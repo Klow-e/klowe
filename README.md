@@ -14,7 +14,7 @@ from klowe import *
 > stop_words: list[str]                         == list of stopwords (esp + ita)
 
 > clean_text("<text>") -> str                   == normalizes text
-> tokenization("<text>") -> list[str]           == clear_text + excludes tokens with illegal characters + tokenizes
+> tokenization("<text>") -> list[str]           == clean_text + excludes tokens with illegal characters + tokenizes
 > bagwords(text: str) -> list[str]              == stopwords filter
 ```
 
