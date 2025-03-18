@@ -9,7 +9,7 @@
 from .tokenization import *
 
 import scipy.stats as stats
-import numoy as np
+import numpy as np
 import nltk
 from nltk import *
 from nltk.util import ngrams
