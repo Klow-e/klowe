@@ -21,6 +21,7 @@ setup(
         "nltk",
         "numpy",
         "scipy",
+        "wikipedia",
 #        "string",
 #        "operator",
 #        "math",
