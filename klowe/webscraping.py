@@ -13,8 +13,12 @@ wikipedia.set_lang("it")
 ###############################################################################################
 
 
-def wiki_article(title: str, lang: str) -> str:
+def wiki_language(lang: str):
     wikipedia.set_lang(lang)
+    return(lang)
+
+
+def wiki_article(title: str) -> str:
     wikilimit: list[str] = ["== Referencias ==", "== Note ==", "== Notes et références =="]
     text = wikipedia.page(title).content
     for i in wikilimit:
