@@ -99,3 +99,6 @@ def extract_tricompos(text: str) -> dict[tuple, float]:
     return s3
 # print(extract_tricompos(wiki_article("Lingua greca antica")))
 
+
+###############################################################################################
+
