@@ -6,6 +6,8 @@
 ###############################################################################################
 
 
+from .tokenization import *
+
 import scipy.stats as stats
 import nltk
 from nltk import *
