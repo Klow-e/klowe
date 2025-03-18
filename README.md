@@ -1,14 +1,18 @@
 
 
 # KlowE
-
+```
+!pip install git+https://github.com/Klow-e/klowe.git
+import klowe
+from klowe import *
+```
 
 ## Tokenization
 ```
 > dirty_characters: str                  == string of characters to remove
 > legal_chatacters: str                  == string of allowed characters in spa + ita orthography
-> clean_text("<<text>>") -> str          == normalizes text
-> tokenization("<<text>>") -> list[str]  == clear_text + tokenizes + excludes tokens with illegal characters
+> clean_text("<text>") -> str            == normalizes text
+> tokenization("<text>") -> list[str]    == clear_text + tokenizes + excludes tokens with illegal characters
 ```
 
 ## ChiSquare
