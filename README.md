@@ -10,9 +10,9 @@ from klowe import *
 
 ## Webscraping
 ```
-> webpage(str) -> str                           == extracts somewhat clean text from an URL
-> wiki_language(str)                            == sets the wikipedia language for the following code ("es", "it"...)
-> wiki_article(str) -> str                      == extracts text from a wikipedia title
+> webpage("<URL>") -> str                       == extracts somewhat clean text from an URL
+> wiki_language("<es>")                         == sets the wikipedia language for the following code
+> wiki_article("<title>") -> str                == extracts text from a wikipedia title
 ```
 
 
@@ -24,8 +24,8 @@ from klowe import *
 
 > clean_text("<text>") -> str                   == normalizes text
 > tokenization("<text>") -> list[str]           == clean_text + excludes tokens with illegal characters + tokenizes
-> bagwords(text: str) -> list[str]              == stopwords filter
-> tfreq(str) -> list[tuple[str,int]]            == counts tokens
+> bagwords("<text>") -> list[str]               == tokenization + stopwords filter
+> tfreq("<text>") -> list[tuple[str,int]]       == bagwords + counts tokens
 ```
 
 
