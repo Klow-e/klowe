@@ -36,7 +36,7 @@ def wiki_article(title: str) -> str:
 
 
 def search_bi(text: str, query: tuple[str]) -> float:
-    T = tokenize(text)
+    T = tokenization(text)
     bigrams = list(ngrams(T, 2))
     A = query[0]
     B = query[1]
@@ -49,7 +49,7 @@ def search_bi(text: str, query: tuple[str]) -> float:
 
 
 def search_tri(text: str, query: tuple[str]) -> float:
-    T = tokenize(text)
+    T = tokenization(text)
     bigrams = list(ngrams(T, 2))
     trigrams = list(ngrams(T, 3))
     A = query[0]
@@ -64,7 +64,7 @@ def search_tri(text: str, query: tuple[str]) -> float:
 
 
 def extract_bicompos(text: str) -> dict[tuple,float]:
-    T = tokenize(text)
+    T = tokenization(text)
     bigrams = list(ngrams(T, 2))
     bigrams = [i for i in bigrams if i[0] not in stop_words]
     bigrams = [i for i in bigrams if i[1] not in stop_words]
@@ -77,7 +77,7 @@ def extract_bicompos(text: str) -> dict[tuple,float]:
     s2 = dict(sorted(composition2.items(), key=operator.itemgetter(1), reverse=True))
     comad = [i[0] + ", " + i[1] for i in s2]
     comad = [i for i in comad if i in text]
-    comad = [tuple(tokenize(i)) for i in comad]
+    comad = [tuple(tokenization(i)) for i in comad]
     s2 = {i:s2[i] for i in s2 if i not in comad}
     s2 = {i:confidence_chi2(s2[i]) for i in s2}
     return s2
@@ -85,7 +85,7 @@ def extract_bicompos(text: str) -> dict[tuple,float]:
 
 
 def extract_tricompos(text: str) -> dict[tuple, float]:
-    T = tokenize(text)
+    T = tokenization(text)
     bigrams = list(ngrams(T, 2))
     trigrams = list(ngrams(T, 3))
     alph, df, p = 0.0005, 1, 12.116
