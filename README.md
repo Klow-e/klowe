@@ -16,6 +16,7 @@ from klowe import *
 > clean_text("<text>") -> str                   == normalizes text
 > tokenization("<text>") -> list[str]           == clean_text + excludes tokens with illegal characters + tokenizes
 > bagwords(text: str) -> list[str]              == stopwords filter
+> tfreq(str) -> list[tuple[str,int]]            == counts tokens
 ```
 
 ## ChiSquare

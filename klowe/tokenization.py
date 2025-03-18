@@ -82,5 +82,10 @@ def bagwords(text: str) -> list[str]:
     return tokens
 
 
+def tfreq(text: str) -> list[tuple[str,int]]:
+    tokens: list[str] = bagwords(text)
+    return FreqDist(tokens).most_common()
+
+
 ###############################################################################################
 
