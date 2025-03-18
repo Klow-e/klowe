@@ -23,10 +23,10 @@ from klowe import *
 > chi2(int, int, int) -> float                  == chi^2 test of {a, b, c} in a 2x2 contingency table (1df)
 > confidence_chi2(float) -> float               == confidence level (per one) of a 1df chi^2
 
-search_bi(str, tuple[str]) -> float             == search on a dirty text for a given bigram composition ("A", "B")
-search_tri(str, tuple[str]) -> float            == search on a dirty text for a given trigram composition ("A", "B", "C")
+> search_bi(str, tuple[str]) -> float           == search on a dirty text for a given bigram composition ("A", "B")
+> search_tri(str, tuple[str]) -> float          == search on a dirty text for a given trigram composition ("A", "B", "C")
 
-extract_bicompos(str) -> dict[tuple, float]     == extract from a dirty text probable bigram compositions
-extract_tricompos(str) -> dict[tuple, float]    == extract from a dirty text probable trigram compositions
+> extract_bicompos(str) -> dict[tuple, float]   == extract from a dirty text probable bigram compositions
+> extract_tricompos(str) -> dict[tuple, float]  == extract from a dirty text probable trigram compositions
 ```
 
