@@ -2,7 +2,6 @@
 
 # KlowE
 
-lllllll
 
 ## Tokenization
 ```
