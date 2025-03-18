@@ -47,7 +47,7 @@ def search_bi(text: str, query: tuple[str]) -> float:
     c: int = T.count(B)-a
     chi: float = chi2(a, b, c)
     return chi
-# print(search_bi(wiki_article("Semiotica"), ("la", "semiotica")))
+# print(search_bi("snow white a snow white b snow white c snow white d snow white e snow white f snow white", ("snow", "white")))
 
 
 def search_tri(text: str, query: tuple[str]) -> float:
@@ -62,7 +62,7 @@ def search_tri(text: str, query: tuple[str]) -> float:
     c: int = bigrams.count((B, C))-a
     chi: float = chi2(a, b, c)
     return chi
-# print(search_tri(wiki_article("Semiotica"), ("il", "segno", "e")))
+# print(search_tri("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white", ("snow", "super", "white")))
 
 
 def extract_bicompos(text: str) -> dict[tuple,float]:
@@ -83,7 +83,7 @@ def extract_bicompos(text: str) -> dict[tuple,float]:
     s2 = {i:s2[i] for i in s2 if i not in comad}
     s2 = {i:confidence_chi2(s2[i]) for i in s2}
     return s2
-# print(extract_bicompos(wiki_article("Lingua greca antica")))
+# print(extract_bicompos("snow white a snow white b snow white c snow white d snow white e snow white f snow white"))
 
 
 def extract_tricompos(text: str) -> dict[tuple, float]:
@@ -98,7 +98,7 @@ def extract_tricompos(text: str) -> dict[tuple, float]:
     s3 = dict(sorted(comp3.items(), key=operator.itemgetter(1), reverse=True))
     s3 = {i:confidence_chi2(s3[i]) for i in s3}
     return s3
-# print(extract_tricompos(wiki_article("Lingua greca antica")))
+# print(extract_tricompos("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white"))
 
 
 ###############################################################################################
