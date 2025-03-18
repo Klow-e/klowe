@@ -11,8 +11,10 @@ from klowe import *
 ```
 > dirty_characters: str                  == string of characters to remove
 > legal_chatacters: str                  == string of allowed characters in spa + ita orthography
+> stop_words: list[str]                  == list of stopwords (esp + ita)
 > clean_text("<text>") -> str            == normalizes text
-> tokenization("<text>") -> list[str]    == clear_text + tokenizes + excludes tokens with illegal characters
+> tokenization("<text>") -> list[str]    == clear_text + excludes tokens with illegal characters + tokenizes
+> bagwords(text: str) -> list[str]       == stopwords filter
 ```
 
 ## ChiSquare

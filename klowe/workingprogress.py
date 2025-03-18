@@ -6,6 +6,7 @@
 import math
 import operator
 import numpy as np
+
 import nltk
 from nltk import *
 from nltk.util import ngrams

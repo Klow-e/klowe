@@ -8,6 +8,8 @@
 
 import string
 from unidecode import unidecode
+import nltk
+from nltk import *
 
 
 ###############################################################################################
@@ -71,6 +73,12 @@ def tokenization(text: str) -> list[str]:
         if all(j not in legal_characters for j in i):
             tokens.remove(i)
     tokens = [unidecode(k) for k in tokens]
+    return tokens
+
+
+def bagwords(text: str) -> list[str]:
+    tokens: list[str] = tokenization(text)
+    tokens = [i for i in tokens if i not in stop_words]
     return tokens
 
 
