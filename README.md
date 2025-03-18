@@ -7,6 +7,15 @@ import klowe
 from klowe import *
 ```
 
+
+## Webscraping
+```
+> webpage(str) -> str                           == extracts somewhat clean text from an URL
+> wiki_language(str)                            == sets the wikipedia language for the following code ("es", "it"...)
+> wiki_article(str) -> str                      == extracts text from a wikipedia title
+```
+
+
 ## Tokenization
 ```
 > dirty_characters: str                         == string of characters to remove
@@ -18,6 +27,7 @@ from klowe import *
 > bagwords(text: str) -> list[str]              == stopwords filter
 > tfreq(str) -> list[tuple[str,int]]            == counts tokens
 ```
+
 
 ## ChiSquare
 ```

@@ -25,6 +25,9 @@ setup(
 #        "string",
 #        "operator",
 #        "math",
+        "requests",
+        "os",
+        "bs4"
     ],
 )
 
