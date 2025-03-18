@@ -7,6 +7,11 @@
 
 
 import scipy.stats as stats
+import nltk
+from nltk import *
+from nltk.util import ngrams
+import math
+import operator
 
 
 ###############################################################################################
