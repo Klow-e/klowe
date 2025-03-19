@@ -6,7 +6,7 @@
 ###############################################################################################
 
 
-from .tokenization import *
+from .textprocessor import *
 
 import scipy.stats as stats
 import numpy as np

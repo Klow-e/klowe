@@ -25,7 +25,14 @@ from klowe import *
 > clean_text("<text>") -> str                       == normalizes text
 > tokenization("<text>") -> list[str]               == clean_text + excludes tokens with illegal characters + tokenizes
 > bagwords("<text>") -> list[str]                   == tokenization + stopwords filter
-> tfreq("<text>") -> list[tuple[str,int]]           == bagwords + counts tokens
+> tfreq("<text>") -> list[tuple[str,int]]           == bagwords + counts tokens (types by frequency)
+
+> count_letters("<text>") -> int                    == counts only number of letters
+> count_tokens("<text>") -> int                     == counts number of tokens
+> list_types("<text>") -> set[str]                  == list of unique words in a text (types)
+> count_types("<text>") -> int                      == counts number of types
+> typetoken_ratio("<text>") -> float                == lexical diversity as type-token ratio
+> average_toklen("<text>") -> float                 == average word length (count_letters / count_tokens)
 ```
 
 

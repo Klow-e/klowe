@@ -89,3 +89,41 @@ def tfreq(text: str) -> list[tuple[str,int]]:
 
 ###############################################################################################
 
+
+def count_letters(text: str) -> int:
+    clear_text: str = clean_text(text)
+    n_letters: int = len(text.replace(" ", ""))
+    return n_letters
+
+
+def count_tokens(text: str) -> int:
+    tokens: list[str] = tokenization(text)
+    n_tokens: int = len(tokens)
+    return n_tokens
+
+
+def list_types(text: str) -> set[str]:
+    tokens: list[str] = tokenization(text)
+    types: set[str] = set(tokens)
+    return types
+
+
+def count_types(text: str) -> int:
+    n_types: int = len(list_types(text))
+    return n_types
+
+
+def typetoken_ratio(text: str) -> float:
+    n_types: int = count_types(text)
+    n_tokens: int = count_tokens(text)
+    ttr: float = (n_types / n_tokens)
+    return ttr
+
+
+def average_toklen(text: str) -> int:
+    lperw: float = count_letters(text) / count_tokens(text)
+    return lperw
+
+
+###############################################################################################
+
