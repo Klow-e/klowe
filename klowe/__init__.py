@@ -3,6 +3,6 @@
 # klowe/__init__.py
 
 
-from .tokenization import *
+from .textprocessor import *
 from .chisquare import *
-from .webscraping import *
+from .webscraper import *
