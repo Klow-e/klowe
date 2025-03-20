@@ -24,7 +24,7 @@ setup(
         "wikipedia",
         "requests",
         "bs4",
-        "re",
+#        "re",
 #        "string",
 #        "operator",
 #        "math",
