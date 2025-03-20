@@ -6,6 +6,7 @@
 ###############################################################################################
 
 
+import re
 import string
 from unidecode import unidecode
 import nltk
@@ -126,4 +127,79 @@ def average_toklen(text: str) -> int:
 
 
 ###############################################################################################
+
+
+def sentence_tokenization(text: str) -> list[str]:
+
+    def handle_wikipedia(text: str) -> str:
+        text = text.replace("\u200b", "")
+        wikih_pattern = r'== .+ =='
+        if re.search(wikih_pattern, text):
+            for m in re.findall(wikih_pattern, text):
+                text = text.replace(m, m+". ")
+        wikic_pattern = r'\S\.\[\d+\]\s'
+        if re.search(wikic_pattern, text):
+            for m in re.findall(wikic_pattern, text):
+                text = text.replace(m, m[0]+" "+m[2:-1]+". ")
+        return text
+
+    def handle_numerals(p0: list[str]) -> list[str]:
+        for i, v in enumerate(p0):
+            if any(d in v for d in string.digits) and not v.endswith((".", "?", "!")):
+                p0[i] += " " + p0.pop(i+1)
+        return p0
+
+    def handle_honor(p0: list[str]) -> list[str]:
+        honor_pattern = r'[A-Z][a-z]{0,2}\.'
+        def honor_case(p0: list[str]) -> list[str]:
+            for i, v in enumerate(p0):
+                if re.match(honor_pattern, v):
+                    p0[i] += " " + p0.pop(i+1)
+            return p0
+        for _ in range(len(re.findall(honor_pattern, text))):
+            p0 = honor_case(p0)
+        return p0
+
+    def handle_comments(p0: list[str]) -> list[str]:
+        comment_pattern = r'\((.*?)\)|\[(.*?)\]|\{(.*?)\}|\"(.*?)\"|\'(.*?)\'|\«(.*?)\»|\“(.*?)\”|¡(.*?)!|\¿(.*?)\?'
+        comment_matches = max(len(i.split()) for m in re.findall(comment_pattern, text) for i in m if i) + 1
+        comment_borders = [("(", ")"), ("[", "]"), ("{", "}"), (r'"', r'"'), (r"'", r"'"), ("«", "»"), ("“", "“"), ("¿", "?"), ("¡", "!")]
+        def comment_case(p1: list[str], open_close: tuple[str, str]) -> list[str]:
+            open_char, close_char = open_close
+            i = 0
+            while i < len(p1):
+                if p1[i].startswith(open_char) and close_char not in p1[i]:
+                    p1[i] += " " + p1.pop(i+1)
+                else: i += 1
+            return p1
+        for _ in range(comment_matches):
+            for b in comment_borders:
+                p0 = comment_case(p0, b)
+        return p0
+
+    def handle_endings(p0: list[str]) -> list[str]:
+        def ending_cases(p1: list[str]) -> list[str]:
+            i = 0
+            while i < len(p1) - 1:
+                if not p1[i].endswith((".", "?", "!")):
+                    p1[i] += " " + p1.pop(i + 1)
+                else: i += 1
+            return p1
+        loops = text.count(". ") + text.count(".\n") + text.count("? ") + text.count("! ")
+        for _ in range(loops):
+            p0 = ending_cases(p0)
+        return p0
+
+    text = handle_wikipedia(text)
+    p0 = text.split()
+    p0 = handle_numerals(p0)
+    p0 = handle_honor(p0)
+    p0 = handle_comments(p0)
+    p0 = handle_endings(p0)
+
+    return p0
+
+
+###############################################################################################
+
 

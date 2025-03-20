@@ -33,6 +33,7 @@ from klowe import *
 > count_types("<text>") -> int                      == counts number of types
 > typetoken_ratio("<text>") -> float                == lexical diversity as type-token ratio
 > average_toklen("<text>") -> float                 == average word length (count_letters / count_tokens)
+> sentence_tokenization("<text>") -> lisr[str]      == separates text by sentence
 ```
 
 
