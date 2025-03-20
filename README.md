@@ -34,6 +34,8 @@ from klowe import *
 > typetoken_ratio("<text>") -> float                == lexical diversity as type-token ratio
 > average_toklen("<text>") -> float                 == average word length (count_letters / count_tokens)
 > sentence_tokenization("<text>") -> lisr[str]      == separates text by sentence
+> count_sentences("<text>") -> int                  == counts number of sentences in a text
+> wordsperentence("<text>") -> float                == average sentence length (count_tokens / count_sentences)
 ```
 
 

@@ -200,6 +200,16 @@ def sentence_tokenization(text: str) -> list[str]:
     return p0
 
 
-###############################################################################################
+def count_sentences(text: str) -> int:
+    sentences: list[str] = sentence_tokenization(text)
+    n_sentences: int = len(sentences)
+    return n_sentences
 
+
+def wordsperentence(text: str) -> float:
+    wpers: float = count_tokens(text) / count_sentences(text)
+    return wpers
+
+
+###############################################################################################
 
