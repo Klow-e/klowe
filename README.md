@@ -84,20 +84,37 @@ from klowe import *
 > _**Vector Space Model**_
 >> Algebraic model of text representation based on creating its own Semantic Space where words are vectors plotted in axis naming semantic characteristics.
 >> * Document: dictionary of {terms : weighted_vectors}
->> * Weight: multiplier based on importance
 >
 > _**Bag-of-Words**_
 >> Indexing Unit Model that defines terms as an unordered weighted set of lematized words in a text after a stopwords filter.
 >>
 >> Term =  {bagword : weighted_vector}
 >
-> _**Term Frequency - Inverse Document Frequency**_
->> Weighting model based on how informative a term is in a collection of texts.
->> ``` 
->> TF.IDF = log_2( n / df(t) )
->>          {n : number of learning documents}
->>          {df(t) : number of documents where the term t appears}
->> ```
+> _**Weight**_
+>> Multiplier for words based on relevance and entropy.
+>> 
+>> $t$ : term
+>>
+>> $d$ : document
+>>
+>> $d_l$ : number of tokens in a document
+>>
+>> $N$ : number of corpus documents
+>>
+>> $n_t$ : number of documents where term $t$ appears
+>>
+>> * **Term Frequency:** relative frequency of a term within a document.
+>> - - $TF = Σt / d_l$
+>>
+>> * **Inverse Document Frequency:** meassure of how informative a term is, downweighting frequent terms. Adding $1$ to each numerator and denominator is a smoothing strategy to counter division by $0$ and edge cases.
+>> - - $IDF = log_2( N + 1 / n_t + 1 )$
+>>
+>> * **Probabilistic IDF:** takes into account both presence and abscense in documents.
+>> - - $pIDF = log_2( N-n_t + 1 / n_t + 1 )$
+>
+>> * _**Term Frequency - Inverse Document Frequency:**_ Weighting model based on how informative a term is in a collection of texts.
+>> - - $TF.IDF = TF * IDF$
+>>
 
 
 ## Frame Semantics
