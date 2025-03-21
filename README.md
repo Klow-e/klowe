@@ -8,7 +8,7 @@ from klowe import *
 ```
 
 
-## Webscraper
+## WebScraper
 ```
 > webpage("<URL>") -> str                           == extracts somewhat clean text from an URL
 > wiki_language("<es>")                             == sets the wikipedia language for the following code
@@ -16,7 +16,7 @@ from klowe import *
 ```
 
 
-## Textprocessor
+## TextProcessor
 ```
 > dirty_characters: str                             == string of characters to remove
 > legal_chatacters: str                             == string of allowed characters in spa + ita orthography
@@ -36,7 +36,14 @@ from klowe import *
 > average_toklen("<text>") -> float                 == average word length (count_letters / count_tokens)
 > sentence_tokenization("<text>") -> lisr[str]      == separates text by sentence
 > count_sentences("<text>") -> int                  == counts number of sentences in a text
-> wordsperentence("<text>") -> float                == average sentence length (count_tokens / count_sentences)
+> wordspersentence("<text>") -> float               == average sentence length (count_tokens / count_sentences)
+```
+
+
+## VectorSpaceModel
+```
+> TermFrequency("<text>") -> list[tuple[str,float]] == relative frequency of each term (TF) in a text
+> TermFrequency("<text>") -> list[tuple[str,float]] == relative frequency of each bagword in a stopword-filtered text
 ```
 
 

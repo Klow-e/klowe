@@ -211,7 +211,7 @@ def count_sentences(text: str) -> int:
     return n_sentences
 
 
-def wordsperentence(text: str) -> float:
+def wordspersentence(text: str) -> float:
     wpers: float = count_tokens(text) / count_sentences(text)
     return wpers
 
