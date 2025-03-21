@@ -43,7 +43,7 @@ from klowe import *
 ## VectorSpaceModel
 ```
 > TermFrequency("<text>") -> list[tuple[str,float]] == relative frequency of each term (TF) in a text
-> TermFrequency("<text>") -> list[tuple[str,float]] == relative frequency of each bagword in a stopword-filtered text
+> BagFrequency("<text>") -> list[tuple[str,float]] == relative frequency of each bagword in a stopword-filtered text
 ```
 
 
