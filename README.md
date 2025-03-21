@@ -25,8 +25,8 @@ from klowe import *
 > clean_text("<text>") -> str                       == normalizes text
 > tokenization("<text>") -> list[str]               == clean_text + excludes tokens with illegal characters + tokenizes
 > bagwords("<text>") -> list[str]                   == tokenization + stopwords filter
-> tfreq("<text>") -> list[tuple[str,int]]           == tokenization + counts tokens (types by frequency)
-> btfreq("<text>") -> list[tuple[str,int]]          == bagwords + counts tokens (types by frequency)
+> tdistribution("<text>") -> list[tuple[str,int]]   == tokenization + counts tokens (types by frequency)
+> btdistribution("<text>") -> list[tuple[str,int]]  == bagwords + counts tokens (types by frequency)
 
 > count_letters("<text>") -> int                    == counts only number of letters
 > count_tokens("<text>") -> int                     == counts number of tokens
