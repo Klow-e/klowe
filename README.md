@@ -104,17 +104,14 @@ from klowe import *
 >> $n_t$ : number of documents where term $t$ appears
 >>
 >> * **Term Frequency:** relative frequency of a term within a document.
->>> $TF = Σt / d_l$
->>
+>>    * $TF = Σt / d_l$
 >> * **Inverse Document Frequency:** meassure of how informative a term is, downweighting frequent terms. Adding $1$ to each numerator and denominator is a smoothing strategy to counter division by $0$ and edge cases.
->> - - $IDF = log_2( N + 1 / n_t + 1 )$
->>
+>>    * $IDF = log_2( N + 1 / n_t + 1 )$
 >> * **Probabilistic IDF:** takes into account both presence and abscense in documents.
->> - - $pIDF = log_2( N-n_t + 1 / n_t + 1 )$
->>
+>>    * $pIDF = log_2( N-n_t + 1 / n_t + 1 )$
 >> * _**Term Frequency - Inverse Document Frequency:**_ Weighting model based on how informative a term is in a collection of texts.
->> - - $TF.IDF = TF * IDF$
->>
+>>    * $TF.IDF = TF * IDF$
+> 
 
 
 ## Frame Semantics
