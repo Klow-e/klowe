@@ -110,11 +110,11 @@ from klowe import *
 >> * **Term Frequency:** relative frequency of a term within a document.
 >>    * $TF = Σt / d_l$
 >>  
->> * **Inverse Document Frequency:** meassure of how informative a term is, downweighting frequent terms. Adding $1$ to each numerator and denominator is a smoothing strategy to counter division by $0$ and edge cases.
->>    * $IDF = log_2( N + 1 / n_t + 1 )$
+>> * **Inverse Document Frequency:** meassure of how informative a term is, downweighting frequent terms. Adding $1$ to each operand is a smoothing strategy to counter division by $0$ and edge cases.
+>>    * $sIDF = log_2( N + 1 / n_t + 1 )$
 >>  
 >> * **Probabilistic IDF:** takes into account both presence and abscense in documents.
->>    * $pIDF = log_2( N-n_t + 1 / n_t + 1 )$
+>>    * $pIDF = log_2( N - n_t / n_t )$
 >>  
 >> * _**Term Frequency - Inverse Document Frequency:**_ Weighting model based on how informative a term is in a collection of texts. A high weight means high frequency in the document and low frequency in other documents, thus that word would identify said document against the corpus.
 >>    * $TF.IDF = TF * IDF$

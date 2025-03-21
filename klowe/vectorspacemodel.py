@@ -8,6 +8,10 @@
 
 from .textprocessor import *
 
+import nltk
+from nltk import *
+import math
+
 
 ###############################################################################################
 
