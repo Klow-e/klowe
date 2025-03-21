@@ -51,3 +51,73 @@ from klowe import *
 > extract_tricompos("<text>") -> dict[tuple, float] == extract from a dirty text probable trigram compositions
 ```
 
+
+---
+---
+
+
+# Theory
+
+
+## Linear Space
+>
+> Structure consisting of a set of points and the possible relaions between them.
+> * **Scalar:** simple quantity expressed as a single number.
+> * **Vector:** complex quantity expressed as a 1D array of numbers
+> * **Matrix:** complex quantity expressed as a 2D table of numbers
+> * **Tensor:** complex quantity expressed as an nD space of numbers
+>
+> _**Cosine Similarity**_
+>> 
+>
+> _**Euclidean Distance**_
+>> 
+
+
+## Distributional Semantics
+>
+> Statistical semantic theory of meaning as arising from syntagmatic combinations.
+> Thus, words that frequently appear in the same context must have simmilar meanings. 
+>
+> _**Semantic Space**_
+>> In Distributional Semantics, a map of words localized according to their characteristics. Similar words would appear closer than dissimilar ones.
+>
+> _**Vector Space Model**_
+>> Algebraic model of text representation based on creating its own Semantic Space where words are vectors plotted in axis naming semantic characteristics.
+>> * Document: dictionary of {terms : weighted_vectors}
+>> * Weight: multiplier based on importance
+>
+> _**Bag-of-Words**_
+>> Indexing Unit Model that defines terms as an unordered weighted set of lematized words in a text after a stopwords filter.
+>>
+>> Term =  {bagword : weighted_vector}
+>
+> _**Term Frequency - Inverse Document Frequency**_
+>> Weighting model based on how informative a term is in a collection of texts.
+>> ``` 
+>> TF.IDF = log_2( n / df(t) )
+>>          {n : number of learning documents}
+>>          {df(t) : number of documents where the term t appears}
+>> ```
+
+
+## Frame Semantics
+>
+> Cognitive semantic theory of meaning as tied to its associated experiential knowledge.
+> Thus, any word is necessarily tied to a set of related words that encompass wordly frameworks.
+>
+> _**Frame**_
+>> Information package about how and what to speak in a specific context. \\
+>> Set of words evoqued by a given situation.
+>
+> _**Trigger**_
+>> Discursive token that activates a cognitive semantic frame.
+>
+> _**Situational Frame**_
+>> Set of triggers of a frame.
+> 
+> _**Concept**_
+>> Indexing Unit Model that defines terms as an unordered weighted set of the hyperonym of each word.
+>>
+>> Term = normalization → {coche:sdo},{moto:sdo} → {automovil}
+
