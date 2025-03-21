@@ -109,7 +109,7 @@ from klowe import *
 >> * **Probabilistic IDF:** takes into account both presence and abscense in documents.
 >>    * $pIDF = log_2( N-n_t + 1 / n_t + 1 )$
 >>  
->> * _**Term Frequency - Inverse Document Frequency:**_ Weighting model based on how informative a term is in a collection of texts.
+>> * _**Term Frequency - Inverse Document Frequency:**_ Weighting model based on how informative a term is in a collection of texts. A high weight means high frequency in the document and low frequency in other documents, thus that word would identify said document against the corpus.
 >>    * $TF.IDF = TF * IDF$
 >>  
 
