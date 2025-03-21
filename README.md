@@ -81,7 +81,6 @@ from klowe import *
 > _**Semantic Space**_
 >> In Distributional Semantics, a map of words localized according to their characteristics. Similar words would appear closer than dissimilar ones.
 >
->
 > _**Vector Space Model**_
 >> Algebraic model of text representation based on creating its own Semantic Space where words are vectors plotted in axis naming semantic characteristics.
 >> * Document: dictionary of {terms : weighted_vectors}
