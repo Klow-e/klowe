@@ -7,3 +7,4 @@ from .textprocessor import *
 from .chisquare import *
 from .webscraper import *
 from .vectorspacemodel import *
+from .mathstuff import *

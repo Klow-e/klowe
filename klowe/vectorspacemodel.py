@@ -7,6 +7,7 @@
 
 
 from .textprocessor import *
+from .mathstuff import *
 
 import nltk
 from nltk import *
