@@ -12,16 +12,16 @@ import math
 ###############################################################################################
 
 
-def normalize_value(x: float, values_l: list[float]) -> float:
+def normalize_value(x: float, values_l: list[float], scale: tuple[float, float]) -> float:
     min_v, max_v = min(values_l), max(values_l)
-    # 1-0 being the feature scale, to normalize values as a {0-1} range
-    n_factor: float = (1-0) / (max_v - min_v)
+    s1, s0 = scale
+    n_factor: float = (s1-s0) / (max_v - min_v)
     n_value: float = (x - min_v) * n_factor
     return n_value
 
 
-def normalize_list(values_l: list[float]) -> list[float]:
-    n_list: list[float] = [normalize_value(x, values_l) for x in values_l]
+def normalize_list(values_l: list[float], scale: tuple[float, float]) -> list[float]:
+    n_list: list[float] = [normalize_value(x, values_l, scale) for x in values_l]
     return n_list
 
 
