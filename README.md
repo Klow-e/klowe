@@ -44,6 +44,8 @@ from klowe import *
 ```
 > TermFrequency("<text>") -> list[tuple[str,float]] == relative frequency of each term (TF) in a text
 > BagFrequency("<text>") -> list[tuple[str,float]]  == relative frequency of each bagword in a stopword-filtered text
+> InverseDocFreq(list[str]) -> sIDF, pIDF, TF, T    == of a list of texts returns a list of lists for IDF, TF, and terms
+> TermFreq_IDF(list[str]) -> TF_sIDF, TF_pIDF, T    == of a list of texts returns a list of lists for TF.IDF and the terms
 ```
 
 
