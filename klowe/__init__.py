@@ -12,5 +12,4 @@ from .mathstuff import *
 
 # ToDo:
 # use TF_IDF to define genre
-# def func pa hacer los valores más extremos
 

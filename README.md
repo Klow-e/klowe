@@ -70,12 +70,14 @@ from klowe import *
 
 ## MathStuff
 ```
+> AlKhwarizmiFunction(a, b, c, x) -> y              == solves a quadratic formula
+> TanhFunction(x) -> y                              == passes data through a Tanh function
+
 > normalize_value(x, values, (s1, s0)) -> float     == of a value in a list of values, returns the normalized value
-> normalize_list(list[float], scale) -> list[float] == normalizes a list of values into a {1, 0} feature scale
+> normalize_list(list[float], scale) -> list[float] == normalizes a list of values into a (s1, s0) feature scale
+> TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
 > midpoint(a, b) -> float                           == gives the midpoint between two numbers
 > top_percent(list[float], float) -> list[float]    == gets the top float per one values in a list of values
-
-> AlKhwarizmiFunction(a, b, c, x) -> y              == solves a quadratic formula
 ```
 
 

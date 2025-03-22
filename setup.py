@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "KlowE",
-    version = "0.0.9",
+    version = "0.0.10",
     description = "Python package for NLP",
     author = "Chloe Carral Bustillo",
     author_email = "chloevampi01@gmail.com",
