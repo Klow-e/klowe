@@ -12,6 +12,20 @@ import math
 ###############################################################################################
 
 
+def AlKhwarizmiFunction(a, b, c, x) -> float:
+    y = (a * x**2) + (b*x) + c
+    return round(y, 4)
+
+
+def TanhFunction(x) -> int:
+    e = 2.71828
+    Tahn = ( 2 / (1 + e**(-2*x)) ) - 1
+    return round(Tahn, 4)
+
+
+###############################################################################################
+
+
 def normalize_value(x: float, values_l: list[float], scale: tuple[float, float]) -> float:
     min_v, max_v = min(values_l), max(values_l)
     s1, s0 = scale
@@ -23,6 +37,11 @@ def normalize_value(x: float, values_l: list[float], scale: tuple[float, float])
 def normalize_list(values_l: list[float], scale: tuple[float, float]) -> list[float]:
     n_list: list[float] = [normalize_value(x, values_l, scale) for x in values_l]
     return n_list
+
+
+def TahnNormalization(l_values: list[float]) -> list[float]:
+    TN = [TanhFunction(x-3) for x in l_values]
+    return normalize_list(TN, (1, 0))
 
 
 def midpoint(a: float, b: float) -> float:
@@ -44,14 +63,6 @@ def top_percent(values_l: list[float], threshold: float) -> list[float]:
             break
     
     return selected_v
-
-
-###############################################################################################
-
-
-def AlKhwarizmiFunction(a, b, c, x) -> float:
-    y = (a * x**2) + (b*x) + c
-    return round(y, 4)
 
 
 ###############################################################################################
