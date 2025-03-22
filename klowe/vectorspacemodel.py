@@ -84,7 +84,5 @@ def TermFreq_IDF(sample_dicts: list[str]):
 # print("\n\n".join("\n".join(map(str, l)) for l in [S, P, T]), "\n")
 
 
-
-
 ###############################################################################################
 

@@ -49,7 +49,7 @@ def top_percent(values_l: list[float], threshold: float) -> list[float]:
 ###############################################################################################
 
 
-def AlKhwarizmiFiunction(a, b, c, x) -> float:
+def AlKhwarizmiFunction(a, b, c, x) -> float:
     y = (a * x**2) + (b*x) + c
     return round(y, 4)
 
