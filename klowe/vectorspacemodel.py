@@ -12,6 +12,7 @@ from .mathstuff import *
 import nltk
 from nltk import *
 import math
+import operator
 
 
 ###############################################################################################
