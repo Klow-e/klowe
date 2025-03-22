@@ -29,7 +29,7 @@ legal_characters += ita_characters
 
 esp_stopwords: list[str] = []
 esp_stopwords += ["que", "qué", "y", "e", "o", "pero", "porque", "por", "para", "ya", "como", "ni", "no", "sí", "con", "más", "mas", "tal"]
-esp_stopwords += ["en", "entre", "cuando", "muy", "sin", "sobre", "también", "hasta", "donde", "desde", "durante", "contra", "ante", "antes", "hacia", "mediante", "tras", "según"]
+esp_stopwords += ["en", "entre", "cuando", "muy", "sin", "sobre", "también", "tambien", "hasta", "donde", "desde", "durante", "contra", "ante", "antes", "hacia", "mediante", "tras", "según"]
 esp_stopwords += ["el", "la", "los", "las", "a", "al", "de", "del", "lo", "le", "les", "un", "una", "uno", "unos", "quien", "otro", "otros", "otras", "otra", "alguno", "algunos", "alguna", "algunas"]
 esp_stopwords += ["se", "si", "sus", "me", "mí", "yo", "él", "su", "nos", "ella", "ellos", "nosotros", "mi", "mis", "tú", "te", "ti", "tu", "tus", "ellas", "nosotras", "vosotros", "vosotras", "os", "mío", "mía", "míos", "mías", "tuyo", "tuya", "tuyos", "tuyas", "suyo", "suya", "suyos", "suyas", "nuestro", "nuestra", "nuestros", "nuestras", "vuestro", "vuestra", "vuestros", "vuestras"]
 esp_stopwords += ["cada", "varios", "varias", "este", "esto", "esta", "estos", "estas", "esos", "ese", "eso" "esa", "esos", "esas", "aquello", "aquel", "aquella", "aquellos", "aquellas", "poca", "pocas", "pocos" "poco", "algo", "mucho", "muchos", "mucha", "muchas", "quienes", "nada", "muchos", "todos", "todo", "toda", "todas", "cual", "cualquier", "cuanquiera", "nada", "tanto", "tantos", "tanta", "tantas", "vez", "veces", "etc", "solo", "solamente", "mientras", "siguiente", "exclusivamente"]
@@ -52,6 +52,7 @@ ita_stopwords += ["sto", "stai", "sta", "stiamo", "stanno", "stia", "stiate", "s
 stop_words: list[str] = []
 stop_words.extend(esp_stopwords)
 stop_words.extend(ita_stopwords)
+stop_words = list(set([unidecode(s) for s in stop_words]))
 
 
 ###############################################################################################
@@ -63,6 +64,7 @@ def clean_text(text: str) -> str:
     text = text.replace("  ", " ")
     text = text.replace("\n\n", "")
     text = text.replace("\u200b", "")
+    text = text.replace("—", ",")
     for i in dirty_characters: text = text.replace(i, "")
     return text
 
