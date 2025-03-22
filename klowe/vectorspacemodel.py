@@ -116,5 +116,12 @@ def Kweight_model(text: str) -> dict[str, float]:
 # print(Kweight_model(wiki_article("Bacilo")))
 
 
+def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
+    all_keys: set[str] = {k for d in l_dicts for k in d}
+    total_d = len(l_dicts)
+    genre_dict: dict = {i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys}
+    return genre_dict
+
+
 ###############################################################################################
 

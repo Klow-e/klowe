@@ -51,6 +51,7 @@ from klowe import *
 > TermFreq_IDF(list[str]) -> TF_sIDF, TF_pIDF, T    == of a list of texts returns a list of lists for TF.IDF and the terms
 
 > Kweight_model("<text>") -> dict[str, float]       == my very own weighting model for texts
+> define_genre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into a unified and mean-value one
 ```
 
 
