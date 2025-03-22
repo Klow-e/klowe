@@ -36,7 +36,6 @@ def BagFrequency(text: str) -> list[tuple[str,float]]:
 
 
 def InverseDocFreq(sample_dicts: list[str]):
-
     TF_tensor: list[list[tuple[str,int]]] = []
     T_tensor: list[list[str]] = []
     F_tensor: list[list[float]] = []
@@ -82,6 +81,38 @@ def TermFreq_IDF(sample_dicts: list[str]):
 # sample_dicts = [wiki_article("Biología"), wiki_article("Célula"), wiki_article("Carbunco"), wiki_article("Bacteria")]
 # S, P, T = TermFreq_IDF(sample_dicts)
 # print("\n\n".join("\n".join(map(str, l)) for l in [S, P, T]), "\n")
+
+
+###############################################################################################
+
+
+def Kweight_model(text: str) -> dict[str, float]:
+    freq_dist: list[tuple[str,int]] = BagFrequency(text)
+    
+    for i, (t, w) in enumerate(freq_dist):
+
+        match len(t):
+            case x if x <= 3: freq_dist[i] = (t, w * 5.0)
+            case x if x <= 4: freq_dist[i] = (t, w * 4.0)
+            case x if x == 5: freq_dist[i] = (t, w * 1.0)
+            case x if x == 6: freq_dist[i] = (t, w * 1.0)
+            case x if x == 7: freq_dist[i] = (t, w * 1.0)
+            case x if x == 8: freq_dist[i] = (t, w * 3.0)
+            case x if x == 9: freq_dist[i] = (t, w * 4.0)
+            case x if x == 10: freq_dist[i] = (t, w * 4.0)
+            case x if x >= 11: freq_dist[i] = (t, w * 5.0)
+        
+        match True:
+            case _ if t[:5] in freq_dist: freq_dist[i] = (t, w * 4.0)
+            case _ if t[:6] in freq_dist: freq_dist[i] = (t, w * 5.0)
+
+    weighted = sorted(freq_dist, key=operator.itemgetter(1), reverse=True)
+    top_w: list[float] = top_percent([w for _, w in weighted], 0.30)
+    top_t: list[str] = [t for t, _ in weighted]
+    top_weighted = dict(sorted(zip(top_t, top_w), key=operator.itemgetter(1), reverse=True))
+    return top_weighted
+
+# print(Kweight_model(wiki_article("Bacilo")))
 
 
 ###############################################################################################

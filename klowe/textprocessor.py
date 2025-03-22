@@ -83,6 +83,7 @@ def bagwords(text: str) -> list[str]:
     tokens: list[str] = tokenization(text)
     tokens = [i for i in tokens if len(i) > 2]
     tokens = [j for j in tokens if j not in stop_words]
+    tokens = [i for i in tokens if len(i) < 25]
     return tokens
 
 
