@@ -13,12 +13,13 @@ import numpy as np
 ###############################################################################################
 
 
-def print_dict(dicc: dict):
-    print(f"Dict len: {len(dicc)}")
+def print_dict(dicc: dict) -> None:
+    print(p:= f"Number of items: {len(dicc)}\n\n")
     for k, v in dicc.items():
-        print(f"\n {k}: \n {v}")
-    print(f"\nDict len: {len(dicc)}")
+        print(f"{k}: \n {v} \n {len(v)} \n\n")
+    print(p)
 # print_dict(Kweight_model(wiki_article("Bacilo")))
+# print_dict(glossary)
 
 
 def plot_dict(weighted_text: dict[str,float]) -> None:
@@ -36,7 +37,7 @@ def plot_dict(weighted_text: dict[str,float]) -> None:
 # plot_dict(Kweight_model(wiki_article("Bacilo")))
 
 
-def plot_function(func: callable, name: str):
+def plot_function(func: callable, name: str) -> None:
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     # function

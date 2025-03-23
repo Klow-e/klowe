@@ -142,7 +142,7 @@ class KGlossary:
 # print(glossary)
 
 
-def save_gloss(glossary):
+def save_gloss(glossary) -> None:
     with open("gloss.json", "w") as fp:
         json.dump(glossary, fp, indent = 4)
 # save_gloss(glossary)
