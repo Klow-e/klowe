@@ -31,6 +31,7 @@ setup(
 #        "operator",
 #        "math",
 #        "os",
+#        "json",
     ],
 )
 
