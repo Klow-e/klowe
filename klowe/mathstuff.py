@@ -18,7 +18,7 @@ def AlKhwarizmiFunction(a, b, c, x) -> float:
     return round(y, 4)
 
 
-def TanhFunction(x) -> int:
+def TanhFunction(x: float) -> int:
     e = 2.71828
     Tahn = ( 2 / (1 + e**(-2*x)) ) - 1
     return round(Tahn, 4)
