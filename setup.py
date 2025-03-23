@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "KlowE",
-    version = "0.0.10",
+    version = "0.0.11",
     description = "Python package for NLP",
     author = "Chloe Carral Bustillo",
     author_email = "chloevampi01@gmail.com",
@@ -24,6 +24,7 @@ setup(
         "wikipedia",
         "requests",
         "bs4",
+        "dataclasses",
 #        "re",
 #        "string",
 #        "operator",

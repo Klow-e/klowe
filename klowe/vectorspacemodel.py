@@ -11,6 +11,7 @@ from .mathstuff import *
 
 import nltk
 from nltk import *
+from dataclasses import dataclass
 import math
 import operator
 
@@ -87,7 +88,7 @@ def TermFreq_IDF(sample_dicts: list[str]):
 ###############################################################################################
 
 
-def Kweight_model(text: str) -> dict[str, float]:
+def Kweight_model(text: str) -> dict[str,float]:
     freq_dist: list[tuple[str,int]] = BagFrequency(text)
     prelex_5 = {t[:5] for t, _ in freq_dist}
     prelex_6 = {t[:6] for t, _ in freq_dist}
@@ -123,6 +124,21 @@ def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
     total_d = len(l_dicts)
     genre_dict: dict = {i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys}
     return dict(sorted(genre_dict.items(), key=operator.itemgetter(1), reverse=True))
+
+
+@dataclass
+class KGlossary:
+    model: callable
+    genres: list[str]
+    articles: list[list[str]]
+
+    def __init__(self, model, gloss: list[tuple[str,list[str]]]) -> dict[str:[dict[str:float]]]:
+        self.apply = {n : define_genre([model(d) for d in s]) for n, s in gloss}
+
+# wiki_language("es")
+# glossary = KGlossary(Kweight_model, [("MATH", [wiki_article('Aritmética'),wiki_article("Matemáticas")]),
+# ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Química')]),]).apply
+# print(glossary)
 
 
 ###############################################################################################

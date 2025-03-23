@@ -52,6 +52,7 @@ from klowe import *
 
 > Kweight_model("<text>") -> dict[str, float]       == my very own weighting model for texts
 > define_genre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into a unified and mean-value one
+> KGlossary(<model>, list[tuple[str,list[str]]])    == class that applies a weighting model to a list of (tag, texts)
 ```
 
 
