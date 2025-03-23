@@ -14,6 +14,7 @@ from nltk import *
 from dataclasses import dataclass
 import math
 import operator
+import json
 
 
 ###############################################################################################
@@ -139,6 +140,21 @@ class KGlossary:
 # glossary = KGlossary(Kweight_model, [("MATH", [wiki_article('Aritmética'), wiki_article("Matemáticas")]),
 # ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Química')]),]).apply
 # print(glossary)
+
+
+def save_gloss(glossary):
+    with open("gloss.json", "w") as fp:
+        json.dump(glossary, fp, indent = 4)
+# save_gloss(glossary)
+
+
+def load_gloss():
+    try:
+        with open("gloss.json", "r") as fp:
+            glossary = json.load(fp)
+        return glossary
+    except: print("No 'gloss.json' file found.")
+# glossary = load_gloss()
 
 
 ###############################################################################################
