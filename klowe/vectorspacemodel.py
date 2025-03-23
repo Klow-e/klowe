@@ -89,23 +89,24 @@ def TermFreq_IDF(sample_dicts: list[str]):
 
 def Kweight_model(text: str) -> dict[str, float]:
     freq_dist: list[tuple[str,int]] = BagFrequency(text)
-    
-    for i, (t, w) in enumerate(freq_dist):
+    prelex_5 = {t[:5] for t, _ in freq_dist}
+    prelex_6 = {t[:6] for t, _ in freq_dist}
 
+    for i, (t, w) in enumerate(freq_dist):
         match len(t):
-            case x if x <= 3: freq_dist[i] = (t, w * 5.0)
-            case x if x <= 4: freq_dist[i] = (t, w * 4.0)
-            case x if x == 5: freq_dist[i] = (t, w * 1.0)
-            case x if x == 6: freq_dist[i] = (t, w * 1.0)
-            case x if x == 7: freq_dist[i] = (t, w * 1.0)
-            case x if x == 8: freq_dist[i] = (t, w * 3.0)
-            case x if x == 9: freq_dist[i] = (t, w * 4.0)
-            case x if x == 10: freq_dist[i] = (t, w * 4.0)
-            case x if x >= 11: freq_dist[i] = (t, w * 5.0)
-        
+            case x if x <= 3: m = 5.0
+            case x if x <= 4: m = 4.0
+            case x if x == 5: m = 1.0
+            case x if x == 6: m = 1.0
+            case x if x == 7: m = 1.0
+            case x if x == 8: m = 3.0
+            case x if x == 9: m = 4.0
+            case x if x == 10: m = 4.0
+            case x if x >= 11: m = 5.0
         match True:
-            case _ if t[:5] in freq_dist: freq_dist[i] = (t, w * 4.0)
-            case _ if t[:6] in freq_dist: freq_dist[i] = (t, w * 5.0)
+            case _ if t[:5] in prelex_5: m *= 4.0
+            case _ if t[:6] in prelex_6: m *= 5.0
+        freq_dist[i] = (t, w * m)
 
     weighted = sorted(freq_dist, key=operator.itemgetter(1), reverse=True)
     top_w: list[float] = top_percent([w for _, w in weighted], 0.30)
@@ -113,7 +114,15 @@ def Kweight_model(text: str) -> dict[str, float]:
     top_weighted = dict(sorted(zip(top_t, top_w), key=operator.itemgetter(1), reverse=True))
     return top_weighted
 
+# wiki_language("es")
 # print(Kweight_model(wiki_article("Bacilo")))
+
+
+
+
+
+
+
 
 
 def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
