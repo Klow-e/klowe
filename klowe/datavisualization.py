@@ -7,6 +7,7 @@
 
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 ###############################################################################################
@@ -33,6 +34,30 @@ def plot_dict(weighted_text: dict[str,float]) -> None:
     plt.tight_layout()
     plt.show()
 # plot_dict(Kweight_model(wiki_article("Bacilo")))
+
+
+def plot_function(func: callable, name: str):
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    # function
+    x = np.linspace(-10, 10, 100)
+    y = np.vectorize(func)(x)
+    plt.plot(x, y, color='black', linewidth=3)
+    plt.plot(x, x*0.333, color='black', linewidth=1)
+    # (0, 0)
+    ax.axhline(0, color='black', linewidth=1, linestyle='--')
+    ax.axvline(0, color='black', linewidth=1, linestyle='--')
+    # axis borders
+    ax.set_ylim(-1, 1)
+    ax.set_xlim(-3, 3)
+    # step size
+    ax.set_xticks(np.arange(-3, 3.5, 0.5))
+    ax.set_yticks(np.arange(-1, 1.5, 0.5))
+    #plot
+    plt.title(name, fontweight="bold")
+    plt.tight_layout()
+    plt.show()
+# plot_function(TanhFunction, "Tanh")
 
 
 ###############################################################################################
