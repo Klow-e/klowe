@@ -13,4 +13,5 @@ from .datavisualization import *
 
 # ToDo:
 # use TF_IDF to define genre
+# normalize Kweight
 
