@@ -22,6 +22,7 @@ from klowe import *
 > legal_chatacters: str                             == string of allowed characters in spa + ita orthography
 > stop_words: list[str]                             == list of stopwords (esp + ita)
 
+> set_language("<es>")                              == sets language for stopwords and wikipedia
 > clean_text("<text>") -> str                       == normalizes text
 
 > sentence_tokenization("<text>") -> lisr[str]      == separates text by sentence

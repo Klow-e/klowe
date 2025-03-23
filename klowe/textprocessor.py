@@ -6,6 +6,8 @@
 ###############################################################################################
 
 
+from .webscraper import *
+
 import re
 import string
 from unidecode import unidecode
@@ -50,9 +52,16 @@ ita_stopwords += ["faccio", "fai", "facciamo", "fanno", "faccia", "facciate", "f
 ita_stopwords += ["sto", "stai", "sta", "stiamo", "stanno", "stia", "stiate", "stiano", "starò", "starai", "starà", "staremo", "starete", "staranno", "starei", "staresti", "starebbe", "staremmo", "stareste", "starebbero", "stavo", "stavi", "stava", "stavamo", "stavate", "stavano", "stetti", "stesti", "stette", "stemmo", "steste", "stettero", "stessi", "stesse", "stessimo", "stessero", "stando"]
 
 stop_words: list[str] = []
-stop_words.extend(esp_stopwords)
-stop_words.extend(ita_stopwords)
 stop_words = list(set([unidecode(s) for s in stop_words]))
+
+
+def set_language(lang: str):
+    match lang:
+        case "es": stop_words.extend(esp_stopwords)
+        case "it": stop_words.extend(ita_stopwords)
+        case _: stop_words.extend(esp_stopwords)
+    wiki_language(lang)
+    return lang
 
 
 ###############################################################################################
