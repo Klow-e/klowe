@@ -1,0 +1,777 @@
+
+
+###############################################################################################
+
+
+training = False
+
+
+###############################################################################################
+
+
+#@title Libraries
+
+if training == True:
+
+    !pip install wikipedia
+    !pip install unidecode
+
+    import json
+    import math
+    import operator
+    import string
+    import nltk
+    import wikipedia
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    from unidecode import unidecode
+    from urllib.request import urlopen
+    from bs4 import BeautifulSoup
+    from nltk import *
+    from nltk.corpus import stopwords
+    nltk.download('stopwords')
+    wikipedia.set_lang("es")
+
+
+###############################################################################################
+
+
+#@title ( Input Text → Normalize → Stopwords → Frequency → Weight ) → Combine ; Test
+
+
+###############################################################################################
+
+
+# wikiweb("<<title or url>>")               -> extracts text from wikipedia or webpage
+#    wiki_article("<<title>>")              -> extracts text from wikipedia article
+#    webpage("<<url>>")                     -> extracts text from webpage
+
+# tfreq("<<text>>")                         -> counts tokens
+
+# words_with_weights("<<clean text>>")      -> weighting model: returns dict of top 30% interesting weighted tokens
+#    weight_freq(list[tuple[str,int]])      -> translates appearances and characteristics into float weights
+#    top_30_percent(list[tuple[str,float]]) -> gets the top 30% and formats it into a dictionary
+
+# define_genre(list[dict[str,float]])       -> supervised learning: turns weighted vocabulary of multiple sources into one
+
+# combine_vocab_genres(list[str],list[dict])-> joins a list of genres with a list of dict[str,float] ordered by genre
+#    split_genres_from(<<glossary>>)        -> gets back the list of genres
+#    split_vocab_from(<<glossary>>)         -> gets back the list of dict[str,float]
+
+# save_gloss(glossary)                      -> saves the variable <glosary> into 'gloss.json'
+# load_gloss()                              -> loads 'gloss.json'
+
+# gloss_embedding(list[<<genre dicts>>])    -> returns an universal dict[str, np.array] with words and their vector ordered by genre
+
+# run_test(<<weights dict, vector dict>>)   -> returns textual genres vector from a words_with_weights() crosmatched with gloss_embedding()
+#    categorize(<<run_test>>)               -> returns two or three most likely genres
+
+
+###############################################################################################
+
+
+esp_stopwords: list[str] = []
+esp_stopwords += nltk.corpus.stopwords.words("spanish")
+esp_stopwords += ["tal", "cada", "varias", "vez", "veces", "etc", "solo", "solamente", "mientras", "siguiente", "exclusivamente"]
+esp_stopwords += ["segun", "cch", "skip", "consiste", "usualmente", "incluyen", "posteriores", "tras", "cualquier", "ocasiones"]
+esp_stopwords += ["xix", "xxi", "xviii", "xvii", "xvi", "xiv", "xii", "vii", "iii", "vii", "hizo", "isbn", "partir", "particular"]
+ita_stopwords: list[str] = []
+ita_stopwords += nltk.corpus.stopwords.words("italian")
+stop_words: list[str] = []
+stop_words.extend(esp_stopwords)
+
+
+esp_chars: str = "áéíóúüñç"
+ita_chars: str = "àèìòùâêîôûãõäëïöüÿ"
+legal_chars: str = string.ascii_letters
+legal_chars += esp_chars
+
+
+###############################################################################################
+
+
+def wiki_article(title: str) -> str:
+    text = wikipedia.page(title).content
+    if "== Referencias ==" in text:
+        text = text[ 0 : text.index("== Referencias ==")]
+    if "== Note ==" in text:
+        text = text[ 0 : text.index("== Note ==")]
+    return text
+
+
+def webpage(url: str) -> str:
+    html = urlopen(url).read()
+    soup = BeautifulSoup(html, features="html.parser")
+    for i in soup(["script", "style"]):
+        i.extract()
+    text = soup.get_text()
+    return text
+
+
+def wikiweb(search: str):
+    if "/" in search:
+        return webpage(search)
+    else:
+        return wiki_article(search)
+
+
+###############################################################################################
+
+
+def clean_text(text: str) -> str:
+    dirty_char: str = string.punctuation
+    dirty_char += string.digits
+    dirty_char += "¿¡““»«…©"
+    text = text.lower()
+    text = text.replace("'", " ")
+    text = text.replace("  ", " ")
+    text = text.replace("\n\n", "")
+    text = text.replace("\u200b", "")
+    for i in dirty_char: text = text.replace(i, "")
+    return text
+
+
+def tokenize(text: str) -> list[str]:
+    clear_text: str = clean_text(text)
+    tokens: list[str] = list(clear_text.split())
+    for i in tokens:
+        if all(j not in legal_chars for j in i):
+            tokens.remove(i)
+    tokens = [unidecode(i) for i in tokens]
+    return tokens
+
+
+def bagwords(text: str) -> list[str]:
+    tokens: list[str] = tokenize(text)
+    tokens = [i for i in tokens if i not in stop_words]
+    return tokens
+
+
+def tfreq(text: str) -> list[tuple[str,int]]:
+    tokens: list[str] = bagwords(text)
+    return FreqDist(tokens).most_common()
+
+
+###############################################################################################
+
+
+def weight_freq(freq_dist: list[tuple[str,int]]) -> list[tuple[str,float]]:
+# translates count into weight
+    # list of tokens
+    tokens: list[str] = [i[0] for i in freq_dist]
+    # list of relative frequencies
+    weight: list[float] = [i[1]/len(freq_dist) for i in freq_dist]
+    for i in freq_dist:
+        if len(i[0]) >= 8:
+            weight[freq_dist.index(i)] *= 4
+        elif len(i[0]) <= 4:
+            weight[freq_dist.index(i)] *= 4
+        if i[:5] in freq_dist:
+            weight[freq_dist.index(i)] *= 4
+    weighted = dict(zip(tokens, weight))
+    sorted_weighted = sorted(weighted.items(), key=operator.itemgetter(1), reverse=True)
+    return sorted_weighted
+# print(weight_freq(tfreq(wikiweb("Bacilo"))))
+# print(len(weight_freq(tfreq(wikiweb("Bacilo")))))
+
+
+def top_30_percent(weighted_freq: list[tuple[str,float]]) -> dict[str:float]:
+# gets the top 30% of weights with their tokens into a dictionary
+    # sum of weights
+    addition: int = 0
+    # vip list of weights being added one by one
+    top_percent: list[float] = []
+    # list of all weights
+    weights = [i[1] for i in weighted_freq]
+    # for every weight
+    for i in weights:
+        # sum it to the addition
+        addition += i
+        # and add it as an item in the vip list
+        top_percent.append(i)
+        # when the iteration of weights reaches 30% of sum of all weights
+        if addition >= sum(weights) * 0.30:
+            # it's time to stop!
+            break
+    # result is a dictionary that contains the ordered items until threshold
+    top_weighted: dict[str, float] = dict(weighted_freq[:len(top_percent)])
+    return top_weighted
+# print(top_30_percent(weight_freq(tfreq(wikiweb("Bacilo")))))
+# print(len(top_30_percent(weight_freq(tfreq(wikiweb("Bacilo"))))))
+
+
+def words_with_weights(text: str) -> dict[str,float]:
+# top 30% of weighted tokens
+    freq_interestings: list[tuple[str,int]] = tfreq(text)
+    weighted_freq: dict[str:float] = weight_freq(freq_interestings)
+    top_weighted: dict[str:float] = top_30_percent(weighted_freq)
+    return top_weighted
+# print(words_with_weights(wikiweb("Bacilo")))
+# print(len(words_with_weights(wikiweb("Bacilo"))))
+
+
+###############################################################################################
+
+
+def define_genre(sample_dicts: list[dict[str,float]]) -> dict[str, float]:
+# transforms a list of variables of dicts[str,float] into one unified dict
+    # setlist of all keys in each dict
+    all_keys: set[str] = set()
+    for i in sample_dicts: all_keys.update(i.keys())
+    # full dictionary of all words with weights
+    genre_dict: dict = {}
+    # for each key in all dicts
+    for i in all_keys:
+        # list of each value in [for each sample dict, value of key or else 0]
+        w_value: list[float] = [k for k in [j.get(i, 0) for j in sample_dicts]]
+        # the value of each token inserted in genre_dict = all of its weights / num of dicts
+        genre_dict[i] = sum(w_value)/len(w_value)
+    # of multiple dictionaries, returns one with a setlist of their keys and a mean of their values
+    return genre_dict
+# dicc_1 = {"a": 12, "b": 3, "c": 6}
+# dicc_2 = {"a": 3, "c": 9, "d": 3}
+# dicc_3 = {"a": 6, "b": 3, "e": 12}
+# diccs = [dicc_1, dicc_2, dicc_3]
+# print(define_genre(diccs))
+
+
+###############################################################################################
+
+
+def combine_vocab_genres(genres_list: list[str], genres_vocab: list[dict[str,float]]) -> dict[str,dict[str,float]]:
+# combines a list of genres with a list of dict[str,float]
+    combined = {}
+    combined = dict(zip(genres_list, genres_vocab))
+    return combined
+# print(combine_vocab_genres(genres_list, genres_vocab))
+# print(len(combine_vocab_genres(genres_list, genres_vocab)))
+
+
+def split_genres_from(combination: dict[str,dict[str,float]]) -> list[str]:
+# gets a list of genres from a dict of genres with dicts
+    genres_list = []
+    for i in combination:
+        genres_list.append(i)
+    return genres_list
+# print(split_genres_from(combine_vocab_genres(genres_list, genres_vocab)))
+# print(len(split_genres_from(combine_vocab_genres(genres_list, genres_vocab))))
+
+
+def split_vocab_from(combination: dict[str,dict[str,float]]) -> list[dict[str,float]]:
+# gets a list of vocabs from a list of genres with vocabs
+    genres_vocab = []
+    for i in combination:
+        genres_vocab.append(combination.get(i))
+    return genres_vocab
+# print(split_vocab_from(combine_vocab_genres(genres_list, genres_vocab)))
+# print(len(split_vocab_from(combine_vocab_genres(genres_list, genres_vocab))))
+
+
+def save_gloss(glossary):
+    with open("gloss.json", "w") as fp:
+        json.dump(glossary, fp, indent = 4)
+
+
+def load_gloss():
+    try:
+        with open("gloss.json", "r") as fp:
+            glossary = json.load(fp)
+        return glossary
+    except:
+        print("No 'gloss.json' file found.")
+
+
+###############################################################################################
+
+
+def lexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str, np.array]]:
+# setlist of all words plus ordered vector matrix with 1D/genre
+    weights_dicts = split_vocab_from(glossary)
+    genres_list = split_genres_from(glossary)
+    # setlist of all keys in each dict
+    all_keys: set[str] = set()
+    for i in weights_dicts: all_keys.update(i.keys())
+    # full dictionary of all words with: weights by dict in each row of a matrix
+    words_vectors: dict = {}
+    # for each key in all dicts
+    for i in all_keys:
+        # get the value of that key, or else 0, in each dict in dicts: list of weights
+        w_values: list[float] = [j.get(i, 0.0) for j in weights_dicts]
+        # the value of each key inserted in words_vectors = make a matrix and stack weights
+        words_vectors[i] = np.vstack([np.array([k]) for k in w_values])
+        # universal dictionary of vectors based on training data
+    embedded_gloss: dict = {}
+    embedded_gloss["genres"] = split_genres_from(glossary)
+    embedded_gloss["vectors"] = words_vectors
+    return embedded_gloss
+# print(lexicon(glossary))
+
+
+def run_test(text_test: dict[str,float], lexicon) -> dict[str,list]:
+# crossmatches text with embedded glossary
+    vectors = lexicon.get("vectors")
+    comparison_dict = {}
+    for i in text_test:
+        if i in vectors:
+            # filters weights in text with learned weights
+            for j, k in text_test.items():
+                # dict with crossmatched words and weights
+                comparison_dict[i] = abs(((vectors.get(i)) * (math.log(k))) * 1.5)
+    # sums all text vectors into a single textual genre vector
+    weights_list = []
+    for i, j in comparison_dict.items():
+        weights_list.append(j)
+    text_vector = sum(weights_list)
+    # join with genres list
+    text_vector_genres: dict = {}
+    text_vector_genres["genres"] = lexicon.get("genres")
+    text_vector_genres["vectors"] = text_vector
+    return text_vector_genres
+# text_test = words_with_weights(wikiweb("Bacilo"))
+# print(run_test(text_test, lexicon(glossary)))
+
+
+def categorize(test: dict) -> list[tuple]:
+# most likely topics
+    genres = test.get("genres")
+    flat_matrix = test.get("vectors").flatten()
+    sorted_indices = np.argsort(flat_matrix)
+    # top 3 indices & weights
+    i_3 = sorted_indices[-3:]
+    k_3 = flat_matrix[i_3]
+    # top 3 genres
+    i_a_genre = genres[i_3[2]]
+    i_b_genre = genres[i_3[1]]
+    i_c_genre = genres[i_3[0]]
+    # fake trust score
+    i_a_trust = int((k_3[2] / sum(k_3)) * 100)
+    i_b_trust = int((k_3[1] / sum(k_3)) * 100)
+    i_c_trust = int((k_3[0] / sum(k_3)) * 100)
+    # conclusion
+    result: list[tuple] = []
+    result.append((i_a_genre, i_a_trust))
+    result.append((i_b_genre, i_b_trust))
+    if i_c_trust >= 25:
+        result.append((i_c_genre, i_c_trust))
+    else:
+        result.append((0, 0))
+    return result
+# test_text = words_with_weights(wikiweb("Bacilo"))
+# result = categorize(run_test(test_text, lexicon(glossary)))
+# print(result)
+
+
+###############################################################################################
+
+
+#@title Data Visualization
+
+
+###############################################################################################
+
+
+# print_dict(dict[str,float])               -> prints dict data
+# print_tokens(dict[str,x])                 -> prints just the keys and the length of a dict
+# plot_weighted_text(dict[str,float])       -> plots exponential distribution of tokens by weight
+# print_gloss(dict[str,[dict[str,float]]])  -> prints each genre with its associated vocab dict
+# print_matrix(<<word, vectors>>)           -> prints the desired word with its by-genre matrix
+# print_text_vector(<<run_test>>)           -> prints the text vector of a test
+# try_me(<<web_clean>>)                     -> directly outputs result of a query
+
+
+###############################################################################################
+
+
+def print_dict(dicc):
+# better way to print dictionaries
+    d_len = len(dicc)
+    print(f"Dict len: {d_len}")
+    for i, k in dicc.items():
+        print(f"\n {i}: \n {k}")
+    print(f"\nDict len: {d_len}")
+# print_dict(words_with_weights(wikiweb("Bacilo")))
+
+
+def print_tokens(dict):
+# better way to print tokens of dicts
+    print([i for i in dict])
+    print(len([i for i in dict]))
+# print_tokens(words_with_weights(wikiweb("Bacilo")))
+
+
+def plot_weighted_text(weighted_text: dict[str, float]) -> None:
+# of a words_with_weights() draws a silly little graph
+    print(weighted_text)
+    print(len(weighted_text))
+    x = [i for i in weighted_text]
+    y = [weighted_text.get(i) for i in weighted_text]
+    plt.plot(x, y)
+    plt.xticks(x[:1:], rotation=0, fontsize=8)
+    plt.title("Top Token distribution by Weight")
+    plt.xlabel("Tokens")
+    plt.ylabel("Weight")
+    plt.tight_layout()
+    plt.show()
+# plot_weighted_text(words_with_weights(wikiweb("Bacilo")))
+
+
+def print_gloss(glossary):
+# better way to print list["genre":dict[str,float]] glossaries
+    lexicon = split_vocab_from(glossary)
+    genres = split_genres_from(glossary)
+    math_police: bool = False
+    num: int = len(genres)
+    if len(lexicon) != len(genres):
+        print("Oh oh, missmatch in lengths UwU")
+    else:
+        math_police: bool = True
+    if math_police == True:
+        print(f"Number of genres: {num}")
+        print(" \n ")
+        countdown = 0
+        for i in lexicon:
+            leni = len(i)
+            print(genres[countdown])
+            print(f" {i} \n {leni} \n\n")
+            countdown += 1
+        print(f"Number of genres: {num}")
+#print_gloss(glossary)
+
+
+def print_matrix(word: str, vectors):
+# better way to print a singular word vector
+    matrix = vectors.get("vectors")
+    genrea = vectors.get("genres")
+    countdown = 0
+    print(word)
+    for i in range(len(matrix.get(word))):
+        vector_genre = genrea[countdown]
+        vector_point = matrix.get(word)[i]
+        print(f" {vector_genre}   \t {vector_point}")
+        countdown += 1
+# print_matrix("evolucion", vectors)
+
+
+def print_text_vector(test):
+# better way to print text vector
+    genres_list = test.get("genres")
+    vectors = test.get("vectors")
+    countdown = 0
+    for i in range(len(vectors)):
+        vector_genre = genres_list[countdown]
+        vector_point = vectors[i]
+        print(f"{vector_genre}:\t{vector_point}")
+        countdown += 1
+# text_test = words_with_weights(wikiweb("Bacilo"))
+# print_text_vector(run_test(text_test, vectors))
+
+
+def print_result(result):
+# better way to print result
+    print("====================")
+    print("Topic:")
+    print(f" {result[0][0]}: \t {result[0][1]}%")
+    print(f" {result[1][0]}: \t {result[1][1]}%")
+    if result[2][0] != 0:
+        print(f" {result[2][0]}: \t {result[2][1]}%")
+    print("====================")
+# print_result(result)
+
+
+###############################################################################################
+
+
+def try_me(search: str):
+#interface
+    test_text = words_with_weights(wikiweb(search))
+    test_vector = run_test(test_text, lexicon(glossary))
+    result = categorize(test_vector)
+    print(f"Search: {search}")
+    print_result(result)
+
+
+###############################################################################################
+
+
+#@title Training Data
+
+
+###############################################################################################
+
+
+if training == True:
+
+    math_dicts = [
+        words_with_weights(wikiweb("Aritmética")),
+        words_with_weights(wikiweb("https://ead.unam.edu.ar/mod/glossary/view.php?id=1453&mode&hook=ALL&sortkey&sortorder&fullsearch=0&page=-1")),
+        words_with_weights(wikiweb("https://portalacademico.cch.unam.mx/glosario/matematicas")),
+        words_with_weights(wikiweb("Matemáticas")),
+        words_with_weights(wikiweb("Geometría")),
+        words_with_weights(wikiweb("Cálculo")),
+        words_with_weights(wikiweb("Álgebra")),
+        words_with_weights(wikiweb("Número")),
+        words_with_weights(wikiweb("Estadística")),
+        # add dicts here
+                ]
+
+    phys_dicts = [
+        words_with_weights(wikiweb("Mecánica cuántica")),
+        words_with_weights(wikiweb("Física")),
+        words_with_weights(wikiweb("Teoría de cuerdas")),
+        words_with_weights(wikiweb("Termodinámica")),
+        words_with_weights(wikiweb("Física de partículas")),
+        words_with_weights(wikiweb("Teoría de la relatividad")),
+        words_with_weights(wikiweb("Electromagnetismo")),
+        words_with_weights(wikiweb("Astrofísica")),
+        words_with_weights(wikiweb("Electricidad")),
+        # add dicts here
+                ]
+
+    chem_dicts = [
+        words_with_weights(wikiweb("Valencia (química)")),
+        words_with_weights(wikiweb("Enlace (química)")),
+        words_with_weights(wikiweb("Química")),
+        words_with_weights(wikiweb("Compuesto químico")),
+        words_with_weights(wikiweb("Química supramolecular")),
+        words_with_weights(wikiweb("Molécula")),
+        words_with_weights(wikiweb("Tabla periódica de los elementos")),
+        words_with_weights(wikiweb("Química inorgánica")),
+        words_with_weights(wikiweb("Química orgánica")),
+        # add dicts here
+                ]
+
+    biol_dicts = [
+        words_with_weights(wikiweb("https://portalacademico.cch.unam.mx/glosario/biologia")),
+        words_with_weights(wikiweb("Biología")),
+        words_with_weights(wikiweb("Filogenia")),
+        words_with_weights(wikiweb("Célula")),
+        words_with_weights(wikiweb("Evolución biológica")),
+        words_with_weights(wikiweb("Botánica")),
+        words_with_weights(wikiweb("Zoología")),
+        words_with_weights(wikiweb("Bioquímica")),
+        words_with_weights(wikiweb("Ser vivo")),
+        # add dicts here
+                ]
+
+    medi_dicts = [
+        words_with_weights(wikiweb("https://www.genesiscare.com/es/apoyo-al-paciente/glosario-de-terminos-y-definiciones-medicas")),
+        words_with_weights(wikiweb("https://hmdrpila.com/glosario-de-terminos-medicos/")),
+        words_with_weights(wikiweb("Medicina")),
+        words_with_weights(wikiweb("Medicina interna")),
+        words_with_weights(wikiweb("Medicina nuclear")),
+        words_with_weights(wikiweb("Cardiología")),
+        words_with_weights(wikiweb("Epidemiología")),
+        words_with_weights(wikiweb("Farmacología")),
+        words_with_weights(wikiweb("Neurología")),
+        # add dicts here
+                ]
+
+    geol_dicts = [
+        words_with_weights(wikiweb("Geología")),
+        words_with_weights(wikiweb("Escala temporal geológica")),
+        words_with_weights(wikiweb("Tierra")),
+        words_with_weights(wikiweb("Tectónica de placas")),
+        words_with_weights(wikiweb("Volcán")),
+        words_with_weights(wikiweb("Terremoto")),
+        words_with_weights(wikiweb("Geofísica")),
+        words_with_weights(wikiweb("Gema")),
+        words_with_weights(wikiweb("Mineral")),
+        # add dicts here
+                ]
+
+    tech_dicts = [
+        words_with_weights(wikiweb("ChatGPT")),
+        words_with_weights(wikiweb("Lenguaje de programación")),
+        words_with_weights(wikiweb("Computadora")),
+        words_with_weights(wikiweb("Software")),
+        words_with_weights(wikiweb("Inteligencia artificial")),
+        words_with_weights(wikiweb("Vehículo aéreo no tripulado")),
+        words_with_weights(wikiweb("Teléfono móvil")),
+        words_with_weights(wikiweb("Robot")),
+        words_with_weights(wikiweb("Automóvil eléctrico")),
+        # add dicts here
+                ]
+
+    anth_dicts = [
+        words_with_weights(wikiweb("Antropología")),
+        words_with_weights(wikiweb("Homo sapiens")),
+        words_with_weights(wikiweb("Estructura social")),
+        words_with_weights(wikiweb("Cultura")),
+        words_with_weights(wikiweb("Arqueología")),
+        words_with_weights(wikiweb("Género (ciencias sociales)")),
+        words_with_weights(wikiweb("Indigenismo")),
+        words_with_weights(wikiweb("Racismo")),
+        words_with_weights(wikiweb("Etnia")),
+        # add dicts here
+                ]
+
+    hist_dicts = [
+        words_with_weights(wikiweb("Historia de España")),
+        words_with_weights(wikiweb("Historiografía")),
+        words_with_weights(wikiweb("Historia")),
+        words_with_weights(wikiweb("Historia de Europa")),
+        words_with_weights(wikiweb("Segunda Guerra Mundial")),
+        words_with_weights(wikiweb("Guerra")),
+        words_with_weights(wikiweb("Edad Media")),
+        words_with_weights(wikiweb("Edad Moderna")),
+        words_with_weights(wikiweb("Mesopotamia")),
+        # add dicts here
+                ]
+
+    geog_dicts = [
+        words_with_weights(wikiweb("España")),
+        words_with_weights(wikiweb("País")),
+        words_with_weights(wikiweb("Geografía")),
+        words_with_weights(wikiweb("Región")),
+        words_with_weights(wikiweb("Paisaje")),
+        words_with_weights(wikiweb("Geografía física")),
+        words_with_weights(wikiweb("Geografía humana")),
+        words_with_weights(wikiweb("Clima")),
+        words_with_weights(wikiweb("Accidente geográfico")),
+        # add dicts here
+                ]
+
+    poli_dicts = [
+        words_with_weights(wikiweb("Comunismo")),
+        words_with_weights(wikiweb("Política")),
+        words_with_weights(wikiweb("Política de España")),
+        words_with_weights(wikiweb("Partido político")),
+        words_with_weights(wikiweb("Gobierno")),
+        words_with_weights(wikiweb("Democracia")),
+        words_with_weights(wikiweb("Fascismo")),
+        words_with_weights(wikiweb("Capitalismo")),
+        words_with_weights(wikiweb("Ideología")),
+        # add dicts here
+                ]
+
+    juri_dicts = [
+        words_with_weights(wikiweb("Estado")),
+        words_with_weights(wikiweb("Ley")),
+        words_with_weights(wikiweb("Constitución")),
+        words_with_weights(wikiweb("Derecho")),
+        words_with_weights(wikiweb("Institución")),
+        words_with_weights(wikiweb("Justicia")),
+        words_with_weights(wikiweb("Ordenamiento jurídico")),
+        words_with_weights(wikiweb("Leyes de España")),
+        words_with_weights(wikiweb("Ley orgánica (España)")),
+        # add dicts here
+                ]
+
+    econ_dicts = [
+        words_with_weights(wikiweb("Economía")),
+        words_with_weights(wikiweb("Dinero")),
+        words_with_weights(wikiweb("Inflación")),
+        words_with_weights(wikiweb("Teoría del valor-trabajo")),
+        words_with_weights(wikiweb("Macroeconomía")),
+        words_with_weights(wikiweb("Microeconomía")),
+        words_with_weights(wikiweb("Producción (economía)")),
+        words_with_weights(wikiweb("Economía marxista")),
+        words_with_weights(wikiweb("Economía clásica")),
+        # add dicts here
+                ]
+
+    phil_dicts = [
+        words_with_weights(wikiweb("Filosofía")),
+        words_with_weights(wikiweb("Historia de la filosofía occidental")),
+        words_with_weights(wikiweb("Historia de la filosofía oriental")),
+        words_with_weights(wikiweb("Fenomenología trascendental")),
+        words_with_weights(wikiweb("Filosofía de la ciencia")),
+        words_with_weights(wikiweb("Metafísica")),
+        words_with_weights(wikiweb("Platón")),
+        words_with_weights(wikiweb("Georg Wilhelm Friedrich Hegel")),
+        words_with_weights(wikiweb("Materialismo dialéctico")),
+        # add dicts here
+                ]
+
+    spor_dicts = [
+        words_with_weights(wikiweb("Deporte")),
+        words_with_weights(wikiweb("Juegos Olímpicos")),
+        words_with_weights(wikiweb("Fútbol")),
+        words_with_weights(wikiweb("Baloncesto")),
+        words_with_weights(wikiweb("Fórmula 1")),
+        words_with_weights(wikiweb("Tenis")),
+        words_with_weights(wikiweb("Golf")),
+        words_with_weights(wikiweb("Competición (juego)")),
+        words_with_weights(wikiweb("Boxeo")),
+        # add dicts here
+                ]
+
+    vide_dicts = [
+        words_with_weights(wikiweb("Videojuego")),
+        words_with_weights(wikiweb("Videoconsola")),
+        words_with_weights(wikiweb("League of Legends")),
+        words_with_weights(wikiweb("Minecraft")),
+        words_with_weights(wikiweb("Nintendo")),
+        words_with_weights(wikiweb("Grand Theft Auto")),
+        words_with_weights(wikiweb("Steam")),
+        words_with_weights(wikiweb("Counter-Strike")),
+        words_with_weights(wikiweb("Angry Birds")),
+        # add dicts here
+                ]
+
+    arts_dicts = [
+        words_with_weights(wikiweb("Arte")),
+        words_with_weights(wikiweb("Música")),
+        words_with_weights(wikiweb("Arquitectura")),
+        words_with_weights(wikiweb("Obra de arte")),
+        words_with_weights(wikiweb("Pintura")),
+        words_with_weights(wikiweb("Literatura")),
+        words_with_weights(wikiweb("Cine")),
+        words_with_weights(wikiweb("Escultura")),
+        words_with_weights(wikiweb("Teoría del arte")),
+        # add dicts here
+                ]
+
+    fict_dicts = [
+        words_with_weights(wikiweb("Ciencia ficción")),
+        words_with_weights(wikiweb("Ficción")),
+        words_with_weights(wikiweb("Literatura fantástica")),
+        words_with_weights(wikiweb("Trilogía cinematográfica de El Señor de los Anillos")),
+        words_with_weights(wikiweb("Harry Potter")),
+        words_with_weights(wikiweb("Star Wars")),
+        words_with_weights(wikiweb("Star Trek")),
+        words_with_weights(wikiweb("Futurama")),
+        words_with_weights(wikiweb("Shingeki no Kyojin")),
+        # add dicts here
+                ]
+
+
+    math_topic = define_genre(math_dicts)
+    phys_topic = define_genre(phys_dicts)
+    chem_topic = define_genre(chem_dicts)
+    biol_topic = define_genre(biol_dicts)
+    medi_topic = define_genre(medi_dicts)
+    geol_topic = define_genre(geol_dicts)
+    tech_topic = define_genre(tech_dicts)
+    anth_topic = define_genre(anth_dicts)
+    hist_topic = define_genre(hist_dicts)
+    geog_topic = define_genre(geog_dicts)
+    poli_topic = define_genre(poli_dicts)
+    juri_topic = define_genre(juri_dicts)
+    econ_topic = define_genre(econ_dicts)
+    phil_topic = define_genre(phil_dicts)
+    spor_topic = define_genre(spor_dicts)
+    vide_topic = define_genre(vide_dicts)
+    arts_topic = define_genre(arts_dicts)
+    fict_topic = define_genre(fict_dicts)
+
+
+    genres_list: list[str] = ["MATH", "PHYS", "CHEM", "BIOL", "MEDI", "GEOL", "TECH", "ANTH", "HIST", "GEOG", "POLI", "JURI", "ECON", "PHIL", "SPOR", "VIDE", "ARTS", "FICT"]
+    genres_vocab: list[dict] = [math_topic, phys_topic, chem_topic, biol_topic, medi_topic, geol_topic, tech_topic, anth_topic, hist_topic, geog_topic, poli_topic, juri_topic, econ_topic, phil_topic, spor_topic, vide_topic, arts_topic, fict_topic]
+
+    glossary: dict[str,dict[str,float]] = combine_vocab_genres(genres_list, genres_vocab)
+    save_gloss(glossary)
+
+
+else:
+    glossary = load_gloss()
+
+
+###############################################################################################
+
+try_me("Barack Obama")
+
+
+###############################################################################################
+
