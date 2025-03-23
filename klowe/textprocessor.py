@@ -55,12 +55,13 @@ stop_words: list[str] = []
 
 
 def set_language(lang: str):
-    global stop_words
+    stop_words.clear()
     match lang:
-        case "es": stop_words = esp_stopwords
-        case "it": stop_words = ita_stopwords
-        case _: stop_words = esp_stopwords
-    stop_words = list(set([unidecode(s) for s in stop_words]))
+        case "es": stop_words.extend(esp_stopwords)
+        case "it": stop_words.extend(ita_stopwords)
+        case _: stop_words.extend(esp_stopwords)
+    #stop_words = list(set([unidecode(s) for s in stop_words]))
+    wiki_language(lang)
     return lang
 
 
