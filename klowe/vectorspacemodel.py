@@ -62,7 +62,7 @@ def InverseDocFreq(sample_dicts: list[str]):
 
     return sIDF, pIDF, F_tensor, T_tensor
 
-# wiki_language("es")
+# set_language("es")
 # sample_dicts = [wiki_article("Biología"), wiki_article("Célula"), wiki_article("Carbunco"), wiki_article("Bacteria")]
 # S, P, F, T = InverseDocFreq(sample_dicts)
 # print("\n\n".join("\n".join(map(str, l)) for l in [S, P, F, T]), "\n")
@@ -80,7 +80,7 @@ def TermFreq_IDF(sample_dicts: list[str]):
 
     return TF_sIDF, TF_pIDF, T_tensor
 
-# wiki_language("es")
+# set_language("es")
 # sample_dicts = [wiki_article("Biología"), wiki_article("Célula"), wiki_article("Carbunco"), wiki_article("Bacteria")]
 # S, P, T = TermFreq_IDF(sample_dicts)
 # print("\n\n".join("\n".join(map(str, l)) for l in [S, P, T]), "\n")
@@ -116,7 +116,7 @@ def Kweight_model(text: str) -> dict[str,float]:
     top_weighted = dict(sorted(zip(top_t, top_w), key=operator.itemgetter(1), reverse=True))
     return top_weighted
 
-# wiki_language("es")
+# set_language("es")
 # print(Kweight_model(wiki_article("Bacilo")))
 
 
@@ -136,7 +136,7 @@ class KGlossary:
     def __init__(self, model, gloss: list[tuple[str,list[str]]]) -> dict[str:[dict[str:float]]]:
         self.apply = {n : define_genre([model(d) for d in s]) for n, s in gloss}
 
-# wiki_language("es")
+# set_language("es")
 # glossary = KGlossary(Kweight_model, [("MATH", [wiki_article('Aritmética'), wiki_article("Matemáticas")]),
 # ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Química')]),]).apply
 # print(glossary)
