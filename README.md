@@ -73,6 +73,7 @@ from klowe import *
 ```
 > AlKhwarizmiFunction(a, b, c, x) -> y              == solves a quadratic formula
 > TanhFunction(x) -> y                              == passes data through a Tanh function
+> ELU(x) -> y                                       == eponential linear unit function
 
 > normalize_value(x, values, (s1, s0)) -> float     == of a value in a list of values, returns the normalized value
 > normalize_list(list[float], scale) -> list[float] == normalizes a list of values into a (s1, s0) feature scale
@@ -86,7 +87,9 @@ from klowe import *
 ## DataVisualization
 ```
 > print_dict(dict)                                  == better way to print dictionaries
+
 > plot_dict(dict[str,float])                        == of a dict with {string:float} plots a silly little graph
+> plot_function(<function>, "<name>")               == graphs a function
 ```
 
 

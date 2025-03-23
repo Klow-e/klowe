@@ -26,7 +26,7 @@ def plot_dict(weighted_text: dict[str,float]) -> None:
     print(len(weighted_text))
     x = [i for i in weighted_text]
     y = [weighted_text.get(i) for i in weighted_text]
-    plt.plot(x, y)
+    plt.plot(x, y, color='black', linewidth=3)
     plt.xticks(x, rotation=90, fontsize=8)
     plt.title("Keys distribution by Values")
     plt.xlabel("Keys")
@@ -44,6 +44,7 @@ def plot_function(func: callable, name: str):
     y = np.vectorize(func)(x)
     plt.plot(x, y, color='black', linewidth=3)
     plt.plot(x, x*0.333, color='black', linewidth=1)
+    plt.plot(x, x, color='black', linewidth=1)
     # (0, 0)
     ax.axhline(0, color='black', linewidth=1, linestyle='--')
     ax.axvline(0, color='black', linewidth=1, linestyle='--')
