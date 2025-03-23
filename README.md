@@ -83,6 +83,13 @@ from klowe import *
 ```
 
 
+## DataVisualization
+```
+> print_dict(dict)                                  == better way to print dictionaries
+> plot_dict(dict[str,float])                        == of a dict with {string:float} plots a silly little graph
+```
+
+
 ---
 
 

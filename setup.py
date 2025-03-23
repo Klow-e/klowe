@@ -25,6 +25,7 @@ setup(
         "requests",
         "bs4",
         "dataclasses",
+        "matplotlib",
 #        "re",
 #        "string",
 #        "operator",

@@ -8,6 +8,7 @@ from .chisquare import *
 from .webscraper import *
 from .vectorspacemodel import *
 from .mathstuff import *
+from .datavisualization import *
 
 
 # ToDo:

@@ -136,7 +136,7 @@ class KGlossary:
         self.apply = {n : define_genre([model(d) for d in s]) for n, s in gloss}
 
 # wiki_language("es")
-# glossary = KGlossary(Kweight_model, [("MATH", [wiki_article('Aritmética'),wiki_article("Matemáticas")]),
+# glossary = KGlossary(Kweight_model, [("MATH", [wiki_article('Aritmética'), wiki_article("Matemáticas")]),
 # ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Química')]),]).apply
 # print(glossary)
 
