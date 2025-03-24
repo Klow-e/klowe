@@ -120,11 +120,21 @@ def Kweight_model(text: str) -> dict[str,float]:
 # print(Kweight_model(wiki_article("Bacilo")))
 
 
+çç='''
 def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
     all_keys: set[str] = {k for d in l_dicts for k in d}
     total_d = len(l_dicts)
     genre_dict: dict = {i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys}
     return dict(sorted(genre_dict.items(), key=operator.itemgetter(1), reverse=True))
+'''
+
+def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
+    all_keys: set[str] = {k for d in l_dicts for k in d}
+    total_d = len(l_dicts)
+    genre_dict: dict = {i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys}
+    genre_dict: dict = dict(sorted(genre_dict.items(), key=operator.itemgetter(1), reverse=True))
+    genre_dict: dict = dict(zip( genre_dict.keys() , normalize_list(genre_dict.values(), (1, 0)) ))
+    return genre_dict
 
 
 @dataclass
