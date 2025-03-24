@@ -111,10 +111,8 @@ def Kweight_model(text: str) -> dict[str,float]:
             case _ if t[:6] in prelex_6: m *= 5.0
         freq_dist[i] = (t, w * m)
 
-    weighted = sorted(freq_dist, key=operator.itemgetter(1), reverse=True)
-    top_w: list[float] = top_percent([w for _, w in weighted], 0.35)
-    top_t: list[str] = [t for t, _ in weighted]
-    top_weighted = SortDict(zip(top_t, top_w))
+    weighted = SortDict(freq_dist)
+    top_weighted = SortDict(zip(GetKeys(weighted), top_percent(GetValues(weighted), 0.35)))
     return top_weighted
 
 # set_language("es")
@@ -124,8 +122,7 @@ def Kweight_model(text: str) -> dict[str,float]:
 def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
     all_keys: set[str] = {k for d in l_dicts for k in d}
     total_d = len(l_dicts)
-    genre_dict: dict = {i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys}
-    genre_dict: dict = dict(sorted(genre_dict.items(), key=operator.itemgetter(1), reverse=True))
+    genre_dict: dict = SortDict({i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys})
     genre_dict: dict = dict(zip( genre_dict.keys() , normalize_list(genre_dict.values(), (0, 1)) ))
     return genre_dict
 
