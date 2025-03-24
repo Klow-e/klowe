@@ -30,7 +30,7 @@ legal_characters += esp_characters
 legal_characters += ita_characters
 
 esp_stopwords: list[str] = []
-esp_stopwords += ["que", "qué", "y", "e", "o", "pero", "porque", "por", "para", "ya", "como", "ni", "no", "sí", "con", "más", "mas", "tal", "cuyo"]
+esp_stopwords += ["que", "qué", "y", "e", "o", "pero", "porque", "por", "para", "ya", "como", "ni", "no", "sí", "con", "más", "mas", "tal", "cuyo", "así"]
 esp_stopwords += ["en", "entre", "cuando", "muy", "sin", "sobre", "también", "tambien", "hasta", "donde", "desde", "durante", "contra", "ante", "antes", "hacia", "mediante", "tras", "según"]
 esp_stopwords += ["el", "la", "los", "las", "a", "al", "de", "del", "lo", "le", "les", "un", "una", "uno", "unos", "dos", "quien", "otro", "otros", "otras", "otra", "alguno", "algunos", "alguna", "algunas"]
 esp_stopwords += ["se", "si", "sus", "me", "mí", "yo", "él", "su", "nos", "ella", "ellos", "nosotros", "mi", "mis", "tú", "te", "ti", "tu", "tus", "ellas", "nosotras", "vosotros", "vosotras", "os", "mío", "mía", "míos", "mías", "tuyo", "tuya", "tuyos", "tuyas", "suyo", "suya", "suyos", "suyas", "nuestro", "nuestra", "nuestros", "nuestras", "vuestro", "vuestra", "vuestros", "vuestras"]
