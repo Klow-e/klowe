@@ -54,6 +54,10 @@ from klowe import *
 > Kweight_model("<text>") -> dict[str, float]       == my very own weighting model for texts
 > define_genre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into a unified and mean-value one
 > KGlossary(<model>, list[tuple[str,list[str]]])    == class that applies a weighting model to a list of (tag, texts)
+> KGlossary(<model>, list).apply                    == just returns a glossary data as dict[str:[dict[str:float]]]
+> KGlossary(<model>, list).sIDFw                    == returns a glossary with sIDF * weights applied to it whole
+> KGlossary(<model>, list).pIDFw                    == returns a glossary with pIDF * weights applied to it whole
+
 > save_gloss(dict[str:[dict[str:float]]])           == saves glossary, like a KGlossary output, to a gloss.json file
 > load_gloss()                                      == loads a gloss.json file
 ```
@@ -97,6 +101,14 @@ from klowe import *
 > plot_dict(dict[str,float])                        == of a dict with {string:float} plots a silly little graph
 > plot_function(<function>, "<name>")               == graphs a function
 > plot_list[float]                                  == graphs a list of numbers
+```
+
+
+## PythonTools
+```
+> SortDict(dict) -> dict                            == returns a sorted dict from a dict or zip item
+> GetKeys(dict) -> list                             == returns a list of the keys of a dict or list of dicts
+> GetValues(dict) -> list                           == returns a list of the values of a dict or list of dicts
 ```
 
 

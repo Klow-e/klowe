@@ -11,8 +11,3 @@ from .mathstuff import *
 from .datavisualization import *
 from .pythontools import *
 
-
-# ToDo:
-# use TF_IDF to define genre
-# normalize Kweight
-
