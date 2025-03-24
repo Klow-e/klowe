@@ -194,7 +194,6 @@ def KLexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(glossary)]]) for i in all_keys}
     embedded_gloss: dict = {"genres": GetKeys(glossary), "vectors": words_vectors}
     return embedded_gloss
-print(KLexicon(glossary))
 # print_dict(KLexicon(glossary).get("vectors"))
 # print(KLexicon(glossary).get("genres"))
 
