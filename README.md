@@ -78,8 +78,8 @@ from klowe import *
 > TanhFunction(x) -> y                              == passes data through a Tanh function
 > ELU(x) -> y                                       == eponential linear unit function
 
-> normalize_value(x, values, (s1, s0)) -> float     == of a value in a list of values, returns the normalized value
-> normalize_list(list[float], scale) -> list[float] == normalizes a list of values into a (s1, s0) feature scale
+> normalize_value(x, values, (s0, s1)) -> float     == of a value in a list of values, returns the normalized value
+> normalize_list(list[float], scale) -> list[float] == normalizes a list of values into a (s0, s1) feature scale
 > TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
 
 > midpoint(a, b) -> float                           == gives the midpoint between two numbers

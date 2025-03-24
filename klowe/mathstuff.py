@@ -33,10 +33,10 @@ def ELU(z: float) -> float:
 
 
 def normalize_value(x: float, values_l: list[float], scale: tuple[float, float]) -> float:
+    s0, s1 = scale
     min_v, max_v = min(values_l), max(values_l)
-    s1, s0 = scale
-    n_factor: float = (s1-s0) / (max_v - min_v)
-    n_value: float = (x - min_v) * n_factor
+    dividend: float = (max_v - min_v)
+    n_value: float =  ( ( (x - min_v) * (s1 - s0) ) / dividend ) + s0
     return n_value
 
 
@@ -46,9 +46,9 @@ def normalize_list(values_l: list[float], scale: tuple[float, float]) -> list[fl
 
 
 def TanhNormalization(l_values: list[float]) -> list[float]:
-    l_values = normalize_list(l_values, (3, -3))
+    l_values = normalize_list(l_values, (-3, 3))
     TN = [TanhFunction(x-3) for x in l_values]
-    return normalize_list(TN, (1, 0))
+    return normalize_list(TN, (0, 1))
 
 
 def midpoint(a: float, b: float) -> float:

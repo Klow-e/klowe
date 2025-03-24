@@ -125,7 +125,7 @@ def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
     total_d = len(l_dicts)
     genre_dict: dict = {i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys}
     genre_dict: dict = dict(sorted(genre_dict.items(), key=operator.itemgetter(1), reverse=True))
-    genre_dict: dict = dict(zip( genre_dict.keys() , normalize_list(genre_dict.values(), (1, 0)) ))
+    genre_dict: dict = dict(zip( genre_dict.keys() , normalize_list(genre_dict.values(), (0, 1)) ))
     return genre_dict
 
 # set_language("es")
