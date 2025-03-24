@@ -9,6 +9,7 @@ from .webscraper import *
 from .vectorspacemodel import *
 from .mathstuff import *
 from .datavisualization import *
+from .pythontools import *
 
 
 # ToDo:

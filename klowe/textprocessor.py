@@ -7,6 +7,7 @@
 
 
 from .webscraper import *
+from .pythontools import *
 
 import re
 import string
@@ -39,7 +40,7 @@ esp_stopwords += ["soy", "eres", "es", "somos", "sois", "son", "sea", "seas", "s
 esp_stopwords += ["estar", "estás", "estoy", "estás", "está", "estamos", "estáis", "están", "esté", "estés", "estemos", "estéis", "estén", "estaré", "estarás", "estará", "estaremos", "estaréis", "estarán", "estaría", "estarías", "estaríamos", "estaríais", "estarían", "estaba", "estabas", "estábamos", "estabais", "estaban", "estuve", "estuviste", "estuvo", "estuvimos", "estuvisteis", "estuvieron", "estuviera", "estuvieras", "estuviéramos", "estuvierais", "estuvieran", "estuviese", "estuvieses", "estuviésemos", "estuvieseis", "estuviesen", "estando", "estado", "estada", "estados", "estadas", "estad"]
 esp_stopwords += ["hay", "he", "has", "ha", "hemos", "habéis", "han", "haya", "hayas", "hayamos", "hayáis", "hayan", "habré", "habrás", "habrá", "habremos", "habréis", "habrán", "habría", "habrías", "habríamos", "habríais", "habrían", "había", "habías", "habíamos", "habíais", "habían", "hube", "hubiste", "hubo", "hubimos", "hubisteis", "hubieron", "hubiera", "hubieras", "hubiéramos", "hubierais", "hubieran", "hubiese", "hubieses", "hubiésemos", "hubieseis", "hubiesen", "habiendo", "habido", "habida", "habidos", "habidas"]
 esp_stopwords += ["tengo", "tienes", "tiene", "tenemos", "tenéis", "tienen", "tenga", "tengas", "tengamos", "tengáis", "tengan", "tendré", "tendrás", "tendrá", "tendremos", "tendréis", "tendrán", "tendría", "tendrías", "tendríamos", "tendríais", "tendrían", "tenía", "tenías", "teníamos", "teníais", "tenían", "tuve", "tuviste", "tuvo", "tuvimos", "tuvisteis", "tuvieron", "tuviera", "tuvieras", "tuviéramos", "tuvierais", "tuvieran", "tuviese", "tuvieses", "tuviésemos", "tuvieseis", "tuviesen", "teniendo", "tenido", "tenida", "tenidos", "tenidas", "tened"]
-esp_stopwords += ["sintiendo", "sentido", "sentida", "sentidas", "siente", "partir", "particular", "usualmente", "hizo", "usa", "pueden", "encontrar", "encuentran"]
+esp_stopwords += ["sintiendo", "sentido", "sentida", "sentidas", "siente", "partir", "particular", "usualmente", "hizo", "usa", "pueden", "encontrar", "encuentran", "debe"]
 esp_stopwords += ["xix", "xxi", "xviii", "xvii", "xvi", "xiv", "xii", "vii", "iii", "vii", "cch", "skip", "isbn", "ocasiones"]
 esp_stopwords = list(set([unidecode(s) for s in esp_stopwords]))
 

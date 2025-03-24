@@ -8,6 +8,7 @@
 
 from .textprocessor import *
 from .mathstuff import *
+from .pythontools import *
 
 import nltk
 from nltk import *
@@ -113,7 +114,7 @@ def Kweight_model(text: str) -> dict[str,float]:
     weighted = sorted(freq_dist, key=operator.itemgetter(1), reverse=True)
     top_w: list[float] = top_percent([w for _, w in weighted], 0.35)
     top_t: list[str] = [t for t, _ in weighted]
-    top_weighted = dict(sorted(zip(top_t, top_w), key=operator.itemgetter(1), reverse=True))
+    top_weighted = SortDict(zip(top_t, top_w))
     return top_weighted
 
 # set_language("es")
