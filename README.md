@@ -93,6 +93,7 @@ from klowe import *
 
 > plot_dict(dict[str,float])                        == of a dict with {string:float} plots a silly little graph
 > plot_function(<function>, "<name>")               == graphs a function
+> plot_list[float]                                  == graphs a list of numbers
 ```
 
 

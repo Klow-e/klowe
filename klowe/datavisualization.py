@@ -62,5 +62,22 @@ def plot_function(func: callable, name: str) -> None:
 # plot_function(TanhFunction, "Tanh")
 
 
+def plot_list(v_list: list[float]) -> None:
+    print(v_list,"\n",len(v_list))
+    ax = plt.figure().add_subplot(1, 1, 1)
+    x = [str(i) for i in v_list]
+    y = [i for i in v_list]
+    plt.plot(x, y, color='black', linewidth=3)
+    ax.axhline(max(y)/2, color='black', linewidth=1, linestyle='--')
+    ax.axvline((len(y)-1)/2, color='black', linewidth=1, linestyle='--')
+    plt.xticks(x, rotation=80, fontsize=6)
+    plt.title("Item distribution by Values")
+    plt.xlabel("Items")
+    plt.ylabel("Values")
+    plt.tight_layout()
+    plt.show()
+# plot_list(TanhNormalization([-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6]))
+
+
 ###############################################################################################
 

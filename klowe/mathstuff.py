@@ -47,7 +47,7 @@ def normalize_list(values_l: list[float], scale: tuple[float, float]) -> list[fl
 
 def TanhNormalization(l_values: list[float]) -> list[float]:
     l_values = normalize_list(l_values, (-3, 3))
-    TN = [TanhFunction(x-3) for x in l_values]
+    TN = [TanhFunction(x) for x in l_values]
     return normalize_list(TN, (0, 1))
 
 
