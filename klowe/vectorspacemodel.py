@@ -111,7 +111,7 @@ def Kweight_model(text: str) -> dict[str,float]:
         freq_dist[i] = (t, w * m)
 
     weighted = sorted(freq_dist, key=operator.itemgetter(1), reverse=True)
-    top_w: list[float] = top_percent([w for _, w in weighted], 0.30)
+    top_w: list[float] = top_percent([w for _, w in weighted], 0.35)
     top_t: list[str] = [t for t, _ in weighted]
     top_weighted = dict(sorted(zip(top_t, top_w), key=operator.itemgetter(1), reverse=True))
     return top_weighted

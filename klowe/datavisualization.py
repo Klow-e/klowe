@@ -28,7 +28,7 @@ def plot_dict(weighted_text: dict[str,float]) -> None:
     x = [i for i in weighted_text]
     y = [weighted_text.get(i) for i in weighted_text]
     plt.plot(x, y, color='black', linewidth=3)
-    plt.xticks(x, rotation=90, fontsize=8)
+    plt.xticks(x, rotation=90, fontsize=6)
     plt.title("Keys distribution by Values")
     plt.xlabel("Keys")
     plt.ylabel("Values")
