@@ -29,6 +29,10 @@ def ELU(z: float) -> float:
     return np.maximum(0, z) + np.minimum(0, alph * (np.exp(z) - 1))
 
 
+def ReLU(x: float) -> float:
+    return max(0.0, x)
+
+
 ###############################################################################################
 
 
@@ -49,6 +53,20 @@ def TanhNormalization(l_values: list[float]) -> list[float]:
     l_values = normalize_list(l_values, (-3, 3))
     TN = [TanhFunction(x) for x in l_values]
     return normalize_list(TN, (0, 1))
+
+
+def ELUNormalization(l_values: list[float]) -> list[float]:
+    l_values = [ELU(x) for x in l_values]
+    #l_values = normalize_list(l_values, (0, 1))
+    return l_values
+# v = [1.0, -0.633, -0.092, 0.226, -0.085, 0.0254, 0.358, 0.173, 0.184, 0.220, 0.119, 0.-148]
+# v.sort()
+# plot_list(ELUNormalization(v))
+
+
+def ReLUNormalization(l_values: list[float]) -> list[float]:
+    l_values = [ReLU(x) for x in l_values]
+    return l_values
 
 
 def midpoint(a: float, b: float) -> float:

@@ -65,7 +65,7 @@ def InverseDocFreq(sample_dicts: list[str]):
 # set_language("es")
 # sample_dicts = [wiki_article("Biología"), wiki_article("Célula"), wiki_article("Carbunco"), wiki_article("Bacteria")]
 # S, P, F, T = InverseDocFreq(sample_dicts)
-# print("\n\n".join("\n".join(map(str, l)) for l in [S, P, F, T]), "\n")
+# print("\n" + "\n\n".join("\n".join(map(str, l)) for l in [S, P, F, T]) + "\n")
 
 
 def TermFreq_IDF(sample_dicts: list[str]):

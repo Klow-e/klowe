@@ -76,11 +76,14 @@ from klowe import *
 ```
 > AlKhwarizmiFunction(a, b, c, x) -> y              == solves a quadratic formula
 > TanhFunction(x) -> y                              == passes data through a Tanh function
-> ELU(x) -> y                                       == eponential linear unit function
+> ELU(x) -> y                                       == exponential linear unit function
+> ReLU(x) -> y                                      == rectified linear unit function
 
 > normalize_value(x, values, (s0, s1)) -> float     == of a value in a list of values, returns the normalized value
 > normalize_list(list[float], scale) -> list[float] == normalizes a list of values into a (s0, s1) feature scale
 > TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
+> ELUNormalization(list[float])                     == passes a list of values through the ELU function
+> ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
 
 > midpoint(a, b) -> float                           == gives the midpoint between two numbers
 > top_percent(list[float], float) -> list[float]    == gets the top float per one values in a list of values
