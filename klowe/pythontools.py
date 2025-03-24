@@ -14,7 +14,7 @@ import operator
 
 
 def SortDict(dicc: dict) -> dict:
-    sorted_d: dict = dict(sorted(dicc.items(), key=operator.itemgetter(1), reverse=True))
+    sorted_d: dict = dict(sorted(dict(dicc).items(), key=operator.itemgetter(1), reverse=True))
     return sorted_d
 
 
