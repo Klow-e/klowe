@@ -6,6 +6,8 @@
 ###############################################################################################
 
 
+from .pythontools import *
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -77,6 +79,19 @@ def plot_list(v_list: list[float]) -> None:
     plt.tight_layout()
     plt.show()
 # plot_list(TanhNormalization([-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6]))
+
+
+###############################################################################################
+
+
+def print_vector(word: str, vectors):
+    print("\n" + word)
+    try:
+        for g, v in zip(vectors.get("genres"), vectors.get("vectors").get(word)):
+            print(f" {g}  \t {v}")
+    except: print("Not in glossary")
+    print()
+# print_vector("evolucion", KLexicon(glossary))
 
 
 ###############################################################################################

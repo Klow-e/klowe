@@ -16,6 +16,8 @@ from dataclasses import dataclass
 import math
 import operator
 import json
+import numpy as np
+
 
 
 ###############################################################################################
@@ -130,6 +132,9 @@ def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
 # print(define_genre([Kweight_model(wiki_article('Aritmética')), Kweight_model(wiki_article("Matemáticas"))]))
 
 
+###############################################################################################
+
+
 @dataclass
 class KGlossary:
     model: callable
@@ -150,7 +155,6 @@ class KGlossary:
         sIDFw: list[list[float]] = [normalize_list([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(sIDF, gd_values)]  
         sIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, sIDFw)]
         return dict(zip(GetKeys(gloss), sIDFw))
-
 
     def pIDFw_gloss(self, gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
         cor_N, nt_tensor, gd_values, gd_keys = self.preprocess_IDF_gloss(gloss)
@@ -183,6 +187,16 @@ def load_gloss():
         return glossary
     except: print("No 'gloss.json' file found.")
 # glossary = load_gloss()
+
+
+def KLexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str, np.array]]:
+    all_keys: set[str] = {k for d in GetValues(glossary) for k in d}
+    words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(glossary)]]) for i in all_keys}
+    embedded_gloss: dict = {"genres": GetKeys(glossary), "vectors": words_vectors}
+    return embedded_gloss
+print(KLexicon(glossary))
+# print_dict(KLexicon(glossary).get("vectors"))
+# print(KLexicon(glossary).get("genres"))
 
 
 ###############################################################################################

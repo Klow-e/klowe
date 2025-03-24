@@ -17,6 +17,7 @@ setup(
     packages = find_packages(),
     install_requires=[
         "setuptools",
+        "dataclasses",
         "unidecode",
         "nltk",
         "numpy",
@@ -24,7 +25,6 @@ setup(
         "wikipedia",
         "requests",
         "bs4",
-        "dataclasses",
         "matplotlib",
 #        "re",
 #        "string",
