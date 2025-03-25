@@ -42,7 +42,6 @@ esp_stopwords += ["hay", "he", "has", "ha", "hemos", "habéis", "han", "haya", "
 esp_stopwords += ["tengo", "tienes", "tiene", "tenemos", "tenéis", "tienen", "tenga", "tengas", "tengamos", "tengáis", "tengan", "tendré", "tendrás", "tendrá", "tendremos", "tendréis", "tendrán", "tendría", "tendrías", "tendríamos", "tendríais", "tendrían", "tenía", "tenías", "teníamos", "teníais", "tenían", "tuve", "tuviste", "tuvo", "tuvimos", "tuvisteis", "tuvieron", "tuviera", "tuvieras", "tuviéramos", "tuvierais", "tuvieran", "tuviese", "tuvieses", "tuviésemos", "tuvieseis", "tuviesen", "teniendo", "tenido", "tenida", "tenidos", "tenidas", "tened"]
 esp_stopwords += ["sintiendo", "sentido", "sentida", "sentidas", "siente", "partir", "particular", "usualmente", "hizo", "usa", "pueden", "encontrar", "encuentran", "debe"]
 esp_stopwords += ["xix", "xxi", "xviii", "xvii", "xvi", "xiv", "xii", "vii", "iii", "vii", "cch", "skip", "isbn", "ocasiones"]
-esp_stopwords = list(set([unidecode(s) for s in esp_stopwords]))
 
 ita_stopwords: list[str] = []
 ita_stopwords += ["ma", "ed", "se", "perché", "anche", "ad", "al", "allo", "ai", "agli", "all", "agl", "alla", "alle", "con", "col", "coi", "da", "dal", "dallo", "dai", "dagli", "dall", "dagl", "dalla", "dalle", "di", "del", "dello", "dei", "degli", "dell", "degl", "della", "delle", "in", "nel", "nello", "nei", "negli", "nell", "negl", "nella", "nelle", "su", "sul", "per", "tra", "contro"]
@@ -52,7 +51,6 @@ ita_stopwords += ["ho", "hai", "ha", "abbiamo", "avete", "hanno", "abbia", "abbi
 ita_stopwords += ["sono", "sei", "è", "siamo", "siete", "sia", "siate", "siano", "sarò", "sarai", "sarà", "saremo", "sarete", "saranno", "sarei", "saresti", "sarebbe", "saremmo", "sareste", "sarebbero", "ero", "eri", "era", "eravamo", "eravate", "erano", "fui", "fosti", "fu", "fummo", "foste", "furono", "fossi", "fosse", "fossimo", "fossero", "essendo"]
 ita_stopwords += ["faccio", "fai", "facciamo", "fanno", "faccia", "facciate", "facciano", "farò", "farai", "farà", "faremo", "farete", "faranno", "farei", "faresti", "farebbe", "faremmo", "fareste", "farebbero", "facevo", "facevi", "faceva", "facevamo", "facevate", "facevano", "feci", "facesti", "fece", "facemmo", "faceste", "fecero", "facessi", "facesse", "facessimo", "facessero", "facendo"]
 ita_stopwords += ["sto", "stai", "sta", "stiamo", "stanno", "stia", "stiate", "stiano", "starò", "starai", "starà", "staremo", "starete", "staranno", "starei", "staresti", "starebbe", "staremmo", "stareste", "starebbero", "stavo", "stavi", "stava", "stavamo", "stavate", "stavano", "stetti", "stesti", "stette", "stemmo", "steste", "stettero", "stessi", "stesse", "stessimo", "stessero", "stando"]
-ita_stopwords = list(set([unidecode(s) for s in ita_stopwords]))
 
 stop_words: list[str] = []
 
@@ -94,8 +92,9 @@ def tokenization(text: str) -> list[str]:
 def bagwords(text: str) -> list[str]:
     tokens: list[str] = tokenization(text)
     tokens = [i for i in tokens if len(i) > 2]
-    tokens = [j for j in tokens if j not in stop_words]
     tokens = [i for i in tokens if len(i) < 25]
+    s_w = list(set([unidecode(s) for s in stop_words]))
+    tokens = [j for j in tokens if j not in s_w]
     return tokens
 
 

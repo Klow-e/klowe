@@ -92,7 +92,7 @@ def TermFreq_IDF(sample_dicts: list[str]):
 ###############################################################################################
 
 
-def Kweight_model(text: str) -> dict[str,float]:
+def KWeightModel(text: str) -> dict[str,float]:
     freq_dist: list[tuple[str,int]] = BagFrequency(text)
     prelex_5 = {t[:5] for t, _ in freq_dist}
     prelex_6 = {t[:6] for t, _ in freq_dist}
@@ -118,7 +118,7 @@ def Kweight_model(text: str) -> dict[str,float]:
     return top_weighted
 
 # set_language("es")
-# print(Kweight_model(wiki_article("Bacilo")))
+# print(KWeightModel(wiki_article("Bacilo")))
 
 
 def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
@@ -129,7 +129,7 @@ def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
     return genre_dict
 
 # set_language("es")
-# print(define_genre([Kweight_model(wiki_article('Aritmética')), Kweight_model(wiki_article("Matemáticas"))]))
+# print(define_genre([KWeightModel(wiki_article('Aritmética')), KWeightModel(wiki_article("Matemáticas"))]))
 
 
 ###############################################################################################
@@ -169,7 +169,7 @@ class KGlossary:
         self.pIDFw = self.pIDFw_gloss(self.apply)
 
 # set_language("es")
-# glossary = KGlossary(Kweight_model, [("POLI", [wiki_article('Mao Zedong'), wiki_article('León Trotski')]),
+# glossary = KGlossary(KWeightModel, [("POLI", [wiki_article('Mao Zedong'), wiki_article('León Trotski')]),
 # ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Termodinámica química')]),]).pIDFw
 # print_dict(glossary)
 

@@ -20,7 +20,7 @@ def print_dict(dicc: dict) -> None:
     for k, v in dicc.items():
         print(f"{k}: \n {v} \n {len(v)} \n\n")
     print(p)
-# print_dict(Kweight_model(wiki_article("Bacilo")))
+# print_dict(KWeightModel(wiki_article("Bacilo")))
 # print_dict(glossary)
 
 
@@ -36,7 +36,7 @@ def plot_dict(weighted_text: dict[str,float]) -> None:
     plt.ylabel("Values")
     plt.tight_layout()
     plt.show()
-# plot_dict(Kweight_model(wiki_article("Bacilo")))
+# plot_dict(KWeightModel(wiki_article("Bacilo")))
 
 
 def plot_function(func: callable, name: str) -> None:

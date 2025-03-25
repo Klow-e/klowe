@@ -51,7 +51,7 @@ from klowe import *
 > InverseDocFreq(list[str]) -> sIDF, pIDF, TF, T    == of a list of texts returns a list of lists for IDF, TF, and terms
 > TermFreq_IDF(list[str]) -> TF_sIDF, TF_pIDF, T    == of a list of texts returns a list of lists for TF.IDF and the terms
 
-> Kweight_model("<text>") -> dict[str, float]       == my very own weighting model for texts
+> KWeightModel("<text>") -> dict[str, float]        == my very own weighting model for texts
 > define_genre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into a unified and mean-value one
 > KGlossary(<model>, list[tuple[str,list[str]]])    == class that applies a weighting model to a list of (tag, texts)
 > KGlossary(<model>, list).apply                    == just returns a glossary data as dict[str:[dict[str:float]]]
