@@ -200,9 +200,9 @@ def KLexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str
 
 def VectorializeTextModel(g, t):
     np.set_printoptions(suppress=True)
-    # w = abs( g * math.log(t) )
+    w = abs( g * math.log(t) )
     # w = ( g * TanhFunction(t) )
-    w = ( g * t )
+    # w = ( g * t )
     return np.around(w, 8)
 
 
