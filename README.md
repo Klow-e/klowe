@@ -55,8 +55,8 @@ from klowe import *
 > define_genre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into a unified and mean-value one
 > KGlossary(<model>, list[tuple[str,list[str]]])    == class that applies a weighting model to a list of (tag, texts)
 > KGlossary(<model>, list).apply                    == just returns a glossary data as dict[str:[dict[str:float]]]
-> KGlossary(<model>, list).sIDFw                    == returns a glossary with sIDF * weights applied to it whole
-> KGlossary(<model>, list).pIDFw                    == returns a glossary with pIDF * weights applied to it whole
+> sIDFw_gloss(glossary)                             == returns a glossary with sIDF * weights applied to it whole
+> pIDFw_gloss(glossary)                             == returns a glossary with pIDF * weights applied to it whole
 
 > save_gloss(dict[str:[dict[str:float]]])           == saves glossary, like a KGlossary output, to a gloss.json file
 > load_gloss()                                      == loads a gloss.json file

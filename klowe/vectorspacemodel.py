@@ -141,37 +141,36 @@ class KGlossary:
     genres: list[str]
     articles: list[list[str]]
 
-    def preprocess_IDF_gloss(self, gloss: dict[str:[dict[str:float]]]):
-        gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
-        gd_values: list[list[float]] = GetValues(GetValues(gloss))
-        cor_Tdist = dict(FreqDist([j for i in gd_keys for j in i]).most_common())
-        nt_tensor = [[cor_Tdist.get(j, 0) for j in i] for i in gd_keys]
-        cor_N: int = len(gloss)
-        return cor_N, nt_tensor, gd_values, gd_keys
-
-    def sIDFw_gloss(self, gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
-        cor_N, nt_tensor, gd_values, gd_keys = self.preprocess_IDF_gloss(gloss)
-        sIDF: list[list[float]] = [[math.log2((cor_N + 1) / (n + 1)) for n in d] for d in nt_tensor]
-        sIDFw: list[list[float]] = [normalize_list([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(sIDF, gd_values)]  
-        sIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, sIDFw)]
-        return dict(zip(GetKeys(gloss), sIDFw))
-
-    def pIDFw_gloss(self, gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
-        cor_N, nt_tensor, gd_values, gd_keys = self.preprocess_IDF_gloss(gloss)
-        pIDF: list[list[float]] = [[math.log2(((cor_N - n) + 1) / (n + 1)) for n in d] for d in nt_tensor]
-        pIDFw: list[list[float]] = [normalize_list([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(pIDF, gd_values)]
-        pIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, pIDFw)]
-        return dict(zip(GetKeys(gloss), pIDFw))
-
     def __init__(self, model, gloss: list[tuple[str,list[str]]]) -> dict[str:[dict[str:float]]]:
         self.apply = {n : define_genre([model(d) for d in s]) for n, s in gloss}
-        self.sIDFw = self.sIDFw_gloss(self.apply)
-        self.pIDFw = self.pIDFw_gloss(self.apply)
 
 # set_language("es")
 # glossary = KGlossary(KWeightModel, [("POLI", [wiki_article('Mao Zedong'), wiki_article('León Trotski')]),
-# ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Termodinámica química')]),]).pIDFw
+# ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Termodinámica química')]),]).apply
 # print_dict(glossary)
+
+
+def preprocess_IDF_gloss(gloss: dict[str:[dict[str:float]]]):
+    gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
+    gd_values: list[list[float]] = GetValues(GetValues(gloss))
+    cor_Tdist = dict(FreqDist([j for i in gd_keys for j in i]).most_common())
+    nt_tensor = [[cor_Tdist.get(j, 0) for j in i] for i in gd_keys]
+    cor_N: int = len(gloss)
+    return cor_N, nt_tensor, gd_values, gd_keys
+
+def sIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
+    cor_N, nt_tensor, gd_values, gd_keys = self.preprocess_IDF_gloss(gloss)
+    sIDF: list[list[float]] = [[math.log2((cor_N + 1) / (n + 1)) for n in d] for d in nt_tensor]
+    sIDFw: list[list[float]] = [normalize_list([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(sIDF, gd_values)]  
+    sIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, sIDFw)]
+    return dict(zip(GetKeys(gloss), sIDFw))
+
+def pIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
+    cor_N, nt_tensor, gd_values, gd_keys = self.preprocess_IDF_gloss(gloss)
+    pIDF: list[list[float]] = [[math.log2(((cor_N - n) + 1) / (n + 1)) for n in d] for d in nt_tensor]
+    pIDFw: list[list[float]] = [normalize_list([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(pIDF, gd_values)]
+    pIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, pIDFw)]
+    return dict(zip(GetKeys(gloss), pIDFw))
 
 
 def save_gloss(glossary) -> None:
