@@ -198,5 +198,25 @@ def KLexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str
 # print(KLexicon(glossary).get("genres"))
 
 
+def VectorializeTextModel(m, v):
+    np.set_printoptions(suppress=True)
+    # abs( ( m * math.log(k) ) * 1.5 )
+    w = (m * v)
+    return np.around(w, 8)
+
+
+def VectorializeText(text: str, glossary) -> dict[str,list]:
+    vectors = KLexicon(glossary).get("vectors")
+    WText: dict[str,float] = KWeightModel(text)
+    WText = zip(GetKeys(WText), normalize_list(GetValues(WText), (0, 1)))
+    WText: list[list[str,float]] = [[k, v] for k, v in WText if k in vectors and v != 0]
+    WText: list[list[str,float, np.array]] = [[k, v, vectors.get(k)] for k, v in WText]
+    WText = {k: VectorializeTextModel(m, v) for k, v, m in WText}
+    TVect = np.vstack([np.array([k]) for k in normalize_list(sum(GetValues(WText)), (0, 1))])
+    VText: dict = {"genres" : KLexicon(glossary).get("genres"), "vectors" : TVect}
+    return VText
+# print_dict(VectorializeText(wiki_article("Bacilo"), glossary))
+
+
 ###############################################################################################
 

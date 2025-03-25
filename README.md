@@ -63,6 +63,8 @@ from klowe import *
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
 > print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre
+> VectorializeText(text, glossary) -> dict          == returns a single textual vector from a text crosmatched with a glossary
+> VectorializeTextModel(m, v) -> w                  == definition of how weights are crossmatched in VectorializeText
 ```
 
 
