@@ -199,8 +199,9 @@ def KLexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str
 
 def VectorializeTextModel(g, t):
     np.set_printoptions(suppress=True)
-    # abs( ( m * math.log(k) ) * 1.5 )
-    w = (g * t)
+    w = abs( g * math.log(t) )
+    # w = ( g * TanhFunction(t) )
+    # w = ( g * t )
     return np.around(w, 8)
 
 
@@ -210,7 +211,7 @@ def VectorializeText(text: str, glossary) -> dict[str,list]:
     WText = zip(GetKeys(WText), normalize_list(GetValues(WText), (0, 1)))
     WText: list[list[str,float]] = [[k, v] for k, v in WText if k in vectors and v != 0]
     WText: list[list[str,float, np.array]] = [[k, v, vectors.get(k)] for k, v in WText]
-    WText = {k: VectorializeTextModel(m, v) for k, v, m in WText}
+    WText = {k: VectorializeTextModel(g, v) for k, v, g in WText}
     TVect = np.vstack([np.array([k]) for k in normalize_list(sum(GetValues(WText)), (0, 1))])
     VText: dict = {"genres" : KLexicon(glossary).get("genres"), "vectors" : TVect}
     return VText
@@ -244,9 +245,10 @@ def CategorizeText(VT: dict) -> list[tuple]:
 
 def PrintTextGenre(text: str, gloss) -> None:
     result: tuple[str,float] = CategorizeText(VectorializeText(text, gloss))
-    print(f"Search: {text[:20]}...\n", e := "====================", "\nTopic:")
+    print(f"Search: {text[:25]}...\n", e := "====================", "\nTopic:")
     for i in range(len(result)): print(f" {result[i][0]}: \t {result[i][1]}%")
     print(e)
+    print_text_vector(VectorializeText(text, glossary))
 # PrintTextGenre(wiki_article("Bacilo"), glossary)
 
 
