@@ -66,6 +66,8 @@ from klowe import *
 > VectorializeText(text, glossary) -> dict          == returns a single textual vector from a text crosmatched with a glossary
 > VectorializeTextModel(g, t) -> w                  == definition of how weights are crossmatched in VectorializeText
 > print_text_vector(VectorializeText())             == better way to print a text vector of a VectorializeText()
+> CategorizeText(VectorializeText())                == returns two or three most likely genres with a percentage
+> PrintTextGenre("<text>", glossary)                == directly outputs result of a categorization query
 ```
 
 

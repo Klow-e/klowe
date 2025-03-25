@@ -217,5 +217,38 @@ def VectorializeText(text: str, glossary) -> dict[str,list]:
 # print_dict(VectorializeText(wiki_article("Bacilo"), glossary))
 
 
+def CategorizeText(VT: dict) -> list[tuple]:
+    genres = VT.get("genres")
+    flat_matrix = VT.get("vectors").flatten()
+    sorted_indices = np.argsort(flat_matrix)
+
+    i_3 = sorted_indices[-3:]
+    k_3 = flat_matrix[i_3]
+
+    i_a_genre = genres[i_3[2]]
+    i_b_genre = genres[i_3[1]]
+    i_c_genre = genres[i_3[0]]
+
+    i_a_trust = int((k_3[2] / sum(k_3)) * 100)
+    i_b_trust = int((k_3[1] / sum(k_3)) * 100)
+    i_c_trust = int((k_3[0] / sum(k_3)) * 100)
+
+    result: list[tuple] = []
+    result.append((i_a_genre, i_a_trust))
+    result.append((i_b_genre, i_b_trust))
+    if i_c_trust >= 25:
+        result.append((i_c_genre, i_c_trust))
+    return result
+# print(CategorizeText(VectorializeText(wiki_article("Bacilo"), glossary)))
+
+
+def PrintTextGenre(text: str, gloss) -> None:
+    result: tuple[str,float] = CategorizeText(VectorializeText(text, gloss))
+    print(f"Search: {text[:20]}...\n", e := "====================", "\nTopic:")
+    for i in range(len(result)): print(f" {result[i][0]}: \t {result[i][1]}%")
+    print(e)
+# PrintTextGenre(wiki_article("Bacilo"), glossary)
+
+
 ###############################################################################################
 
