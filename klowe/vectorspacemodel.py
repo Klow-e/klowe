@@ -9,6 +9,7 @@
 from .textprocessor import *
 from .mathstuff import *
 from .pythontools import *
+from .datavisualization import *
 
 import nltk
 from nltk import *
