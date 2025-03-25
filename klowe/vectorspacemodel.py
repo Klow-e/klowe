@@ -159,14 +159,14 @@ def preprocess_IDF_gloss(gloss: dict[str:[dict[str:float]]]):
     return cor_N, nt_tensor, gd_values, gd_keys
 
 def sIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
-    cor_N, nt_tensor, gd_values, gd_keys = self.preprocess_IDF_gloss(gloss)
+    cor_N, nt_tensor, gd_values, gd_keys = preprocess_IDF_gloss(gloss)
     sIDF: list[list[float]] = [[math.log2((cor_N + 1) / (n + 1)) for n in d] for d in nt_tensor]
     sIDFw: list[list[float]] = [normalize_list([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(sIDF, gd_values)]  
     sIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, sIDFw)]
     return dict(zip(GetKeys(gloss), sIDFw))
 
 def pIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
-    cor_N, nt_tensor, gd_values, gd_keys = self.preprocess_IDF_gloss(gloss)
+    cor_N, nt_tensor, gd_values, gd_keys = preprocess_IDF_gloss(gloss)
     pIDF: list[list[float]] = [[math.log2(((cor_N - n) + 1) / (n + 1)) for n in d] for d in nt_tensor]
     pIDFw: list[list[float]] = [normalize_list([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(pIDF, gd_values)]
     pIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, pIDFw)]
