@@ -52,14 +52,28 @@ ita_stopwords += ["sono", "sei", "è", "siamo", "siete", "sia", "siate", "siano"
 ita_stopwords += ["faccio", "fai", "facciamo", "fanno", "faccia", "facciate", "facciano", "farò", "farai", "farà", "faremo", "farete", "faranno", "farei", "faresti", "farebbe", "faremmo", "fareste", "farebbero", "facevo", "facevi", "faceva", "facevamo", "facevate", "facevano", "feci", "facesti", "fece", "facemmo", "faceste", "fecero", "facessi", "facesse", "facessimo", "facessero", "facendo"]
 ita_stopwords += ["sto", "stai", "sta", "stiamo", "stanno", "stia", "stiate", "stiano", "starò", "starai", "starà", "staremo", "starete", "staranno", "starei", "staresti", "starebbe", "staremmo", "stareste", "starebbero", "stavo", "stavi", "stava", "stavamo", "stavate", "stavano", "stetti", "stesti", "stette", "stemmo", "steste", "stettero", "stessi", "stesse", "stessimo", "stessero", "stando"]
 
-stop_words: list[str] = []
+eng_stopwords: list[str] = []
+eng_stopwords += ["s", "t", "ll", "d", "ve", "re", "y", "m", "o", "a", "an", "the", "no", "nor", "not", "or", "so", "to"]
+eng_stopwords += ["i", "my", "me", "myself", "she", "her", "hers", "herself", "he", "his", "him", "himself", "it", "its", "itself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves"]
+eng_stopwords += ["be", "being", "do", "don", "does", "doesn", "doing", "did", "didn", "have", "has", "having", "hasn", "had", "hadn"]
+eng_stopwords += ['about', 'above', 'after', 'again', 'against', 'ain', 'all', 'am', 'and', 'any', 'are', 'aren', 'as', 'at', 'because', 'been', 'before', 'below', 'between', 'both', 'but', 'by', 'can', 'couldn', "could"]
+eng_stopwords += ["here", 'how', 'if', 'in', 'into', 'is', 'isn', 'just', 'mightn', "might", 'down', 'during', 'each', 'few', 'for', 'from', 'further']
+eng_stopwords += ['more', 'most', 'mustn', "must", 'needn', "need", 'now', 'of', 'off', 'on', 'once', 'only', 'other', 'out', 'over', 'own', 'same']
+eng_stopwords += ['should', 'shouldn', 'some', 'such', 'than', 'that', 'their', 'theirs', 'them', 'themselves', 'then', 'there', 'these', 'they', 'this', 'those']
+eng_stopwords += ['through', 'too', 'under', 'until', 'up', 'very', 'was', 'wasn', 'were', 'weren', 'what', 'when', 'where', 'which', 'while', 'who', 'whom', 'why', 'will', 'with', 'won', 'wouldn']
 
+fre_stopwords: list[str] = []
+fre_stopwords += ['au', 'aux', 'avec', 'ce', 'ces', 'dans', 'de', 'des', 'du', 'elle', 'en', 'et', 'eux', 'il', 'ils', 'je', 'la', 'le', 'les', 'leur', 'lui', 'ma', 'mais', 'me', 'même', 'mes', 'moi', 'mon', 'ne', 'nos', 'notre', 'nous', 'on', 'ou', 'par', 'pas', 'pour', 'qu', 'que', 'qui', 'sa', 'se', 'ses', 'son', 'sur', 'ta', 'te', 'tes', 'toi', 'ton', 'tu', 'un', 'une', 'vos', 'votre', 'vous', 'c', 'd', 'j', 'l', 'à', 'm', 'n', 's', 't', 'y', 'été', 'étée', 'étées', 'étés', 'étant', 'étante', 'étants', 'étantes', 'suis', 'es', 'est', 'sommes', 'êtes', 'sont', 'serai', 'seras', 'sera', 'serons', 'serez', 'seront', 'serais', 'serait', 'serions', 'seriez', 'seraient', 'étais', 'était', 'étions', 'étiez', 'étaient', 'fus', 'fut', 'fûmes', 'fûtes', 'furent', 'sois', 'soit', 'soyons', 'soyez', 'soient', 'fusse', 'fusses', 'fût', 'fussions', 'fussiez', 'fussent', 'ayant', 'ayante', 'ayantes', 'ayants', 'eu', 'eue', 'eues', 'eus', 'ai', 'as', 'avons', 'avez', 'ont', 'aurai', 'auras', 'aura', 'aurons', 'aurez', 'auront', 'aurais', 'aurait', 'aurions', 'auriez', 'auraient', 'avais', 'avait', 'avions', 'aviez', 'avaient', 'eut', 'eûmes', 'eûtes', 'eurent', 'aie', 'aies', 'ait', 'ayons', 'ayez', 'aient', 'eusse', 'eusses', 'eût', 'eussions', 'eussiez', 'eussent']
+
+stop_words: list[str] = []
 
 def set_language(lang: str):
     stop_words.clear()
     match lang:
         case "es": stop_words.extend(esp_stopwords)
         case "it": stop_words.extend(ita_stopwords)
+        case "en": stop_words.extend(eng_stopwords)
+        case "fr": stop_words.extend(fre_stopwords)
         case _: stop_words.extend(esp_stopwords)
     wiki_language(lang)
     return lang
