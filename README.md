@@ -55,11 +55,12 @@ from klowe import *
 > define_genre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into a unified and mean-value one
 > KGlossary(<model>, list[tuple[str,list[str]]])    == class that applies a weighting model to a list of (tag, texts)
 > KGlossary(<model>, list).apply                    == just returns a glossary data as dict[str:[dict[str:float]]]
-> sIDFw_gloss(glossary)                             == returns a glossary with sIDF * weights applied to it whole
-> pIDFw_gloss(glossary)                             == returns a glossary with pIDF * weights applied to it whole
+> sIDFw_gloss(glossary)                             == returns a glossary with sIDF * weights applied to it whole; better
+> pIDFw_gloss(glossary)                             == returns a glossary with pIDF * weights applied to it whole; worse
 
 > save_gloss(dict[str:[dict[str:float]]])           == saves glossary, like a KGlossary output, to a gloss.json file
 > load_gloss()                                      == loads a gloss.json file
+    SAVING AND LOADING GLOSSARY FILES IS BROKEN AT THE MOMENT DUE TO SCIENTIFIC NOTATION DISCREPANCIES :/
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
 > print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre

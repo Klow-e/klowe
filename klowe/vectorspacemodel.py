@@ -18,7 +18,7 @@ import math
 import operator
 import json
 import numpy as np
-
+np.set_printoptions(suppress=True)
 
 
 ###############################################################################################
@@ -200,9 +200,9 @@ def KLexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str
 
 def VectorializeTextModel(g, t):
     np.set_printoptions(suppress=True)
-    w = abs( g * math.log(t) )
-    # w = ( g * TanhFunction(t) )
-    # w = ( g * t )
+    # w = abs( g * math.log(t) )    # works decent
+    # w = ( g * TanhFunction(t) )   # works decent
+    w = ( g * t )                   # works better
     return np.around(w, 8)
 
 
