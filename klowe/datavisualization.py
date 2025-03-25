@@ -94,5 +94,13 @@ def print_vector(word: str, vectors):
 # print_vector("evolucion", KLexicon(glossary))
 
 
+def print_text_vector(test):
+    print()
+    for k, v in zip(test.get("genres"), test.get("vectors")):
+        print(f"{k}:\t{v}")
+    print()
+# print_text_vector(VectorializeText(wiki_article("Bacilo"), glossary))
+
+
 ###############################################################################################
 

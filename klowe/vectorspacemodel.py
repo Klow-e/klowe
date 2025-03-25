@@ -198,10 +198,10 @@ def KLexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str
 # print(KLexicon(glossary).get("genres"))
 
 
-def VectorializeTextModel(m, v):
+def VectorializeTextModel(g, t):
     np.set_printoptions(suppress=True)
     # abs( ( m * math.log(k) ) * 1.5 )
-    w = (m * v)
+    w = (g * t)
     return np.around(w, 8)
 
 
