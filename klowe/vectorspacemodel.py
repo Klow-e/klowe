@@ -112,7 +112,7 @@ def KWeightModel(text: str) -> dict[str,float]:
         match True:
             case _ if t[:5] in prelex_5: m *= 4.0
             case _ if t[:6] in prelex_6: m *= 5.0
-        freq_dist[i] = (t, w * m)
+        freq_dist[i] = (t, round( w * m , 10))
 
     weighted = SortDict(freq_dist)
     top_weighted = SortDict(zip(GetKeys(weighted), top_percent(GetValues(weighted), 0.35)))
