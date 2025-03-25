@@ -249,7 +249,7 @@ def PrintTextGenre(text: str, gloss) -> None:
     print(f"Search: {text[:25]}...\n", e := "====================", "\nTopic:")
     for i in range(len(result)): print(f" {result[i][0]}: \t {result[i][1]}%")
     print(e)
-    print_text_vector(VectorializeText(text, glossary))
+    print_text_vector(VectorializeText(text, gloss))
 # PrintTextGenre(wiki_article("Bacilo"), glossary)
 
 
