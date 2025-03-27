@@ -8,6 +8,33 @@ from klowe import *
 ```
 
 
+## PythonTools
+```
+> SortDict(dict) -> dict                            == returns a sorted dict from a dict or zip item
+> GetKeys(dict) -> list                             == returns a list of the keys of a dict or list of dicts
+> GetValues(dict) -> list                           == returns a list of the values of a dict or list of dicts
+```
+
+
+## MathStuff
+```
+> AlKhwarizmiFunction(a, b, c, x) -> y              == solves a quadratic formula
+> TanhFunction(x) -> y                              == passes data through a Tanh function
+> ELU(x) -> y                                       == exponential linear unit function
+> ReLU(x) -> y                                      == rectified linear unit function
+
+> NormalizeValue(x, values, (s0, s1)) -> float      == of a value in a list of values, returns the normalized value
+> NormalizeList(list[float], scale) -> list[float]  == normalizes a list of values into a (s0, s1) feature scale
+> RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
+> TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
+> ELUNormalization(list[float])                     == passes a list of values through the ELU function
+> ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
+
+> MidPoint(a, b) -> float                           == gives the midpoint between two numbers
+> TopPercent(list[float], float) -> list[float]     == gets the top float per one values in a list of values
+```
+
+
 ## WebScraper
 ```
 > webpage("<URL>") -> str                           == extracts somewhat clean text from an URL
@@ -85,25 +112,6 @@ from klowe import *
 ```
 
 
-## MathStuff
-```
-> AlKhwarizmiFunction(a, b, c, x) -> y              == solves a quadratic formula
-> TanhFunction(x) -> y                              == passes data through a Tanh function
-> ELU(x) -> y                                       == exponential linear unit function
-> ReLU(x) -> y                                      == rectified linear unit function
-
-> normalize_value(x, values, (s0, s1)) -> float     == of a value in a list of values, returns the normalized value
-> NormalizeList(list[float], scale) -> list[float]  == normalizes a list of values into a (s0, s1) feature scale
-> RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
-> TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
-> ELUNormalization(list[float])                     == passes a list of values through the ELU function
-> ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
-
-> MidPoint(a, b) -> float                           == gives the midpoint between two numbers
-> TopPercent(list[float], float) -> list[float]     == gets the top float per one values in a list of values
-```
-
-
 ## DataVisualization
 ```
 > print_dict(dict)                                  == better way to print dictionaries
@@ -114,12 +122,7 @@ from klowe import *
 ```
 
 
-## PythonTools
-```
-> SortDict(dict) -> dict                            == returns a sorted dict from a dict or zip item
-> GetKeys(dict) -> list                             == returns a list of the keys of a dict or list of dicts
-> GetValues(dict) -> list                           == returns a list of the values of a dict or list of dicts
-```
+
 
 
 ---

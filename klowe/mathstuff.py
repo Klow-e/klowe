@@ -36,7 +36,7 @@ def ReLU(x: float) -> float:
 ###############################################################################################
 
 
-def normalize_value(x: float, values_l: list[float], scale: tuple[float, float]) -> float:
+def NormalizeValue(x: float, values_l: list[float], scale: tuple[float, float]) -> float:
     s0, s1 = scale
     min_v, max_v = min(values_l), max(values_l)
     dividend: float = (max_v - min_v)
@@ -45,7 +45,7 @@ def normalize_value(x: float, values_l: list[float], scale: tuple[float, float])
 
 
 def NormalizeList(values_l: list[float], scale: tuple[float, float]) -> list[float]:
-    n_list: list[float] = [normalize_value(x, values_l, scale) for x in values_l]
+    n_list: list[float] = [NormalizeValue(x, values_l, scale) for x in values_l]
     return n_list
 
 

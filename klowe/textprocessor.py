@@ -30,6 +30,7 @@ legal_characters: str = string.ascii_letters
 legal_characters += esp_characters
 legal_characters += ita_characters
 
+
 esp_stopwords: list[str] = []
 esp_stopwords += ["que", "qué", "y", "e", "o", "pero", "porque", "por", "para", "ya", "como", "ni", "no", "sí", "con", "más", "mas", "tal", "cuyo", "así"]
 esp_stopwords += ["en", "entre", "cuando", "muy", "sin", "sobre", "también", "tambien", "hasta", "donde", "desde", "durante", "contra", "ante", "antes", "hacia", "mediante", "tras", "según"]
@@ -64,10 +65,13 @@ eng_stopwords += ['through', 'too', 'under', 'until', 'up', 'very', 'was', 'wasn
 fre_stopwords: list[str] = []
 fre_stopwords += ['au', 'aux', 'avec', 'ce', 'ces', 'dans', 'de', 'des', 'du', 'elle', 'en', 'et', 'eux', 'il', 'ils', 'je', 'la', 'le', 'les', 'leur', 'lui', 'ma', 'mais', 'me', 'même', 'mes', 'moi', 'mon', 'ne', 'nos', 'notre', 'nous', 'on', 'ou', 'par', 'pas', 'pour', 'qu', 'que', 'qui', 'sa', 'se', 'ses', 'son', 'sur', 'ta', 'te', 'tes', 'toi', 'ton', 'tu', 'un', 'une', 'vos', 'votre', 'vous', 'c', 'd', 'j', 'l', 'à', 'm', 'n', 's', 't', 'y', 'été', 'étée', 'étées', 'étés', 'étant', 'étante', 'étants', 'étantes', 'suis', 'es', 'est', 'sommes', 'êtes', 'sont', 'serai', 'seras', 'sera', 'serons', 'serez', 'seront', 'serais', 'serait', 'serions', 'seriez', 'seraient', 'étais', 'était', 'étions', 'étiez', 'étaient', 'fus', 'fut', 'fûmes', 'fûtes', 'furent', 'sois', 'soit', 'soyons', 'soyez', 'soient', 'fusse', 'fusses', 'fût', 'fussions', 'fussiez', 'fussent', 'ayant', 'ayante', 'ayantes', 'ayants', 'eu', 'eue', 'eues', 'eus', 'ai', 'as', 'avons', 'avez', 'ont', 'aurai', 'auras', 'aura', 'aurons', 'aurez', 'auront', 'aurais', 'aurait', 'aurions', 'auriez', 'auraient', 'avais', 'avait', 'avions', 'aviez', 'avaient', 'eut', 'eûmes', 'eûtes', 'eurent', 'aie', 'aies', 'ait', 'ayons', 'ayez', 'aient', 'eusse', 'eusses', 'eût', 'eussions', 'eussiez', 'eussent']
 
-stop_words: list[str] = ["displaystyle", "chh", "skip", "isbn", "xix", "xxi", "xviii", "xvii", "xvi", "xiv", "xii", "vii", "iii", "vii"]
+universal_stopwords: list[str] = ["displaystyle", "chh", "skip", "isbn", "xix", "xxi", "xviii", "xvii", "xvi", "xiv", "xii", "vii", "iii", "vii"]
+
+stop_words: list[str] = []
 
 def set_language(lang: str):
     stop_words.clear()
+    stop_words.extend(universal_stopwords)
     match lang:
         case "es": stop_words.extend(esp_stopwords)
         case "it": stop_words.extend(ita_stopwords)
