@@ -93,7 +93,7 @@ from klowe import *
 > ReLU(x) -> y                                      == rectified linear unit function
 
 > normalize_value(x, values, (s0, s1)) -> float     == of a value in a list of values, returns the normalized value
-> normalize_list(list[float], scale) -> list[float] == normalizes a list of values into a (s0, s1) feature scale
+> NormalizeList(list[float], scale) -> list[float]  == normalizes a list of values into a (s0, s1) feature scale
 > RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
 > TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
 > ELUNormalization(list[float])                     == passes a list of values through the ELU function
