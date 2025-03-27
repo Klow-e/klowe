@@ -116,7 +116,8 @@ def KWeightModel(text: str) -> dict[str,float]:
 
 
 def DefineGenre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
-    all_keys: set[str] = {k for d in l_dicts for k in d}
+    # sorted?
+    all_keys: set[str] = sorted({k for d in l_dicts for k in d})
     total_d = len(l_dicts)
     genre_dict: dict = SortDict({i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys})
     genre_dict: dict = dict(zip( genre_dict.keys() , RoundList( NormalizeList(genre_dict.values(), (0, 1)) , 10) ))
@@ -187,7 +188,7 @@ def pIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]
 
 
 def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str, np.array]]:
-    all_keys: set[str] = {k for d in GetValues(gloss) for k in d}
+    all_keys: set[str] = sorted({k for i in GetKeys(GetValues(gloss)) for k in i})
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
     embedded_gloss: dict = {"genres": GetKeys(gloss), "vectors": words_vectors}
     return embedded_gloss
