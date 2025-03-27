@@ -49,6 +49,11 @@ def normalize_list(values_l: list[float], scale: tuple[float, float]) -> list[fl
     return n_list
 
 
+def RoundList(l: list[float], n: int) -> list[float]:
+    r_list: list[float] = [round(i, n) for i in l]
+    return r_list
+
+
 def TanhNormalization(l_values: list[float]) -> list[float]:
     l_values = normalize_list(l_values, (-3, 3))
     TN = [TanhFunction(x) for x in l_values]

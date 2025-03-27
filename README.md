@@ -52,7 +52,7 @@ from klowe import *
 > TermFreq_IDF(list[str]) -> TF_sIDF, TF_pIDF, T    == of a list of texts returns a list of lists for TF.IDF and the terms
 
 > KWeightModel("<text>") -> dict[str, float]        == my very own weighting model for texts
-> define_genre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into a unified and mean-value one
+> DefineGrenre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into a unified and mean-value one
 > KGlossary(<model>, list[tuple[str,list[str]]])    == class that applies a weighting model to a list of (tag, texts)
 > KGlossary(<model>, list).apply                    == just returns a glossary data as dict[str:[dict[str:float]]]
 > sIDFw_gloss(glossary)                             == returns a glossary with sIDF * weights applied to it whole; better
@@ -94,6 +94,7 @@ from klowe import *
 
 > normalize_value(x, values, (s0, s1)) -> float     == of a value in a list of values, returns the normalized value
 > normalize_list(list[float], scale) -> list[float] == normalizes a list of values into a (s0, s1) feature scale
+> RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
 > TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
 > ELUNormalization(list[float])                     == passes a list of values through the ELU function
 > ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
