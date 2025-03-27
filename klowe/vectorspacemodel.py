@@ -133,23 +133,10 @@ class KGlossary:
         self.model = model
         #self.genres = [n for n, _ in gloss]
         #self.articles = [s for _, s in gloss]
-        
         self.apply = {n : self.DefineGenre([self.model(d) for d in s]) for n, s in gloss}
     
-
     def DefineGenre(self, l_dicts: list[dict[str,float]]) -> dict[str,float]:
         return DefineGenre(l_dicts)
-
-'''
-@dataclass
-class KGlossary:
-    model: callable
-    genres: list[str]
-    articles: list[list[str]]
-
-    def __init__(self, model, gloss: list[tuple[str,list[str]]]) -> dict[str:[dict[str:float]]]:
-        self.apply = {n : DefineGenre([model(d) for d in s]) for n, s in gloss}
-'''
 
 # glossary = KGlossary(KWeightModel, [("POLI", [wiki_article('Mao Zedong'), wiki_article('León Trotski')]),
 # ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Termodinámica química')]),]).apply
