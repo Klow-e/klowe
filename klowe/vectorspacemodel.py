@@ -13,7 +13,6 @@ from .datavisualization import *
 
 import nltk
 from nltk import *
-from dataclasses import dataclass
 import math
 import operator
 import json
@@ -128,6 +127,20 @@ def DefineGenre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
 ###############################################################################################
 
 
+class KGlossary:
+
+    def __init__(self, model: callable, gloss: list[tuple[str, list[str]]]):
+        self.model = model
+        #self.genres = [n for n, _ in gloss]
+        #self.articles = [s for _, s in gloss]
+        
+        self.apply = {n : self.DefineGenre([self.model(d) for d in s]) for n, s in gloss}
+    
+
+    def DefineGenre(self, l_dicts: list[dict[str,float]]) -> dict[str,float]:
+        return DefineGenre(l_dicts)
+
+'''
 @dataclass
 class KGlossary:
     model: callable
@@ -136,6 +149,8 @@ class KGlossary:
 
     def __init__(self, model, gloss: list[tuple[str,list[str]]]) -> dict[str:[dict[str:float]]]:
         self.apply = {n : DefineGenre([model(d) for d in s]) for n, s in gloss}
+'''
+
 # glossary = KGlossary(KWeightModel, [("POLI", [wiki_article('Mao Zedong'), wiki_article('León Trotski')]),
 # ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Termodinámica química')]),]).apply
 # print_dict(glossary)
@@ -184,10 +199,10 @@ def pIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]
 ###############################################################################################
 
 
-def KLexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str, np.array]]:
-    all_keys: set[str] = {k for d in GetValues(glossary) for k in d}
-    words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(glossary)]]) for i in all_keys}
-    embedded_gloss: dict = {"genres": GetKeys(glossary), "vectors": words_vectors}
+def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str, np.array]]:
+    all_keys: set[str] = {k for d in GetValues(gloss) for k in d}
+    words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
+    embedded_gloss: dict = {"genres": GetKeys(gloss), "vectors": words_vectors}
     return embedded_gloss
 # print_dict(KLexicon(glossary).get("vectors"))
 # print(KLexicon(glossary).get("genres"))
@@ -201,15 +216,15 @@ def VectorializeTextModel(g, t):
     return np.around(w, 8)
 
 
-def VectorializeText(text: str, glossary) -> dict[str,list]:
-    vectors = KLexicon(glossary).get("vectors")
+def VectorializeText(text: str, gloss) -> dict[str,list]:
+    vectors = KLexicon(gloss).get("vectors")
     WText: dict[str,float] = KWeightModel(text)
     WText = zip(GetKeys(WText), NormalizeList(GetValues(WText), (0, 1)))
     WText: list[list[str,float]] = [[k, v] for k, v in WText if k in vectors and v != 0]
     WText: list[list[str,float, np.array]] = [[k, v, vectors.get(k)] for k, v in WText]
     WText = {k: VectorializeTextModel(g, v) for k, v, g in WText}
     TVect = np.vstack([np.array([k]) for k in NormalizeList(sum(GetValues(WText)), (0, 1))])
-    VText: dict = {"genres" : KLexicon(glossary).get("genres"), "vectors" : TVect}
+    VText: dict = {"genres" : KLexicon(gloss).get("genres"), "vectors" : TVect}
     return VText
 # print_dict(VectorializeText(wiki_article("Bacilo"), glossary))
 
