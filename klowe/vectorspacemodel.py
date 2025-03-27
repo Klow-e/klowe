@@ -111,7 +111,7 @@ def KWeightModel(text: str) -> dict[str,float]:
         freq_dist[i] = (t, round( w * m , 10))
 
     weighted = SortDict(freq_dist)
-    top_weighted = SortDict(zip(GetKeys(weighted), top_percent(GetValues(weighted), 0.35)))
+    top_weighted = SortDict(zip(GetKeys(weighted), RoundList( TopPercent(GetValues(weighted), 0.35) , 10 ) ))
     return top_weighted
 # print(KWeightModel(wiki_article("Bacilo")))
 

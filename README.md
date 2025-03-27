@@ -100,7 +100,7 @@ from klowe import *
 > ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
 
 > midpoint(a, b) -> float                           == gives the midpoint between two numbers
-> top_percent(list[float], float) -> list[float]    == gets the top float per one values in a list of values
+> TopPercent(list[float], float) -> list[float]     == gets the top float per one values in a list of values
 ```
 
 

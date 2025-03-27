@@ -79,7 +79,7 @@ def midpoint(a: float, b: float) -> float:
     return mid
 
 
-def top_percent(values_l: list[float], threshold: float) -> list[float]:
+def TopPercent(values_l: list[float], threshold: float) -> list[float]:
     target_threshold: float = sum(values_l) * threshold
     sorted_values: list[float] = sorted(values_l, reverse=True)
     
