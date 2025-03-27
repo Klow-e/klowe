@@ -65,8 +65,6 @@ def InverseDocFreq(sample_dicts: list[str]):
     pIDF = [[math.log2(((cor_N - nt) + 1) / (nt + 1)) for nt in d] for d in nt_tensor]
 
     return sIDF, pIDF, F_tensor, T_tensor
-
-# set_language("es")
 # sample_dicts = [wiki_article("Biología"), wiki_article("Célula"), wiki_article("Carbunco"), wiki_article("Bacteria")]
 # S, P, F, T = InverseDocFreq(sample_dicts)
 # print("\n" + "\n\n".join("\n".join(map(str, l)) for l in [S, P, F, T]) + "\n")
@@ -83,8 +81,6 @@ def TermFreq_IDF(sample_dicts: list[str]):
     TF_pIDF = TermFreq_IDF(pIDF, F_tensor)
 
     return TF_sIDF, TF_pIDF, T_tensor
-
-# set_language("es")
 # sample_dicts = [wiki_article("Biología"), wiki_article("Célula"), wiki_article("Carbunco"), wiki_article("Bacteria")]
 # S, P, T = TermFreq_IDF(sample_dicts)
 # print("\n\n".join("\n".join(map(str, l)) for l in [S, P, T]), "\n")
@@ -117,20 +113,16 @@ def KWeightModel(text: str) -> dict[str,float]:
     weighted = SortDict(freq_dist)
     top_weighted = SortDict(zip(GetKeys(weighted), top_percent(GetValues(weighted), 0.35)))
     return top_weighted
-
-# set_language("es")
 # print(KWeightModel(wiki_article("Bacilo")))
 
 
-def define_genre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
+def DefineGenre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
     all_keys: set[str] = {k for d in l_dicts for k in d}
     total_d = len(l_dicts)
     genre_dict: dict = SortDict({i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys})
     genre_dict: dict = dict(zip( genre_dict.keys() , normalize_list(genre_dict.values(), (0, 1)) ))
     return genre_dict
-
-# set_language("es")
-# print(define_genre([KWeightModel(wiki_article('Aritmética')), KWeightModel(wiki_article("Matemáticas"))]))
+# print(DefineGenre([KWeightModel(wiki_article('Aritmética')), KWeightModel(wiki_article("Matemáticas"))]))
 
 
 ###############################################################################################
@@ -143,9 +135,7 @@ class KGlossary:
     articles: list[list[str]]
 
     def __init__(self, model, gloss: list[tuple[str,list[str]]]) -> dict[str:[dict[str:float]]]:
-        self.apply = {n : define_genre([model(d) for d in s]) for n, s in gloss}
-
-# set_language("es")
+        self.apply = {n : DefineGenre([model(d) for d in s]) for n, s in gloss}
 # glossary = KGlossary(KWeightModel, [("POLI", [wiki_article('Mao Zedong'), wiki_article('León Trotski')]),
 # ("CHEM", [wiki_article('Valencia (química)'), wiki_article('Termodinámica química')]),]).apply
 # print_dict(glossary)
