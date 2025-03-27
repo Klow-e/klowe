@@ -116,7 +116,6 @@ def KWeightModel(text: str) -> dict[str,float]:
 
 
 def DefineGenre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
-    # sorted?
     all_keys: set[str] = sorted({k for d in l_dicts for k in d})
     total_d = len(l_dicts)
     genre_dict: dict = SortDict({i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys})

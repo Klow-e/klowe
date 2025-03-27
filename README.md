@@ -87,7 +87,6 @@ from klowe import *
 
 > save_gloss(dict[str:[dict[str:float]]])           == saves glossary, like a KGlossary output, to a gloss.json file
 > load_gloss()                                      == loads a gloss.json file
-    SAVING AND LOADING GLOSSARY FILES IS BROKEN AT THE MOMENT DUE TO SCIENTIFIC NOTATION DISCREPANCIES :/
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
 > print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre
