@@ -120,7 +120,7 @@ def DefineGenre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
     all_keys: set[str] = {k for d in l_dicts for k in d}
     total_d = len(l_dicts)
     genre_dict: dict = SortDict({i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys})
-    genre_dict: dict = dict(zip( genre_dict.keys() , RoundList( normalize_list(genre_dict.values(), (0, 1)) , 10) ))
+    genre_dict: dict = dict(zip( genre_dict.keys() , RoundList( NormalizeList(genre_dict.values(), (0, 1)) , 10) ))
     return genre_dict
 # print(DefineGenre([KWeightModel(wiki_article('Aritmética')), KWeightModel(wiki_article("Matemáticas"))]))
 
@@ -141,29 +141,6 @@ class KGlossary:
 # print_dict(glossary)
 
 
-def preprocess_IDF_gloss(gloss: dict[str:[dict[str:float]]]):
-    gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
-    gd_values: list[list[float]] = GetValues(GetValues(gloss))
-    cor_Tdist = dict(FreqDist([j for i in gd_keys for j in i]).most_common())
-    nt_tensor = [[cor_Tdist.get(j, 0) for j in i] for i in gd_keys]
-    cor_N: int = len(gloss)
-    return cor_N, nt_tensor, gd_values, gd_keys
-
-def sIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
-    cor_N, nt_tensor, gd_values, gd_keys = preprocess_IDF_gloss(gloss)
-    sIDF: list[list[float]] = [[math.log2((cor_N + 1) / (n + 1)) for n in d] for d in nt_tensor]
-    sIDFw: list[list[float]] = [normalize_list([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(sIDF, gd_values)]  
-    sIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, sIDFw)]
-    return dict(zip(GetKeys(gloss), sIDFw))
-
-def pIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
-    cor_N, nt_tensor, gd_values, gd_keys = preprocess_IDF_gloss(gloss)
-    pIDF: list[list[float]] = [[math.log2(((cor_N - n) + 1) / (n + 1)) for n in d] for d in nt_tensor]
-    pIDFw: list[list[float]] = [normalize_list([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(pIDF, gd_values)]
-    pIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, pIDFw)]
-    return dict(zip(GetKeys(gloss), pIDFw))
-
-
 def save_gloss(glossary) -> None:
     with open("gloss.json", "w") as fp:
         json.dump(glossary, fp, indent = 4)
@@ -177,6 +154,34 @@ def load_gloss():
         return glossary
     except: print("No 'gloss.json' file found.")
 # glossary = load_gloss()
+
+
+def preprocess_IDF_gloss(gloss: dict[str:[dict[str:float]]]):
+    gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
+    gd_values: list[list[float]] = GetValues(GetValues(gloss))
+    cor_Tdist = dict(FreqDist([j for i in gd_keys for j in i]).most_common())
+    nt_tensor = [[cor_Tdist.get(j, 0) for j in i] for i in gd_keys]
+    cor_N: int = len(gloss)
+    return cor_N, nt_tensor, gd_values, gd_keys
+
+
+def sIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
+    cor_N, nt_tensor, gd_values, gd_keys = preprocess_IDF_gloss(gloss)
+    sIDF: list[list[float]] = [[math.log2((cor_N + 1) / (n + 1)) for n in d] for d in nt_tensor]
+    sIDFw: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(sIDF, gd_values)]  
+    sIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, sIDFw)]
+    return dict(zip(GetKeys(gloss), sIDFw))
+
+
+def pIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
+    cor_N, nt_tensor, gd_values, gd_keys = preprocess_IDF_gloss(gloss)
+    pIDF: list[list[float]] = [[math.log2(((cor_N - n) + 1) / (n + 1)) for n in d] for d in nt_tensor]
+    pIDFw: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(pIDF, gd_values)]
+    pIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, pIDFw)]
+    return dict(zip(GetKeys(gloss), pIDFw))
+
+
+###############################################################################################
 
 
 def KLexicon(glossary: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str, np.array]]:
@@ -199,11 +204,11 @@ def VectorializeTextModel(g, t):
 def VectorializeText(text: str, glossary) -> dict[str,list]:
     vectors = KLexicon(glossary).get("vectors")
     WText: dict[str,float] = KWeightModel(text)
-    WText = zip(GetKeys(WText), normalize_list(GetValues(WText), (0, 1)))
+    WText = zip(GetKeys(WText), NormalizeList(GetValues(WText), (0, 1)))
     WText: list[list[str,float]] = [[k, v] for k, v in WText if k in vectors and v != 0]
     WText: list[list[str,float, np.array]] = [[k, v, vectors.get(k)] for k, v in WText]
     WText = {k: VectorializeTextModel(g, v) for k, v, g in WText}
-    TVect = np.vstack([np.array([k]) for k in normalize_list(sum(GetValues(WText)), (0, 1))])
+    TVect = np.vstack([np.array([k]) for k in NormalizeList(sum(GetValues(WText)), (0, 1))])
     VText: dict = {"genres" : KLexicon(glossary).get("genres"), "vectors" : TVect}
     return VText
 # print_dict(VectorializeText(wiki_article("Bacilo"), glossary))

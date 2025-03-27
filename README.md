@@ -99,7 +99,7 @@ from klowe import *
 > ELUNormalization(list[float])                     == passes a list of values through the ELU function
 > ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
 
-> midpoint(a, b) -> float                           == gives the midpoint between two numbers
+> MidPoint(a, b) -> float                           == gives the midpoint between two numbers
 > TopPercent(list[float], float) -> list[float]     == gets the top float per one values in a list of values
 ```
 

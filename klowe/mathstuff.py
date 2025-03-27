@@ -44,7 +44,7 @@ def normalize_value(x: float, values_l: list[float], scale: tuple[float, float])
     return n_value
 
 
-def normalize_list(values_l: list[float], scale: tuple[float, float]) -> list[float]:
+def NormalizeList(values_l: list[float], scale: tuple[float, float]) -> list[float]:
     n_list: list[float] = [normalize_value(x, values_l, scale) for x in values_l]
     return n_list
 
@@ -55,14 +55,14 @@ def RoundList(l: list[float], n: int) -> list[float]:
 
 
 def TanhNormalization(l_values: list[float]) -> list[float]:
-    l_values = normalize_list(l_values, (-3, 3))
+    l_values = NormalizeList(l_values, (-3, 3))
     TN = [TanhFunction(x) for x in l_values]
-    return normalize_list(TN, (0, 1))
+    return NormalizeList(TN, (0, 1))
 
 
 def ELUNormalization(l_values: list[float]) -> list[float]:
     l_values = [ELU(x) for x in l_values]
-    #l_values = normalize_list(l_values, (0, 1))
+    #l_values = NormalizeList(l_values, (0, 1))
     return l_values
 # v = [1.0, -0.633, -0.092, 0.226, -0.085, 0.0254, 0.358, 0.173, 0.184, 0.220, 0.119, 0.-148]
 # v.sort()
@@ -74,7 +74,7 @@ def ReLUNormalization(l_values: list[float]) -> list[float]:
     return l_values
 
 
-def midpoint(a: float, b: float) -> float:
+def MidPoint(a: float, b: float) -> float:
     mid: float = (a * 0.5) + (b * 0.5)
     return mid
 
