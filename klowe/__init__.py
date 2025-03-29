@@ -10,7 +10,6 @@ from .vectorspacemodel import *
 from .mathstuff import *
 from .datavisualization import *
 from .pythontools import *
-from klowe.assets import gloss_example
 
 
 # ToDo:
