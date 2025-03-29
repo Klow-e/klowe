@@ -6,7 +6,7 @@
 ###############################################################################################
 
 
-from assets import gloss_example
+from klowe.assets import gloss_example
 
 import math
 import numpy as np
