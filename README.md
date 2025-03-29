@@ -22,6 +22,9 @@ from klowe import *
 > RandomInt(a, b) -> int                            == gives a true random int between two ints
 > RandomFloatList(a, b, length) -> list[float]      == gives a list of true random floats between two floats
 > RandomIntList(a, b, length) -> list[int]          == gives a list of true random ints between two ints
+> RandomWord() -> str                               == gives a pseudo-random word
+> RandomWordList(length) -> list[str]               == gives a list of pseudo-random words
+> RandomDictStrFloat(length) -> dict[str,float]     == gives a pseudo-random dict[str,float]
 
 > AlKhwarizmiFunction(a, b, c, x) -> y              == solves a quadratic formula
 > TanhFunction(x) -> y                              == passes data through a Tanh function
@@ -92,6 +95,7 @@ from klowe import *
 
 > save_gloss(dict[str:[dict[str:float]]])           == saves glossary, like a KGlossary output, to a gloss.json file
 > load_gloss()                                      == loads a gloss.json file
+> example_gloss: dict[str:[dict[str:float]]]        == example of a glossary file
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
 > print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre

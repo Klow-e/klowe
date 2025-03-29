@@ -140,5 +140,27 @@ def RandomFloatList(a:float, b:float, l: int) -> list[float]:
 # print(RandomFloatList(0, 1, 13))
 
 
+def RandomWordList(l: int) -> list[str]:
+    some_keys: list[str] = list({k for i in GetKeys(GetValues(example_gloss)) for k in i[:100]})
+    index: int = RandomInt(0, len(some_keys) - l)
+    RSL: list[str] = [some_keys[index + i] for i in range(l)]
+    return RSL
+# print(RandomWordList(10))
+
+
+def RandomWord() -> str:
+    RS: str = "".join(RandomWordList(1))
+    return RS
+# print(RandomWord())
+
+
+def RandomDictStrFloat(l: int) -> dict[str,float]:
+    k: list[str] = RandomWordList(l)
+    v: list[float] = RandomFloatList(0, 1, l)
+    RD: dict[str,float] = SortDict(dict(zip(k, v)))
+    return RD
+# print(RandomDictStrFloat(10))
+
+
 ###############################################################################################
 

@@ -18,7 +18,8 @@ import numpy as np
 def print_dict(dicc: dict) -> None:
     print(p:= f"Number of items: {len(dicc)}\n\n")
     for k, v in dicc.items():
-        print(f"{k}: \n {v} \n {len(v)} \n\n")
+        l = len(v) if isinstance(v, (list, dict)) else len(str(v))
+        print(f"{k}: \n {v} \n {l} \n\n")
     print(p)
 # print_dict(KWeightModel(wiki_article("Bacilo")))
 # print_dict(glossary)
@@ -36,7 +37,7 @@ def plot_dict(weighted_text: dict[str,float]) -> None:
     plt.ylabel("Values")
     plt.tight_layout()
     plt.show()
-# plot_dict(KWeightModel(wiki_article("Bacilo")))
+# plot_dict(RandomDictStrFloat(10))
 
 
 def plot_function(func: callable, name: str) -> None:

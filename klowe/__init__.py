@@ -19,4 +19,5 @@ import importlib.resources as pkg_resources
 
 # ToDo:
 # setlang exclude chars
+# remove nltk
 
