@@ -10,11 +10,9 @@ from .vectorspacemodel import *
 from .mathstuff import *
 from .datavisualization import *
 from .pythontools import *
+from assets import gloss_example
 
 
 # ToDo:
-
-# Create data generator
-
 # setlang exclude chars
 
