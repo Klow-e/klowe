@@ -140,9 +140,9 @@ def count_tokens(text: str) -> int:
     return n_tokens
 
 
-def list_types(text: str) -> set[str]:
+def list_types(text: str) -> list[str]:
     tokens: list[str] = tokenization(text)
-    types: set[str] = set(tokens)
+    types: set[str] = list(sorted(set(tokens)))
     return types
 
 
@@ -189,9 +189,12 @@ def sentence_tokenization(text: str) -> list[str]:
     def handle_honor(p0: list[str]) -> list[str]:
         honor_pattern = r'[A-Z][a-z]{0,2}\.'
         def honor_case(p0: list[str]) -> list[str]:
-            for i, v in enumerate(p0):
-                if re.match(honor_pattern, v):
-                    p0[i] += " " + p0.pop(i+1)
+            if re.search(honor_pattern, text):
+                for i, v in enumerate(p0):
+                    if re.match(honor_pattern, v):
+                        if i + 1 < len(p0):
+                            p0[i] += " " + p0.pop(i + 1)
+                        else: break
             return p0
         for _ in range(len(re.findall(honor_pattern, text))):
             p0 = honor_case(p0)

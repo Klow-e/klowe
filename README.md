@@ -63,7 +63,7 @@ from klowe import *
 > sentence_tokenization("<text>") -> lisr[str]      == separates text by sentence
 > tokenization("<text>") -> list[str]               == clean_text + excludes tokens with illegal characters + tokenizes
 > bagwords("<text>") -> list[str]                   == tokenization + stopwords filter
-> list_types("<text>") -> set[str]                  == list of unique words in a text (types)
+> list_types("<text>") -> list[str]                 == list of unique words in a text (types)
 
 > count_letters("<text>") -> int                    == counts only number of letters
 > count_tokens("<text>") -> int                     == counts number of tokens
