@@ -54,7 +54,7 @@ from klowe import *
 ## TextProcessor
 ```
 > dirty_characters: str                             == string of characters to remove
-> legal_chatacters: str                             == string of allowed characters in spa + ita orthography
+> legal_characters: str                             == string of allowed characters in spa + ita orthography
 > stop_words: list[str]                             == list of stopwords (esp + ita)
 
 > set_language("<es>")                              == sets language for stopwords and wikipedia
