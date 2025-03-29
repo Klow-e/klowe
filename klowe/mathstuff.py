@@ -145,7 +145,7 @@ def RandomFloatList(a:float, b:float, l: int) -> list[float]:
 import json
 
 def gloss_ex():
-    gloss_example = json.loads(klowe/gloss_example.json)
+    gloss_example = json.loads(gloss_example.json)
     return gloss_example
 
 
