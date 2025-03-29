@@ -10,6 +10,7 @@ from .textprocessor import *
 from .mathstuff import *
 from .pythontools import *
 from .datavisualization import *
+from .example_gloss import *
 
 import nltk
 from nltk import *
@@ -248,6 +249,14 @@ def PrintTextGenre(text: str, gloss) -> None:
     print(e)
     print_text_vector(VectorializeText(text, gloss))
 # PrintTextGenre(wiki_article("Bacilo"), glossary)
+
+
+###############################################################################################
+
+
+def Categorizar(text: str) -> None:
+    PrintTextGenre(text, example_gloss)
+# Categorizar(wiki_article("GNU"))
 
 
 ###############################################################################################

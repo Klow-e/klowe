@@ -104,6 +104,8 @@ from klowe import *
 > print_text_vector(VectorializeText())             == better way to print a text vector of a VectorializeText()
 > CategorizeText(VectorializeText())                == returns two or three most likely genres with a percentage
 > PrintTextGenre("<text>", glossary)                == directly outputs result of a categorization query
+
+> Categorizar("<text>")                             == categorizes by topic a text in spanish
 ```
 
 
@@ -126,7 +128,7 @@ from klowe import *
 
 > plot_dict(dict[str,float])                        == of a dict with {string:float} plots a silly little graph
 > plot_function(<function>, "<name>")               == graphs a function
-> plot_list[float]                                  == graphs a list of numbers
+> plot_list(list[float])                            == graphs a list of numbers
 ```
 
 
