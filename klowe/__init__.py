@@ -10,7 +10,7 @@ from .vectorspacemodel import *
 from .mathstuff import *
 from .datavisualization import *
 from .pythontools import *
-
+import gloss_example
 
 # ToDo:
 # setlang exclude chars
