@@ -10,6 +10,7 @@ from .vectorspacemodel import *
 from .mathstuff import *
 from .datavisualization import *
 from .pythontools import *
+from .example_gloss import *
 
 
 import json
