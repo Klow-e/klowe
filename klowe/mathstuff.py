@@ -107,7 +107,7 @@ def RandomFloat(a:float, b:float) -> float:
 
 
 def RandomInt(a: int, b: int) -> int:
-    RN: int = int(RandomFloat(0, 10))
+    RN: int = int(RandomFloat(a, b))
     return RN
 # print(RandomInt(0, 10))
 
