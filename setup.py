@@ -14,6 +14,11 @@ setup(
     url = "https://github.com/Klow-e/",
     license = "GNU General Public License",
     
+    include_package_data=True,
+    package_data={
+        "KlowE": ["gloss_example.json"]
+    },
+
     packages = find_packages(),
     install_requires=[
         "setuptools",
