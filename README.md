@@ -18,6 +18,11 @@ from klowe import *
 
 ## MathStuff
 ```
+> RandomFloat(a, b) -> float                        == gives a true random float between two floats
+> RandomInt(a, b) -> int                            == gives a true random int between two ints
+> RandomFloatList(a, b, length) -> list[float]      == gives a list of true random floats between two floats
+> RandomIntList(a, b, length) -> list[int]          == gives a list of true random ints between two ints
+
 > AlKhwarizmiFunction(a, b, c, x) -> y              == solves a quadratic formula
 > TanhFunction(x) -> y                              == passes data through a Tanh function
 > ELU(x) -> y                                       == exponential linear unit function
@@ -119,9 +124,6 @@ from klowe import *
 > plot_function(<function>, "<name>")               == graphs a function
 > plot_list[float]                                  == graphs a list of numbers
 ```
-
-
-
 
 
 ---

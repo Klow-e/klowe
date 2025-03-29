@@ -112,15 +112,32 @@ def RandomInt(a: int, b: int) -> int:
 # print(RandomInt(0, 10))
 
 
-def RandomIntList(a:int, b:int, l: int) -> list:
+def RandomIntList(a:int, b:int, l: int) -> list[int]:
     RN = int(str(RandomFloat(2.7182818284, 3.1415926535))[2:]) ** 2
-    RN = str(RN ** ( (l//30) + 1 ))
-    RSL = list(RN[5:l+5])
-    RIL = [int(i) for i in RSL]
-    RIL = NormalizeList(RIL, [a, b])
+    RN = list(str(RN ** ((l//30)+1))[5:l+5])
+    RIL = [int(i) for i in RN]
+    RIL = NormalizeList(RIL, (a, b))
     RIL = [int(i) for i in RIL]
     return RIL
 # print(RandomIntList(0, 10, 12))
+
+
+def RandomFloatList(a:float, b:float, l: int) -> list[float]:
+    RIL: list[float] = RandomIntList(-11, 13, l)
+
+    RFLa: list[float] = [n for i, n in enumerate(RIL) if i % 2 == 0]
+    RFLb: list[float] = [n for i, n in enumerate(RIL) if i % 2 != 0]
+
+    RFLaa: list[float] = [n + 3.1415926535 for i, n in enumerate(RFLa) if i % 2 == 0]
+    RFLab: list[float] = [n - 2.7182818284 for i, n in enumerate(RFLa) if i % 2 != 0]
+
+    RFLba: list[float] = [n - 3.1415926535 for i, n in enumerate(RFLb) if i % 2 == 0]
+    RFLbb: list[float] = [n + 2.7182818284 for i, n in enumerate(RFLb) if i % 2 != 0]
+
+    RFL: list[float] = RFLaa + RFLbb + RFLab + RFLba
+    RFL: list[float] = NormalizeList(RFL, (a, b))
+    return RFL
+# print(RandomFloatList(0, 1, 13))
 
 
 ###############################################################################################
