@@ -65,6 +65,7 @@ def plot_function(func: callable, name: str) -> None:
 
 
 def plot_list(v_list: list[float]) -> None:
+    v_list.sort()
     print(v_list,"\n",len(v_list))
     ax = plt.figure().add_subplot(1, 1, 1)
     x = [str(i) for i in v_list]
