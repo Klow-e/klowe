@@ -8,6 +8,7 @@
 
 import math
 import numpy as np
+import datetime
 
 
 ###############################################################################################
@@ -93,6 +94,17 @@ def TopPercent(values_l: list[float], threshold: float) -> list[float]:
             break
     
     return selected_v
+
+
+###############################################################################################
+
+
+RSN: int = int(f"{str(datetime.datetime.now().strftime('%f')):0<6}")
+
+
+def RandomNumber(a:float, b:float) -> float:
+    RN: float = NormalizeValue(RSN, [0, 999999], (a, b))
+    return RN
 
 
 ###############################################################################################

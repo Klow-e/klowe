@@ -14,8 +14,6 @@ from .pythontools import *
 
 # ToDo:
 
-# Def sIDF_formula
-
 # Create data generator
 
 # setlang exclude chars
