@@ -7,6 +7,7 @@
 
 
 from .pythontools import *
+from .example_gloss import *
 
 import math
 import numpy as np
