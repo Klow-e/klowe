@@ -142,15 +142,3 @@ def RandomFloatList(a:float, b:float, l: int) -> list[float]:
 
 ###############################################################################################
 
-
-import json
-import os
-
-json_path = os.path.join(os.path.dirname(__file__), "gloss_example.json")
-
-def gloss_example():
-    with open(json_path, "r") as fp:
-        gloss_example = json.load(fp)
-    return gloss_example
-
-
