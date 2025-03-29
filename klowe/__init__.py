@@ -16,9 +16,11 @@ import json
 import importlib.resources as pkg_resources
 
 
-with pkg_resources.open_text(__name__, "gloss_example.json") as fp:
-    gloss_ex = json.load(fp)
-
+try:
+    with pkg_resources.open_text(__name__, "gloss_example.json") as fp:
+        gloss_ex = json.load(fp)
+except FileNotFoundError:
+    gloss_ex = {}
 
 # ToDo:
 # setlang exclude chars
