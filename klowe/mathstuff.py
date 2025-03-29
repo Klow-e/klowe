@@ -99,13 +99,28 @@ def TopPercent(values_l: list[float], threshold: float) -> list[float]:
 ###############################################################################################
 
 
-#RSN: int = int(f"{str(datetime.datetime.now().strftime('%f')):0<6}")
-
-
-def RandomNumber(a:float, b:float) -> float:
+def RandomFloat(a:float, b:float) -> float:
     RSN: int = int(f"{str(datetime.datetime.now().strftime('%f')):0<6}")
     RN: float = NormalizeValue(RSN, [0, 999999], (a, b))
     return RN
+# print(RandomFloat(0, 10))
+
+
+def RandomInt(a: int, b: int) -> int:
+    RN: int = int(RandomFloat(0, 10))
+    return RN
+# print(RandomInt(0, 10))
+
+
+def RandomIntList(a:int, b:int, l: int) -> list:
+    RN = int(str(RandomFloat(2.7182818284, 3.1415926535))[2:]) ** 2
+    RN = str(RN ** ( (l//30) + 1 ))
+    RSL = list(RN[5:l+5])
+    RIL = [int(i) for i in RSL]
+    RIL = NormalizeList(RIL, [a, b])
+    RIL = [int(i) for i in RIL]
+    return RIL
+# print(RandomIntList(0, 10, 12))
 
 
 ###############################################################################################
