@@ -79,7 +79,7 @@ def plot_list(v_list: list[float]) -> None:
     plt.ylabel("Values")
     plt.tight_layout()
     plt.show()
-# plot_list(TanhNormalization([-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6]))
+# plot_list(RandomFloatList(-6, 6, 12))
 
 
 ###############################################################################################
