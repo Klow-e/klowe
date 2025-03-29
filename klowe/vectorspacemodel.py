@@ -158,29 +158,29 @@ def load_gloss():
 # glossary = load_gloss()
 
 
-def preprocess_IDF_gloss(gloss: dict[str:[dict[str:float]]]):
+def IDF_gloss(gloss: dict[str:[dict[str:float]]], xIDF: str) -> dict[str:[dict[str:float]]]:
     gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
     gd_values: list[list[float]] = GetValues(GetValues(gloss))
     cor_Tdist = dict(FreqDist([j for i in gd_keys for j in i]).most_common())
     nt_tensor = [[cor_Tdist.get(j, 0) for j in i] for i in gd_keys]
-    cor_N: int = len(gloss)
-    return cor_N, nt_tensor, gd_values, gd_keys
+
+    if xIDF == "sIDF":
+        IDF: list[list[float]] = [[math.log2( (len(gloss) + 1) / (n + 1) ) for n in d] for d in nt_tensor]
+    if xIDF == "pIDF":
+        IDF: list[list[float]] = [[math.log2( ((len(gloss) - n) + 1) / (n + 1) ) for n in d] for d in nt_tensor]
+
+    IDFw: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(IDF, gd_values)]
+    IDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, IDFw)]
+
+    return dict(zip(GetKeys(gloss), IDFw))
 
 
-def sIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
-    cor_N, nt_tensor, gd_values, gd_keys = preprocess_IDF_gloss(gloss)
-    sIDF: list[list[float]] = [[math.log2((cor_N + 1) / (n + 1)) for n in d] for d in nt_tensor]
-    sIDFw: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(sIDF, gd_values)]  
-    sIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, sIDFw)]
-    return dict(zip(GetKeys(gloss), sIDFw))
+def sIDFw_gloss (gloss, xIDF = "sIDF") -> dict[str:[dict[str:float]]]:
+    return IDF_gloss(gloss, xIDF)
 
 
-def pIDFw_gloss(gloss: dict[str:[dict[str:float]]]) -> dict[str:[dict[str:float]]]:
-    cor_N, nt_tensor, gd_values, gd_keys = preprocess_IDF_gloss(gloss)
-    pIDF: list[list[float]] = [[math.log2(((cor_N - n) + 1) / (n + 1)) for n in d] for d in nt_tensor]
-    pIDFw: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(pIDF, gd_values)]
-    pIDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, pIDFw)]
-    return dict(zip(GetKeys(gloss), pIDFw))
+def pIDFw_gloss (gloss, xIDF = "pIDF") -> dict[str:[dict[str:float]]]:
+    return IDF_gloss(gloss, xIDF)
 
 
 ###############################################################################################
