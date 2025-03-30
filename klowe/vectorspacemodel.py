@@ -187,7 +187,7 @@ def pIDFw_gloss (gloss, xIDF = "pIDF") -> dict[str:[dict[str:float]]]:
 ###############################################################################################
 
 
-def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[gstr,list[str]|dict[str,np.array]]:
+def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[str,list[str]|dict[str,np.array]]:
     all_keys: set[str] = sorted({k for i in GetKeys(GetValues(gloss)) for k in i})
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
     embedded_gloss: dict = {"genres": GetKeys(gloss), "vectors": words_vectors}
