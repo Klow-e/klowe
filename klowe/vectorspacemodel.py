@@ -187,7 +187,7 @@ def pIDFw_gloss (gloss, xIDF = "pIDF") -> dict[str:[dict[str:float]]]:
 ###############################################################################################
 
 
-def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[str,str|dict[str, np.array]]:
+def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[gstr,list[str]|dict[str,np.array]]:
     all_keys: set[str] = sorted({k for i in GetKeys(GetValues(gloss)) for k in i})
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
     embedded_gloss: dict = {"genres": GetKeys(gloss), "vectors": words_vectors}
@@ -204,17 +204,17 @@ def VectorializeTextModel(g, t):
     return np.around(w, 8)
 
 
-def VectorializeText(text: str, gloss) -> dict[str,list]:
+def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str,list]:
     vectors = KLexicon(gloss).get("vectors")
     WText: dict[str,float] = KWeightModel(text)
     WText = zip(GetKeys(WText), NormalizeList(GetValues(WText), (0, 1)))
     WText: list[list[str,float]] = [[k, v] for k, v in WText if k in vectors and v != 0]
     WText: list[list[str,float, np.array]] = [[k, v, vectors.get(k)] for k, v in WText]
-    WText = {k: VectorializeTextModel(g, v) for k, v, g in WText}
+    WText = {k: VTmodel(g, v) for k, v, g in WText}
     TVect = np.vstack([np.array([k]) for k in NormalizeList(sum(GetValues(WText)), (0, 1))])
     VText: dict = {"genres" : KLexicon(gloss).get("genres"), "vectors" : TVect}
     return VText
-# print_dict(VectorializeText(wiki_article("Bacilo"), glossary))
+# print_dict(VectorializeText(wiki_article("Bacilo"), glossary, VectorializeTextModel))
 
 
 def CategorizeText(VT: dict) -> list[tuple]:

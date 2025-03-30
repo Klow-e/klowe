@@ -22,4 +22,5 @@ import importlib.resources as pkg_resources
 # remove nltk
 # capitalize textprocessor functions
 # comment with ''' ''' function descriptions
+# add chi^2 to theory
 
