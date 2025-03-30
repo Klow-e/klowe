@@ -6,6 +6,8 @@
 import klowe
 from klowe import *
 ```
+You can check what can be done and how to use this package in the following Colab notebook:  
+https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sharing
 
 
 ## PythonTools
