@@ -229,9 +229,9 @@ def CategorizeText(VT: dict) -> list[tuple]:
     i_b_genre = genres[i_3[1]]
     i_c_genre = genres[i_3[0]]
 
-    i_a_trust = int((k_3[2] / sum(k_3)) * 100)
-    i_b_trust = int((k_3[1] / sum(k_3)) * 100)
-    i_c_trust = int((k_3[0] / sum(k_3)) * 100)
+    i_a_trust = k_3[2] / sum(k_3)
+    i_b_trust = k_3[1] / sum(k_3)
+    i_c_trust = k_3[0] / sum(k_3)
 
     result: list[tuple] = []
     result.append((i_a_genre, i_a_trust))
@@ -239,16 +239,17 @@ def CategorizeText(VT: dict) -> list[tuple]:
     if i_c_trust >= 25:
         result.append((i_c_genre, i_c_trust))
     return result
-# print(CategorizeText(VectorializeText(wiki_article("Bacilo"), glossary)))
+# print(CategorizeText(VectorializeText(wiki_article("Bacilo"), glossary, VectorializeTextModel)))
 
 
-def PrintTextGenre(text: str, gloss) -> None:
-    result: tuple[str,float] = CategorizeText(VectorializeText(text, gloss))
+def PrintTextGenre(text: str, gloss, VTmodel) -> None:
+    VT: dict[str,list] = VectorializeText(text, gloss, VTmodel)
+    result: tuple[str,float] = CategorizeText(VT)
     print(f"Search: {text[:25]}...\n", e := "====================", "\nTopic:")
-    for i in range(len(result)): print(f" {result[i][0]}: \t {result[i][1]}%")
+    for i in range(len(result)): print(f" {result[i][0]}: \t {result[i][1]:.0%}")
     print(e)
-    print_text_vector(VectorializeText(text, gloss))
-# PrintTextGenre(wiki_article("Bacilo"), glossary)
+    print_text_vector(VT)
+# PrintTextGenre(wiki_article("Bacilo"), glossary, VectorializeTextModel)
 
 
 ###############################################################################################

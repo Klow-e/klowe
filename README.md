@@ -103,7 +103,7 @@ from klowe import *
 > VectorializeTextModel(g, t) -> w                  == definition of how weights are crossmatched in VectorializeText
 > print_text_vector(VectorializeText())             == better way to print a text vector of a VectorializeText()
 > CategorizeText(VectorializeText())                == returns two or three most likely genres with a percentage
-> PrintTextGenre("<text>", glossary)                == directly outputs result of a categorization query
+> PrintTextGenre("<text>", glossary, VTmodel)       == directly outputs result of a categorization query
 
 > Categorizar("<text>")                             == categorizes by topic a text in spanish
 ```
