@@ -196,7 +196,7 @@ def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[str,list[str]|dict[
 # print(KLexicon(glossary).get("genres"))
 
 
-def VectorializeTextModel(g: np.array, t: float) -> np.array:
+def VTModel(g: np.array, t: float) -> np.array:
     np.set_printoptions(suppress=True)
     # w = abs( g * math.log(t) )    # works decent
     # w = ( g * TanhFunction(t) )   # works decent
@@ -214,7 +214,7 @@ def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str,list]:
     TVect = np.vstack([np.array([k]) for k in NormalizeList(sum(GetValues(WText)), (0, 1))])
     VText: dict = {"genres" : KLexicon(gloss).get("genres"), "vectors" : TVect}
     return VText
-# print_dict(VectorializeText(wiki_article("Bacilo"), glossary, VectorializeTextModel))
+# print_dict(VectorializeText(wiki_article("Bacilo"), glossary, VTModel))
 
 
 def CategorizeText(VT: dict) -> list[tuple]:
@@ -239,7 +239,7 @@ def CategorizeText(VT: dict) -> list[tuple]:
     if i_c_trust >= 25:
         result.append((i_c_genre, i_c_trust))
     return result
-# print(CategorizeText(VectorializeText(wiki_article("Bacilo"), glossary, VectorializeTextModel)))
+# print(CategorizeText(VectorializeText(wiki_article("Bacilo"), glossary, VTModel)))
 
 
 def PrintTextGenre(text: str, gloss, VTmodel) -> None:
@@ -249,14 +249,14 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
     for i in range(len(result)): print(f" {result[i][0]}: \t {result[i][1]:.0%}")
     print(e)
     print_text_vector(VT)
-# PrintTextGenre(wiki_article("Bacilo"), glossary, VectorializeTextModel)
+# PrintTextGenre(wiki_article("Bacilo"), glossary, VTModel)
 
 
 ###############################################################################################
 
 
 def Categorizar(text: str) -> None:
-    PrintTextGenre(text, example_gloss, VectorializeTextModel)
+    PrintTextGenre(text, example_gloss, VTModel)
 # Categorizar(wiki_article("GNU"))
 
 

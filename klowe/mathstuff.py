@@ -68,9 +68,7 @@ def ELUNormalization(l_values: list[float]) -> list[float]:
     l_values = [ELU(x) for x in l_values]
     #l_values = NormalizeList(l_values, (0, 1))
     return l_values
-# v = [1.0, -0.633, -0.092, 0.226, -0.085, 0.0254, 0.358, 0.173, 0.184, 0.220, 0.119, 0.-148]
-# v.sort()
-# plot_list(ELUNormalization(v))
+# plot_list(ELUNormalization(RandomFloatList(-1, 1, 13)))
 
 
 def ReLUNormalization(l_values: list[float]) -> list[float]:
