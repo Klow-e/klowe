@@ -256,7 +256,7 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
 
 
 def Categorizar(text: str) -> None:
-    PrintTextGenre(text, example_gloss)
+    PrintTextGenre(text, example_gloss, VectorializeTextModel)
 # Categorizar(wiki_article("GNU"))
 
 
