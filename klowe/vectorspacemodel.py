@@ -196,7 +196,7 @@ def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[str,list[str]|dict[
 # print(KLexicon(glossary).get("genres"))
 
 
-def VectorializeTextModel(g, t):
+def VectorializeTextModel(g: np.array, t: float) -> np.array:
     np.set_printoptions(suppress=True)
     # w = abs( g * math.log(t) )    # works decent
     # w = ( g * TanhFunction(t) )   # works decent
