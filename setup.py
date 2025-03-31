@@ -20,7 +20,6 @@ setup(
         "unidecode",
         "numpy",
         "scipy",
-        "wikipedia",
         "requests",
         "bs4",
         "matplotlib",

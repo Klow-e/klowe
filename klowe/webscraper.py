@@ -15,7 +15,6 @@ import requests
 import os
 import operator
 from operator import *
-import wikipedia
 
 
 ###############################################################################################
