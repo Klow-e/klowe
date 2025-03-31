@@ -13,10 +13,6 @@ from .pythontools import *
 from .example_gloss import *
 
 
-import json
-import importlib.resources as pkg_resources
-
-
 # ToDo:
 # setlang exclude chars
 # capitalize textprocessor functions
