@@ -6,7 +6,6 @@
 ###############################################################################################
 
 
-from .webscraper import *
 from .pythontools import *
 
 import re
@@ -125,6 +124,7 @@ def btdistribution(text: str) -> list[tuple[str,int]]:
     tokens: list[str] = bagwords(text)
     tokens: list[tiple[str, int]] = CountDistribution(tokens)
     return tokens
+
 
 ###############################################################################################
 
