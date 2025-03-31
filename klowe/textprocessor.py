@@ -69,6 +69,8 @@ stop_words: list[str] = []
 
 KLanguage = []
 def set_language(lang: str):
+    KLanguage.clear()
+    KLanguage.extend(lang)
     stop_words.clear()
     stop_words.extend(universal_stopwords)
     match lang:
@@ -77,8 +79,6 @@ def set_language(lang: str):
         case "en": stop_words.extend(eng_stopwords)
         case "fr": stop_words.extend(fre_stopwords)
         case _: stop_words.extend(esp_stopwords)
-    KLanguage.clear()
-    KLanguage.extend(lang)
     return lang
 
 
