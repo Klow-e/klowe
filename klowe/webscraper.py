@@ -6,6 +6,7 @@
 ###############################################################################################
 
 
+from unidecode import unidecode
 from pdfminer.high_level import extract_text
 from bs4 import BeautifulSoup
 import requests
@@ -40,17 +41,13 @@ def PDFtext(name: str, url):
     else: return "not found"
 
 
-def wiki_language(lang: str):
-    wikipedia.set_lang(lang)
-    return(lang)
-
 def wiki_article(title: str) -> str:
-    wikilimit: list[str] = ["== Referencias ==", "== Note ==", "== Notes et références =="]
-    text = wikipedia.page(title).content
-    for i in wikilimit:
-        if i in text:
-            text = text[ 0 : text.index(i)]
-    return text
+    lang: str = "".join(KLanguage)
+    title: str = title.replace(" ", "_")
+    title: str = unidecode(title)
+    url = f"https://{lang}.wikipedia.org/wiki/{title}"
+    WT: str = WebPage(url)
+    return WT
 
 
 ###############################################################################################
