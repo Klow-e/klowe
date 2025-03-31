@@ -115,15 +115,16 @@ def bagwords(text: str) -> list[str]:
     return tokens
 
 
-def tdistribution(text: str) -> list[tuple[str,int]]:
+def tdistribution(text: str) -> list[tuple[str, int]]:
     tokens: list[str] = tokenization(text)
-    return FreqDist(tokens).most_common()
+    tokens: list[tiple[str, int]] = CountDistribution(tokens)
+    return tokens
 
 
 def btdistribution(text: str) -> list[tuple[str,int]]:
     tokens: list[str] = bagwords(text)
-    return FreqDist(tokens).most_common()
-
+    tokens: list[tiple[str, int]] = CountDistribution(tokens)
+    return tokens
 
 ###############################################################################################
 

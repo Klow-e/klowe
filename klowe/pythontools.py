@@ -8,6 +8,7 @@
 
 import math
 import operator
+from collections import Counter
 
 
 ###############################################################################################
@@ -30,6 +31,11 @@ def GetValues(dicc: dict) -> list:
         return list(dicc.values())
     elif type(dicc) == list:
         return [GetValues(i) for i in dicc]
+
+
+def CountDistribution(lista: list[str]) -> list[tuple[str,int]]:
+    counter: Counter = Counter(lista)
+    return counter.most_common()
 
 
 ###############################################################################################

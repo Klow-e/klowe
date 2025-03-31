@@ -25,6 +25,7 @@ setup(
         "requests",
         "bs4",
         "matplotlib",
+#        "collections",
 #        "re",
 #        "string",
 #        "operator",
