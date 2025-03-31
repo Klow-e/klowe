@@ -18,7 +18,6 @@ setup(
     install_requires=[
         "setuptools",
         "unidecode",
-        "nltk",
         "numpy",
         "scipy",
         "wikipedia",
