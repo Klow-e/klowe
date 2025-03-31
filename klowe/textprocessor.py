@@ -12,8 +12,6 @@ from .pythontools import *
 import re
 import string
 from unidecode import unidecode
-import nltk
-from nltk import *
 
 
 ###############################################################################################
