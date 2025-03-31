@@ -11,9 +11,6 @@ from .pythontools import *
 
 import scipy.stats as stats
 import numpy as np
-import nltk
-from nltk import *
-from nltk.util import ngrams
 import math
 import operator
 
@@ -40,7 +37,7 @@ def confidence_chi2(chi: float) -> float:
 
 def search_bi(text: str, query: tuple[str]) -> float:
     T = tokenization(text)
-    bigrams = list(ngrams(T, 2))
+    bigrams = NGrams(T, 2)
     A = query[0]
     B = query[1]
     a: int = bigrams.count((A, B))
@@ -53,8 +50,8 @@ def search_bi(text: str, query: tuple[str]) -> float:
 
 def search_tri(text: str, query: tuple[str]) -> float:
     T = tokenization(text)
-    bigrams = list(ngrams(T, 2))
-    trigrams = list(ngrams(T, 3))
+    bigrams = NGrams(T, 2)
+    trigrams = NGrams(T, 3)
     A = query[0]
     B = query[1]
     C = query[2]
@@ -68,7 +65,7 @@ def search_tri(text: str, query: tuple[str]) -> float:
 
 def extract_bicompos(text: str) -> dict[tuple,float]:
     T = tokenization(text)
-    bigrams = list(ngrams(T, 2))
+    bigrams = NGrams(T, 2)
     bigrams = [i for i in bigrams if i[0] not in stop_words]
     bigrams = [i for i in bigrams if i[1] not in stop_words]
     bigrams = [i for i in bigrams if i[0] != i[1]]
@@ -89,8 +86,8 @@ def extract_bicompos(text: str) -> dict[tuple,float]:
 
 def extract_tricompos(text: str) -> dict[tuple, float]:
     T = tokenization(text)
-    bigrams = list(ngrams(T, 2))
-    trigrams = list(ngrams(T, 3))
+    bigrams = NGrams(T, 2)
+    trigrams = NGrams(T, 3)
     alph, df, p = 0.0005, 1, 12.116
     comp3 = {}
     for i in trigrams:
