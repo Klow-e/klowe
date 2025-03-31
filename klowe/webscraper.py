@@ -41,7 +41,7 @@ def PDFtext(name: str, url):
         return text
     else: return "not found"
 
-#from .textprocessor import KLanguage
+
 def wiki_article(title: str) -> str:
     lang: str = "".join(KLanguage)
     title: str = title.replace(" ", "_")
@@ -49,6 +49,13 @@ def wiki_article(title: str) -> str:
     url = f"https://{lang}.wikipedia.org/wiki/{title}"
     WT: str = WebPage(url)
     return WT
+
+
+def CleanTextFile(text: str) -> list[str]:
+    text_l: list[str] = [i for i in text.split('\n')]
+    text_l: list[str] = [i for i in text_l if len(i) > 50]
+    text_l: list[str] = [i for i in text_l if not contains(i, "_full_")]
+    return text_l
 
 
 ###############################################################################################
