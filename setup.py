@@ -24,6 +24,7 @@ setup(
         "requests",
         "bs4",
         "matplotlib",
+        "pdfminer.six",
 #        "collections",
 #        "re",
 #        "string",

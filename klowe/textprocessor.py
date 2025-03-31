@@ -67,6 +67,7 @@ universal_stopwords: list[str] = ["displaystyle", "chh", "skip", "isbn", "xix", 
 
 stop_words: list[str] = []
 
+KLanguage = []
 def set_language(lang: str):
     stop_words.clear()
     stop_words.extend(universal_stopwords)
@@ -77,6 +78,8 @@ def set_language(lang: str):
         case "fr": stop_words.extend(fre_stopwords)
         case _: stop_words.extend(esp_stopwords)
     wiki_language(lang)
+    KLanguage.clear()
+    KLanguage.extend(lang)
     return lang
 
 

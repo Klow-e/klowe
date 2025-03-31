@@ -6,25 +6,27 @@
 ###############################################################################################
 
 
+from pdfminer.high_level import extract_text
 from bs4 import BeautifulSoup
 import requests
 import os
+import operator
+from operator import *
 import wikipedia
 
 
 ###############################################################################################
 
 
-def webpage(url: str) -> str:
+def WebPage(url: str) -> str:
     response = requests.get(url)
-    html = response.text
-    soup = BeautifulSoup(html, "html.parser")
-    paragraph=soup.find_all("p")
-    output: str = ""
-    for p in paragraph:
-        output += p.text
-        output += os.linesep
-    return output
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        paragraphs = soup.find_all('p')
+        paragraphs = [p.text for p in paragraphs]
+        paragraphs = " ".join(paragraphs)
+        return paragraphs
+    else: return "not found"
 
 
 def wiki_language(lang: str):

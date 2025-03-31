@@ -49,7 +49,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ## WebScraper
 ```
-> webpage("<URL>") -> str                           == extracts somewhat clean text from an URL
+> WebPage("<URL>") -> str                           == extracts somewhat clean text from an URL
 > wiki_language("<es>")                             == sets the wikipedia language for the following code
 > wiki_article("<title>") -> str                    == extracts text from a wikipedia title
 ```
