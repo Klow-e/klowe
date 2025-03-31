@@ -77,7 +77,6 @@ def set_language(lang: str):
         case "en": stop_words.extend(eng_stopwords)
         case "fr": stop_words.extend(fre_stopwords)
         case _: stop_words.extend(esp_stopwords)
-    wiki_language(lang)
     KLanguage.clear()
     KLanguage.extend(lang)
     return lang
