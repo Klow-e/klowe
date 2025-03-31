@@ -29,6 +29,17 @@ def WebPage(url: str) -> str:
     else: return "not found"
 
 
+def PDFtext(name: str, url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(name, 'wb') as fl:
+            fl.write(response.content)
+        text = extract_text(name)
+        os.remove(name)
+        return text
+    else: return "not found"
+
+
 def wiki_language(lang: str):
     wikipedia.set_lang(lang)
     return(lang)
