@@ -102,7 +102,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
 > print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre
 > VectorializeText(text, glossary, VTmodel) -> dict == returns a single textual vector from a text crosmatched with a glossary
-> VTModel(g, t) -> w                  == definition of how weights are crossmatched in VectorializeText
+> VTModel(g, t) -> w                                == definition of how weights are crossmatched in VectorializeText
 > print_text_vector(VectorializeText())             == better way to print a text vector of a VectorializeText()
 > CategorizeText(VectorializeText())                == returns two or three most likely genres with a percentage
 > PrintTextGenre("<text>", glossary, VTmodel)       == directly outputs result of a categorization query
