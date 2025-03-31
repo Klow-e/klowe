@@ -6,6 +6,8 @@
 ###############################################################################################
 
 
+from .textprocessor import *
+
 from unidecode import unidecode
 from pdfminer.high_level import extract_text
 from bs4 import BeautifulSoup
