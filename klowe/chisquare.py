@@ -72,17 +72,17 @@ def extract_bicompos(text: str) -> dict[tuple,float]:
     bigrams = [i for i in bigrams if i[1] not in stop_words]
     bigrams = [i for i in bigrams if i[0] != i[1]]
     alph, df, p = 0.0005, 1, 12.116
-    composition2 = {}
+    comp2 = {}
     for i in bigrams:
         if search_bi(text, i) > p:
-            composition2[i] = search_bi(text, i)
-    s2 = dict(sorted(composition2.items(), key=operator.itemgetter(1), reverse=True))
-    comad = [i[0] + ", " + i[1] for i in s2]
+            comp2[i] = search_bi(text, i)
+    comp2 = SortDict(comp2)
+    comad = [i[0] + ", " + i[1] for i in comp2]
     comad = [i for i in comad if i in text]
     comad = [tuple(tokenization(i)) for i in comad]
-    s2 = {i:s2[i] for i in s2 if i not in comad}
-    s2 = {i:confidence_chi2(s2[i]) for i in s2}
-    return s2
+    comp2 = {i : comp2[i] for i in comp2 if i not in comad}
+    comp2 = {i : confidence_chi2(comp2[i]) for i in comp2}
+    return comp2
 # print(extract_bicompos("snow white a snow white b snow white c snow white d snow white e snow white f snow white"))
 
 
@@ -95,9 +95,9 @@ def extract_tricompos(text: str) -> dict[tuple, float]:
     for i in trigrams:
         if search_tri(text, i) > p:
             comp3[i] = search_tri(text, i)
-    s3 = dict(sorted(comp3.items(), key=operator.itemgetter(1), reverse=True))
-    s3 = {i:confidence_chi2(s3[i]) for i in s3}
-    return s3
+    comp3 = SortDict(comp3)
+    comp3 = {i : confidence_chi2(comp3[i]) for i in comp3}
+    return comp3
 # print(extract_tricompos("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white"))
 
 
