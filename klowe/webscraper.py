@@ -16,7 +16,7 @@ import wikipedia
 
 
 def webpage(url: str) -> str:
-    response=requests.get(url)
+    response = requests.get(url)
     html = response.text
     soup = BeautifulSoup(html, "html.parser")
     paragraph=soup.find_all("p")
