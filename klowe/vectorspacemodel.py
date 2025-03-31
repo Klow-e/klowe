@@ -12,8 +12,6 @@ from .pythontools import *
 from .datavisualization import *
 from .example_gloss import *
 
-import nltk
-from nltk import *
 import math
 import operator
 import json
@@ -57,7 +55,7 @@ def InverseDocFreq(sample_dicts: list[str]):
         T_tensor.append(doc_T)
         F_tensor.append(doc_F)
 
-    cor_Tdist = dict(FreqDist([j for i in T_tensor for j in i]).most_common())
+    cor_Tdist = dict(CountDistribution([j for i in T_tensor for j in i]))
     nt_tensor = [[cor_Tdist.get(j, 0) for j in i] for i in T_tensor]
     cor_N: int = len(sample_dicts)
 
@@ -162,7 +160,7 @@ def load_gloss():
 def IDF_gloss(gloss: dict[str:[dict[str:float]]], xIDF: str) -> dict[str:[dict[str:float]]]:
     gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
     gd_values: list[list[float]] = GetValues(GetValues(gloss))
-    cor_Tdist = dict(FreqDist([j for i in gd_keys for j in i]).most_common())
+    cor_Tdist = dict(CountDistribution([j for i in gd_keys for j in i]))
     nt_tensor = [[cor_Tdist.get(j, 0) for j in i] for i in gd_keys]
 
     if xIDF == "sIDF":
