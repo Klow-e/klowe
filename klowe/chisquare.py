@@ -7,6 +7,7 @@
 
 
 from .textprocessor import *
+from .pythontools import *
 
 import scipy.stats as stats
 import numpy as np

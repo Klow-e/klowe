@@ -38,5 +38,11 @@ def CountDistribution(lista: list[str]) -> list[tuple[str,int]]:
     return counter.most_common()
 
 
+def NGrams(Tok: list, n: int) -> list[tuple]:
+    ngrams = [tuple(Tok[i: i + n]) for i in range(len(Tok) - n + 1)]
+    return ngrams
+# print(NGrams([1, 2, 3, 4, 5], 2))
+
+
 ###############################################################################################
 

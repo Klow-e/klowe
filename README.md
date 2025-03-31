@@ -16,6 +16,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > GetKeys(dict) -> list                             == returns a list of the keys of a dict or list of dicts
 > GetValues(dict) -> list                           == returns a list of the values of a dict or list of dicts
 > CountDistribution(list[str]) -> list[tuple]       == returns a count of each str in a list
+> NGrams(list, n) -> list[tuple]                    == returns a list of n-grams from a list
 ```
 
 
