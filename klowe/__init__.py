@@ -19,7 +19,7 @@ import importlib.resources as pkg_resources
 
 # ToDo:
 # setlang exclude chars
-# remove nltk
+# remove wikipedia
 # capitalize textprocessor functions
 # comment with ''' ''' function descriptions
 # add chi^2 to theory
