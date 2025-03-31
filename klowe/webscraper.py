@@ -41,7 +41,7 @@ def PDFtext(name: str, url):
         return text
     else: return "not found"
 
-
+from .textprocessor import KLanguage
 def wiki_article(title: str) -> str:
     lang: str = "".join(KLanguage)
     title: str = title.replace(" ", "_")
