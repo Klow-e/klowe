@@ -94,15 +94,10 @@ def KWeightModel(text: str) -> dict[str,float]:
 
     for i, (t, w) in enumerate(freq_dist):
         match len(t):
-            case x if x <= 3: m = 5.0
-            case x if x <= 4: m = 4.0
-            case x if x == 5: m = 1.0
-            case x if x == 6: m = 1.0
-            case x if x == 7: m = 1.0
-            case x if x == 8: m = 3.0
-            case x if x == 9: m = 4.0
-            case x if x == 10: m = 4.0
-            case x if x >= 11: m = 5.0
+            case 5 | 6 | 7 : m = 1.0
+            case 8 : m = 3.0
+            case 4 | 9 | 10 : m = 4.0
+            case 3 | _ : m = 5.0
         match True:
             case _ if t[:5] in prelex_5: m *= 4.0
             case _ if t[:6] in prelex_6: m *= 5.0
