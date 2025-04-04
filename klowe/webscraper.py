@@ -45,7 +45,7 @@ def PDFtext(name: str, url):
 def WikiArticle(title: str) -> str:
     lang: str = "".join(KLanguage)
     title: str = title.replace(" ", "_")
-    title: str = unidecode(title)
+    #title: str = unidecode(title)
     url = f"https://{lang}.wikipedia.org/wiki/{title}"
     WT: str = WebPage(url)
     return WT
