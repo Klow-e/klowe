@@ -31,7 +31,7 @@ def WebPage(url: str) -> str:
     else: print(f"Not found {url = }")
 
 
-def PDFtext(name: str, url):
+def PDFtext(name: str, url: str):
     response = requests.get(url)
     if response.status_code == 200:
         with open(name, 'wb') as fl:
