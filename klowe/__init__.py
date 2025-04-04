@@ -25,10 +25,15 @@ from .example_gloss import *
 
 
 # ToDo:
+
 # setlang exclude chars
+
 # capitalize textprocessor functions
 # comment with ''' ''' function descriptions
 # add chi^2 to theory
-# modularize webscraper
+
 # create bootcat clone
+# # Tuple generator
+# # lang detection with stopwords and html
+# # 
 
