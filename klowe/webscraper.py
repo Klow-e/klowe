@@ -28,7 +28,7 @@ def WebPage(url: str) -> str:
         paragraphs = [p.text for p in paragraphs]
         paragraphs = " ".join(paragraphs)
         return paragraphs
-    else: return "not found"
+    else: print(f"Not found {url = }")
 
 
 def PDFtext(name: str, url):
@@ -39,7 +39,7 @@ def PDFtext(name: str, url):
         text = extract_text(name)
         os.remove(name)
         return text
-    else: return "not found"
+    else: print(f"Not found {url = }")
 
 
 def WikiArticle(title: str) -> str:
@@ -49,6 +49,9 @@ def WikiArticle(title: str) -> str:
     url = f"https://{lang}.wikipedia.org/wiki/{title}"
     WT: str = WebPage(url)
     return WT
+
+
+###############################################################################################
 
 
 def CleanTextFile(text: str) -> list[str]:
