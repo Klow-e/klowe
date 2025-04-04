@@ -169,15 +169,15 @@ def average_toklen(text: str) -> int:
 
 def sentence_tokenization(text: str) -> list[str]:
 
-    def handle_wikipedia(text: str) -> str:
+    def handle_citations(text: str) -> str:
         text = text.replace("\u200b", "")
-        wikih_pattern = r'== .+ =='
-        if re.search(wikih_pattern, text):
-            for m in re.findall(wikih_pattern, text):
-                text = text.replace(m, m+". ")
-        wikic_pattern = r'\S\.\[\d+\]\s'
-        if re.search(wikic_pattern, text):
-            for m in re.findall(wikic_pattern, text):
+        #wikih_pattern = r'== .+ =='
+        #if re.search(wikih_pattern, text):
+        #    for m in re.findall(wikih_pattern, text):
+        #        text = text.replace(m, m+". ")
+        cite_pattern = r'\S\.\[\d+\]\s'
+        if re.search(cite_pattern, text):
+            for m in re.findall(cite_pattern, text):
                 text = text.replace(m, m[0]+" "+m[2:-1]+". ")
         return text
 
@@ -231,7 +231,7 @@ def sentence_tokenization(text: str) -> list[str]:
             p0 = ending_cases(p0)
         return p0
 
-    text = handle_wikipedia(text)
+    text = handle_citations(text)
     p0 = text.split()
     p0 = handle_numerals(p0)
     p0 = handle_honor(p0)
