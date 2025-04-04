@@ -24,4 +24,6 @@ from .example_gloss import *
 # capitalize textprocessor functions
 # comment with ''' ''' function descriptions
 # add chi^2 to theory
+# modularize webscraper
+# create bootcat clone
 
