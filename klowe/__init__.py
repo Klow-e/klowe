@@ -28,6 +28,9 @@ from .example_gloss import *
 
 # setlang exclude chars
 
+# remove scipy
+# remove unidecode
+
 # capitalize textprocessor functions
 # comment with ''' ''' function descriptions
 # add chi^2 to theory
