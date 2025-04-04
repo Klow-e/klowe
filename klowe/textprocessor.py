@@ -171,10 +171,6 @@ def sentence_tokenization(text: str) -> list[str]:
 
     def handle_citations(text: str) -> str:
         text = text.replace("\u200b", "")
-        #wikih_pattern = r'== .+ =='
-        #if re.search(wikih_pattern, text):
-        #    for m in re.findall(wikih_pattern, text):
-        #        text = text.replace(m, m+". ")
         cite_pattern = r'\S\.\[\d+\]\s'
         if re.search(cite_pattern, text):
             for m in re.findall(cite_pattern, text):

@@ -44,7 +44,7 @@ if training == True:
 
 
 # wikiweb("<<title or url>>")               -> extracts text from wikipedia or webpage
-#    wiki_article("<<title>>")              -> extracts text from wikipedia article
+#    WikiArticle("<<title>>")              -> extracts text from wikipedia article
 #    webpage("<<url>>")                     -> extracts text from webpage
 
 # tfreq("<<text>>")                         -> counts tokens
@@ -91,7 +91,7 @@ legal_chars += esp_chars
 ###############################################################################################
 
 
-def wiki_article(title: str) -> str:
+def WikiArticle(title: str) -> str:
     text = wikipedia.page(title).content
     if "== Referencias ==" in text:
         text = text[ 0 : text.index("== Referencias ==")]
@@ -113,7 +113,7 @@ def wikiweb(search: str):
     if "/" in search:
         return webpage(search)
     else:
-        return wiki_article(search)
+        return WikiArticle(search)
 
 
 ###############################################################################################

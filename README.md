@@ -51,7 +51,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 ```
 > WebPage("<URL>") -> str                           == extracts somewhat clean text from an URL
 > PDFtext("<name>", "<url>") -> str                 == extracts somewhat clean text from an URL to a PDF
-> wiki_article("<title>") -> str                    == extracts text from a wikipedia title
+> WikiArticle("<title>") -> str                     == extracts text from a wikipedia title
 > CleanTextFile(str) -> list[str]                   == cleans a extracted text into a list of lines
 ```
 

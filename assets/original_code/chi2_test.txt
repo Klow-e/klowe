@@ -45,7 +45,7 @@ stop_words.extend(ita_stopwords)
 ###############################################################################################
 
 
-def wiki_article(title: str) -> str:
+def WikiArticle(title: str) -> str:
     text = wikipedia.page(title).content
     if "== Referencias ==" in text:
         text = text[ 0 : text.index("== Referencias ==")]
@@ -109,7 +109,7 @@ def search_bi(text: str, query: tuple[str]) -> float:
     c: int = T.count(B)-a
     chi: float = chi2(a, b, c)
     return chi
-# print(search_bi(wiki_article("Semiotica"), ("la", "semiotica")))
+# print(search_bi(WikiArticle("Semiotica"), ("la", "semiotica")))
 
 
 def search_tri(text: str, query: tuple[str]) -> float:
@@ -124,7 +124,7 @@ def search_tri(text: str, query: tuple[str]) -> float:
     c: int = bigrams.count((B, C))-a
     chi: float = chi2(a, b, c)
     return chi
-# print(search_tri(wiki_article("Semiotica"), ("il", "segno", "e")))
+# print(search_tri(WikiArticle("Semiotica"), ("il", "segno", "e")))
 
 
 def extract_bicompos(text: str) -> dict[tuple,float]:
@@ -145,7 +145,7 @@ def extract_bicompos(text: str) -> dict[tuple,float]:
     s2 = {i:s2[i] for i in s2 if i not in comad}
     s2 = {i:confidence_chi2(s2[i]) for i in s2}
     return s2
-# print(extract_bicompos(wiki_article("Lingua greca antica")))
+# print(extract_bicompos(WikiArticle("Lingua greca antica")))
 
 
 def extract_tricompos(text: str) -> dict[tuple, float]:
@@ -160,7 +160,7 @@ def extract_tricompos(text: str) -> dict[tuple, float]:
     s3 = dict(sorted(comp3.items(), key=operator.itemgetter(1), reverse=True))
     s3 = {i:confidence_chi2(s3[i]) for i in s3}
     return s3
-# print(extract_tricompos(wiki_article("Lingua greca antica")))
+# print(extract_tricompos(WikiArticle("Lingua greca antica")))
 
 
 ###############################################################################################
