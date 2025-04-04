@@ -15,8 +15,13 @@ from .example_gloss import *
 
 # Clean Code Principles
 # # The code should explain itself
-# # A function should do one thing only
-# # A function does one thing if it cannot be extracted another meaningful function from it
+# # The code should be beautiful and regular
+# # The code should be simple and easy
+# # The code should be explicit and flat
+# # The code should be defensive and errors be managed
+# # A function should only do one thing only
+# # One thing is when no other meaningful function can be extracted
+# # If the implementation is hard to explain, it's a bad idea
 
 
 # ToDo:
