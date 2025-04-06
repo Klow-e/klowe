@@ -79,7 +79,7 @@ def extract_bicompos(text: str) -> dict[tuple,float]:
     comad = [i for i in comad if i in text]
     comad = [tuple(tokenization(i)) for i in comad]
     comp2 = {i : comp2[i] for i in comp2 if i not in comad}
-    comp2 = {i : confidence_chi2(comp2[i]) for i in comp2}
+    comp2 = {i : Chi2Confidence(comp2[i]) for i in comp2}
     return comp2
 # print(extract_bicompos("snow white a snow white b snow white c snow white d snow white e snow white f snow white"))
 
@@ -94,7 +94,7 @@ def extract_tricompos(text: str) -> dict[tuple, float]:
         if search_tri(text, i) > p:
             comp3[i] = search_tri(text, i)
     comp3 = SortDict(comp3)
-    comp3 = {i : confidence_chi2(comp3[i]) for i in comp3}
+    comp3 = {i : Chi2Confidence(comp3[i]) for i in comp3}
     return comp3
 # print(extract_tricompos("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white"))
 
