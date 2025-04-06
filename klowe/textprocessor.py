@@ -21,16 +21,14 @@ dirty_characters += string.digits
 dirty_characters += "¿¡““»«…©"
 
 
-esp_characters: str = "áéíóúüñç"
-ita_characters: str = "éèàìòù"
-fre_characters: str = "áéíóúàèìòùäëïöüÿâêîôûçœæ"
-eng_characters: str = "èéíëïüôç"
+esp_characters: list[str] = ["á", "é", "í", "ó", "ú", "ü", "ñ", "ç"]
+ita_characters: list[str] = ['é', 'è', 'à', 'ì', 'ò', 'ù']
+fre_characters: list[str] = ['á', 'é', 'í', 'ó', 'ú', 'à', 'è', 'ì', 'ò', 'ù', 'ä', 'ë', 'ï', 'ö', 'ü', 'ÿ', 'â', 'ê', 'î', 'ô', 'û', 'ç', 'œ', 'æ']
+eng_characters: list[str] = ['è', 'é', 'í', 'ë', 'ï', 'ü', 'ô', 'ç']
 
-legal_characters: str = string.ascii_letters
-legal_characters += esp_characters
-legal_characters += ita_characters
-legal_characters += fre_characters
-legal_characters += eng_characters
+latin_characters: list[str] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+legal_characters: list[str] = []
 
 
 esp_stopwords: list[str] = []
@@ -55,14 +53,12 @@ ita_stopwords += ["faccio", "fai", "facciamo", "fanno", "faccia", "facciate", "f
 ita_stopwords += ["sto", "stai", "sta", "stiamo", "stanno", "stia", "stiate", "stiano", "starò", "starai", "starà", "staremo", "starete", "staranno", "starei", "staresti", "starebbe", "staremmo", "stareste", "starebbero", "stavo", "stavi", "stava", "stavamo", "stavate", "stavano", "stetti", "stesti", "stette", "stemmo", "steste", "stettero", "stessi", "stesse", "stessimo", "stessero", "stando"]
 
 eng_stopwords: list[str] = []
-eng_stopwords += ["s", "t", "ll", "d", "ve", "re", "y", "m", "o", "a", "an", "the", "no", "nor", "not", "or", "so", "to"]
-eng_stopwords += ["i", "my", "me", "myself", "she", "her", "hers", "herself", "he", "his", "him", "himself", "it", "its", "itself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves"]
-eng_stopwords += ["be", "being", "do", "don", "does", "doesn", "doing", "did", "didn", "have", "has", "having", "hasn", "had", "hadn"]
-eng_stopwords += ['about', 'above', 'after', 'again', 'against', 'ain', 'all', 'am', 'and', 'any', 'are', 'aren', 'as', 'at', 'because', 'been', 'before', 'below', 'between', 'both', 'but', 'by', 'can', 'couldn', "could"]
-eng_stopwords += ["here", 'how', 'if', 'in', 'into', 'is', 'isn', 'just', 'mightn', "might", 'down', 'during', 'each', 'few', 'for', 'from', 'further']
-eng_stopwords += ['more', 'most', 'mustn', "must", 'needn', "need", 'now', 'of', 'off', 'on', 'once', 'only', 'other', 'out', 'over', 'own', 'same']
-eng_stopwords += ['should', 'shouldn', 'some', 'such', 'than', 'that', 'their', 'theirs', 'them', 'themselves', 'then', 'there', 'these', 'they', 'this', 'those']
-eng_stopwords += ['through', 'too', 'under', 'until', 'up', 'very', 'was', 'wasn', 'were', 'weren', 'what', 'when', 'where', 'which', 'while', 'who', 'whom', 'why', 'will', 'with', 'won', 'wouldn']
+eng_stopwords += ["s", "t", "ll", "d", "ve", "re", "y", "m", "o", "a", "an", "the", "no", "nor", "not", "out", "or", "so", "to", "too", "very", "and", "as", "at", "in", "if", "of", "off", "on", "but", "by", "some", "such", "more", "less", "both", "just", "none", "neither", "either", "through", "tho", "for", "few", "from", "each", "up", "other", "until", "under", "til"]
+eng_stopwords += ["i", "my", "me", "myself", "she", "her", "hers", "herself", "he", "his", "him", "himself", "it", "its", "itself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves", "they", "their", "theirs", "them", "themselves", "what", "when", "where", "which", "while", "who", "whom", "why", "with"]
+eng_stopwords += ["own", "need", "needn", "might", "may", "must", "mustn", "be", "been", "am", "ain", "isn", "is", "are", "aren", "was", "wasn", "were", "weren", "being", "do", "don", "does", "doesn", "doing", "did", "didn", "have", "has", "having", "hasn", "had", "hadn", "will", "won", "would", "wouldn", "can", "could", "couldn", "should", "shouldn"]
+eng_stopwords += ['about', 'above', 'after', 'again', 'against', 'all', 'any', 'because', 'before', 'below', 'between']
+eng_stopwords += ["here", 'how', 'into', 'down', 'during', 'further', 'most', 'now', 'once', 'only', 'over', 'same']
+eng_stopwords += ['than', 'that', 'then', 'there', 'these', 'this', 'those']
 
 fre_stopwords: list[str] = []
 fre_stopwords += ['au', 'aux', 'avec', 'ce', 'ces', 'dans', 'de', 'des', 'du', 'elle', 'en', 'et', 'eux', 'il', 'ils', 'je', 'la', 'le', 'les', 'leur', 'lui', 'ma', 'mais', 'me', 'même', 'mes', 'moi', 'mon', 'ne', 'nos', 'notre', 'nous', 'on', 'ou', 'par', 'pas', 'pour', 'qu', 'que', 'qui', 'sa', 'se', 'ses', 'son', 'sur', 'ta', 'te', 'tes', 'toi', 'ton', 'tu', 'un', 'une', 'vos', 'votre', 'vous', 'c', 'd', 'j', 'l', 'à', 'm', 'n', 's', 't', 'y', 'été', 'étée', 'étées', 'étés', 'étant', 'étante', 'étants', 'étantes', 'suis', 'es', 'est', 'sommes', 'êtes', 'sont', 'serai', 'seras', 'sera', 'serons', 'serez', 'seront', 'serais', 'serait', 'serions', 'seriez', 'seraient', 'étais', 'était', 'étions', 'étiez', 'étaient', 'fus', 'fut', 'fûmes', 'fûtes', 'furent', 'sois', 'soit', 'soyons', 'soyez', 'soient', 'fusse', 'fusses', 'fût', 'fussions', 'fussiez', 'fussent', 'ayant', 'ayante', 'ayantes', 'ayants', 'eu', 'eue', 'eues', 'eus', 'ai', 'as', 'avons', 'avez', 'ont', 'aurai', 'auras', 'aura', 'aurons', 'aurez', 'auront', 'aurais', 'aurait', 'aurions', 'auriez', 'auraient', 'avais', 'avait', 'avions', 'aviez', 'avaient', 'eut', 'eûmes', 'eûtes', 'eurent', 'aie', 'aies', 'ait', 'ayons', 'ayez', 'aient', 'eusse', 'eusses', 'eût', 'eussions', 'eussiez', 'eussent']
@@ -82,7 +78,15 @@ def set_language(lang: str):
         case "it": stop_words.extend(ita_stopwords)
         case "en": stop_words.extend(eng_stopwords)
         case "fr": stop_words.extend(fre_stopwords)
-        case _: stop_words.extend(esp_stopwords)
+        case _: print(f"Language {lang} not supported.")
+    legal_characters.clear()
+    legal_characters.extend(latin_characters)
+    match lang:
+        case "es": legal_characters.extend(esp_characters)
+        case "it": legal_characters.extend(ita_characters)
+        case "en": legal_characters.extend(eng_characters)
+        case "fr": legal_characters.extend(fre_characters)
+        case _: print(f"Pick 'es', 'it', 'en', or 'fr'.")
     return KLanguage
 
 
