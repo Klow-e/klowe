@@ -23,7 +23,7 @@ def Chi2(a: int, b: int, c: int) -> float:
     chi_den = (d**2-c**2)*(d**2-b**2)
     if chi_num == 0: chi = 0
     else: chi = chi_num / chi_den
-    return chi
+    return round(chi, 6)
 
 
 def Chi2Confidence(chi: float) -> float:
