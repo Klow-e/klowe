@@ -25,14 +25,11 @@ from .example_gloss import *
 
 
 # ToDo:
-
-# setlang exclude chars
-
-# capitalize textprocessor functions
-# comment with ''' ''' function descriptions
-# add chi^2 to theory
-
-# create hebrew & greek parser
+# # setlang exclude chars
+# # capitalize textprocessor functions
+# # comment with ''' ''' function descriptions
+# # add chi^2 to theory
+# # create hebrew & greek parser
 
 # create bootcat clone
 # # Tuple generator

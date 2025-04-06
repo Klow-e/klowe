@@ -22,10 +22,15 @@ dirty_characters += "¿¡““»«…©"
 
 
 esp_characters: str = "áéíóúüñç"
-ita_characters: str = "àèìòùâêîôûãõäëïöüÿ"
+ita_characters: str = "éèàìòù"
+fre_characters: str = "áéíóúàèìòùäëïöüÿâêîôûçœæ"
+eng_characters: str = "èéíëïüôç"
+
 legal_characters: str = string.ascii_letters
 legal_characters += esp_characters
 legal_characters += ita_characters
+legal_characters += fre_characters
+legal_characters += eng_characters
 
 
 esp_stopwords: list[str] = []
