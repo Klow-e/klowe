@@ -7,6 +7,7 @@
 
 
 from .textprocessor import *
+from .pythontools import *
 
 from unidecode import unidecode
 from pdfminer.high_level import extract_text
