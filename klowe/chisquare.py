@@ -143,7 +143,7 @@ def Chi2Confidence(chi: float) -> float:
 ###############################################################################################
 
 
-def search_bi(text: str, query: tuple[str]) -> float:
+def SearchBigramUnit(text: str, query: tuple[str]) -> float:
     T = tokenization(text)
     bigrams = NGrams(T, 2)
     A = query[0]
@@ -153,10 +153,10 @@ def search_bi(text: str, query: tuple[str]) -> float:
     c: int = T.count(B)-a
     chi: float = Chi2(a, b, c)
     return chi
-# print(search_bi("snow white a snow white b snow white c snow white d snow white e snow white f snow white", ("snow", "white")))
+# print(SearchBigramUnit("snow white a snow white b snow white c snow white d snow white e snow white f snow white", ("snow", "white")))
 
 
-def search_tri(text: str, query: tuple[str]) -> float:
+def SearchTrigramUnit(text: str, query: tuple[str]) -> float:
     T = tokenization(text)
     bigrams = NGrams(T, 2)
     trigrams = NGrams(T, 3)
@@ -168,7 +168,7 @@ def search_tri(text: str, query: tuple[str]) -> float:
     c: int = bigrams.count((B, C))-a
     chi: float = Chi2(a, b, c)
     return chi
-# print(search_tri("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white", ("snow", "super", "white")))
+# print(SearchTrigramUnit("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white", ("snow", "super", "white")))
 
 
 def extract_bicompos(text: str) -> dict[tuple,float]:
@@ -180,8 +180,8 @@ def extract_bicompos(text: str) -> dict[tuple,float]:
     alph, df, p = 0.0005, 1, 12.116
     comp2 = {}
     for i in bigrams:
-        if search_bi(text, i) > p:
-            comp2[i] = search_bi(text, i)
+        if SearchBigramUnit(text, i) > p:
+            comp2[i] = SearchBigramUnit(text, i)
     comp2 = SortDict(comp2)
     comad = [i[0] + ", " + i[1] for i in comp2]
     comad = [i for i in comad if i in text]
@@ -199,8 +199,8 @@ def extract_tricompos(text: str) -> dict[tuple, float]:
     alph, df, p = 0.0005, 1, 12.116
     comp3 = {}
     for i in trigrams:
-        if search_tri(text, i) > p:
-            comp3[i] = search_tri(text, i)
+        if SearchTrigramUnit(text, i) > p:
+            comp3[i] = SearchTrigramUnit(text, i)
     comp3 = SortDict(comp3)
     comp3 = {i : Chi2Confidence(comp3[i]) for i in comp3}
     return comp3
