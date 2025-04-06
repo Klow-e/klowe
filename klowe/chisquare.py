@@ -171,7 +171,7 @@ def SearchTrigramUnit(text: str, query: tuple[str]) -> float:
 # print(SearchTrigramUnit("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white", ("snow", "super", "white")))
 
 
-def extract_bicompos(text: str) -> dict[tuple,float]:
+def ExtractBigramCompositions(text: str) -> dict[tuple, float]:
     T = tokenization(text)
     bigrams = NGrams(T, 2)
     bigrams = [i for i in bigrams if i[0] not in stop_words]
@@ -189,10 +189,10 @@ def extract_bicompos(text: str) -> dict[tuple,float]:
     comp2 = {i : comp2[i] for i in comp2 if i not in comad}
     comp2 = {i : Chi2Confidence(comp2[i]) for i in comp2}
     return comp2
-# print(extract_bicompos("snow white a snow white b snow white c snow white d snow white e snow white f snow white"))
+# print(ExtractBigramCompositions("snow white a snow white b snow white c snow white d snow white e snow white f snow white"))
 
 
-def extract_tricompos(text: str) -> dict[tuple, float]:
+def ExtractTrigramCompositions(text: str) -> dict[tuple, float]:
     T = tokenization(text)
     bigrams = NGrams(T, 2)
     trigrams = NGrams(T, 3)
@@ -204,7 +204,7 @@ def extract_tricompos(text: str) -> dict[tuple, float]:
     comp3 = SortDict(comp3)
     comp3 = {i : Chi2Confidence(comp3[i]) for i in comp3}
     return comp3
-# print(extract_tricompos("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white"))
+# print(ExtractTrigramCompositions("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white"))
 
 
 ###############################################################################################

@@ -122,8 +122,8 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > SearchBigramUnit(str, tuple[str]) -> float        == search on a dirty text for a given bigram composition ("A", "B")
 > SearchTrigramUnit(str, tuple[str]) -> float       == search on a dirty text for a given trigram composition ("A", "B", "C")
 
-> extract_bicompos("<text>") -> dict[tuple, float]  == extract from a dirty text probable bigram compositions
-> extract_tricompos("<text>") -> dict[tuple, float] == extract from a dirty text probable trigram compositions
+> ExtractBigramCompositions(str) -> dict[tuple,fl]  == extract from a dirty text probable bigram compositions
+> ExtractTrigramCompositions(str) -> dict[tuple,fl] == extract from a dirty text probable trigram compositions
 ```
 
 
