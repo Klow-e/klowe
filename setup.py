@@ -37,6 +37,7 @@ setup(
 
 # Clean Code Principles
 # # The code should explain itself
+# # The code should be type annotated
 # # The code should be beautiful and regular
 # # The code should be simple and easy
 # # The code should be explicit and flat
