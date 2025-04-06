@@ -9,7 +9,6 @@
 from .textprocessor import *
 from .pythontools import *
 
-import scipy.stats as stats
 import numpy as np
 import math
 import operator
@@ -28,8 +27,6 @@ def Chi2(a: int, b: int, c: int) -> float:
 
 
 def Chi2Confidence(chi: float) -> float:
-#    conlvl: float = round(1-(1-stats.chi2.cdf(chi,1)), 4)
-#    return conlvl
     match chi:
         case x if 00.05 <= x < 00.10: return 0.1
         case x if 00.10 <= x < 00.15: return 0.2

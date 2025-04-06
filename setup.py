@@ -19,7 +19,6 @@ setup(
         "setuptools",
         "unidecode",
         "numpy",
-        "scipy",
         "requests",
         "bs4",
         "matplotlib",
