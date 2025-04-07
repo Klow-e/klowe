@@ -58,7 +58,7 @@ def WikiArticle(title: str) -> str:
 
 def CleanTextFile(text: str) -> list[str]:
     text_l: list[str] = [i for i in text.split('\n')]
-    text_l: list[str] = [i for i in text_l if len(i) > 3]
+    # text_l: list[str] = [i for i in text_l if len(i) > 3]
     text_l: list[str] = [i for i in text_l if not contains(i, "_full_")]
     return text_l
 
