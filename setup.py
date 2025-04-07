@@ -52,9 +52,4 @@ setup(
 # # comment with ''' ''' function descriptions
 # # add chi^2 to theory
 # # create hebrew & greek parser
-
-# create bootcat clone
-# # Tuple generator
-# # lang detection with stopwords and html
-# # 
-
+# # BootCat clone, detect language with stopwords

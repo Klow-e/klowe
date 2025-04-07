@@ -16,6 +16,8 @@ import requests
 import os
 import operator
 from operator import *
+import itertools
+from itertools import *
 
 
 ###############################################################################################
