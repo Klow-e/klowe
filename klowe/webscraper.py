@@ -18,6 +18,7 @@ import operator
 from operator import *
 import itertools
 from itertools import *
+import logging
 
 
 ###############################################################################################
@@ -89,6 +90,7 @@ def file_to_text(file_path: str) -> list[str]:
         os.remove('pdf_bytes')
         return text
     
+    logging.getLogger('pdfminer').setLevel(logging.ERROR)
     if file_path.endswith(".html"): return html_text(file_path)
     elif file_path.endswith(".pdf"): return pdf_text(file_path)
     else: raise Exception(f"Invalid file type: {file_path}. Try PDF or HTML")
