@@ -50,7 +50,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 ## WebScraper
 ```
 > WebPage("<URL>") -> str                           == extracts somewhat clean text from an URL
-> PDFtext("<name>", "<url>") -> str                 == extracts somewhat clean text from an URL to a PDF
+> PDFtext("<URL>") -> str                           == extracts somewhat clean text from an URL to a PDF
 > WikiArticle("<title>") -> str                     == extracts text from a wikipedia title
 > search_engine("<URL>") -> list[str]               == extracts links in a webpage
 > CleanTextFile(str) -> list[str]                   == cleans a extracted text into a list of lines
