@@ -69,14 +69,29 @@ def search_engine(url: str) -> list[str]:
         return [url, ]
 
 
-###############################################################################################
+def file_to_text(file_path: str) -> list[str]:
 
+    def html_text(file_path: str) -> list[str]:
+        with open(file_path, 'r', encoding='utf-8', errors='ignore') as html:  
+            soup = BeautifulSoup(html.read(), 'html.parser')
+        text = soup.find_all('p')
+        text = "\n".join([p.text for p in text])
+        text = [j for j in [i.strip() for i in text.split("\n")] if j != ""]
+        return text
 
-def CleanTextFile(text: str) -> list[str]:
-    text_l: list[str] = [i for i in text.split('\n')]
-    # text_l: list[str] = [i for i in text_l if len(i) > 3]
-    text_l: list[str] = [i for i in text_l if not contains(i, "_full_")]
-    return text_l
+    def pdf_text(file_path: str) -> list[str]:
+        with open(file_path, 'rb') as pdf:  
+            with open('pdf_bytes', 'wb') as fl:
+                fl.write(pdf.read())
+        text = extract_text('pdf_bytes').split("\n")
+        text = "\n".join([i.strip() for i in text])
+        text = [j for j in [i.strip() for i in text.split("\n")] if j != ""]
+        os.remove('pdf_bytes')
+        return text
+    
+    if file_path.endswith(".html"): return html_text(file_path)
+    elif file_path.endswith(".pdf"): return pdf_text(file_path)
+    else: raise Exception(f"Invalid file type: {file_path}. Try PDF or HTML")
 
 
 ###############################################################################################
