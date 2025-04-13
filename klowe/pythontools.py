@@ -6,6 +6,8 @@
 ###############################################################################################
 
 
+import os
+import shutil
 import math
 import operator
 from collections import Counter
@@ -42,6 +44,16 @@ def NGrams(Tok: list, n: int) -> list[tuple]:
     ngrams = [tuple(Tok[i: i + n]) for i in range(len(Tok) - n + 1)]
     return ngrams
 # print(NGrams([1, 2, 3, 4, 5], 2))
+
+
+###############################################################################################
+
+
+def RemoveFolder(name: str) -> None:
+    if os.path.exists(name):
+        shutil.rmtree(name)
+    if os.path.exists(f"{name}.zip"):
+        os.remove(f"{name}.zip")
 
 
 ###############################################################################################
