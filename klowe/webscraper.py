@@ -114,7 +114,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     Works fine on UNIX-based file systems, may fail on Windows.
     """
 
-    if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with set_language()")
+    if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with set_language() as 'es', 'en'...")
     if len(seeds := [f"%22{i}%22" for i in query_terms]) < 3: raise Exception(f"Must add at least 3 seeds to input_seeds()")
     search_tuples: list[str] = ["+".join(i).replace(" ", "+") for i in list(combinations(seeds, 3))]
 
@@ -160,7 +160,8 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
                                 "http://angelfire", "https://mastodon", "https://x.com", "https://www.jovenclub", "https://www.lycos.com",
                                 "https://search3", "https://search1", "https://docencia.tic.unam", "https://search4", "https://search.",
                                 "https://eu1-browse", "https://eu2-browse", "https://www2.feandalucia", "https://www.ecured.cu",
-                                "https://registration.",)
+                                "https://registration.", "https://www.lavozdigital.", "https://www.centraldereservas.", "https://www.abc.",
+                                "https://www.trainvelling.com", "https://www.getyourguide", "https://www.renfe", "https://www.tripadvisor.",)
     clean_urls: list[str] = list(set([i for i in clean_urls if not i.startswith(exclude_domains)]))
     with open(f"{project_name}/cleaned_links.txt", "w") as fl: fl.write("\n".join(clean_urls))
 
