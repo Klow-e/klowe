@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "KlowE",
-    version = "0.2.3",
+    version = "1.0.0",
     description = "Python package for NLP",
     author = "Chloe Carral Bustillo",
     author_email = "chloevampi01@gmail.com",
@@ -32,6 +32,7 @@ setup(
 #        "json",
 #        "datetime",
 #        "logging",
+#        "shutil",
     ],
 )
 
@@ -53,4 +54,4 @@ setup(
 # # comment with ''' ''' function descriptions
 # # add chi^2 to theory
 # # create hebrew & greek parser
-# # BootCat clone, detect language with stopwords
+

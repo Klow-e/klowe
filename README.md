@@ -54,6 +54,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > WikiArticle("<title>") -> str                     == extracts text from a wikipedia title
 > search_engine("<URL>") -> list[str]               == extracts links in a webpage
 > file_to_text(file_path: str) -> list[str]         == extracts text from a PDF or HTML file
+> KWebScrap("<project>", tuple[str, ...])           == from a tuple of queries scraps the web and builds a corpus
 ```
 
 
