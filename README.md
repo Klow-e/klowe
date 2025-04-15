@@ -158,8 +158,14 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> Degree of belief in a proposition independent of other external information.
 >>    * $P(ω) = P(ω)/Ω$
 >
+> _**Combined Probability**_
+>> Probability of two events happening at once.
+>>    * $P(a) \text{ or } P(b)  = P(a) + P(b)$
+>>    * $P(a) \text{ and } P(b)  = P(a) \cdot P(b)$
+>
 > _**Conditional Probability**_
 >> Degree of belief in a proposition given already revealed evidence.
+>>    * $P(a|b) = P(a \cdot b) / P(b)$
 
 
 
