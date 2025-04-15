@@ -146,13 +146,31 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 # Theory
 
 
+## Probability
+>
+> * **ω:** a possible world, one result of an experiment.
+> * **P(ω):** probability of a particular possible world.
+>     * $0 ≤ P(ω) ≤ 1 $
+> * **Ω:** set of every possible world, all results of an experiment.
+>     * $\sum\limits_{ω∈Ω} P(ω) = 1$
+>
+> _**Unconditional Probability**_
+>> Degree of belief in a proposition independent of other external information.
+>>    * $P(ω) = P(ω)/Ω$
+>
+> _**Conditional Probability**_
+>> Degree of belief in a proposition given already revealed evidence.
+
+
+
+
 ## Linear Space
 >
 > Structure consisting of a set of points and the possible relaions between them.
 > * **Scalar:** simple quantity expressed as a single number.
-> * **Vector:** complex quantity expressed as a 1D array of numbers
-> * **Matrix:** complex quantity expressed as a 2D table of numbers
-> * **Tensor:** complex quantity expressed as an nD space of numbers
+> * **Vector:** complex quantity expressed as a 1D array of numbers.
+> * **Matrix:** complex quantity expressed as a 2D table of numbers.
+> * **Tensor:** complex quantity expressed as an nD space of numbers.
 >
 > _**Cosine Similarity**_
 >> 
@@ -188,7 +206,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $n_t$ : number of documents where term $t$ appears
 >>  
 >> * **Term Frequency:** relative frequency of a term within a document.
->>    * $TF = Σt / d_l$
+>>    * $TF = \sum t/d_l$
 >>  
 >> * **Inverse Document Frequency:** meassure of how informative a term is, downweighting frequent terms. Adding $1$ to each operand is a smoothing strategy to counter division by $0$ and edge cases.
 >>    * $sIDF = log_2( N + 1 / n_t + 1 )$
