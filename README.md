@@ -161,8 +161,8 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> Degree of belief in a proposition independent of other external information.
 >>    * $P(a) = P(a)/A$
 >>    * $P(\overline{a}) = 1 - P(a)$
->>    * $P(a) \text{ and } P(b)  = P(a) \cdot P(b)$
->>    * $P(a) \text{ or } P(b)  = P(a) + P(b)$
+>>    * $P(a) \text{ and } P(b) = P(a, b) = P(a) \cdot P(b)$
+>>    * $P(a) \text{ or } P(b) = P(a) + P(b)$
 >>    * $P(a) \text{ xor } P(b) = P(a + b) - P(a \cdot b)$
 >
 > _**Conditional Probability**_
@@ -175,11 +175,29 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 > _**Probability Distribution**_
 >> Table of probabilities associated with each value a variable can take.
->>    * $\mathbb{P}(A) = \text{<}0.6, 0.3, 0.1\text{>} = $
+>>    * $\mathbb{P}(\bold{A}) = \left< 0.6, 0.3, 0.1 \right> = $
 >>      * $P(A = a_i) = 0.6$
 >>      * $P(A = a_j) = 0.3$
 >>      * $P(A = a_k) = 0.1$
 >
+> _**Joint Probability**_
+>> A Probability Distribution of multiple events at once.
+>>
+>> |       	            | $B = b$ 	    | $B = \overline{b}$    |                       |
+>> |--------------------|---------------|-----------------------|-----------------------|
+>> | $A = a$ 	        | $0.08$  	    | $0.32$  	            | $a = 0.4$             |
+>> | $A = \overline{a}$ | $0.02$  	    | $0.58$  	            | $\overline{a} = 0.6$  |
+>> |       	            | $b = 0.1$     | $\overline{b} = 0.9$  | $1$                   |
+>>
+>> * $\mathbb{P}$: Probability Distribution
+>> * $\bold{A}$: Probability Distribution of Random Variable
+>> * $A$: Random Vatiable
+>> * $a$: Value
+>> * $\alpha$: Normalization Factor
+>>
+>> $\mathbb{P}(\bold{A}|b) = P(A, b) / P(b) = \alpha P(A, b) = \alpha \left< 0.08, 0.02\right> = \left< 0.8, 0.2\right> $
+
+
 
 ### Bayesian Network
 >
