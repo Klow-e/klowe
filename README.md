@@ -250,6 +250,14 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > | $c$                         | $0.9$     | $0.1$         | 1             |
 > | $\overline{c}$              | $0.6$     | $0.4$         | 1             |
 >
+> $P(a_2, \overline{b}) = P(a_2) \cdot P(\overline{b}|a_2)$
+>
+> $P(a_2, \overline{b}, \overline{c}) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b})$
+>
+> $P(a_2, \overline{b}, \overline{c}, d) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b}) \cdot P(d|\overline{c})$
+>
+> $\mathbb{P}(\mathbb{D}|a_2,\overline{b}) = \alpha \mathbb{P}(\mathbb{D}, a_2, \overline{b}) = \alpha [\mathbb{P}(\mathbb{D}, a_2, \overline{b}, c) + \mathbb{P}(\mathbb{D}, a_2, \overline{b}, \overline{c})]$
+>
 
 
 ## Linear Space
