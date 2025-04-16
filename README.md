@@ -146,12 +146,33 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 # Theory
 
 
+## Arithmetics
+>
+
+### Linear Programming
+>
+
+### Linear Space
+>
+> Structure consisting of a set of points and the possible relaions between them.
+> * **Scalar:** simple quantity expressed as a single number.
+> * **Vector:** complex quantity expressed as a 1D array of numbers.
+> * **Matrix:** complex quantity expressed as a 2D table of numbers.
+> * **Tensor:** complex quantity expressed as an nD space of numbers.
+>
+> _**Cosine Similarity**_
+>> 
+>
+> _**Euclidean Distance**_
+>> 
+
+
 ## Probability
 >
-> * **ω:** a possible world, one result of an experiment.
-> * **P(ω):** probability of a particular possible world.
+> * $ω$: a possible world, one result of an experiment.
+> * $P(ω)$: probability of a particular possible world.
 >     * $0 ≤ P(ω) ≤ 1 $
-> * **Ω:** set of every possible world, all results of an experiment.
+> * $Ω$: set of every possible world, all results of an experiment.
 >     * $\sum\limits_{ω \in Ω} P(ω) = 1$
 >
 > _**Random Variable**_
@@ -260,19 +281,24 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 
 
-## Linear Space
+## Artificial Intelligence
 >
-> Structure consisting of a set of points and the possible relaions between them.
-> * **Scalar:** simple quantity expressed as a single number.
-> * **Vector:** complex quantity expressed as a 1D array of numbers.
-> * **Matrix:** complex quantity expressed as a 2D table of numbers.
-> * **Tensor:** complex quantity expressed as an nD space of numbers.
+> * **Agent:** entity that percives and acts upon its enviroment.
+> * **State:** A particular configuration of the Agent in its enviroment.
+> * **Initial State:** the State from where the Agent begins.
+> * **Goal State:** desired final State.
+
+### Neuronal Network
 >
-> _**Cosine Similarity**_
->> 
+> Machine Learning non-linear function based on interconnected nodes.
+> * $M$: size of training set.
+> * $n$: ammount of input variables.
+> * $L$: ammount of layers.
+> * $l$: specific layer.
+> * $W^l$: weights for layer $l$.
+> * $b^l$: bias for layer $l$.
+> * $x_i$: single input variable.
 >
-> _**Euclidean Distance**_
->> 
 
 
 ## Distributional Semantics
