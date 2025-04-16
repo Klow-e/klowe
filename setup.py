@@ -44,6 +44,7 @@ setup(
 # # The code should be simple and easy
 # # The code should be explicit and flat
 # # The code should be defensive and errors be managed
+# # The coude should ask forgiveness, not permission
 # # A function should only do one thing only
 # # One thing is when no other meaningful function can be extracted
 # # If the implementation is hard to explain, it's a bad idea
