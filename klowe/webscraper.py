@@ -34,9 +34,14 @@ def WebPage(url: str) -> str:
         paragraphs = [p.text for p in paragraphs]
         paragraphs = " ".join(paragraphs)
         return paragraphs
+    elif response.status_code == 429:
+        print(f"Error '429 Too Many Requests' at '{url = }'")
+        print(f" The function will return str('no') for pipelining purposes and wait for 10 seconds to not stress the API.")
+        time.sleep(10)
+        return "no"
     else:
-        print(f"Unacceptable response '{response.status_code}' at '{url = }' The function will return 'no' for pipelining purposes.")
-        time.sleep(2)
+        print(f"Unacceptable response '{response.status_code}' at '{url = }'")
+        print(f" The function will return str('no') for pipelining purposes")
         return "no"
 
 
