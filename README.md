@@ -147,9 +147,11 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 
 ## Arithmetics
+> Science of quantities and operations with them.
 >
 
 ### Linear Programming
+> 
 >
 
 ### Linear Space
