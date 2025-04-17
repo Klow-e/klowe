@@ -33,7 +33,6 @@ def WebPage(url: str) -> str:
         paragraphs = soup.find_all('p')
         paragraphs = [p.text for p in paragraphs]
         paragraphs = " ".join(paragraphs)
-        time.sleep(1)
         return paragraphs
     elif response.status_code == 429:
         print(f"Error '429 Too Many Requests' at '{url = }'")
@@ -61,6 +60,7 @@ def WikiArticle(title: str) -> str:
     lang: str = "".join(KLanguage)
     title: str = title.replace(" ", "_")
     url = f"https://{lang}.wikipedia.org/wiki/{title}"
+    time.sleep(1)
     WT: str = WebPage(url)
     return WT
 
