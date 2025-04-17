@@ -147,16 +147,40 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 
 ## Arithmetics
+>
 > Science of quantities and operations with them.
+>
+> * **Quantity:** anything admitting of increasing or decreasing.
+>    * **Continious:** cannot be segmented.
+>        * **Nominal:** unordered categories without distance, like colors.
+>        * **Ordinal:** ordered undivisible ranking, like lists.
+>    * **Discrete:** consisting of segmentable parts.
+>        * **Interval:** data with relative divisible distances, like temperature.
+>        * **Ratio:** cardinal count with true zero, like volume.
+> * **Measure:** comparing a Quantity to another known one of the same kind.
+> * **Unit:** base Quantity used to Meassure others of its kind.
+> * **Complex Number:** multi-dimensional Quantity not representable by just one Number at once.
+> * **Real Number:** representation of a Quantity as relation to the Unit.
+>    * **Transcendental:** not obtainable by Polynomial Equations, like $e$.
+>        * **Uncomputable:** not obtainable by Computation, like $\Omega$.
+>        * **Computable:** obtainable by Algorithmic Computation, like $e$.
+>    * **Algebraic:** obtainable by Polynomial Equations, like $\sqrt[3]{2}$.
+>        * **Constructable:** obtainable in a Cartesian Plane, like $\sqrt{2} $.
+>        * **Rational:** ratios to the Unit, like $\frac{5}{4}$.
+>        * **Integerns:** obtainable by stacking or removing Units, like $-3$.
+>        * **Whole:** obtainable by stacking Units or its absence, like $0$.
+>        * **Natural:** obtainable by stacking Units, like $2$.
 >
 
 ### Linear Programming
 > 
 >
+>
 
 ### Linear Space
 >
 > Structure consisting of a set of points and the possible relaions between them.
+>
 > * **Scalar:** simple quantity expressed as a single number.
 > * **Vector:** complex quantity expressed as a 1D array of numbers.
 > * **Matrix:** complex quantity expressed as a 2D table of numbers.
@@ -273,13 +297,13 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > | $c$                         | $0.9$     | $0.1$         | 1             |
 > | $\overline{c}$              | $0.6$     | $0.4$         | 1             |
 >
-> $P(a_2, \overline{b}) = P(a_2) \cdot P(\overline{b}|a_2)$
+> * $P(a_2, \overline{b}) = P(a_2) \cdot P(\overline{b}|a_2)$
 >
-> $P(a_2, \overline{b}, \overline{c}) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b})$
+> * $P(a_2, \overline{b}, \overline{c}) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b})$
 >
-> $P(a_2, \overline{b}, \overline{c}, d) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b}) \cdot P(d|\overline{c})$
+> * $P(a_2, \overline{b}, \overline{c}, d) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b}) \cdot P(d|\overline{c})$
 >
-> $\mathbb{P}(\mathbb{D}|a_2,\overline{b}) = \alpha \mathbb{P}(\mathbb{D}, a_2, \overline{b}) = \alpha [\mathbb{P}(\mathbb{D}, a_2, \overline{b}, c) + \mathbb{P}(\mathbb{D}, a_2, \overline{b}, \overline{c})]$
+> * $\mathbb{P}(\mathbb{D}|a_2,\overline{b}) = \alpha \mathbb{P}(\mathbb{D}, a_2, \overline{b}) = \alpha [\mathbb{P}(\mathbb{D}, a_2, \overline{b}, c) + \mathbb{P}(\mathbb{D}, a_2, \overline{b}, \overline{c})]$
 >
 
 ### Chi-Squared Distribution
@@ -323,9 +347,11 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > _**Chi-Squared Test**_
 >> Test to (dis)prove the Null Hypothesis, determining how probable it is that two events occur simultaneously by chance alone.
 >> To disprove the Null Hypothesis means to conclude that the distribution of two simultaneous events is not explicable by pure chance, but are conditioned.
+>>
 >> * $\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$
 >>    * $O_i$: observed values in the Contingency Table.
 >>    * $E_i$: expected values assuming the Null Hypothesis
+>>
 >> * $\chi^2_{(df=1)} = \frac{α-E_α}{E_α} + \frac{β-E_β}{E_β} + \frac{γ-E_γ}{E_γ} + \frac{δ-E_δ}{E_δ} = \frac{(α+β+γ+δ)(αδ-βγ)^2}{(α+β)(γ+δ)(α+γ)(β+δ)}$
 >>    * $E_α = \frac{(α+β)(α+γ)}{N}$
 >>    * $E_β = \frac{(α+β)(β+δ)}{N}$
@@ -340,10 +366,12 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > * **State:** A particular configuration of the Agent in its enviroment.
 > * **Initial State:** the State from where the Agent begins.
 > * **Goal State:** desired final State.
+>
 
 ### Neural Network
 >
 > Machine Learning non-linear function based on interconnected nodes.
+>
 > * $M$: size of training set.
 > * $n$: ammount of input variables.
 > * $L$: ammount of layers.
@@ -391,7 +419,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>  
 >> * _**Term Frequency - Inverse Document Frequency:**_ Weighting model based on how informative a term is in a collection of texts. A high weight means high frequency in the document and low frequency in other documents, thus that word would identify said document against the corpus.
 >>    * $TF.IDF = TF * IDF$
->>  
+>
 
 
 ## Frame Semantics
