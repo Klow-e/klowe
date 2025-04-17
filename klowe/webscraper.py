@@ -33,11 +33,12 @@ def WebPage(url: str) -> str:
         paragraphs = soup.find_all('p')
         paragraphs = [p.text for p in paragraphs]
         paragraphs = " ".join(paragraphs)
+        time.sleep(1)
         return paragraphs
     elif response.status_code == 429:
         print(f"Error '429 Too Many Requests' at '{url = }'")
-        print(f" The function will return str('no') for pipelining purposes and wait for 10 seconds to not stress the API.")
-        time.sleep(10)
+        print(f" The function will return str('no') for pipelining purposes and wait for 9 seconds to not stress the API.")
+        time.sleep(9)
         return "no"
     else:
         print(f"Unacceptable response '{response.status_code}' at '{url = }'")
