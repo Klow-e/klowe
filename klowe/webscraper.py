@@ -33,7 +33,9 @@ def WebPage(url: str) -> str:
         paragraphs = [p.text for p in paragraphs]
         paragraphs = " ".join(paragraphs)
         return paragraphs
-    else: raise Exception(f"Not found {url = }")
+    else:
+        print(f"Not found {url = }")
+        return "no"
 
 
 def PDFtext(url: str):

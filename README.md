@@ -316,7 +316,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> * $b = (α+γ)$ 
 >> * $\overline{b} = (β+δ)$
 >> * $N = α+β+γ+δ$
->> * $δ = N-α+β+γ$
+>> * $δ = N-α-β-γ$
 >
 > _**Chi-Squared Test**_
 >> Test to (dis)prove the Null Hypothesis, determining how probable it is that two events occur simultaneously by chance alone.
