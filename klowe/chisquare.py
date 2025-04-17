@@ -17,10 +17,9 @@ import operator
 ###############################################################################################
 
 
-def Chi2(a: int, b: int, c: int) -> float:
-    d = a+b+c
-    chi_num = 2*d*((a*d-b*c)**2)
-    chi_den = (d**2-c**2)*(d**2-b**2)
+def Chi2(a: int, b: int, c: int, d: int) -> float:
+    chi_num = (a+b+c+d)*(ad-bc)*(ad-bc)
+    chi_den = (a+b)*(c+d)*(a+c)*(b+d)
     if chi_num == 0: chi = 0
     else: chi = chi_num / chi_den
     return round(chi, 6)
@@ -151,7 +150,8 @@ def SearchBigramUnit(text: str, query: tuple[str]) -> float:
     a: int = bigrams.count((A, B))
     b: int = T.count(A)-a
     c: int = T.count(B)-a
-    chi: float = Chi2(a, b, c)
+    d: int = (len(bigrams)+1) - (a+b+c)
+    chi: float = Chi2(a, b, c, d)
     return chi
 # print(SearchBigramUnit("snow white a snow white b snow white c snow white d snow white e snow white f snow white", ("snow", "white")))
 
@@ -166,6 +166,7 @@ def SearchTrigramUnit(text: str, query: tuple[str]) -> float:
     a: int = trigrams.count((A, B, C))
     b: int = bigrams.count((A, B))-a
     c: int = bigrams.count((B, C))-a
+    d: int = (len(trigrams)+1) - (a+b+c)
     chi: float = Chi2(a, b, c)
     return chi
 # print(SearchTrigramUnit("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white", ("snow", "super", "white")))

@@ -53,6 +53,5 @@ setup(
 # ToDo:
 # # capitalize textprocessor functions
 # # comment with ''' ''' function descriptions
-# # add chi^2 to theory
 # # create hebrew & greek parser
 

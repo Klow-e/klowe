@@ -315,8 +315,8 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> * $\overline{a} = (γ+δ)$
 >> * $b = (α+γ)$ 
 >> * $\overline{b} = (β+δ)$
->> * $δ = α+β+γ$
 >> * $N = α+β+γ+δ$
+>> * $δ = N-α+β+γ$
 >
 > _**Chi-Squared Test**_
 >> Test to (dis)prove the Null Hypothesis, determining how probable it is that two events occur simultaneously by chance alone.
@@ -324,7 +324,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> * $\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$
 >>    * $O_i$: observed values in the Contingency Table.
 >>    * $E_i$: expected values assuming the Null Hypothesis
->> * $\chi^2_{(df=1)} = \frac{α-E_α}{E_α} + \frac{β-E_β}{E_β} + \frac{γ-E_γ}{E_γ} + \frac{δ-E_δ}{E_δ} = \frac{2d(ad-bc)^2}{(d^2-c^2)(d^2-b^2)}$
+>> * $\chi^2_{(df=1)} = \frac{α-E_α}{E_α} + \frac{β-E_β}{E_β} + \frac{γ-E_γ}{E_γ} + \frac{δ-E_δ}{E_δ} = \frac{(α+β+γ+δ)(αδ-βγ)^2}{(α+β)(γ+δ)(α+γ)(β+δ)}$
 >>    * $E_α = \frac{(α+β)(α+γ)}{N}$
 >>    * $E_β = \frac{(α+β)(β+δ)}{N}$
 >>    * $E_γ = \frac{(γ+δ)(α+γ)}{N}$
