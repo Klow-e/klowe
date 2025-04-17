@@ -65,7 +65,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > legal_characters: str                             == string of allowed characters in spa + ita orthography
 > stop_words: list[str]                             == list of stopwords (esp + ita)
 
-> set_language("<es>")                              == sets language for stopwords and wikipedia
+> set_language("<es>")                              == sets language for stopwords and webpages
 > clean_text("<text>") -> str                       == normalizes text
 
 > sentence_tokenization("<text>") -> lisr[str]      == separates text by sentence

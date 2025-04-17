@@ -74,6 +74,7 @@ def set_language(lang: str):
     stop_words.clear()
     stop_words.extend(universal_stopwords)
     match lang:
+        case "": pass
         case "es": stop_words.extend(es_stopwords)
         case "it": stop_words.extend(it_stopwords)
         case "en": stop_words.extend(en_stopwords)
@@ -82,11 +83,12 @@ def set_language(lang: str):
     legal_characters.clear()
     legal_characters.extend(latin_characters)
     match lang:
+        case "": pass
         case "es": legal_characters.extend(es_characters)
         case "it": legal_characters.extend(it_characters)
         case "en": legal_characters.extend(en_characters)
         case "fr": legal_characters.extend(fr_characters)
-        case _: print(f"Pick 'es', 'it', 'en', or 'fr'.")
+        case _: print(f"Pick 'es', 'it', 'en', 'fr', or empty string '' to set to general case.")
     return KLanguage
 
 
