@@ -148,7 +148,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ## Arithmetics
 >
-> Science of quantities and operations with them.
+> Science of quantities and their operations.
 >
 > * **Quantity:** anything admitting of increasing or decreasing.
 >    * **Continious:** cannot be segmented.
@@ -174,7 +174,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ### Linear Programming
 > 
->
+> Algebraic technique for optimizing a Cost Function subject to Constraints.
 >
 
 ### Linear Space
@@ -191,6 +191,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 > _**Euclidean Distance**_
 >> 
+>
 
 
 ## Probability
