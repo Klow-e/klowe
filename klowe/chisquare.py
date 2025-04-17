@@ -167,7 +167,7 @@ def SearchTrigramUnit(text: str, query: tuple[str]) -> float:
     b: int = bigrams.count((A, B))-a
     c: int = bigrams.count((B, C))-a
     d: int = (len(trigrams)+1) - (a+b+c)
-    chi: float = Chi2(a, b, c)
+    chi: float = Chi2(a, b, c, d)
     return chi
 # print(SearchTrigramUnit("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white", ("snow", "super", "white")))
 
