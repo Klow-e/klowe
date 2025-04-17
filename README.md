@@ -180,7 +180,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 > _**Unconditional Probability**_
 >> Degree of belief in a proposition independent of other external information.
->>    * $P(a) = P(a)/A$
+>>    * $P(a) = \frac{P(a)}{A}$
 >>    * $P(\overline{a}) = 1 - P(a)$
 >>    * $P(a) \text{ and } P(b) = P(a, b) = P(a) \cdot P(b)$
 >>    * $P(a) \text{ or } P(b) = P(a) + P(b)$
@@ -189,10 +189,10 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > _**Conditional Probability**_
 >> Degree of belief in a proposition given already revealed evidence.
 >>    * $P(a|b) = P(a \cdot b) / P(b)$
->>    * $P(\overline{a}|b) = [P(b|\overline{a}) \cdot P(\overline{a})] / P(b)$
+>>    * $P(\overline{a}|b) = \frac{P(b|\overline{a}) \cdot P(\overline{a})}{P(b)}$
 >>
 >>    * **Bayes Rule:** Knowing the probability of an effect given a cause being known, we can calculate the probability of the cause ocurring given the effect happening.
->>      * $P(b|a) = [P(a|b) \cdot P(b)] / P(a)$
+>>      * $P(b|a) = \frac{P(a|b) \cdot P(b)}{P(a)}$
 >>
 >>    * **Marginalization:** $P(a) = P(a, b) + P(a, \overline{b})$
 >>      * $P(X = x_i) = \sum\limits_{j} P(X=x_i , Y = y_j)$
@@ -221,7 +221,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> * $a$: Value
 >> * $\alpha$: Normalization Factor
 >>
->> $\mathbb{P}(\mathbb{A}|b) = P(A, b) / P(b) = \alpha P(A, b) = \alpha \left< 0.08, 0.02\right> = \left< 0.8, 0.2\right> $
+>> $\mathbb{P}(\mathbb{A}|b) = \frac{P(A, b)}{P(b)} = \alpha P(A, b) = \alpha \left< 0.08, 0.02\right> = \left< 0.8, 0.2\right> $
 >
 
 ### Bayesian Network
@@ -284,14 +284,26 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 > Statistical distribution of a Contingency Table of Random Variables.
 >
-> _**Degrees of Freedom**_
->> Description of the parameters of a Contingency Table necessary for Chi-Squared calculations.
->> * $d.f. = (M-1) \cdot (N-1)$
->>    * $M$: number of rows.
->>    * $N$: number of columns.
+> * **Null Hypothesis:** Assumption that a given distribution of two Variables can perfectly be explained by probabilistic chance alone.
+>     * $H_0: P(A|B) = P(A|\overline{B})$
+> * **P-Value:** probability of obtaining a given result or a more extreme one under the Null Hypothesis.
+>     * $p = P[x \leq \chi^2]$
+> * **Significance Level:** degree of certainty in rejecting the Null Hypothesis.
+>     * $p \leq \alpha \implies \overline{H_0}$
+>
+> * **Degrees of Freedom:** Description of the parameters of an $M \cdot N$ Contingency Table necessary for Chi-Squared calculations.
+>     * $d.f. = (M-1) \cdot (N-1)$
 >
 > _**Contingency Table**_
 >> Joint Probability table used in Statistics to plot probabilities of events.
+>>
+>> * $a$: the event $A$ happens.
+>> * $\overline{a}$: the event $A$ doesn't happen.
+>> * $α$: total times $A$ and $B$ happen together.
+>> * $β$: times $A$ happens without $B$ happening.
+>> * $(α+β)$: total times $A$ happens.
+>> * $(γ+δ)$: total times $A$ doesn't happen.
+>> * $N$: total number of things that can happen.
 >>
 >> | $df = 1$              | $B = b$ 	           | $B = \overline{b}$    |            |
 >> |-----------------------|-----------------------|-----------------------|------------|
@@ -306,35 +318,18 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> * $δ = α+β+γ$
 >> * $N = α+β+γ+δ$
 >
-> _**Null Hypothesis**_
->> Assumption that a given distribution of two Variables can perfectly be explained by probabilistic chance alone.
->> * $H_0: P(A|B) = P(A|\overline{B})$
->
 > _**Chi-Squared Test**_
 >> Test to (dis)prove the Null Hypothesis, determining how probable it is that two events occur simultaneously by chance alone.
 >> To disprove the Null Hypothesis means to conclude that the distribution of two simultaneous events is not explicable by pure chance, but are conditioned.
-
-
-```
-
-# A is "the event A happens", A̅ is "the event A doesn't happen". Same for the B.
-# a would be the times A and B happen together, while b would be the times A happens without B happening.
-# c is B happening while A doesn't happen, and d is times neither happen.
-# N is the total number of things that can happen, so N = a + b + c + d.
-# thus, a+c is the total times B happens, as it is the sum of B happens with A, and B happens without A.
-# a+b is total times A happens. b+d is total times B doesn't happen, and c+d is total times A doesn't happen
-
-# using quick maths we can come to the conclussion that the whole table is constructable just by knowing a, b, c
-# this way, to get the result of the chi^2 test, you can use Chi2()
-# Chi2() calculates the chi^2 score of a 1df distribution
-
-confidence level
-# this number is a per one percentage of how sure you can be events A and B occur conjointly more than what would be expected by pure chance
-# the way this function works is that it gets the p-score, which is the opposite of the confidence level
-# the scientific standard to for the confidence level of a chi^2 test at 1df is that it must be over 0.9995
-```
-
-
+>> * $\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$
+>>    * $O_i$: observed values in the Contingency Table.
+>>    * $E_i$: expected values assuming the Null Hypothesis
+>> * $\chi^2_{(df=1)} = \frac{α-E_α}{E_α} + \frac{β-E_β}{E_β} + \frac{γ-E_γ}{E_γ} + \frac{δ-E_δ}{E_δ} = \frac{2d(ad-bc)^2}{(d^2-c^2)(d^2-b^2)}$
+>>    * $E_α = \frac{(α+β)(α+γ)}{N}$
+>>    * $E_β = \frac{(α+β)(β+δ)}{N}$
+>>    * $E_γ = \frac{(γ+δ)(α+γ)}{N}$
+>>    * $E_δ = \frac{(γ+δ)(β+δ)}{N}$
+>
 
 
 ## Artificial Intelligence
@@ -384,13 +379,13 @@ confidence level
 >> $n_t$ : number of documents where term $t$ appears
 >>  
 >> * **Term Frequency:** relative frequency of a term within a document.
->>    * $TF = \sum t/d_l$
+>>    * $TF = \sum \frac{t}{d_l}$
 >>  
 >> * **Inverse Document Frequency:** meassure of how informative a term is, downweighting frequent terms. Adding $1$ to each operand is a smoothing strategy to counter division by $0$ and edge cases.
->>    * $sIDF = log_2( N + 1 / n_t + 1 )$
+>>    * $sIDF = log_2(\frac{N + 1}{n_t + 1})$
 >>  
 >> * **Probabilistic IDF:** takes into account both presence and abscense in documents.
->>    * $pIDF = log_2( N - n_t + 1 / n_t + 1)$
+>>    * $pIDF = log_2(\frac{N - n_t + 1}{n_t + 1})$
 >>  
 >> * _**Term Frequency - Inverse Document Frequency:**_ Weighting model based on how informative a term is in a collection of texts. A high weight means high frequency in the document and low frequency in other documents, thus that word would identify said document against the corpus.
 >>    * $TF.IDF = TF * IDF$
