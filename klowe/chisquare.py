@@ -18,7 +18,7 @@ import operator
 
 
 def Chi2(a: int, b: int, c: int, d: int) -> float:
-    chi_num = (a+b+c+d)*(ad-bc)*(ad-bc)
+    chi_num = (a+b+c+d)*(((a*d)-(b*c))**2)
     chi_den = (a+b)*(c+d)*(a+c)*(b+d)
     if chi_num == 0: chi = 0
     else: chi = chi_num / chi_den
