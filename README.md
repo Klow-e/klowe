@@ -339,7 +339,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > * **Initial State:** the State from where the Agent begins.
 > * **Goal State:** desired final State.
 
-### Neuronal Network
+### Neural Network
 >
 > Machine Learning non-linear function based on interconnected nodes.
 > * $M$: size of training set.

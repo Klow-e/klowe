@@ -20,6 +20,7 @@ import itertools
 from itertools import *
 import logging
 import shutil
+import time
 
 
 ###############################################################################################
@@ -34,7 +35,8 @@ def WebPage(url: str) -> str:
         paragraphs = " ".join(paragraphs)
         return paragraphs
     else:
-        print(f"Not found {url = }")
+        print(f"Unacceptable response '{response.status_code}' at '{url = }' The function will return 'no' for pipelining purposes.")
+        time.sleep(2)
         return "no"
 
 
