@@ -280,6 +280,62 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > $\mathbb{P}(\mathbb{D}|a_2,\overline{b}) = \alpha \mathbb{P}(\mathbb{D}, a_2, \overline{b}) = \alpha [\mathbb{P}(\mathbb{D}, a_2, \overline{b}, c) + \mathbb{P}(\mathbb{D}, a_2, \overline{b}, \overline{c})]$
 >
 
+### Chi-Squared Distribution
+>
+> Statistical distribution of a Contingency Table of Random Variables.
+>
+> _**Degrees of Freedom**_
+>> Description of the parameters of a Contingency Table necessary for Chi-Squared calculations.
+>> * $d.f. = (M-1) \cdot (N-1)$
+>>    * $M$: number of rows.
+>>    * $N$: number of columns.
+>
+> _**Contingency Table**_
+>> Joint Probability table used in Statistics to plot probabilities of events.
+>>
+>> | $df = 1$              | $B = b$ 	           | $B = \overline{b}$    |            |
+>> |-----------------------|-----------------------|-----------------------|------------|
+>> | $A = a$ 	           | $α_{ab} $  	       | $β_{a\overline{b}}$   | $(α+β)$    |
+>> | $A = \overline{a}$    | $γ_{\overline{a}b}$   | $δ_{\overline{ab}}$   | $(γ+δ)$    |
+>> |       	               | $(α+γ)$               | $(β+δ)$               | $N$        |
+>>
+>> * $a = (α+β)$
+>> * $\overline{a} = (γ+δ)$
+>> * $b = (α+γ)$ 
+>> * $\overline{b} = (β+δ)$
+>> * $δ = α+β+γ$
+>> * $N = α+β+γ+δ$
+>
+> _**Null Hypothesis**_
+>> Assumption that a given distribution of two Variables can perfectly be explained by probabilistic chance alone.
+>> * $H_0: P(A|B) = P(A|\overline{B})$
+>
+> _**Chi-Squared Test**_
+>> Test to (dis)prove the Null Hypothesis, determining how probable it is that two events occur simultaneously by chance alone.
+>> To disprove the Null Hypothesis means to conclude that the distribution of two simultaneous events is not explicable by pure chance, but are conditioned.
+
+
+```
+
+# A is "the event A happens", A̅ is "the event A doesn't happen". Same for the B.
+# a would be the times A and B happen together, while b would be the times A happens without B happening.
+# c is B happening while A doesn't happen, and d is times neither happen.
+# N is the total number of things that can happen, so N = a + b + c + d.
+# thus, a+c is the total times B happens, as it is the sum of B happens with A, and B happens without A.
+# a+b is total times A happens. b+d is total times B doesn't happen, and c+d is total times A doesn't happen
+
+# using quick maths we can come to the conclussion that the whole table is constructable just by knowing a, b, c
+# this way, to get the result of the chi^2 test, you can use Chi2()
+# Chi2() calculates the chi^2 score of a 1df distribution
+
+confidence level
+# this number is a per one percentage of how sure you can be events A and B occur conjointly more than what would be expected by pure chance
+# the way this function works is that it gets the p-score, which is the opposite of the confidence level
+# the scientific standard to for the confidence level of a chi^2 test at 1df is that it must be over 0.9995
+```
+
+
+
 
 ## Artificial Intelligence
 >
