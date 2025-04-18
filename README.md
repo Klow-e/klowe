@@ -176,6 +176,8 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > 
 > Algebraic technique for optimizing a Cost Function subject to Constraints.
 >
+> * $b_l \leq \sum\limits_{i} (a_i \cdot x_i) \leq b_u$
+>
 
 ### Linear Space
 >
@@ -244,7 +246,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >> * $\mathbb{P}$: Probability Distribution
 >> * $\mathbb{A}$: Probability Distribution of Random Variable
->> * $A$: Random Vatiable
+>> * $A$: Random Variable
 >> * $a$: Value
 >> * $\alpha$: Normalization Factor
 >>
@@ -306,6 +308,17 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 > * $\mathbb{P}(\mathbb{D}|a_2,\overline{b}) = \alpha \mathbb{P}(\mathbb{D}, a_2, \overline{b}) = \alpha [\mathbb{P}(\mathbb{D}, a_2, \overline{b}, c) + \mathbb{P}(\mathbb{D}, a_2, \overline{b}, \overline{c})]$
 >
+> _**Inference by Enumeration**_
+>> $\mathbb{P}(\mathbb{X}|e) = \alpha \mathbb{P}(\mathbb{X},e) = \alpha \sum\limits_{y} P(X, e, y) $
+>> * $\mathbb{X}$: query variable for which to compute distribution.
+>> * $E$: observed variable of an event.
+>> * $e$: evidence value for $E$
+>> * $Y$: non-evidence non-query hidden variables.
+>
+> _**Rejection Sampling**_
+>> Of a Bayesian Network, picking a bunch of sample queries and using it as a probabilistic model.
+>> * The result for a simple query would be in how many of the samples is the query present.
+>> * The result of a conditional query would be of the samples where the condition is met, in how many is the query present.
 
 ### Chi-Squared Distribution
 >
@@ -317,7 +330,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >     * $p = P[x \leq \chi^2]$
 > * **Significance Level:** degree of certainty in rejecting the Null Hypothesis.
 >     * $p \leq \alpha \implies \overline{H_0}$
->
 > * **Degrees of Freedom:** Description of the parameters of an $M \cdot N$ Contingency Table necessary for Chi-Squared calculations.
 >     * $d.f. = (M-1) \cdot (N-1)$
 >
