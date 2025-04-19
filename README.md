@@ -281,6 +281,68 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $\mathbb{P}(\mathbb{A}|b) = \frac{P(A, b)}{P(b)} = \alpha P(A, b) = \alpha \left< 0.08, 0.02\right> = \left< 0.8, 0.2\right> $
 >
 
+## Bayesian Network
+> Data Structure that represents dependencies among Random Variables.
+> Markov Chain where each node represents a Random Variable with a Probability Distribution conditioned on its Parent Nodes.
+>
+> ```mermaid
+> graph TD;
+>       A["𝔸 {a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>}"]
+>       B["𝔹 {b, b̅}"]
+>       C["ℂ {c, c̅}"]
+>       D["𝔻 {d, d̅}"]
+>
+>       A-->B;
+>       B-->C;
+>       A-->C;
+>       C-->D;
+> ```
+>
+> | $a_1$     | $a_2$ | $a_3$ | $\mathbb{A}$  |
+> |-----------|-------|-------|---------------|
+> | $0.7$     | $0.2$ | $0.1$ | 1             |
+>
+> | $\mathbb{A}$                | $b$       | $\overline{b}$| $\mathbb{B}$  |
+> |-----------------------------|-----------|---------------|---------------|
+> | $a_1$                       | $0.4$     | $0.6$         | 1             |
+> | $a_2$                       | $0.2$     | $0.8$         | 1             |
+> | $a_3$                       | $0.1$     | $0.9$         | 1             |
+>
+> | $\mathbb{A}$| $\mathbb{B}$  | $c$       | $\overline{c}$| $\mathbb{C}$  |
+> |-------------|---------------|-----------|---------------|---------------|
+> | $a_1$       | $b$           | $0.8$     | $0.2$         | 1             |
+> | $a_1$       | $\overline{b}$| $0.9$     | $0.1$         | 1             |
+> | $a_2$       | $b$           | $0.8$     | $0.4$         | 1             |
+> | $a_2$       | $\overline{b}$| $0.7$     | $0.3$         | 1             |
+> | $a_3$       | $b$           | $0.4$     | $0.6$         | 1             |
+> | $a_3$       | $\overline{b}$| $0.5$     | $0.5$         | 1             |
+>
+> | $\mathbb{C}$                | $d$       | $\overline{d}$| $\mathbb{D}$  |
+> |-----------------------------|-----------|---------------|---------------|
+> | $c$                         | $0.9$     | $0.1$         | 1             |
+> | $\overline{c}$              | $0.6$     | $0.4$         | 1             |
+>
+> * $P(a_2, \overline{b}) = P(a_2) \cdot P(\overline{b}|a_2)$
+>
+> * $P(a_2, \overline{b}, \overline{c}) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b})$
+>
+> * $P(a_2, \overline{b}, \overline{c}, d) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b}) \cdot P(d|\overline{c})$
+>
+> * $\mathbb{P}(\mathbb{D}|a_2,\overline{b}) = \alpha \mathbb{P}(\mathbb{D}, a_2, \overline{b}) = \alpha [\mathbb{P}(\mathbb{D}, a_2, \overline{b}, c) + \mathbb{P}(\mathbb{D}, a_2, \overline{b}, \overline{c})]$
+>
+> _**Inference by Enumeration**_
+>> $\mathbb{P}(\mathbb{X}|e) = \alpha \mathbb{P}(\mathbb{X},e) = \alpha \sum\limits_{y} P(X, e, y) $
+>> * $\mathbb{X}$: query variable for which to compute distribution.
+>> * $E$: observed variable of an event.
+>> * $e$: evidence value for $E$
+>> * $Y$: non-evidence non-query hidden variables.
+>
+> _**Rejection Sampling**_
+>> Of a Bayesian Network, picking a bunch of sample queries and using it as a probabilistic model.
+>> * The result for a simple query would be in how many of the samples is the query present.
+>> * The result of a conditional query would be of the samples where the condition is met, in how many is the query present.
+>
+
 ### Chi-Squared Distribution
 >
 > Statistical distribution of a Contingency Table of Random Variables.
@@ -352,68 +414,14 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ### Supervised Machine Learning
 >
-> based on a set of inputs to outputs, map new inputs to outputs.
+> Based on a set of inputs to outputs, map new inputs to outputs.
 >
-> _**Bayesian Network**_
->> Data Structure that represents dependencies among Random Variables.
->> Markov Chain where each node represents a Random Variable with a Probability Distribution conditioned on its Parent Nodes.
->>
->> ```mermaid
->> graph TD;
->>       A["𝔸 {a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>}"]
->>       B["𝔹 {b, b̅}"]
->>       C["ℂ {c, c̅}"]
->>       D["𝔻 {d, d̅}"]
->>
->>       A-->B;
->>       B-->C;
->>       A-->C;
->>       C-->D;
->> ```
->>
->> | $a_1$     | $a_2$ | $a_3$ | $\mathbb{A}$  |
->> |-----------|-------|-------|---------------|
->> | $0.7$     | $0.2$ | $0.1$ | 1             |
->>
->> | $\mathbb{A}$                | $b$       | $\overline{b}$| $\mathbb{B}$  |
->> |-----------------------------|-----------|---------------|---------------|
->> | $a_1$                       | $0.4$     | $0.6$         | 1             |
->> | $a_2$                       | $0.2$     | $0.8$         | 1             |
->> | $a_3$                       | $0.1$     | $0.9$         | 1             |
->>
->> | $\mathbb{A}$| $\mathbb{B}$  | $c$       | $\overline{c}$| $\mathbb{C}$  |
->> |-------------|---------------|-----------|---------------|---------------|
->> | $a_1$       | $b$           | $0.8$     | $0.2$         | 1             |
->> | $a_1$       | $\overline{b}$| $0.9$     | $0.1$         | 1             |
->> | $a_2$       | $b$           | $0.8$     | $0.4$         | 1             |
->> | $a_2$       | $\overline{b}$| $0.7$     | $0.3$         | 1             |
->> | $a_3$       | $b$           | $0.4$     | $0.6$         | 1             |
->> | $a_3$       | $\overline{b}$| $0.5$     | $0.5$         | 1             |
->>
->> | $\mathbb{C}$                | $d$       | $\overline{d}$| $\mathbb{D}$  |
->> |-----------------------------|-----------|---------------|---------------|
->> | $c$                         | $0.9$     | $0.1$         | 1             |
->> | $\overline{c}$              | $0.6$     | $0.4$         | 1             |
->>
->> * $P(a_2, \overline{b}) = P(a_2) \cdot P(\overline{b}|a_2)$
->>
->> * $P(a_2, \overline{b}, \overline{c}) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b})$
->>
->> * $P(a_2, \overline{b}, \overline{c}, d) = P(a_2) \cdot P(\overline{b}|a_2) \cdot P(\overline{c}|a_2,\overline{b}) \cdot P(d|\overline{c})$
->>
->> * $\mathbb{P}(\mathbb{D}|a_2,\overline{b}) = \alpha \mathbb{P}(\mathbb{D}, a_2, \overline{b}) = \alpha [\mathbb{P}(\mathbb{D}, a_2, \overline{b}, c) + \mathbb{P}(\mathbb{D}, a_2, \overline{b}, \overline{c})]$
->>
->> _**Inference by Enumeration**_
->>> $\mathbb{P}(\mathbb{X}|e) = \alpha \mathbb{P}(\mathbb{X},e) = \alpha \sum\limits_{y} P(X, e, y) $
->>> * $\mathbb{X}$: query variable for which to compute distribution.
->>> * $E$: observed variable of an event.
->>> * $e$: evidence value for $E$
->>> * $Y$: non-evidence non-query hidden variables.
->>
->> _**Rejection Sampling**_
->>> Of a Bayesian Network, picking a bunch of sample queries and using it as a probabilistic model.
->>> * The result for a simple query would be in how many of the samples is the query present.
->>> * The result of a conditional query would be of the samples where the condition is met, in how many is the query present.
+
+> _**Nearest Neighbour Classifier**_
+>> a
+>
+> _**K-Nearest Neighbour Classifier**_
+>> a
 >
 
 ### Reinforcement Machine Learning
