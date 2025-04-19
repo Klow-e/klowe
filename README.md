@@ -178,6 +178,34 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 > * $b_l \leq \sum\limits_{i} (a_i \cdot x_i) \leq b_u$
 >
+> Example:
+> * Cost Function: $50x_1 + 80x_2$
+> * Constraint: $5x_1 + 2x_2 \leq 20$
+> * Constraint: $[10x_1 + 12x_2 \geq 90] \cdot -1\implies (-10x_1) + (-12x_2) \leq -90$
+>
+> _**Constraint Satisfaction**_
+>>
+>> * **Set of Variables:** $V\{x_1, x_2, x_3, ...\}$
+>> * **Set of their Domains:** $D\{d_1, d_2, d_3, ...\}$
+>> * **Set of Constraints:** $C\{c_a, c_b, c_c, ...\}$
+>>    * **Soft Constraints:** preferable.
+>>    * **Hard Constraints:** obligatory.
+>>    * **Unary Constraint:** involves just one Variable. $\{A \neq 1\}$
+>>        * **Node Consistency:** all Values in a Variable's Domain satisfy its Unary Constraints.
+>>    * **Binary Constraint:** involves just two Variables. $\{A \neq B\}$
+>>        * **Arc Consistency:** All Values in a Variable's Domain satisfy its Binary Constraints.
+>>
+>> Example: Sudoku
+>> * $V: \{(0,2), (1,1), (1,2), ... \}$
+>> * $D: V\{0-9\}$
+>> * $C: \{(0,2) \neq (1,1) \neq (1,2), ... \}$
+>>
+>> Example: Date
+>> * $V_D: A\{Mon, Tue, Wed\} ; B\{Mon, Tue, Wed\}$
+>> * $C: \{A \neq Mon, B \neq Tue, B \neq Mon, A \neq B \}$
+>> * Node Consistency: $A\{Tue, Wed\} ; B\{Wed\}$
+>> * Arc Consistency: $A\{Tue\} ; B\{Wed\}$
+>
 
 ### Linear Space
 >
