@@ -415,14 +415,34 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 ### Supervised Machine Learning
 >
 > Based on a set of inputs to outputs, map new inputs to outputs.
+> * **Classification:** divides data into binary classes.
+> * **Regression:** predicts the value of an input.
 >
-
 > _**Nearest Neighbour Classifier**_
 >> a
 >
 > _**K-Nearest Neighbour Classifier**_
 >> a
 >
+> _**Support Vector Machine Classifier**_
+>> a
+>
+> _**Random Forest Classifier**_
+>> a
+>
+> _**Naive Bayes Classifier**_
+>> a
+>
+> _**Linear Regression**_
+>> a
+>
+> _**Logistic Regression**_
+>> a
+>
+> _**Random Forest Regression**_
+>> a
+>
+
 
 ### Reinforcement Machine Learning
 >
