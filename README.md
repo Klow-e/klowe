@@ -543,3 +543,39 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> Term = normalization → {coche:sdo},{moto:sdo} → {automovil}
 >
 
+
+## (TGG) Transformational-Generative Grammar
+>
+> A generative formal system as description for natural language.
+>
+> * **(50's, CT) Classical Theory:**
+>    * Phrase Structure Rules
+>    * Transformation Rules
+>    * Deep/Surface Structure
+> * **(60's, ST) Standard Theory:**
+>    * Lexical Insertion Rules
+>    * Subcategorization
+>    * Semantic Interpretation
+>    * Competence/Performance
+> * **(70's, EST) Extended Standard Theory:**
+>    * Trace Theory
+>    * Constraints
+> * **(80's, GB) Goberment and Binding Theory:**
+>    * ~~Rules~~ $\rightarrow$ Principles & Parameters
+>    * P&P Modules:
+>        * X-bar Theory
+>        * Theta Theory
+>        * Case Theory
+>        * Binding Theory
+>        * Bounding Theory
+>        * Control Theory
+>        * Goberment
+> * **(90's, MP) Minimalist Program:**
+>    * ~~Principles & Parameters~~ $\rightarrow$ Core Operations:
+>        * Merge
+>        * Move
+>        * Agree
+>    * ~~X-bar Theory~~ $\rightarrow$ Bare Phrase Structure
+>    * ~~Goverment~~ $\rightarrow$ Feature-Checking
+>    * ~~Deep/Surface Structure~~ $\rightarrow$ Derivation
+>

@@ -55,4 +55,5 @@ setup(
 # # capitalize textprocessor functions
 # # comment with ''' ''' function descriptions
 # # create hebrew & greek parser
+# # add formal language, rewriting, and chomsky hierarchy to theory
 
