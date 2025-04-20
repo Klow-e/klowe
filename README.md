@@ -389,9 +389,13 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>    * $E_i$: expected values assuming the Null Hypothesis
 >>
 >> * $\chi^2_{(df=1)} = \frac{α-E_α}{E_α} + \frac{β-E_β}{E_β} + \frac{γ-E_γ}{E_γ} + \frac{δ-E_δ}{E_δ} = \frac{(α+β+γ+δ)(αδ-βγ)^2}{(α+β)(γ+δ)(α+γ)(β+δ)}$
+>>
 >>    * $E_α = \frac{(α+β)(α+γ)}{N}$
+>>
 >>    * $E_β = \frac{(α+β)(β+δ)}{N}$
+>>
 >>    * $E_γ = \frac{(γ+δ)(α+γ)}{N}$
+>>
 >>    * $E_δ = \frac{(γ+δ)(β+δ)}{N}$
 >
 
@@ -579,3 +583,34 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >    * ~~Goverment~~ $\rightarrow$ Feature-Checking
 >    * ~~Deep/Surface Structure~~ $\rightarrow$ Derivation
 >
+> _**English Phrase Structure Rules**_
+>>
+>> * $S        \longrightarrow    NP + VP$
+>>
+>> * $NP     \longrightarrow    (Det) + (AP) + N + (PP)$
+>>
+>> * $VP     \longrightarrow    AUX + V + (NP) + (PP) + (AdvP)$
+>>
+>> * $AUX  \longrightarrow    (do) + (M) + (have) + (be)$
+>>
+>> * $PP      \longrightarrow    Pre + NP$
+>>
+>> * $AP      \longrightarrow    (Adv) + Adj$
+>>
+>> * $AdvP  \longrightarrow    (Adv) + Adv$
+>>
+>> * $M        \longrightarrow    can, may, must, shall, will.$
+>>
+>> * $V         \longrightarrow    cry, code, give, appear...$
+>>
+>> * $N         \longrightarrow    rose, solitude, god, sun...$
+>>
+>> * $Det      \longrightarrow    the, a, this, my, any, one...$
+>>
+>> * $Pre      \longrightarrow    at, in, on, by, for, since...$
+>>
+>> * $Adv     \longrightarrow    now, far, here, even, badly...$
+>>
+>> * $A         \longrightarrow    old, biblical, bizarre, other...$
+>
+
