@@ -719,7 +719,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $\qquad\qquad\; | \qquad\ Nom + GerVP$  
 >> $\qquad\qquad\; | \qquad\ Nom + RelC$  
 >>
->> $RelC \quad\ \longrightarrow \quad \{ \ who \ | \ that \} + VP$   
+>> $RelC \quad\ \longrightarrow \quad \{ \ who \ | \ that \ \} + VP$   
 >>
 >> $GerVP \ \longrightarrow \;\;\,\ GerV$  
 >> $\qquad\qquad\; | \qquad\ GerV + NP$  
@@ -727,13 +727,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $\qquad\qquad\; | \qquad\ GerV + NP + VP$  
 >>
 >> $GerV \quad \longrightarrow \quad \{ \ being \ | \ leaving \ | \ going \ | \ ... \ \}$  
-
-
-
-
-
-
- 
 >>
 >> $\\$  
 >> $VP \;\quad\;\ \longrightarrow \quad\, V + (NP) + ({PP}^*) + (AdvP)$
