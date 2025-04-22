@@ -706,16 +706,34 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $\qquad\qquad\; | \qquad\ M + be$  
 >>
 >> $\\$  
->> $NP \;\quad\;\ \longrightarrow \quad\, (Det) + Nom$  
+>> $NP \;\quad\;\ \longrightarrow \quad\, (Det^*) + Nom$  
+>> $\qquad\qquad\; | \qquad\ Det + PP$  
+>>
+>> $Det \qquad \longrightarrow \quad \{ \ the \ | \ a \ | \ this \ | \ my \ | \ any \ | \ one \ | \ ... \ \}$
+>> $\qquad\qquad\; | \qquad\ NP + 's$ 
 >>
 >> $Nom \,\quad \longrightarrow \quad\, N$  
 >> $\qquad\qquad\; | \qquad\ AP^* + N$  
 >> $\qquad\qquad\; | \qquad\ N + {PP}^*$  
 >> $\qquad\qquad\; | \qquad\ AP^* + N + {PP}^*$  
->> $\qquad\qquad\; | \qquad\ Nom + GerundVP$  
+>> $\qquad\qquad\; | \qquad\ Nom + GerVP$  
+>> $\qquad\qquad\; | \qquad\ Nom + RelC$  
 >>
->> $Det \qquad \longrightarrow \quad \{ \ the \ | \ a \ | \ this \ | \ my \ | \ any \ | \ one \ | \ ... \ \}$
->> $\qquad\qquad\; | \qquad\ NP + 's$  
+>> $RelC \quad\ \longrightarrow \quad \{ \ who \ | \ that \} + VP$   
+>>
+>> $GerVP \ \longrightarrow \;\;\,\ GerV$  
+>> $\qquad\qquad\; | \qquad\ GerV + NP$  
+>> $\qquad\qquad\; | \qquad\ GerV + PP$  
+>> $\qquad\qquad\; | \qquad\ GerV + NP + VP$  
+>>
+>> $GerV \quad \longrightarrow \quad \{ \ being \ | \ leaving \ | \ going \ | \ ... \ \}$  
+
+
+
+
+
+
+ 
 >>
 >> $\\$  
 >> $VP \;\quad\;\ \longrightarrow \quad\, V + (NP) + ({PP}^*) + (AdvP)$
@@ -724,12 +742,10 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $PP \qquad \longrightarrow \quad\, Pre + NP$
 >>
 >> $\\$  
->> $AP \qquad \longrightarrow \quad\, Adj^*$  
->> $\qquad\qquad\; | \qquad\ Adv^* + Adj^*$  
+>> $AP \qquad \longrightarrow \quad\, (Adv^*) + (N) + A^*$  
 >>
 >> $\\$  
->> $AdvP \;\;\ \longrightarrow \quad\, Adv^*$  
->> $\qquad\qquad\; | \qquad\ Adv^* + Adv^*$  
+>> $AdvP \;\;\ \longrightarrow \quad\, (Adv^*) + Adv^*$  
 >>
 >> $\\$  
 >> $V \;\qquad\;\ \longrightarrow \quad \{ \ cry \ | \ code \ | \ give \ | \ appear \ | \ ... \ \}$
