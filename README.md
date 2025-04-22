@@ -148,7 +148,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ## Arithmetics
 >
-> $\\$  
 > Science of quantities and their operations.
 >
 > * **Quantity:** anything admitting of increasing or decreasing.
@@ -175,7 +174,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ### Linear Programming
 > 
-> $\\$  
 > Algebraic technique for optimizing a Cost Function subject to Constraints.
 >
 > * $b_l \leq \sum\limits_{i} (a_i \cdot x_i) \leq b_u$
@@ -185,7 +183,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > * Constraint: $5x_1 + 2x_2 \leq 20$
 > * Constraint: $[10x_1 + 12x_2 \geq 90] \cdot -1\implies (-10x_1) + (-12x_2) \leq -90$
 >
-> $\\$  
 > _**Constraint Satisfaction**_
 >>
 >> * **Set of Variables:** $V\{x_1, x_2, x_3, ...\}$
@@ -212,7 +209,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ### Linear Space
 >
-> $\\$  
 > Structure consisting of a set of points and the possible relaions between them.
 >
 > * **Scalar:** simple quantity expressed as a single number.
@@ -220,19 +216,15 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > * **Matrix:** complex quantity expressed as a 2D table of numbers.
 > * **Tensor:** complex quantity expressed as an nD space of numbers.
 >
-> $\\$  
 > _**Cosine Similarity**_
 >> 
 >
-> $\\$  
 > _**Euclidean Distance**_
 >> 
 >
 
 
 ## Probability
->
-> $\\$  
 >
 >
 >
@@ -242,11 +234,9 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > * $Ω$: set of every possible world, all results of an experiment.
 >     * $\sum\limits_{ω \in Ω} P(ω) = 1$
 >
-> $\\$  
 > _**Random Variable**_
 >> A variable, or experiment, with a domain of possible result values.
 >
-> $\\$  
 > _**Unconditional Probability**_
 >> Degree of belief in a proposition independent of other external information.
 >>    * $P(a) = \frac{P(a)}{A}$
@@ -255,7 +245,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>    * $P(a) \text{ or } P(b) = P(a) + P(b)$
 >>    * $P(a) \text{ xor } P(b) = P(a + b) - P(a \cdot b)$
 >
-> $\\$  
 > _**Conditional Probability**_
 >> Degree of belief in a proposition given already revealed evidence.
 >>    * $P(a|b) = P(a \cdot b) / P(b)$
@@ -269,7 +258,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >>    * **Conditioning:** $P(a) = [P(a|b) \cdot P(b)] + [P(a|\overline{b}) \cdot P(\overline{b})]$
 >
-> $\\$  
 > _**Probability Distribution**_
 >> Table of probabilities associated with each value a variable can take.
 >>    * $\mathbb{P}(\mathbb{A}) = \left< 0.6, 0.3, 0.1 \right> = $
@@ -277,7 +265,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>      * $P(A = a_j) = 0.3$
 >>      * $P(A = a_k) = 0.1$
 >
-> $\\$  
 > _**Joint Probability**_
 >> A Probability Distribution of multiple events at once.
 >>
@@ -298,7 +285,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ## Bayesian Network
 >
-> $\\$  
 > Data Structure that represents dependencies among Random Variables.
 > Markov Chain where each node represents a Random Variable with a Probability Distribution conditioned on its Parent Nodes.
 >
@@ -347,7 +333,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 > * $\mathbb{P}(\mathbb{D}|a_2,\overline{b}) = \alpha \mathbb{P}(\mathbb{D}, a_2, \overline{b}) = \alpha [\mathbb{P}(\mathbb{D}, a_2, \overline{b}, c) + \mathbb{P}(\mathbb{D}, a_2, \overline{b}, \overline{c})]$
 >
-> $\\$  
 > _**Inference by Enumeration**_
 >> $\mathbb{P}(\mathbb{X}|e) = \alpha \mathbb{P}(\mathbb{X},e) = \alpha \sum\limits_{y} P(X, e, y)$
 >> * $\mathbb{X}$: query variable for which to compute distribution.
@@ -355,7 +340,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> * $e$: evidence value for $E$
 >> * $Y$: non-evidence non-query hidden variables.
 >
-> $\\$  
 > _**Rejection Sampling**_
 >> Of a Bayesian Network, picking a bunch of sample queries and using it as a probabilistic model.
 >> * The result for a simple query would be in how many of the samples is the query present.
@@ -364,7 +348,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ### Chi-Squared Distribution
 >
-> $\\$  
 > Statistical distribution of a Contingency Table of Random Variables.
 >
 > * **Null Hypothesis:** Assumption that a given distribution of two Variables can perfectly be explained by probabilistic chance alone.
@@ -376,7 +359,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > * **Degrees of Freedom:** Description of the parameters of an $M \cdot N$ Contingency Table necessary for Chi-Squared calculations.
 >     * $d.f. = (M-1) \cdot (N-1)$
 >
-> $\\$  
 > _**Contingency Table**_
 >> Joint Probability table used in Statistics to plot probabilities of events.
 >>
@@ -401,7 +383,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> * $N = α+β+γ+δ$
 >> * $δ = N-α-β-γ$
 >
-> $\\$  
 > _**Chi-Squared Test**_
 >>
 >> Test to (dis)prove the Null Hypothesis, determining how probable it is that two events occur simultaneously by chance alone.
@@ -427,8 +408,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ## Artificial Intelligence
 >
-> $\\$  
->
 >
 >
 > * **Machine Learning:** techniques to make a program learn from data without explicit instructions.
@@ -441,7 +420,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 > * **Goal State:** desired final State.
 >
-> $\\$  
 > _**Markov Model**_
 >>
 >> * **Markov Assumption:** the current state depends only on a finite fixed number of previous states.
@@ -457,42 +435,33 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ### Supervised Machine Learning
 >
-> $\\$  
 > Based on a set of inputs to outputs, map new inputs to outputs.
 >
 > * **Classification:** divides data into binary classes.
 >
 > * **Regression:** predicts the value of an input.
 >
-> $\\$  
 > _**Nearest Neighbour Classifier**_
 >> a
 >
-> $\\$  
 > _**K-Nearest Neighbour Classifier**_
 >> a
 >
-> $\\$  
 > _**Support Vector Machine Classifier**_
 >> a
 >
-> $\\$  
 > _**Random Forest Classifier**_
 >> a
->
-> $\\$  
+>  
 > _**Naive Bayes Classifier**_
 >> a
 >
-> $\\$  
 > _**Linear Regression**_
 >> a
 >
-> $\\$  
 > _**Logistic Regression**_
 >> a
 >
-> $\\$  
 > _**Random Forest Regression**_
 >> a
 >
@@ -500,7 +469,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ### Reinforcement Machine Learning
 >
-> $\\$  
 > Based on a set of rewards or punishments, learn the optimal actions.
 >
 > ```mermaid
@@ -517,17 +485,14 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ### Unsupervised Machine Learning
 >
-> $\\$  
 > Learning patterns alone without any aditional feedback.
 >
-> $\\$  
 > _**K-Means Clustering**_
 >>
 >
 
 ### Neural Network
 >
-> $\\$  
 > Machine Learning non-linear function based on interconnected nodes.
 >
 > * $M$: size of training set.
@@ -548,26 +513,21 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ## Distributional Semantics
 >
-> $\\$  
 > Statistical semantic theory of meaning as arising from syntagmatic combinations.
 > Thus, words that frequently appear in the same context must have simmilar meanings. 
 >
-> $\\$  
 > _**Semantic Space**_
 >> In Distributional Semantics, a map of words localized according to their characteristics. Similar words would appear closer than dissimilar ones.
 >
-> $\\$  
 > _**Vector Space Model**_
 >> Algebraic model of text representation based on creating its own Semantic Space where words are vectors plotted in axis naming semantic characteristics.
 >> * Document: dictionary of {terms : weighted_vectors}
 >
-> $\\$  
 > _**Bag-of-Words**_
 >> Indexing Unit Model that defines terms as an unordered weighted set of lematized words in a text after a stopwords filter.
 >>
 >> Term =  {bagword : weighted_vector}
 >  
-> $\\$  
 > _**Weight**_
 >> Multiplier for words based on relevance and entropy.
 >>  
@@ -577,19 +537,15 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $N$ : number of corpus documents  
 >> $n_t$ : number of documents where term $t$ appears
 >>  
->> $\\$  
 >> * **Term Frequency:** relative frequency of a term within a document.
 >>    * $TF = \sum \frac{t}{d_l}$
->>  
->> $\\$  
+>>    
 >> * **Inverse Document Frequency:** meassure of how informative a term is, downweighting frequent terms. Adding $1$ to each operand is a smoothing strategy to counter division by $0$ and edge cases.
 >>    * $sIDF = log_2(\frac{N + 1}{n_t + 1})$
 >>  
->> $\\$  
 >> * **Probabilistic IDF:** takes into account both presence and abscense in documents.
 >>    * $pIDF = log_2(\frac{N - n_t + 1}{n_t + 1})$
 >>  
->> $\\$  
 >> * _**Term Frequency - Inverse Document Frequency:**_ Weighting model based on how informative a term is in a collection of texts. A high weight means high frequency in the document and low frequency in other documents, thus that word would identify said document against the corpus.
 >>    * $TF.IDF = TF * IDF$
 >
@@ -597,24 +553,19 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ## Frame Semantics
 >
-> $\\$  
 > Cognitive semantic theory of meaning as tied to its associated experiential knowledge.
 > Thus, any word is necessarily tied to a set of related words that encompass wordly frameworks.
 >
-> $\\$  
 > _**Frame**_
 >> Information package about how and what to speak in a specific context. \\
 >> Set of words evoqued by a given situation.
 >
-> $\\$  
 > _**Trigger**_
 >> Discursive token that activates a cognitive semantic frame.
 >
-> $\\$  
 > _**Situational Frame**_
 >> Set of triggers of a frame.
 > 
-> $\\$  
 > _**Concept**_
 >> Indexing Unit Model that defines terms as an unordered weighted set of the hyperonym of each word.
 >>
@@ -624,7 +575,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 
 ## (TGG) Transformational-Generative Grammar
 >
-> $\\$  
 > A generative formal system as description for natural language.
 >
 > * **(50's, CT) Classical Theory:**
@@ -658,7 +608,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >    * ~~Goverment~~ $\rightarrow$ Feature-Checking
 >    * ~~Deep/Surface Structure~~ $\rightarrow$ Derivation
 >
-> $\\$  
 > _**(CFG) Context-Free Grammar**_
 >>
 >> A constituency formal system of combination/grouping rules and a lexicon that generate possible sentences.
@@ -688,13 +637,11 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $\mathscr{L}_G$: a set of strings derivable from the designated Start Symbol.
 >> * $\mathscr{L}_G = \{w \in \Sigma^* : S \Rightarrow^* w\}$
 >
-> $\\$  
 > _**English Phrase Structure Rules**_
 >>
 >>
 >> $S \;\qquad\;\ \longrightarrow \quad\, NP + (AUX) +  VP$
 >>
->> $\\$  
 >> $AUX \quad \longrightarrow \quad\, do$  
 >> $\qquad\qquad\; | \qquad\ do + have$  
 >> $\qquad\qquad\; | \qquad\ do + be$  
@@ -705,7 +652,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $\qquad\qquad\; | \qquad\ M + have$  
 >> $\qquad\qquad\; | \qquad\ M + be$  
 >>
->> $\\$  
+>>
 >> $NP \;\quad\;\ \longrightarrow \quad\, (Det^*) + Nom$  
 >> $\qquad\qquad\; | \qquad\ Det + PP$  
 >>
@@ -728,19 +675,19 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >> $GerV \quad \longrightarrow \quad \{ \ being \ | \ leaving \ | \ going \ | \ ... \ \}$  
 >>
->> $\\$  
+>>
 >> $VP \;\quad\;\ \longrightarrow \quad\, V + (NP) + ({PP}^*) + (AdvP)$
 >>
->> $\\$  
+>>
 >> $PP \qquad \longrightarrow \quad\, Pre + NP$
 >>
->> $\\$  
+>>
 >> $AP \qquad \longrightarrow \quad\, (Adv^*) + (N) + A^*$  
 >>
->> $\\$  
+>>
 >> $AdvP \;\;\ \longrightarrow \quad\, (Adv^*) + Adv^*$  
 >>
->> $\\$  
+>>
 >> $V \;\qquad\;\ \longrightarrow \quad \{ \ cry \ | \ code \ | \ give \ | \ appear \ | \ ... \ \}$
 >>
 >> $N \;\qquad\;\ \longrightarrow \quad \{ \ rose \ | \ solitude \ | \ god \ | \ sun \ | \ ... \}$
@@ -753,7 +700,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >> $A \qquad\quad \longrightarrow \quad \{ \ old \ | \ biblical \ | \ bizarre \ | \ other \ | \ ... \}$
 >>
->> $\\$  
+>>
 >> **Imperative:** $\;\qquad\quad\ S \quad \longrightarrow \quad VP$
 >>
 >> **Yes-No Question:** $\quad S \quad \longrightarrow \quad AUX + NP + VP$
@@ -762,5 +709,4 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >> **Objective Wh-:** $\qquad S \quad \longrightarrow \quad Wh+NP + AUX + S$
 >>
-
 
