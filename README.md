@@ -639,41 +639,42 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >
 > _**English Phrase Structure Rules**_
 >>
->>
->> $S \;\qquad\;\ \longrightarrow \quad\, NP + (AUX) +  VP$
->>
->> $AUX \quad \longrightarrow \quad\, do$  
->> $\qquad\qquad\; | \qquad\ do + have$  
->> $\qquad\qquad\; | \qquad\ do + be$  
->> $\qquad\qquad\; | \qquad\ do + M$  
->> $\qquad\qquad\; | \qquad\ M$  
->>
->> $M \;\qquad\; \longrightarrow \quad \{ \ can \ | \ may \ | \ must \ | \ shall \ | \ will \ \}$
->> $\qquad\qquad\; | \qquad\ M + have$  
->> $\qquad\qquad\; | \qquad\ M + be$  
+>>```
+>>  S      ->    NP  +  (AUX)  +  VP
 >>
 >>
->> $NP \;\quad\;\ \longrightarrow \quad\, (Det^*) + Nom$  
->> $\qquad\qquad\; | \qquad\ Det + PP$  
+>>  AUX    ->     do
+>>         |      do + have
+>>         |      do + be
+>>         |      do + M
+>>         |      M
 >>
->> $Det \qquad \longrightarrow \quad \{ \ the \ | \ a \ | \ this \ | \ my \ | \ any \ | \ one \ | \ ... \ \}$
->> $\qquad\qquad\; | \qquad\ NP + 's$ 
+>>  M      ->     { can | may | must | shall | will }
+>>         |      M + have
+>>         |      M + be
 >>
->> $Nom \,\quad \longrightarrow \quad\, N$  
->> $\qquad\qquad\; | \qquad\ AP^* + N$  
->> $\qquad\qquad\; | \qquad\ N + {PP}^*$  
->> $\qquad\qquad\; | \qquad\ AP^* + N + {PP}^*$  
->> $\qquad\qquad\; | \qquad\ Nom + GerVP$  
->> $\qquad\qquad\; | \qquad\ Nom + RelC$  
 >>
->> $RelC \quad\ \longrightarrow \quad \{ \ who \ | \ that \ \} + VP$   
+>>  NP     ->     (Det*) + Nom
+>>         |      Det + PP
 >>
->> $GerVP \ \longrightarrow \;\;\,\ GerV$  
->> $\qquad\qquad\; | \qquad\ GerV + NP$  
->> $\qquad\qquad\; | \qquad\ GerV + PP$  
->> $\qquad\qquad\; | \qquad\ GerV + NP + VP$  
+>>  Det    ->     { the | a | this | my | any | one | ... }
+>>         |      NP + 's
 >>
->> $GerV \quad \longrightarrow \quad \{ \ being \ | \ leaving \ | \ going \ | \ ... \ \}$  
+>>  Nom    ->     N
+>>         |      AP* + N
+>>         |      N + PP*
+>>         |      AP* + N + PP*
+>>         |      Nom + GerVP
+>>         |      Nom + RelC
+>>
+>>  RelC   ->     { who | that } + VP   
+>>
+>>  GerVP  ->     GerV  
+>>         |      GerV + NP
+>>         |      GerV + PP
+>>         |      GerV + NP + VP
+>>
+>>  GerV   |      { being | leaving | going | ... }
 >>
 >>
 >> $VP \;\quad\;\ \longrightarrow \quad\, V + (NP) + ({PP}^*) + (AdvP)$
@@ -701,12 +702,13 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> $A \qquad\quad \longrightarrow \quad \{ \ old \ | \ biblical \ | \ bizarre \ | \ other \ | \ ... \}$
 >>
 >>
->> **Imperative:** $\;\qquad\quad\ S \quad \longrightarrow \quad VP$
+>>  Imperative:       S -> VP
 >>
->> **Yes-No Question:** $\quad S \quad \longrightarrow \quad AUX + NP + VP$
+>>  Yes-No Question:  S -> AUX + NP + VP
 >>
->> **Subjective Wh-:** $\quad\;\ S \quad \longrightarrow \quad Wh+NP + VP$
+>>  Subjective Wh-:   S -> \longrightarrow \quad Wh+NP + VP$
 >>
->> **Objective Wh-:** $\qquad S \quad \longrightarrow \quad Wh+NP + AUX + S$
+>>  Objective Wh-:    S \quad \longrightarrow \quad Wh+NP + AUX + S$
 >>
+>>```
 
