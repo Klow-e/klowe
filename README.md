@@ -640,41 +640,44 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 > _**English Phrase Structure Rules**_
 >>
 >>```
->>  S      ->    NP  +  (AUX)  +  VP
+>>  S      ->     NP    +      (AUX)  +  VP
 >>
 >>
 >>  AUX    ->     do
->>         |      do + have
->>         |      do + be
->>         |      do + M
+>>         |      do    +  have
+>>         |      do    +  be
+>>         |      do    +  M
 >>         |      M
 >>
 >>  M      ->     { can | may | must | shall | will }
->>         |      M + have
->>         |      M + be
+>>         |      M     +  have
+>>         |      M     +  be
 >>
 >>
->>  NP     ->     (Det*) + Nom
->>         |      Det + PP
+>>  NP     ->     Nom
+>>         |      Det   +  Nom
+>>         |      Det   +  PP
 >>
 >>  Det    ->     { the | a | this | my | any | one | ... }
->>         |      NP + 's
+>>         |      NP-'s
 >>
 >>  Nom    ->     N
->>         |      AP* + N
->>         |      N + PP*
->>         |      AP* + N + PP*
->>         |      Nom + GerVP
->>         |      Nom + RelC
+>>         |      AP*   +  N
+>>         |      N     +  PP*
+>>         |      AP*   +  N + PP*
+>>         |      Nom   +  GerVP
+>>         |      Nom   +  RelC
 >>
 >>  RelC   ->     { who | that } + VP   
 >>
 >>  GerVP  ->     GerV  
->>         |      GerV + NP
->>         |      GerV + PP
->>         |      GerV + NP + VP
+>>         |      GerV  +  NP
+>>         |      GerV  +  PP
+>>         |      GerV  +  NP + VP
 >>
 >>  GerV   ->     { being | leaving | going | ... }
+>>
+>>
 >>
 >>
 >>  VP     ->     V + (NP) + (PP*) + (AdvP)
@@ -692,8 +695,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>  V      ->     { cry | code | give | appear | ... }
 >>
 >>  N      ->     { rose | solitude | god | sun | ... }
->>
->>  Det    ->     { the | a | this | my | any | one | ... }
 >>
 >>  Pre    ->     { at | in | on | by | for | since | ... }
 >>
