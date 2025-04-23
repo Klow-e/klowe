@@ -644,6 +644,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>  S      ->     NP    +   (AUX) +   VP
 >>
 >>
+>>
 >>  AUX    ->     do
 >>         |      do    +   have
 >>         |      do    +   be
@@ -653,6 +654,7 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>  M      ->     { can | may | must | shall | will }
 >>         |      M     +   have
 >>         |      M     +   be
+>>
 >>
 >>
 >>  NP     ->     Nom
@@ -680,8 +682,10 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >>
 >>
->>
 >>  VP     ->     V + (NP) + (PP*) + (AdvP)
+>>
+>>
+>>
 >>
 >>
 >>  PP     ->     Pre + NP
