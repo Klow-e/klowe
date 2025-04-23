@@ -674,41 +674,41 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>         |      GerV + PP
 >>         |      GerV + NP + VP
 >>
->>  GerV   |      { being | leaving | going | ... }
+>>  GerV   ->     { being | leaving | going | ... }
 >>
 >>
->> $VP \;\quad\;\ \longrightarrow \quad\, V + (NP) + ({PP}^*) + (AdvP)$
+>>  VP     ->     V + (NP) + (PP*) + (AdvP)
 >>
 >>
->> $PP \qquad \longrightarrow \quad\, Pre + NP$
+>>  PP     ->     Pre + NP
 >>
 >>
->> $AP \qquad \longrightarrow \quad\, (Adv^*) + (N) + A^*$  
+>>  AP     ->     (Adv*) + (N) + A*
 >>
 >>
->> $AdvP \;\;\ \longrightarrow \quad\, (Adv^*) + Adv^*$  
+>>  AdvP   ->     (Adv*) + Adv* 
 >>
 >>
->> $V \;\qquad\;\ \longrightarrow \quad \{ \ cry \ | \ code \ | \ give \ | \ appear \ | \ ... \ \}$
+>>  V      ->     { cry | code | give | appear | ... }
 >>
->> $N \;\qquad\;\ \longrightarrow \quad \{ \ rose \ | \ solitude \ | \ god \ | \ sun \ | \ ... \}$
+>>  N      ->     { rose | solitude | god | sun | ... }
 >>
->> $Det \qquad \longrightarrow \quad \{ \ the \ | \ a \ | \ this \ | \ my \ | \ any \ | \ one \ | \ ... \ \}$
+>>  Det    ->     { the | a | this | my | any | one | ... }
 >>
->> $Pre \qquad \longrightarrow \quad \{ \ at \ | \ in \ | \ on \ | \ by \ | \ for \ | \ since \ | \ ... \ \}$
+>>  Pre    ->     { at | in | on | by | for | since | ... }
 >>
->> $Adv \qquad \longrightarrow \quad \{ \ now \ | \ far \ | \ here \ | \ even \ | \ badly \ | \ ... \ \}$
+>>  Adv    ->     { now | far | here | even | badly | ... }
 >>
->> $A \qquad\quad \longrightarrow \quad \{ \ old \ | \ biblical \ | \ bizarre \ | \ other \ | \ ... \}$
+>>  A      ->     { old | biblical | bizarre | other | ... }
 >>
 >>
 >>  Imperative:       S -> VP
 >>
 >>  Yes-No Question:  S -> AUX + NP + VP
 >>
->>  Subjective Wh-:   S -> \longrightarrow \quad Wh+NP + VP$
+>>  Subjective Wh-:   S -> Wh-NP + VP
 >>
->>  Objective Wh-:    S \quad \longrightarrow \quad Wh+NP + AUX + S$
+>>  Objective Wh-:    S -> Wh-NP + AUX + S
 >>
 >>```
 
