@@ -643,6 +643,8 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >>  S      ->     NP    +   (AUX) +   VP
 >>
+>>  CC     ->     { and | or | but | ... }
+>>
 >>
 >>
 >>  AUX    ->     do
@@ -682,30 +684,39 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >>
 >>
->>  VP     ->     V + (NP) + (PP*) + (AdvP)
->>
->>
->>
->>
->>
->>  PP     ->     Pre + NP
->>
->>
->>  AP     ->     (Adv*) + (N) + A*
->>
->>
->>  AdvP   ->     (Adv*) + Adv* 
->>
+>>  VP     ->     V
+>>         |      V     +   NP*
+>>         |      V     +   NP*   +   PP*
+>>         |      V     +   PP*
+>>         |      V     +   S
+>>         |      V     +   VP
+>>         |      VP    +   AdvP
 >>
 >>  V      ->     { cry | code | give | appear | ... }
+>>  V_c:s  ->     { think | believe | say | mean | ... }
+>>  V_c:np ->     { want | find | leave | give | prefer | ... }
+>>  V_c:vp ->     { want | try | need | prefer |... }
+>>  V_c:pp ->     { fly | travel | ... }
+>>
+>>  AdvP   ->     Adv*
+>>  Adv    ->     { now | far | here | even | badly | ... }
+>>
+>>
+>>
+>>  PP     ->     Pre   +   NP
+>>  Pre    ->     { at | in | on | by | for | since | ... }
+>>
+>>
+>>
+>>
+>>  AP     ->     (Adv*)+ (N) + A*
+>>
 >>
 >>  N      ->     { rose | solitude | god | sun | ... }
 >>
->>  Pre    ->     { at | in | on | by | for | since | ... }
->>
->>  Adv    ->     { now | far | here | even | badly | ... }
 >>
 >>  A      ->     { old | biblical | bizarre | other | ... }
+>>
 >>
 >>
 >>  Imperative:       S -> VP
@@ -715,6 +726,8 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>  Subjective Wh-:   S -> Wh-NP + VP
 >>
 >>  Objective Wh-:    S -> Wh-NP + AUX + S
+>>
+>>  Coordination:     X -> X + CC + C
 >>
 >>```
 >>
