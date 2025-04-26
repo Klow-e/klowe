@@ -622,28 +622,27 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >> * **Grammaticality:** property of a string that can be derived from a grammar.
 >>
->> $G_{CFG} = (S, N, \Sigma, R)$
+>> * **Grammar:** $G_{CFG} = (S, N, \Sigma, R)$
 >>
->> * $S$: start symbol, top node of a parse tree $\{S\}$.
+>>    * $S$: start symbol, top node of a parse tree $\{S\}$.
 >>
->> * $N$: set of non-terminal symbols, for the rules symbols $\{A, B, C,...\}$.
+>>    * $N$: set of non-terminal symbols, for the rules symbols $\{A, B, C,...\}$.
 >>
->> * $\Sigma$: set of terminal symbols, for the lexicon symbols $\{a, b, c,...\}$.
+>>    * $\Sigma$: set of terminal symbols, for the lexicon symbols $\{a, b, c,...\}$.
 >>
->> * $R$: set of production rules as $A \rightarrow \beta$:
->>    * $A \in N$
->>    * $\beta \in (\Sigma \cup N)* $
+>>    * $R$: set of production rules as $A \rightarrow \beta$:
+>>        * $A \in N$
+>>        * $\beta \in (\Sigma \cup N)* $
 >>
->> $\mathscr{L}_G$: a set of strings derivable from the designated Start Symbol.
->> * $\mathscr{L}_G = \{w \in \Sigma^* : S \Rightarrow^* w\}$
->
-> _**English Phrase Structure Rules**_
+>> * **Language:** a set of strings derivable from the designated Start Symbol.
+>>
+>>    * $\mathscr{L}_G = \{w \in \Sigma^* : S \Rightarrow^* w\}$
+>>
+>> * **English Phrase Structure Rules:**
 >>
 >>```
 >>
 >>  S      ->     NP    +   (AUX) +   VP
->>
->>  CC     ->     { and | or | but | ... }
 >>
 >>
 >>
@@ -673,6 +672,8 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>         |      Nom   +   GerVP
 >>         |      Nom   +   RelC
 >>
+>>  N      ->     { rose | solitude | god | sun | ... }
+>>
 >>  RelC   ->     { who | that }  +   VP   
 >>
 >>  GerVP  ->     GerV  
@@ -681,6 +682,9 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>         |      GerV  +   NP    +   VP
 >>
 >>  GerV   ->     { being | leaving | going | ... }
+>>
+>>  AP     ->     (Adv*)+ (N) + A*
+>>  A      ->     { old | biblical | bizarre | other | ... }
 >>
 >>
 >>
@@ -708,27 +712,23 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >>
 >>
+>>  Imperative:   S     -> VP
 >>
->>  AP     ->     (Adv*)+ (N) + A*
+>>  Yes-No Q:     S     -> AUX   + NP  + VP
 >>
+>>  Subj Wh-:     S     -> Wh-NP + VP
 >>
->>  N      ->     { rose | solitude | god | sun | ... }
+>>  Obj Wh-:      S     -> Wh-NP + AUX + S
 >>
->>
->>  A      ->     { old | biblical | bizarre | other | ... }
->>
->>
->>
->>  Imperative:       S -> VP
->>
->>  Yes-No Question:  S -> AUX + NP + VP
->>
->>  Subjective Wh-:   S -> Wh-NP + VP
->>
->>  Objective Wh-:    S -> Wh-NP + AUX + S
->>
->>  Coordination:     X -> X + CC + C
+>>  Coordination: X     -> X     + CC  + C
+>>                CC    -> { and | or | but | ... }
 >>
 >>```
+>
+> _**Lexicalized CFG**_
 >>
+>> A CFG that relies more on the Lexicon rather than the Phrase Structure Rules.
+>>
+>> * a
+
 
