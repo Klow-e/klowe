@@ -612,8 +612,17 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>
 >> A constituency formal system of combination/grouping rules and a lexicon that generate possible sentences.
 >>
->> * **Derivation:** expanding the rules to generate a terminal set of strings.
+>> * **Phrase Structure Rules:** generation rules for non-terminal nodes.
 >>
+>> * **Lexion:** terminal nodes set of equivalences.
+>>
+>> * **Lexicalized CFG:** a CFG that relies more on the Lexicon rather than the Phrase Structure Rules.
+>>    * (LFG) Lexical-Functional Grammar
+>>    * (HPSG) Head-Driven Phrase Structure Grammar
+>>    * (TAG) Tree-Adjoining Grammar
+>>    * (CCG) Combinatory Categorical Grammar
+>>
+>> * **Derivation:** expanding the rules to generate a terminal set of strings.
 >>    * $NP \rightarrow Det + N \rightarrow \text{a cat}$
 >>
 >> * **Parse Tree:** graphical representation of a derivation.
@@ -623,23 +632,17 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >> * **Grammaticality:** property of a string that can be derived from a grammar.
 >>
 >> * **Grammar:** $G_{CFG} = (S, N, \Sigma, R)$
->>
 >>    * $S$: start symbol, top node of a parse tree $\{S\}$.
->>
 >>    * $N$: set of non-terminal symbols, for the rules symbols $\{A, B, C,...\}$.
->>
 >>    * $\Sigma$: set of terminal symbols, for the lexicon symbols $\{a, b, c,...\}$.
->>
 >>    * $R$: set of production rules as $A \rightarrow \beta$:
 >>        * $A \in N$
 >>        * $\beta \in (\Sigma \cup N)* $
 >>
 >> * **Language:** a set of strings derivable from the designated Start Symbol.
->>
 >>    * $\mathscr{L}_G = \{w \in \Sigma^* : S \Rightarrow^* w\}$
 >>
 >> * **English Phrase Structure Rules:**
->>
 >>```
 >>
 >>  S      ->     NP    +   (AUX) +   VP
@@ -724,11 +727,5 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>                CC    -> { and | or | but | ... }
 >>
 >>```
->
-> _**Lexicalized CFG**_
 >>
->> A CFG that relies more on the Lexicon rather than the Phrase Structure Rules.
->>
->> * a
-
 
