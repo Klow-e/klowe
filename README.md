@@ -662,7 +662,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>  S      ->     NP    +   (AUX) +   VP
 >>
 >>
->>
 >>  AUX    ->     do
 >>         |      do    +   have
 >>         |      do    +   be
@@ -672,7 +671,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>  M      ->     { can | may | must | shall | will }
 >>         |      M     +   have
 >>         |      M     +   be
->>
 >>
 >>
 >>  NP     ->     Nom
@@ -704,7 +702,6 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>  A      ->     { old | biblical | bizarre | other | ... }
 >>
 >>
->>
 >>  VP     ->     V
 >>         |      V     +   NP*
 >>         |      V     +   NP*   +   PP*
@@ -723,23 +720,27 @@ https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sh
 >>  Adv    ->     { now | far | here | even | badly | ... }
 >>
 >>
->>
 >>  PP     ->     Pre   +   NP
 >>  Pre    ->     { at | in | on | by | for | since | ... }
 >>
+>>```
+>
+> _**(TG) Transformational Grammar**_
+>> A generative grammar consisting of a CFG as a base, and derived trees through transformations.
 >>
+>> * **English Transformations:**
+>>```
 >>
->>  Imperative:   S     -> VP
+>>  Imperative:   S     => VP
 >>
->>  Yes-No Q:     S     -> AUX   + NP  + VP
+>>  Yes-No Q:     S     => AUX   + NP  + VP
 >>
->>  Subj Wh-:     S     -> Wh-NP + VP
+>>  Subj Wh-:     S     => Wh-NP + VP
 >>
->>  Obj Wh-:      S     -> Wh-NP + AUX + S
+>>  Obj Wh-:      S     => Wh-NP + AUX + S
 >>
 >>  Coordination: X     -> X     + CC  + C
 >>                CC    -> { and | or | but | ... }
 >>
 >>```
 >>
-
