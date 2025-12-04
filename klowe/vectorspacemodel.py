@@ -132,7 +132,7 @@ class KGlossary:
     def DefineGenre(self, l_dicts: list[dict[str,float]]) -> dict[str,float]:
         return DefineGenre(l_dicts)
 
-# glossary = KGlossary(KWeightModel, [("POLI", [WikiArticle('Mao Zedong'), WikiArticle('León Trotski')]),
+# glossary = KGlossary(KWeightModel, [("POLI", [my_text_maoism, my_text_trotsky]),
 # ("CHEM", [my_text_quimica, my_text_valencia]),]).apply
 # print_dict(glossary)
 
