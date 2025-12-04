@@ -63,7 +63,7 @@ def InverseDocFreq(sample_dicts: list[str]):
     pIDF = [[math.log2(((cor_N - nt) + 1) / (nt + 1)) for nt in d] for d in nt_tensor]
 
     return sIDF, pIDF, F_tensor, T_tensor
-# sample_dicts = [WikiArticle("Biología"), WikiArticle("Célula"), WikiArticle("Carbunco"), WikiArticle("Bacteria")]
+# sample_dicts = [my_text_bacterias, my_text_celulas, my_text_carbunco, my_text_bacilo]
 # S, P, F, T = InverseDocFreq(sample_dicts)
 # print("\n" + "\n\n".join("\n".join(map(str, l)) for l in [S, P, F, T]) + "\n")
 
@@ -79,7 +79,7 @@ def TermFreq_IDF(sample_dicts: list[str]):
     TF_pIDF = TermFreq_IDF(pIDF, F_tensor)
 
     return TF_sIDF, TF_pIDF, T_tensor
-# sample_dicts = [WikiArticle("Biología"), WikiArticle("Célula"), WikiArticle("Carbunco"), WikiArticle("Bacteria")]
+# sample_dicts = [my_text_bacterias, my_text_celulas, my_text_carbunco, my_text_bacilo]
 # S, P, T = TermFreq_IDF(sample_dicts)
 # print("\n\n".join("\n".join(map(str, l)) for l in [S, P, T]), "\n")
 
@@ -106,7 +106,7 @@ def KWeightModel(text: str) -> dict[str,float]:
     weighted = SortDict(freq_dist)
     top_weighted = SortDict(zip(GetKeys(weighted), RoundList( TopPercent(GetValues(weighted), 0.35) , 10 ) ))
     return top_weighted
-# print(KWeightModel(WikiArticle("Bacilo")))
+# print(KWeightModel(my_text))
 
 
 def DefineGenre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
@@ -115,7 +115,7 @@ def DefineGenre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
     genre_dict: dict = SortDict({i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys})
     genre_dict: dict = dict(zip( genre_dict.keys() , RoundList( NormalizeList(genre_dict.values(), (0, 1)) , 10) ))
     return genre_dict
-# print(DefineGenre([KWeightModel(WikiArticle('Aritmética')), KWeightModel(WikiArticle("Matemáticas"))]))
+# print(DefineGenre([KWeightModel(my_text_aritmetica), KWeightModel(my_text_geometria)]))
 
 
 ###############################################################################################
@@ -133,7 +133,7 @@ class KGlossary:
         return DefineGenre(l_dicts)
 
 # glossary = KGlossary(KWeightModel, [("POLI", [WikiArticle('Mao Zedong'), WikiArticle('León Trotski')]),
-# ("CHEM", [WikiArticle('Valencia (química)'), WikiArticle('Termodinámica química')]),]).apply
+# ("CHEM", [my_text_quimica, my_text_valencia]),]).apply
 # print_dict(glossary)
 
 
@@ -207,7 +207,7 @@ def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str,list]:
     TVect = np.vstack([np.array([k]) for k in NormalizeList(sum(GetValues(WText)), (0, 1))])
     VText: dict = {"genres" : KLexicon(gloss).get("genres"), "vectors" : TVect}
     return VText
-# print_dict(VectorializeText(WikiArticle("Bacilo"), glossary, VTModel))
+# print_dict(VectorializeText(my_text, glossary, VTModel))
 
 
 def CategorizeText(VT: dict) -> list[tuple]:
@@ -232,7 +232,7 @@ def CategorizeText(VT: dict) -> list[tuple]:
     if i_c_trust >= 25:
         result.append((i_c_genre, i_c_trust))
     return result
-# print(CategorizeText(VectorializeText(WikiArticle("Bacilo"), glossary, VTModel)))
+# print(CategorizeText(VectorializeText(mytext, glossary, VTModel)))
 
 
 def PrintTextGenre(text: str, gloss, VTmodel) -> None:
@@ -242,7 +242,7 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
     for i in range(len(result)): print(f" {result[i][0]}: \t {result[i][1]:.0%}")
     print(e)
     print_text_vector(VT)
-# PrintTextGenre(WikiArticle("Bacilo"), glossary, VTModel)
+# PrintTextGenre(my_text, glossary, VTModel)
 
 
 ###############################################################################################
@@ -250,7 +250,7 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
 
 def Categorizar(text: str) -> None:
     PrintTextGenre(text, example_gloss, VTModel)
-# Categorizar(WikiArticle("GNU"))
+# Categorizar(my_text)
 
 
 ###############################################################################################
