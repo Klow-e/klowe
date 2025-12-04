@@ -56,13 +56,8 @@ def PDFtext(url: str):
     else: raise Exception(f"Not found {url = }")
 
 
-def WikiArticle(title: str) -> str:
-    lang: str = "".join(KLanguage)
-    title: str = title.replace(" ", "_")
-    url = f"https://{lang}.wikipedia.org/wiki/{title}"
-    time.sleep(1)
-    WT: str = WebPage(url)
-    return WT
+def WikiArticle(title: str):
+    print("'WikiArticle' function depricated.")
 
 
 ###############################################################################################
