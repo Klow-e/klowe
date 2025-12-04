@@ -21,7 +21,7 @@ def print_dict(dicc: dict) -> None:
         l = len(v) if isinstance(v, (list, dict)) else len(str(v))
         print(f"{k}: \n {v} \n {l} \n\n")
     print(p)
-# print_dict(KWeightModel(WikiArticle("Bacilo")))
+# print_dict(KWeightModel(my_text))
 # print_dict(glossary)
 
 
@@ -101,7 +101,7 @@ def print_text_vector(test):
     for k, v in zip(test.get("genres"), test.get("vectors")):
         print(f"{k}:\t{v}")
     print()
-# print_text_vector(VectorializeText(WikiArticle("Bacilo"), glossary))
+# print_text_vector(VectorializeText(my_text, glossary))
 
 
 ###############################################################################################
