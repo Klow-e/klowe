@@ -10,7 +10,7 @@ def KSampleTexts():
     """
     Prints every variable that starts with 'ksampletext_', that's to say, every sample text in KlowE.
     """
-    for i in dir(): print(i) if i.startswith("ksampletext_") else None
+    for i in globals(): print(i) if i.startswith("ksampletext_") else None
 
 
 ###############################################################################################
