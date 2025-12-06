@@ -98,6 +98,8 @@ You should have received a copy of the GNU General Public License along with thi
 
 > tdistribution("<text>") -> list[tuple[str,int]]   == tokenization + counts tokens (types by frequency)
 > btdistribution("<text>") -> list[tuple[str,int]]  == bagwords + counts tokens (types by frequency)
+
+> sampletexts.py                                    == corpus of sample texts
 ```
 
 
