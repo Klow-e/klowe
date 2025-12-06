@@ -56,10 +56,6 @@ def PDFtext(url: str):
     else: raise Exception(f"Not found {url = }")
 
 
-def WikiArticle(title: str):
-    print("'WikiArticle' function depricated.")
-
-
 ###############################################################################################
 
 
