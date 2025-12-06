@@ -100,6 +100,7 @@ You should have received a copy of the GNU General Public License along with thi
 > btdistribution("<text>") -> list[tuple[str,int]]  == bagwords + counts tokens (types by frequency)
 
 > sampletexts.py                                    == corpus of sample texts
+> KSampleTexts()                                    == prints every text name in sampletexts.py
 ```
 
 
