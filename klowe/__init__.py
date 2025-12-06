@@ -11,4 +11,5 @@ from .mathstuff import *
 from .datavisualization import *
 from .pythontools import *
 from .example_gloss import *
+from .sampletexts import *
 
