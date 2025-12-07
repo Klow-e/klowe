@@ -25,7 +25,7 @@ def KPrintDict(dicc: dict) -> None:
 # KPrintDict(glossary)
 
 
-def plot_dict(weighted_text: dict[str,float]) -> None:
+def KPlotDict(weighted_text: dict[str,float]) -> None:
     print(weighted_text)
     print(len(weighted_text))
     x = [i for i in weighted_text]
@@ -37,10 +37,11 @@ def plot_dict(weighted_text: dict[str,float]) -> None:
     plt.ylabel("Values")
     plt.tight_layout()
     plt.show()
-# plot_dict(RandomDictStrFloat(10))
+    print()
+# KPlotDict(RandomDictStrFloat(10))
 
 
-def plot_function(func: callable, name: str) -> None:
+def KPlotFunction(func: callable, name: str) -> None:
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     # function
@@ -62,10 +63,10 @@ def plot_function(func: callable, name: str) -> None:
     plt.title(name, fontweight="bold")
     plt.tight_layout()
     plt.show()
-# plot_function(TanhFunction, "Tanh")
+# KPlotFunction(TanhFunction, "Tanh")
 
 
-def plot_list(v_list: list[float]) -> None:
+def KPlotList(v_list: list[float]) -> None:
     v_list.sort()
     print(v_list,"\n",len(v_list))
     ax = plt.figure().add_subplot(1, 1, 1)
@@ -80,7 +81,7 @@ def plot_list(v_list: list[float]) -> None:
     plt.ylabel("Values")
     plt.tight_layout()
     plt.show()
-# plot_list(RandomFloatList(-6, 6, 12))
+    print()
 
 
 ###############################################################################################
