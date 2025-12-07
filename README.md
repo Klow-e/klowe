@@ -9,18 +9,14 @@ from klowe import *
 You can check what can be done and how to use this package in the following Colab notebook:  
 https://colab.research.google.com/drive/1JHb7EgQTV0iNRBodc7u841v6OknHrrxj?usp=sharing
 
-`KlowE` is a Python library for NLP and Computational Linguistics applications.
+`KlowE` is a Python library for NLP and Computational Linguistics applications.\
 `KlowE` is available under the GNU GPL-3.0 license.
 
 ```
 Copyright (C) 2025 Chloe Carral Bustillo <chloevampi01@gmail.com>
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
 

@@ -82,8 +82,10 @@ def KSetLanguage(lang: str) -> list[str]:
     `returns:  KLanguage = ['firstletter', 'secondletter']`
     `example:  KSetLanguage('es')`
     """
+
     KLanguage.clear()
     KLanguage.extend(lang)
+
     stop_words.clear()
     stop_words.extend(universal_stopwords)
     match lang:
@@ -93,6 +95,7 @@ def KSetLanguage(lang: str) -> list[str]:
         case "en": stop_words.extend(en_stopwords)
         case "fr": stop_words.extend(fr_stopwords)
         case _: print(f"Language {lang} not supported.")
+
     legal_characters.clear()
     legal_characters.extend(latin_characters)
     match lang:
@@ -102,6 +105,7 @@ def KSetLanguage(lang: str) -> list[str]:
         case "en": legal_characters.extend(en_characters)
         case "fr": legal_characters.extend(fr_characters)
         case _: print(f"Pick 'es', 'it', 'en', 'fr', or empty string '' to set to general case.")
+    
     return KLanguage
 
 

@@ -16,7 +16,7 @@ def KCleanWikiText(stext: str) -> str:
     s: list[str] = [i.replace("'", "").replace("‘", "").replace("’", "").replace("  ", " ") for i in s]
     o: str = " ".join(s)
     for i in [f"[{i}]" for i in range(600)]: o = o.replace(i, "")
-    o: str = o.replace("  ", " ").removesuffix("[").strip().replace("\n\n", "\n").removesuffix(".")
+    o: str = o.replace("  ", " ").removesuffix("[").strip().replace("\n\n", "").removesuffix(".")
     o += "."
     return o
 
