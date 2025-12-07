@@ -45,6 +45,9 @@ You should have received a copy of the GNU General Public License along with thi
 > RandomDictStrFloat(length) -> dict[str,float]     == gives a pseudo-random dict[str,float]
 > RandomChoiceFrom(iterable) -> item                == picks a random item in an iterable object
 
+> MidPoint(a, b) -> float                           == gives the midpoint between two numbers
+> TopPercent(list[float], float) -> list[float]     == gets the top float per one values in a list of values
+
 > AlKhwarizmiFunction(a, b, c, x) -> y              == gives the y of a quadratic formula in a given x
 > AlKhwarizmiFunction(a, b, c) -> Callable[x] -> y  == of a given quadratic formula gives its f(x)
 > TanhFunction(x) -> y                              == passes data through a Tanh function
@@ -57,9 +60,6 @@ You should have received a copy of the GNU General Public License along with thi
 > TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
 > ELUNormalization(list[float])                     == passes a list of values through the ELU function
 > ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
-
-> MidPoint(a, b) -> float                           == gives the midpoint between two numbers
-> TopPercent(list[float], float) -> list[float]     == gets the top float per one values in a list of values
 ```
 
 
