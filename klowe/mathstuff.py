@@ -101,30 +101,69 @@ def TopPercent(values_l: list[float], threshold: float) -> list[float]:
 ###############################################################################################
 
 
-def RandomFloat(a: float, b: float) -> float:
+def RandomFloat(a: float|int, b: float|int) -> float:
+    """
+    Gives a true random float bewteen the specified values.
+    `param 1:  inclusive lower limit`
+    `param 2:  inclusive upper limit`
+    `returns:  a random float between those`
+    `example:  random_float: float = RandomFloat(-1, 1.5)`
+    """
     RSN: int = int(f"{str(datetime.datetime.now().strftime('%f')):0<6}")
     RN: float = NormalizeValue(RSN, [0, 999999], (a, b))
     return RN
-# print(RandomFloat(0, 10))
 
 
 def RandomInt(a: int, b: int) -> int:
+    """
+    Gives a true random int bewteen the specified values.
+    `param 1:  inclusive lower limit`
+    `param 2:  inclusive upper limit`
+    `returns:  a random int between those`
+    `example:  random_int: int = RandomInt(-10, 10)`
+    """
     RN: int = int(RandomFloat(a, b))
     return RN
-# print(RandomInt(0, 10))
+
+
+def RandomChoiceFrom(ite: Any) -> Any:
+    """
+    Picks a random item from an iterable.
+    `param 1:  iterable object`
+    `returns:  a random intem in it`
+    `example:  apick: int = RandomChoiceFrom([1, 2, 3, 4])`
+    """
+    indexchoice: int = RandomInt(0, len(ite))
+    choice = ite[indexchoice]
+    return choice
 
 
 def RandomIntList(a: int, b: int, l: int) -> list[int]:
+    """
+    Gives a list of true random ints bewteen the specified values.
+    `param 1:  inclusive lower limit`
+    `param 2:  inclusive upper limit`
+    `param 3:  length of list`
+    `returns:  a list of ints between those, length of the third param`
+    `example:  random_int_list: list[int] = RandomIntList(0, 10, 8)`
+    """
     RN = int(str(RandomFloat(2.7182818284, 3.1415926535))[2:]) ** 2
     RN = list(str(RN ** ((l//30)+1))[5:l+5])
     RIL = [int(i) for i in RN]
     RIL = NormalizeList(RIL, (a, b))
     RIL = [int(i) for i in RIL]
     return RIL
-# print(RandomIntList(0, 10, 12))
 
 
 def RandomFloatList(a:float, b:float, l: int) -> list[float]:
+    """
+    Gives a list of true random floats bewteen the specified values.
+    `param 1:  inclusive lower limit`
+    `param 2:  inclusive upper limit`
+    `param 3:  length of list`
+    `returns:  a list of floats between those, length of the third param`
+    `example:  random_float_list: list[float] = RandomFloatList(-1, 1, 8)`
+    """
     RIL: list[float] = RandomIntList(-11, 13, l)
 
     RFLa: list[float] = [n for i, n in enumerate(RIL) if i % 2 == 0]
@@ -139,41 +178,43 @@ def RandomFloatList(a:float, b:float, l: int) -> list[float]:
     RFL: list[float] = RFLaa + RFLbb + RFLab + RFLba
     RFL: list[float] = NormalizeList(RFL, (a, b))
     return RFL
-# print(RandomFloatList(0, 1, 13))
 
 
 def RandomWordList(l: int) -> list[str]:
+    """
+    Gives a list of pseudo-random words in Spanish.
+    `param 1:  length of list`
+    `returns:  a list of that length containing random words`
+    `example:  random_word_list: list[str] = RandomWordList(5)`
+    """
     some_keys: list[str] = list({k for i in GetKeys(GetValues(example_gloss)) for k in i[:100]})
     index: int = RandomInt(0, len(some_keys) - l)
     RSL: list[str] = [some_keys[index + i] for i in range(l)]
     return RSL
-# print(RandomWordList(10))
 
 
 def RandomWord() -> str:
+    """
+    Gives a pseudo-random word in Spanish.
+    `param 1:  None`
+    `returns:  a random word`
+    `example:  random_word: str = RandomWord()`
+    """
     RS: str = "".join(RandomWordList(1))
     return RS
-# print(RandomWord())
 
 
-def RandomDictStrFloat(l: int) -> dict[str,float]:
+def RandomDictStrFloat(l: int) -> dict[str, float]:
+    """
+    Gives a mock dict with Spanish words as keys and random floats between 0 and 1 as values.
+    `param 1:  length of dict`
+    `returns:  a mock dict of words with weights between 0 and 1`
+    `example:  random_dict: dict[str, float] = RandomDictStrFloat(5)`
+    """
     k: list[str] = RandomWordList(l)
     v: list[float] = RandomFloatList(0, 1, l)
     RD: dict[str,float] = SortDict(dict(zip(k, v)))
     return RD
-# print(RandomDictStrFloat(10))
-
-
-def RandomChoiceFrom(ite: Any) -> Any:
-    """
-    Picks a random intem from an iterable.
-    `param 1:  iterable object`
-    `returns:  a random intem in it`
-    `example:  apick: int = RandomChoiceFrom([1, 2, 3, 4])`
-    """
-    indexchoice: int = RandomInt(0, len(ite))
-    choice = ite[indexchoice]
-    return choice
 
 
 ###############################################################################################
