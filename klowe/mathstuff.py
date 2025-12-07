@@ -13,14 +13,19 @@ import math
 import numpy as np
 import datetime
 from typing import Any
+from collections.abc import Callable
 
 
 ###############################################################################################
 
 
-def AlKhwarizmiFunction(a, b, c, x) -> float:
-    y = (a * x**2) + (b*x) + c
-    return round(y, 4)
+def AlKhwarizmiFunction(a, b, c, x='') -> float|Callable:
+    if type(x) != str:
+        y = (a * x**2) + (b*x) + c
+        return round(y, 4)
+    else:
+        def myf(x): return AlKhwarizmiFunction(1, -4, -5, x)
+        return myf
 
 
 def TanhFunction(x: float) -> int:
