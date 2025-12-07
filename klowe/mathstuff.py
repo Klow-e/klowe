@@ -12,6 +12,7 @@ from .example_gloss import *
 import math
 import numpy as np
 import datetime
+from typing import Any
 
 
 ###############################################################################################
@@ -100,7 +101,7 @@ def TopPercent(values_l: list[float], threshold: float) -> list[float]:
 ###############################################################################################
 
 
-def RandomFloat(a:float, b:float) -> float:
+def RandomFloat(a: float, b: float) -> float:
     RSN: int = int(f"{str(datetime.datetime.now().strftime('%f')):0<6}")
     RN: float = NormalizeValue(RSN, [0, 999999], (a, b))
     return RN
@@ -113,7 +114,7 @@ def RandomInt(a: int, b: int) -> int:
 # print(RandomInt(0, 10))
 
 
-def RandomIntList(a:int, b:int, l: int) -> list[int]:
+def RandomIntList(a: int, b: int, l: int) -> list[int]:
     RN = int(str(RandomFloat(2.7182818284, 3.1415926535))[2:]) ** 2
     RN = list(str(RN ** ((l//30)+1))[5:l+5])
     RIL = [int(i) for i in RN]
@@ -161,6 +162,18 @@ def RandomDictStrFloat(l: int) -> dict[str,float]:
     RD: dict[str,float] = SortDict(dict(zip(k, v)))
     return RD
 # print(RandomDictStrFloat(10))
+
+
+def RandomChoiceFrom(ite: Any) -> Any:
+    """
+    Picks a random intem from an iterable.
+    `param 1:  iterable object`
+    `returns:  a random intem in it`
+    `example:  apick: int = RandomChoiceFrom([1, 2, 3, 4])`
+    """
+    indexchoice: int = RandomInt(0, len(ite))
+    choice = ite[indexchoice]
+    return choice
 
 
 ###############################################################################################

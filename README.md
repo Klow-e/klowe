@@ -43,6 +43,7 @@ You should have received a copy of the GNU General Public License along with thi
 > RandomWord() -> str                               == gives a pseudo-random word
 > RandomWordList(length) -> list[str]               == gives a list of pseudo-random words
 > RandomDictStrFloat(length) -> dict[str,float]     == gives a pseudo-random dict[str,float]
+> RandomChoiceFrom(iterable) -> item                == picks a random item in an iterable object
 
 > AlKhwarizmiFunction(a, b, c, x) -> y              == solves a quadratic formula
 > TanhFunction(x) -> y                              == passes data through a Tanh function

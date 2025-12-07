@@ -24,7 +24,6 @@
 # # create hebrew & greek parser
 # # add formal language, rewriting, and chomsky hierarchy to theory
 # # annotate functions
-# # # pythontools.py
 # # # datavisualization.py
 # # # mathstuff.py
 # # # textprocessor.py
@@ -43,6 +42,9 @@
     `param 2:  aaaaa`
     `returns:  None`
     `result:   aaaaa`
-    `example:  `
+    `example:  aaaaa`
     """
+
+
+###############################################################################################
 
