@@ -134,7 +134,7 @@ class KGlossary:
 
 # glossary = KGlossary(KWeightModel, [("POLI", [my_text_maoism, my_text_trotsky]),
 # ("CHEM", [my_text_quimica, my_text_valencia]),]).apply
-# print_dict(glossary)
+# KPrintDict(glossary)
 
 
 def save_gloss(glossary) -> None:
@@ -185,7 +185,7 @@ def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[str,list[str]|dict[
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
     embedded_gloss: dict = {"genres": GetKeys(gloss), "vectors": words_vectors}
     return embedded_gloss
-# print_dict(KLexicon(glossary).get("vectors"))
+# KPrintDict(KLexicon(glossary).get("vectors"))
 # print(KLexicon(glossary).get("genres"))
 
 
@@ -207,7 +207,7 @@ def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str,list]:
     TVect = np.vstack([np.array([k]) for k in NormalizeList(sum(GetValues(WText)), (0, 1))])
     VText: dict = {"genres" : KLexicon(gloss).get("genres"), "vectors" : TVect}
     return VText
-# print_dict(VectorializeText(my_text, glossary, VTModel))
+# KPrintDict(VectorializeText(my_text, glossary, VTModel))
 
 
 def CategorizeText(VT: dict) -> list[tuple]:

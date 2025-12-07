@@ -15,14 +15,14 @@ import numpy as np
 ###############################################################################################
 
 
-def print_dict(dicc: dict) -> None:
+def KPrintDict(dicc: dict) -> None:
     print(p:= f"Number of items: {len(dicc)}\n\n")
     for k, v in dicc.items():
         l = len(v) if isinstance(v, (list, dict)) else len(str(v))
         print(f"{k}: \n {v} \n {l} \n\n")
     print(p)
-# print_dict(KWeightModel(my_text))
-# print_dict(glossary)
+# KPrintDict(KWeightModel(my_text))
+# KPrintDict(glossary)
 
 
 def plot_dict(weighted_text: dict[str,float]) -> None:

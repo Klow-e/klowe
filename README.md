@@ -146,7 +146,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## DataVisualization
 ```
-> print_dict(dict)                                  == better way to print dictionaries
+> KPrintDict(dict)                                  == better way to print dictionaries
 
 > plot_dict(dict[str,float])                        == of a dict with {string:float} plots a silly little graph
 > plot_function(<function>, "<name>")               == graphs a function

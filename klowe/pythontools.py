@@ -33,6 +33,7 @@ def GetKeys(dicc: dict|list[dict]) -> list:
     `param 1:  dict or list[dict]`
     `returns:  list of the keys of the dictionary/ies`
     `example:  mykeys: list = GetKeys(dicc)`
+    If it's a list[dict], the output will be a list[list].
     """
     if type(dicc) == dict:
         return list(dicc.keys())
@@ -40,7 +41,14 @@ def GetKeys(dicc: dict|list[dict]) -> list:
         return [GetKeys(i) for i in dicc]
 
 
-def GetValues(dicc: dict) -> list:
+def GetValues(dicc: dict|list[dict]) -> list:
+    """
+    From a dict or list[dict], extracts all the values.
+    `param 1:  dict or list[dict]`
+    `returns:  list of the values of the dictionary/ies`
+    `example:  myvalues: list = GetValues(dicc)`
+    If it's a list[dict], the output will be a list[list].
+    """
     if type(dicc) == dict:
         return list(dicc.values())
     elif type(dicc) == list:

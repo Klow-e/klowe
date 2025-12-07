@@ -371,7 +371,7 @@ def categorize(test: dict) -> list[tuple]:
 ###############################################################################################
 
 
-# print_dict(dict[str,float])               -> prints dict data
+# KPrintDict(dict[str,float])               -> prints dict data
 # print_tokens(dict[str,x])                 -> prints just the keys and the length of a dict
 # plot_weighted_text(dict[str,float])       -> plots exponential distribution of tokens by weight
 # print_gloss(dict[str,[dict[str,float]]])  -> prints each genre with its associated vocab dict
@@ -383,14 +383,14 @@ def categorize(test: dict) -> list[tuple]:
 ###############################################################################################
 
 
-def print_dict(dicc):
+def KPrintDict(dicc):
 # better way to print dictionaries
     d_len = len(dicc)
     print(f"Dict len: {d_len}")
     for i, k in dicc.items():
         print(f"\n {i}: \n {k}")
     print(f"\nDict len: {d_len}")
-# print_dict(words_with_weights(wikiweb("Bacilo")))
+# KPrintDict(words_with_weights(wikiweb("Bacilo")))
 
 
 def print_tokens(dict):
