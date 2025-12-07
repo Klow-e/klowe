@@ -51,6 +51,7 @@ setup(
 #        "shutil",
 #        "time",
 #        "typing",
+#        "dataclasses",
     ],
 )
 
