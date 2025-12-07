@@ -23,7 +23,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "KlowE",
-    version = "1.2.2",
+    version = "1.2.3",
     description = "Python package for NLP",
     author = "Chloe Carral Bustillo",
     author_email = "chloevampi01@gmail.com",
@@ -52,24 +52,4 @@ setup(
 #        "time",
     ],
 )
-
-
-# Clean Code Principles
-# # The code should explain itself
-# # The code should be type annotated
-# # The code should be beautiful and regular
-# # The code should be simple and easy
-# # The code should be explicit and flat
-# # The code should be defensive and errors be managed
-# # The coude should ask forgiveness, not permission
-# # A function should only do one thing only
-# # One thing is when no other meaningful function can be extracted
-# # If the implementation is hard to explain, it's a bad idea
-
-
-# ToDo:
-# # capitalize textprocessor functions
-# # comment with ''' ''' function descriptions
-# # create hebrew & greek parser
-# # add formal language, rewriting, and chomsky hierarchy to theory
 

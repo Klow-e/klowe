@@ -17,11 +17,23 @@ from collections import Counter
 
 
 def SortDict(dicc: dict) -> dict:
+    """
+    Sorts a dict from high to low based on its values.
+    `param 1:  dict to be sorted`
+    `returns:  the sorted dict`
+    `example:  sdicc: dict = SortDict(dicc)`
+    """
     sorted_d: dict = dict(sorted(dict(dicc).items(), key=operator.itemgetter(1), reverse=True))
     return sorted_d
 
 
-def GetKeys(dicc: dict) -> list:
+def GetKeys(dicc: dict|list[dict]) -> list:
+    """
+    From a dict or list[dict], extracts all the keys.
+    `param 1:  dict or list[dict]`
+    `returns:  list of the keys of the dictionary/ies`
+    `example:  mykeys: list = GetKeys(dicc)`
+    """
     if type(dicc) == dict:
         return list(dicc.keys())
     elif type(dicc) == list:
