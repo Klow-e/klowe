@@ -33,7 +33,7 @@ def GetKeys(dicc: dict|list[dict]) -> list:
     `param 1:  dict or list[dict]`
     `returns:  list of the keys of the dictionary/ies`
     `example:  mykeys: list = GetKeys(dicc)`
-    If it's a list[dict], the output will be a list[list].
+    If it's a list[dict], the output will be a list[list[<keys>]].
     """
     if type(dicc) == dict:
         return list(dicc.keys())
@@ -47,7 +47,7 @@ def GetValues(dicc: dict|list[dict]) -> list:
     `param 1:  dict or list[dict]`
     `returns:  list of the values of the dictionary/ies`
     `example:  myvalues: list = GetValues(dicc)`
-    If it's a list[dict], the output will be a list[list].
+    If it's a list[dict], the output will be a list[list[<values>]].
     """
     if type(dicc) == dict:
         return list(dicc.values())
@@ -58,21 +58,40 @@ def GetValues(dicc: dict|list[dict]) -> list:
 ###############################################################################################
 
 
-def CountDistribution(lista: list[str]) -> list[tuple[str,int]]:
+def CountDistribution(lista: list[str]) -> list[tuple[str, int]]:
+    """
+    Counts how many times each item of a list appears in it.
+    `param 1:  list[str]`
+    `returns:  list[tuple[str, int]] where tuples are each unique item and how many times it appears`
+    `example:  words_distribution: list[tuple[str, int]] = CountDistribution(tokenized_text)`
+    """
     counter: Counter = Counter(lista)
     return counter.most_common()
 
 
-def NGrams(Tok: list, n: int) -> list[tuple]:
-    ngrams = [tuple(Tok[i: i + n]) for i in range(len(Tok) - n + 1)]
+def NGrams(tok: list, n: int) -> list[tuple]:
+    """
+    Of a list of items and a desired length, returns n-grams.
+    `param 1:  list of items`
+    `param 2:  length of n-grams`
+    `returns:  list[tuple] where tuples are each item followed by the next n items`
+    `example:  mybigrams: list[tuple] = NGrams([1, 2, 3, 4, 5], 2)`
+    """
+    ngrams: list[tuple] = [tuple(tok[i: i + n]) for i in range(len(tok) - n + 1)]
     return ngrams
-# print(NGrams([1, 2, 3, 4, 5], 2))
 
 
 ###############################################################################################
 
 
 def RemoveFolder(name: str) -> None:
+    """
+    Removes a folder alongside its contents and any .zip file with the same name.
+    `param 1:  relative path to folder`
+    `returns:  None`
+    `result:   folder deleted`
+    `example:  RemoveFolder(myfolder)`
+    """
     if os.path.exists(name):
         shutil.rmtree(name)
     if os.path.exists(f"{name}.zip"):
