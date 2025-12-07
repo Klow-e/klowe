@@ -24,10 +24,12 @@ You should have received a copy of the GNU General Public License along with thi
 ## PythonTools
 ```
 > SortDict(dict) -> dict                            == returns a sorted dict from a dict or zip item
-> GetKeys(dict) -> list                             == returns a list of the keys of a dict or list of dicts
-> GetValues(dict) -> list                           == returns a list of the values of a dict or list of dicts
+> GetKeys(dict|list[dict]) -> list                  == returns a list of the keys of a dict or list of dicts
+> GetValues(dict|list[dict]) -> list                == returns a list of the values of a dict or list of dicts
+
 > CountDistribution(list[str]) -> list[tuple]       == returns a count of each str in a list
 > NGrams(list, n) -> list[tuple]                    == returns a list of n-grams from a list
+
 > RemoveFolder(str)                                 == removes the folder with the given name
 ```
 
@@ -117,7 +119,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 > save_gloss(dict[str:[dict[str:float]]])           == saves glossary, like a KGlossary output, to a gloss.json file
 > load_gloss()                                      == loads a gloss.json file
-> example_gloss: dict[str:[dict[str:float]]]        == example of a glossary file
+> example_gloss: dict[str:[dict[str:float]]]        == example of a glossary file, found in example_gloss.py
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
 > print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre
