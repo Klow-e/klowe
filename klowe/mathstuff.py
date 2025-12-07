@@ -47,7 +47,8 @@ def TanhFunction(x: float) -> int:
 
 def ELU(z: float) -> float:
     alph = 1.0
-    return np.maximum(0, z) + np.minimum(0, alph * (np.exp(z) - 1))
+    e = 2.71828
+    return max(0, z) + min(0, alph * ((e**z) - 1))
 
 
 def ReLU(x: float) -> float:

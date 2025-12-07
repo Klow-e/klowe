@@ -62,6 +62,7 @@ def KPlotFunction(func: callable, name: str = '', xsize: tuple = (-3, 3), ysize:
     plt.title(name, fontweight="bold")
     plt.tight_layout()
     plt.show()
+    print()
 # KPlotFunction(TanhFunction, "Tanh")
 
 

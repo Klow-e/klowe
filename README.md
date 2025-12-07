@@ -153,7 +153,7 @@ You should have received a copy of the GNU General Public License along with thi
 > KPrintDict(dict)                                  == better way to print dictionaries
 
 > KPlotDict(dict[str,float])                        == of a dict with {string:float} plots a silly little graph
-> KPlotFunction(<function>, "<name>")               == graphs a function
+> KPlotFunction(<function>, xsize, ysize, step)     == graphs a f(x)=y function
 > KPlotList(list[float])                            == graphs a list of numbers
 ```
 
