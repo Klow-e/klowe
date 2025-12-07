@@ -19,7 +19,18 @@ from collections.abc import Callable
 ###############################################################################################
 
 
-def AlKhwarizmiFunction(a, b, c, x='') -> float|Callable:
+def AlKhwarizmiFunction(a, b, c, x: str|int|float = '') -> float|Callable:
+    """
+    Of a quadratic equation in a given x solves for y.
+    If y is left empty, gives a python function for f(x).
+    `param 1:  a`
+    `param 2:  b`
+    `param 3:  c`
+    `param 4:  optionally x`
+    `returns:  if an x is given, then y; else, f(x)`
+    `example:  yat5: float = AlKhwarizmiFunction(1, -4, -5, 5) -> 0`
+    `example:  myf: Callable = AlKhwarizmiFunction(1, -4, -5) -> myf(5): float = 0`
+    """
     if type(x) != str:
         y = (a * x**2) + (b*x) + c
         return round(y, 4)
