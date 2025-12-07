@@ -41,24 +41,23 @@ def KPlotDict(weighted_text: dict[str,float]) -> None:
 # KPlotDict(RandomDictStrFloat(10))
 
 
-def KPlotFunction(func: callable, name: str, xlo: int = -3, xhi: int = 3, ylo: int = -1, yhi: int = 1) -> None:
+def KPlotFunction(func: callable, name: str = '', xsize: tuple = (-3, 3), ysize: tuple = (-1, 1), step: float|int = 0.5) -> None:
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     # function
     x = np.linspace(-10, 10, 100)
     y = np.vectorize(func)(x)
     plt.plot(x, y, color='black', linewidth=3)
-    plt.plot(x, x*0.333, color='black', linewidth=1)
     plt.plot(x, x, color='black', linewidth=1)
     # (0, 0)
     ax.axhline(0, color='black', linewidth=1, linestyle='--')
     ax.axvline(0, color='black', linewidth=1, linestyle='--')
     # axis borders
-    ax.set_ylim(ylo, yhi)
-    ax.set_xlim(xlo, xhi)
+    ax.set_xlim(xsize)
+    ax.set_ylim(ysize)
     # step size
-    ax.set_xticks(np.arange(-3, 3.5, 0.5))
-    ax.set_yticks(np.arange(-1, 1.5, 0.5))
+    ax.set_xticks(np.arange(xsize[0], xsize[1]+step, step))
+    ax.set_yticks(np.arange(ysize[0], ysize[1]+step, step))
     #plot
     plt.title(name, fontweight="bold")
     plt.tight_layout()
