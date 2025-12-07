@@ -105,9 +105,7 @@ def TanhNormalization(l_values: list[float]) -> list[float]:
 
 def ELUNormalization(l_values: list[float]) -> list[float]:
     l_values = [ELU(x) for x in l_values]
-    #l_values = NormalizeList(l_values, (0, 1))
     return l_values
-# KPlotList(ELUNormalization(RandomFloatList(-1, 1, 13)))
 
 
 def ReLUNormalization(l_values: list[float]) -> list[float]:
