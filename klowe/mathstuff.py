@@ -119,6 +119,13 @@ def MidPoint(a: float, b: float) -> float:
 
 
 def TopPercent(values_l: list[float], threshold: float) -> list[float]:
+    """
+    Of a list of values, gives the top n perone.
+    `param 1:  list of numerical values`
+    `param 2:  top perone threshold`
+    `returns:  values of the list that make up the top n perone of the sum of the list`
+    `example:  top_30_percent_list: list[float] = TopPercent([30, 20, 20, 20, 10], 0.30)`
+    """
     target_threshold: float = sum(values_l) * threshold
     sorted_values: list[float] = sorted(values_l, reverse=True)
     
@@ -130,7 +137,6 @@ def TopPercent(values_l: list[float], threshold: float) -> list[float]:
         accumulated_sum += v
         if accumulated_sum >= target_threshold:
             break
-    
     return selected_v
 
 
