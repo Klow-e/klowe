@@ -46,7 +46,7 @@ You should have received a copy of the GNU General Public License along with thi
 > RandomChoiceFrom(iterable) -> item                == picks a random item in an iterable object
 
 > AlKhwarizmiFunction(a, b, c, x) -> y              == gives the y of a quadratic formula in a given x
-> AlKhwarizmiFunction(a, b, c) -> callable[x] -> y  == of a given quadratic formula gives its f(x)
+> AlKhwarizmiFunction(a, b, c) -> Callable[x] -> y  == of a given quadratic formula gives its f(x)
 > TanhFunction(x) -> y                              == passes data through a Tanh function
 > ELU(x) -> y                                       == exponential linear unit function
 > ReLU(x) -> y                                      == rectified linear unit function
