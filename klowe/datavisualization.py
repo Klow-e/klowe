@@ -41,7 +41,7 @@ def KPlotDict(weighted_text: dict[str,float]) -> None:
 # KPlotDict(RandomDictStrFloat(10))
 
 
-def KPlotFunction(func: callable, name: str) -> None:
+def KPlotFunction(func: callable, name: str, xlo: int = -3, xhi: int = 3, ylo: int = -1, yhi: int = 1) -> None:
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     # function
@@ -54,8 +54,8 @@ def KPlotFunction(func: callable, name: str) -> None:
     ax.axhline(0, color='black', linewidth=1, linestyle='--')
     ax.axvline(0, color='black', linewidth=1, linestyle='--')
     # axis borders
-    ax.set_ylim(-1, 1)
-    ax.set_xlim(-3, 3)
+    ax.set_ylim(ylo, yhi)
+    ax.set_xlim(xlo, xhi)
     # step size
     ax.set_xticks(np.arange(-3, 3.5, 0.5))
     ax.set_yticks(np.arange(-1, 1.5, 0.5))
