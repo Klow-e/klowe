@@ -67,7 +67,9 @@ universal_stopwords: list[str] = ["displaystyle", "chh", "skip", "isbn", "xix", 
 
 stop_words: list[str] = []
 
+
 KLanguage: list = []
+
 def set_language(lang: str):
     KLanguage.clear()
     KLanguage.extend(lang)
