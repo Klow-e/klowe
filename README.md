@@ -79,7 +79,7 @@ You should have received a copy of the GNU General Public License along with thi
 > legal_characters: str                             == string of allowed characters in spa + ita orthography
 > stop_words: list[str]                             == list of stopwords (esp + ita)
 
-> set_language("<es>")                              == sets language for stopwords and webpages
+> KSetLanguage("<es>")                              == sets language for stopwords and webpages
 > clean_text("<text>") -> str                       == normalizes text
 
 > sentence_tokenization("<text>") -> lisr[str]      == separates text by sentence

@@ -115,7 +115,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     Works fine on UNIX-based file systems, may fail on Windows.
     """
 
-    if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with set_language() as 'es', 'en'...")
+    if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with KSetLanguage() as 'es', 'en'...")
     if len(seeds := [f"%22{i}%22" for i in query_terms]) < 3: raise Exception(f"Must add at least 3 seeds to input_seeds()")
     search_tuples: list[str] = ["+".join(i).replace(" ", "+") for i in list(combinations(seeds, 3))]
 
