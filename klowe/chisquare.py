@@ -18,6 +18,15 @@ import operator
 
 
 def Chi2(a: int, b: int, c: int, d: int) -> float:
+    """
+    Gives the chi^2 score of a 2x2 contingency table.
+    `param 1:  (A ∪ B)`
+    `param 2:  (A ∪ B̅)`
+    `param 3:  (A̅ ∪ B)`
+    `param 4:  (A̅ ∪ B̅)`
+    `returns:  chi^2 score`
+    `example:  my_conttab: float = Chi2(30, 20, 10, 940)`
+    """
     chi_num = (a+b+c+d)*(((a*d)-(b*c))**2)
     chi_den = (a+b)*(c+d)*(a+c)*(b+d)
     if chi_num == 0: chi = 0
@@ -26,6 +35,12 @@ def Chi2(a: int, b: int, c: int, d: int) -> float:
 
 
 def Chi2Confidence(chi: float) -> float:
+    """
+    Gives the confidence level of a chi^2 score at 1df.
+    `param 1:  a chi^2 score`
+    `returns:  confidence level per-one of the chi^2 score`
+    `example:  my_conttab_confidence: float = Chi2Confidence(429.824561)`
+    """
     match chi:
         case x if 00.05 <= x < 00.10: return 0.1
         case x if 00.10 <= x < 00.15: return 0.2
@@ -153,7 +168,6 @@ def SearchBigramUnit(text: str, query: tuple[str, ...]) -> float:
     d: int = (len(bigrams)+1) - (a+b+c)
     chi: float = Chi2(a, b, c, d)
     return chi
-# print(SearchBigramUnit("snow white a snow white b snow white c snow white d snow white e snow white f snow white", ("snow", "white")))
 
 
 def SearchTrigramUnit(text: str, query: tuple[str, ...]) -> float:
@@ -169,7 +183,6 @@ def SearchTrigramUnit(text: str, query: tuple[str, ...]) -> float:
     d: int = (len(trigrams)+1) - (a+b+c)
     chi: float = Chi2(a, b, c, d)
     return chi
-# print(SearchTrigramUnit("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white", ("snow", "super", "white")))
 
 
 def ExtractBigramCompositions(text: str) -> dict[tuple, float]:
@@ -190,7 +203,6 @@ def ExtractBigramCompositions(text: str) -> dict[tuple, float]:
     comp2 = {i : comp2[i] for i in comp2 if i not in comad}
     comp2 = {i : Chi2Confidence(comp2[i]) for i in comp2}
     return comp2
-# print(ExtractBigramCompositions("snow white a snow white b snow white c snow white d snow white e snow white f snow white"))
 
 
 def ExtractTrigramCompositions(text: str) -> dict[tuple, float]:
@@ -205,7 +217,6 @@ def ExtractTrigramCompositions(text: str) -> dict[tuple, float]:
     comp3 = SortDict(comp3)
     comp3 = {i : Chi2Confidence(comp3[i]) for i in comp3}
     return comp3
-# print(ExtractTrigramCompositions("snow super white a snow super white b snow super white c snow super white d snow super white e snow super white f snow super white"))
 
 
 ###############################################################################################
