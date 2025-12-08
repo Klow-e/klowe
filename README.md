@@ -23,8 +23,6 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## PythonTools
 ```
-> RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
-
 > SortDict(dict) -> dict                            == returns a sorted dict from a dict or zip item
 > GetKeys(dict|list[dict]) -> list                  == returns a list of the keys of a dict or list of dicts
 > GetValues(dict|list[dict]) -> list                == returns a list of the values of a dict or list of dicts
@@ -47,9 +45,6 @@ You should have received a copy of the GNU General Public License along with thi
 > RandomDictStrFloat(length) -> dict[str,float]     == gives a pseudo-random dict[str,float]
 > RandomChoiceFrom(iterable) -> item                == picks a random item in an iterable object
 
-> MidPoint(a, b) -> float                           == gives the midpoint between two numbers
-> TopPercent(list[float], float) -> list[float]     == gets the top float per one values in a list of values
-
 > AlKhwarizmiFunction(a, b, c, x) -> y              == gives the y of a quadratic formula in a given x
 > AlKhwarizmiFunction(a, b, c) -> Callable[x] -> y  == of a given quadratic formula gives its f(x)
 > TanhFunction(x) -> y                              == passes data through a Tanh function
@@ -62,7 +57,12 @@ You should have received a copy of the GNU General Public License along with thi
 > ELUNormalization(list[float])                     == passes a list of values through the ELU function
 > ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
 
+> MidPoint(a, b) -> float                           == gives the midpoint between two numbers
+> TopPercent(list[float], float) -> list[float]     == gets the top float per one values in a list of values
+> RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
+
 > NormalizeDict(dict[str,float], scale) -> dict     == normalizes a dict's values into a (s0, s1) feature scale
+> RoundDict(dict[str,float], int) -> dict           == rouns a dict's values to n positions
 ```
 
 

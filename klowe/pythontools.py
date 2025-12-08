@@ -16,18 +16,6 @@ from collections import Counter
 ###############################################################################################
 
 
-def RoundList(l: list[float], n: int) -> list[float]:
-    """
-    Rounds every number in a list of floats to a desired size.
-    `param 1:  list[float]`
-    `param 2:  number of decimals to round each float`
-    `returns:  the list with every float rounded to n decimals`
-    `example:  rounded_list: list[float] = RoundList([-1.2077, -0.1002, 1.7261, 0.9009], 2)`
-    """
-    r_list: list[float] = [round(i, n) for i in l]
-    return r_list
-
-
 def SortDict(dicc: dict|zip) -> dict:
     """
     Sorts a dict or zip from high to low based on its values.

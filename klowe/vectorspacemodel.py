@@ -113,6 +113,7 @@ def DefineGenre(l_dicts: list[dict[str,float]]) -> dict[str,float]:
     all_keys: set[str] = sorted({k for d in l_dicts for k in d})
     total_d = len(l_dicts)
     genre_dict: dict = SortDict({i : (sum(d.get(i, 0) for d in l_dicts) / total_d) for i in all_keys})
+    # normalizes and rounds
     genre_dict: dict = dict(zip( genre_dict.keys() , RoundList( NormalizeList(genre_dict.values(), (0, 1)) , 10) ))
     return genre_dict
 # print(DefineGenre([KWeightModel(my_text_aritmetica), KWeightModel(my_text_geometria)]))

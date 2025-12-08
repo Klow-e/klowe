@@ -181,6 +181,18 @@ def TopPercent(values_l: list[float], threshold: float) -> list[float]:
     return selected_v
 
 
+def RoundList(l: list[float], n: int) -> list[float]:
+    """
+    Rounds every number in a list of floats to a desired size.
+    `param 1:  list[float]`
+    `param 2:  number of decimals to round each float`
+    `returns:  the list with every float rounded to n decimals`
+    `example:  rounded_list: list[float] = RoundList([-1.2077, -0.1002, 1.7261, 0.9009], 2)`
+    """
+    r_list: list[float] = [round(i, n) for i in l]
+    return r_list
+
+
 ###############################################################################################
 
 
@@ -190,10 +202,22 @@ def NormalizeDict(dicc: dict[str, float], scale: tuple[float, float]) -> dict[st
     `param 1:  dict[str, float]`
     `param 2:  tuple with the lower and upper limits to normalize to`
     `returns:  the dict with every value normalized to that range`
-    `example:  normalized_dict: dict[str, float] = NormalizeDict({'e': 2.71, 'pi': 3.12, 'tau': 6.28}, (0, 1))`
+    `example:  normalized_dict: dict[str, float] = NormalizeDict({'e': 2.71, 'pi': 3.14, 'tau': 6.28}, (0, 1))`
     """
     n_dicc: dict[str, float] = {i : NormalizeValue(dicc.get(i), GetValues(dicc), scale) for i in dicc}
     return n_dicc
+
+
+def RoundDict(dicc: dict[str, float], n: int) -> dict[str, float]:
+    """
+    Rounds every number in a dict's values to a desired size.
+    `param 1:  dict[str, float]`
+    `param 2:  number of decimals to round each float`
+    `returns:  the dict with every value rounded to n decimals`
+    `example:  rounded_dict: dict[str, float] = RoundDict({'e': 2.7182, 'pi': 3.1415, 'tau': 6.2831}, 2)`
+    """
+    r_dicc: dict[str, float] = {i : round(dicc[i], n) for i in dicc}
+    return r_dicc
 
 
 ###############################################################################################
