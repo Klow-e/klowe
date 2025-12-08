@@ -34,19 +34,11 @@ def WebPage(url: str) -> str:
         paragraphs = [p.text for p in paragraphs]
         paragraphs = " ".join(paragraphs)
         return paragraphs
-    elif response.status_code == 429:
-        print(f"Error '429 Too Many Requests' at '{url = }'")
-        print(f" The function will return str('no') for pipelining purposes and wait for 9 seconds to not stress the API.")
-        time.sleep(9)
-        return "no"
-    else:
-        print(f"Unacceptable response '{response.status_code}' at '{url = }'")
-        print(f" The function will return str('no') for pipelining purposes.")
-        return "no"
+    else: raise Exception(f"Unacceptable response '{response.status_code}' at '{url = }'")
 
 
 def PDFtext(url: str):
-    response = requests.get(url)
+    response = requests.get(url,  timeout=5)
     if response.status_code == 200:
         with open('name', 'wb') as fl:
             fl.write(response.content)
