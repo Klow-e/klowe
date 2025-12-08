@@ -216,7 +216,8 @@ def ExtractBigramCompositions(text: str) -> dict[tuple, float]:
     comp2: dict = {}
     for i in bigrams:
         qs: float = SearchBigramUnit(text, i)
-        if qs > threshold:
+        qa: int = False if len([j for j in bigrams if j == i]) == 1 else True
+        if qa and qs > threshold:
             comp2.update({i : Chi2Confidence(qs)})
     return SortDict(comp2)
 
@@ -235,7 +236,8 @@ def ExtractTrigramCompositions(text: str) -> dict[tuple, float]:
     comp3: dict = {}
     for i in trigrams:
         qs: float = SearchTrigramUnit(text, i)
-        if qs > threshold:
+        qa: int = False if len([j for j in trigrams if j == i]) == 1 else True
+        if qa and qs > threshold:
             comp3.update({i : Chi2Confidence(qs)})
     return SortDict(comp3)
 
