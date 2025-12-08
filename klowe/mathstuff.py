@@ -80,6 +80,14 @@ def ReLU(x: float) -> float:
 
 
 def NormalizeValue(x: float, values_l: list[float], scale: tuple[float, float]) -> float:
+    """
+    Normalizes a value in a list to a desired scale.
+    `param 1:  value to be normalized`
+    `param 2:  list where it would appear`
+    `param 3:  tuple of the scale to normalize in`
+    `returns:  aaa`
+    `example:  normalized_value: float = NormalizeValue(0.314, [-0.42, -2, 2, 0.314], (0, 1))`
+    """
     s0, s1 = scale
     min_v, max_v = min(values_l), max(values_l)
     dividend: float = (max_v - min_v)
@@ -88,32 +96,74 @@ def NormalizeValue(x: float, values_l: list[float], scale: tuple[float, float]) 
 
 
 def NormalizeList(values_l: list[float], scale: tuple[float, float]) -> list[float]:
+    """
+    Normalizes the values of a list[float] to a desired scale.
+    `param 1:  list[float]`
+    `param 2:  tuple with the lower and upper limits to normalize to`
+    `returns:  the list normalized to that range`
+    `example:  normalized_list: list[float] = NormalizeList([-0.42, -2, 2, 0.314], (0, 1))`
+    """
     n_list: list[float] = [NormalizeValue(x, values_l, scale) for x in values_l]
     return n_list
 
 
-def RoundList(l: list[float], n: int) -> list[float]:
-    r_list: list[float] = [round(i, n) for i in l]
-    return r_list
-
-
 def TanhNormalization(l_values: list[float]) -> list[float]:
+    """
+    Makes extreme values more extreme, scaled to (0,1)
+    1: Normalizes original list to (-3,3) so the Tanh function applies equally.
+    2: Passes values through a Tanh function.
+    3: Normalizes result to (0,1).
+    `param 1:  List of values to be normalized`
+    `returns:  List through a Tanh function`
+    `example:  tanh_normlis: list[float] = TanhNormalization([-3, -2. -1, 0, 1, 2, 3])`
+    """
     l_values = NormalizeList(l_values, (-3, 3))
     TN = [TanhFunction(x) for x in l_values]
     return NormalizeList(TN, (0, 1))
 
 
 def ELUNormalization(l_values: list[float]) -> list[float]:
+    """
+    1: aaaaa
+    `param 1:  List of values to be normalized`
+    `returns:  List through a ELU function`
+    `example:  elu_normlis: list[float] = ELUNormalization([-3, -2. -1, 0, 1, 2, 3])`
+    """
     l_values = [ELU(x) for x in l_values]
     return l_values
 
 
 def ReLUNormalization(l_values: list[float]) -> list[float]:
+    """
+    1: aaaaa
+    `param 1:  List of values to be normalized`
+    `returns:  List through a ReLU function`
+    `example:  relu_norlis: list[float] = ReLUNormalization([-3, -2. -1, 0, 1, 2, 3])`
+    """
     l_values = [ReLU(x) for x in l_values]
     return l_values
 
 
+def RoundList(l: list[float], n: int) -> list[float]:
+    """
+    Rounds every number in a list of floats to a desired size.
+    `param 1:  list[float]`
+    `param 2:  number of decimals to round each float`
+    `returns:  the list with every float rounded to n decimals`
+    `example:  rounded_list: list[float] = RoundList([-1.2077, -0.1002, 1.7261, 0.9009], 2)`
+    """
+    r_list: list[float] = [round(i, n) for i in l]
+    return r_list
+
+
 def MidPoint(a: float, b: float) -> float:
+    """
+    Gives the number midway between two numbers.
+    `param 1:  lower number`
+    `param 2:  higher number`
+    `returns:  midpoint between those two`
+    `example:  middle_e_pi: float = MidPoint(2.7182, 3.1415)`
+    """
     mid: float = (a * 0.5) + (b * 0.5)
     return mid
 
