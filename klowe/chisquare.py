@@ -27,7 +27,7 @@ def Chi2(a: int, b: int, c: int, d: int) -> float:
     `returns:  chi^2 score`
     `example:  my_conttab: float = Chi2(30, 20, 10, 940)`
     """
-    chi_num = (a+b+c+d)*(((a*d)-(b*c))**2)
+    chi_num = (a+b+c+d) * (((a*d)-(b*c))**2)
     chi_den = (a+b)*(c+d)*(a+c)*(b+d)
     if chi_num == 0: chi = 0
     else: chi = chi_num / chi_den
@@ -170,11 +170,12 @@ def SearchBigramUnit(text: str, query: tuple[str, str]) -> float:
     bigrams: list[tuple] = NGrams(T, 2)
     A: str = query[0]
     B: str = query[1]
-    a: int = bigrams.count((A, B))
-    b: int = T.count(A)-a
-    c: int = T.count(B)-a
-    d: int = (len(bigrams)+1) - (a+b+c)
+    a: int = len([i for i in bigrams if i == query])                # = "(A & B)"¬
+    b: int = len([i for i in bigrams if i[0] == A and i[1] != B])   # = "(A & ¬B)"
+    c: int = len([i for i in bigrams if i[0] != A and i[1] == B])   # = "(¬A & B)"
+    d: int = len(bigrams)-a                                         # = "(¬A & ¬B)"
     chi: float = Chi2(a, b, c, d)
+    # print(f"{query = } ;; {a=} ; {b=} ; {c=} ; {d=} ;; {chi = }\n")
     return chi
 
 
@@ -188,16 +189,16 @@ def SearchTrigramUnit(text: str, query: tuple[str, str, str]) -> float:
     `example:  tri_query_chi2_score: float = SearchTrigramUnit(mytext, ("de", "la", "soul"))`
     """
     T: list[str] = tokenization(text)
-    bigrams: list[tuple] = NGrams(T, 2)
     trigrams: list[tuple] = NGrams(T, 3)
     A: str = query[0]
     B: str = query[1]
     C: str = query[2]
-    a: int = trigrams.count((A, B, C))      # = "(A & B & C)"
-    b: int = bigrams.count((A, B))-a        # = "(A & B) ∧ ¬(A & B & C)"
-    c: int = bigrams.count((B, C))-a        # = "(B & C) ∧ ¬(A & B & C)"
-    d: int = (len(trigrams)+1) - (a+b+c)    # = "¬(A & B & C)"
+    a: int = len([i for i in trigrams if i == query])                               # = "(A & B & C)"
+    b: int = len([i for i in trigrams if i[0] == A and i[1] == B and i[2] != C])    # = "(A & B) ∧ ¬(A & B & C)"
+    c: int = len([i for i in trigrams if i[0] != A and i[1] == B and i[2] == C])    # = "(B & C) ∧ ¬(A & B & C)"
+    d: int = len(trigrams)-a                                                        # = "¬(A & B & C)"
     chi: float = Chi2(a, b, c, d)
+    # print(f"{query = } ;; {a=} ; {b=} ; {c=} ; {d=} ;; {chi = }\n")
     return chi
 
 
@@ -207,7 +208,7 @@ def ExtractBigramCompositions(text: str) -> dict[tuple, float]:
     bigrams = [i for i in bigrams if i[0] not in stop_words]
     bigrams = [i for i in bigrams if i[1] not in stop_words]
     bigrams = [i for i in bigrams if i[0] != i[1]]
-    alph, df, p = 0.0005, 1, 12.116
+    alph, p = 0.0005, 12.116
     comp2 = {}
     for i in bigrams:
         if SearchBigramUnit(text, i) > p:
@@ -225,7 +226,7 @@ def ExtractTrigramCompositions(text: str) -> dict[tuple, float]:
     T: list[str] = tokenization(text)
     bigrams = NGrams(T, 2)
     trigrams = NGrams(T, 3)
-    alph, df, p = 0.0005, 1, 12.116
+    alph, p = 0.0005, 12.116
     comp3 = {}
     for i in trigrams:
         if SearchTrigramUnit(text, i) > p:

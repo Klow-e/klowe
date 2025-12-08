@@ -23,7 +23,7 @@ from collections.abc import Sequence
 def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: int|float|str = '') -> float|int|Callable[[int|float], int|float]:
     """
     Of a quadratic equation in a given x solves for y.
-    If y is left empty, gives a python function for f(x).
+    If x is left empty, gives a python function for f(x).
     `param 1:  a`
     `param 2:  b`
     `param 3:  c`
