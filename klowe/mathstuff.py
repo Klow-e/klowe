@@ -14,12 +14,13 @@ import numpy as np
 import datetime
 from typing import Any
 from collections.abc import Callable
+from collections.abc import Sequence
 
 
 ###############################################################################################
 
 
-def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: int|float|str = '') -> float|int|Callable:
+def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: int|float|str = '') -> float|int|Callable[int|float]:
     """
     Of a quadratic equation in a given x solves for y.
     If y is left empty, gives a python function for f(x).
@@ -270,7 +271,7 @@ def RandomInt(a: int, b: int) -> int:
     return RN
 
 
-def RandomChoiceFrom(ite: Any) -> Any:
+def RandomChoiceFrom(ite: Sequence) -> Any:
     """
     Picks a random item from an iterable.
     `param 1:  iterable object`
@@ -278,7 +279,7 @@ def RandomChoiceFrom(ite: Any) -> Any:
     `example:  apick: int = RandomChoiceFrom([1, 2, 3, 4])`
     """
     indexchoice: int = RandomInt(0, len(ite))
-    choice = ite[indexchoice]
+    choice: Any = ite[indexchoice]
     return choice
 
 

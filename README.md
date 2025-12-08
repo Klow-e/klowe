@@ -43,7 +43,7 @@ You should have received a copy of the GNU General Public License along with thi
 > RandomWord() -> str                               == gives a pseudo-random word
 > RandomWordList(length) -> list[str]               == gives a list of pseudo-random words
 > RandomDictStrFloat(length) -> dict[str,float]     == gives a pseudo-random dict[str,float]
-> RandomChoiceFrom(iterable) -> item                == picks a random item in an iterable object
+> RandomChoiceFrom(Iterable) -> item                == picks a random item in an iterable object
 
 > AlKhwarizmiFunction(a, b, c, x) -> y              == gives the y of a quadratic formula in a given x
 > AlKhwarizmiFunction(a, b, c) -> Callable[x] -> y  == of a given quadratic formula gives its f(x)
