@@ -23,6 +23,8 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## PythonTools
 ```
+> RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
+
 > SortDict(dict) -> dict                            == returns a sorted dict from a dict or zip item
 > GetKeys(dict|list[dict]) -> list                  == returns a list of the keys of a dict or list of dicts
 > GetValues(dict|list[dict]) -> list                == returns a list of the values of a dict or list of dicts
@@ -56,7 +58,6 @@ You should have received a copy of the GNU General Public License along with thi
 
 > NormalizeValue(x, values, (s0, s1)) -> float      == of a value in a list of values, returns the normalized value
 > NormalizeList(list[float], scale) -> list[float]  == normalizes a list of values into a (s0, s1) feature scale
-> RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
 > TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
 > ELUNormalization(list[float])                     == passes a list of values through the ELU function
 > ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
