@@ -144,6 +144,9 @@ def ReLUNormalization(l_values: list[float]) -> list[float]:
     return l_values
 
 
+###############################################################################################
+
+
 def MidPoint(a: float, b: float) -> float:
     """
     Gives the number midway between two numbers.
@@ -176,6 +179,21 @@ def TopPercent(values_l: list[float], threshold: float) -> list[float]:
         if accumulated_sum >= target_threshold:
             break
     return selected_v
+
+
+###############################################################################################
+
+
+def NormalizeDict(dicc: dict[str, float], scale: tuple[float, float]) -> dict[str, float]:
+    """
+    Normalizes every value in a dict[str, float] to a desired size.
+    `param 1:  dict[str, float]`
+    `param 2:  tuple with the lower and upper limits to normalize to`
+    `returns:  the dict with every value normalized to that range`
+    `example:  normalized_dict: dict[str, float] = NormalizeDict({'e': 2.71, 'pi': 3.12, 'tau': 6.28}, (0, 1))`
+    """
+    n_dicc: dict[str, float] = {i : NormalizeValue(dicc.get(i), GetValues(dicc), scale) for i in dicc}
+    return n_dicc
 
 
 ###############################################################################################

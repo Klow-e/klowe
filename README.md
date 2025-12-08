@@ -61,6 +61,8 @@ You should have received a copy of the GNU General Public License along with thi
 > TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
 > ELUNormalization(list[float])                     == passes a list of values through the ELU function
 > ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
+
+> NormalizeDict(dict[str,float], scale) -> dict     == normalizes a dict's values into a (s0, s1) feature scale
 ```
 
 
