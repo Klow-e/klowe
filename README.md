@@ -75,8 +75,8 @@ You should have received a copy of the GNU General Public License along with thi
 > SearchBigramUnit(str, tuple[str]) -> float        == search on a text for a given bigram composition ("A", "B")
 > SearchTrigramUnit(str, tuple[str]) -> float       == search on a text for a given trigram composition ("A", "B", "C")
 
-> ExtractBigramCompositions(str) -> dict[tuple,fl]  == extract from a text probable bigram compositions
-> ExtractTrigramCompositions(str) -> dict[tuple,fl] == extract from a text probable trigram compositions
+> ExtractBigramCompositions(str) -> dict[tuple,fl]  == extract from a str probable bigram compositions
+> ExtractTrigramCompositions(str) -> dict[tuple,fl] == extract from a str probable trigram compositions
 ```
 
 

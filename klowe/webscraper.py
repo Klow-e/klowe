@@ -27,7 +27,7 @@ import time
 
 
 def WebPage(url: str) -> str:
-    response = requests.get(url)
+    response = requests.get(url, timeout=5)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
         paragraphs = soup.find_all('p')
@@ -41,7 +41,7 @@ def WebPage(url: str) -> str:
         return "no"
     else:
         print(f"Unacceptable response '{response.status_code}' at '{url = }'")
-        print(f" The function will return str('no') for pipelining purposes")
+        print(f" The function will return str('no') for pipelining purposes.")
         return "no"
 
 
@@ -98,7 +98,6 @@ def file_to_text(file_path: str) -> list[str]:
 
 
 def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
-
     """
     1: Creates the directory structure for a web scraping project.
     2: Generates a list of combinations of temrs suitable for insertion in a searcher's URL.
