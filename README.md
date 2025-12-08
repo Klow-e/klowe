@@ -72,11 +72,11 @@ You should have received a copy of the GNU General Public License along with thi
 > Chi2(a, b, c, d) -> float                         == chi^2 test of {a, b, c, d} in a 2x2 contingency table (1df)
 > Chi2Confidence(float) -> float                    == confidence level per-one of a 1df chi^2
 
-> SearchBigramUnit(str, tuple[str]) -> float        == search on a dirty text for a given bigram composition ("A", "B")
-> SearchTrigramUnit(str, tuple[str]) -> float       == search on a dirty text for a given trigram composition ("A", "B", "C")
+> SearchBigramUnit(str, tuple[str]) -> float        == search on a text for a given bigram composition ("A", "B")
+> SearchTrigramUnit(str, tuple[str]) -> float       == search on a text for a given trigram composition ("A", "B", "C")
 
-> ExtractBigramCompositions(str) -> dict[tuple,fl]  == extract from a dirty text probable bigram compositions
-> ExtractTrigramCompositions(str) -> dict[tuple,fl] == extract from a dirty text probable trigram compositions
+> ExtractBigramCompositions(str) -> dict[tuple,fl]  == extract from a text probable bigram compositions
+> ExtractTrigramCompositions(str) -> dict[tuple,fl] == extract from a text probable trigram compositions
 ```
 
 

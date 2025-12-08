@@ -203,37 +203,41 @@ def SearchTrigramUnit(text: str, query: tuple[str, str, str]) -> float:
 
 
 def ExtractBigramCompositions(text: str) -> dict[tuple, float]:
+    """
+    Extracts bigrams that occur more frequently than expected in a text.
+    `param 1:  text`
+    `returns:  dict with the bigram and the chi^2 confidence level`
+    `example:  mycompositions: dict[tuple, float] = ExtractBigramCompositions(mytext)`
+    """
     T: list[str] = tokenization(text)
-    bigrams = NGrams(T, 2)
-    bigrams = [i for i in bigrams if i[0] not in stop_words]
-    bigrams = [i for i in bigrams if i[1] not in stop_words]
-    bigrams = [i for i in bigrams if i[0] != i[1]]
-    alph, p = 0.0005, 12.116
-    comp2 = {}
+    bigrams: list[tuple[str, str]] = NGrams(T, 2)
+    threshold: float = 12.116
+
+    comp2: dict = {}
     for i in bigrams:
-        if SearchBigramUnit(text, i) > p:
-            comp2[i] = SearchBigramUnit(text, i)
-    comp2 = SortDict(comp2)
-    comad = [i[0] + ", " + i[1] for i in comp2]
-    comad = [i for i in comad if i in text]
-    comad = [tuple(tokenization(i)) for i in comad]
-    comp2 = {i : comp2[i] for i in comp2 if i not in comad}
-    comp2 = {i : Chi2Confidence(comp2[i]) for i in comp2}
-    return comp2
+        qs: float = SearchBigramUnit(text, i)
+        if qs > threshold:
+            comp2.update({i : Chi2Confidence(qs)})
+    return SortDict(comp2)
 
 
 def ExtractTrigramCompositions(text: str) -> dict[tuple, float]:
+    """
+    Extracts trigrams that occur more frequently than expected in a text.
+    `param 1:  text`
+    `returns:  dict with the trigram and the chi^2 confidence level`
+    `example:  mycompositions: dict[tuple, float] = ExtractTrigramCompositions(mytext)`
+    """
     T: list[str] = tokenization(text)
-    bigrams = NGrams(T, 2)
-    trigrams = NGrams(T, 3)
-    alph, p = 0.0005, 12.116
-    comp3 = {}
+    trigrams: list[tuple[str, str, str]] = NGrams(T, 3)
+    threshold: float = 12.116
+
+    comp3: dict = {}
     for i in trigrams:
-        if SearchTrigramUnit(text, i) > p:
-            comp3[i] = SearchTrigramUnit(text, i)
-    comp3 = SortDict(comp3)
-    comp3 = {i : Chi2Confidence(comp3[i]) for i in comp3}
-    return comp3
+        qs: float = SearchTrigramUnit(text, i)
+        if qs > threshold:
+            comp3.update({i : Chi2Confidence(qs)})
+    return SortDict(comp3)
 
 
 ###############################################################################################
