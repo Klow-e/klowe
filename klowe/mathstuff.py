@@ -13,12 +13,18 @@ import math
 import numpy as np
 import datetime
 from typing import Any
+from typing import overload
 from collections.abc import Callable
 from collections.abc import Sequence
 
 
 ###############################################################################################
 
+
+@overload
+def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: int|float) -> float|int: ...
+@overload
+def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: str) -> Callable[[float|int], float|int]: ...
 
 def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: int|float|str = '') -> float|int|Callable[[int|float], int|float]:
     """
