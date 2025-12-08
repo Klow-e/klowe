@@ -16,9 +16,9 @@ from collections import Counter
 ###############################################################################################
 
 
-def SortDict(dicc: dict) -> dict:
+def SortDict(dicc: dict|zip) -> dict:
     """
-    Sorts a dict from high to low based on its values.
+    Sorts a dict or zip from high to low based on its values.
     `param 1:  dict to be sorted`
     `returns:  the sorted dict`
     `example:  sdicc: dict = SortDict(dicc)`

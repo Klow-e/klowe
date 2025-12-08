@@ -25,7 +25,6 @@
 # # add formal language, rewriting, and chomsky hierarchy to theory
 # # annotate functions
 # # # datavisualization.py
-# # # mathstuff.py
 # # # textprocessor.py
 # # # chisquare.py
 # # # vectorspacemodel.py
