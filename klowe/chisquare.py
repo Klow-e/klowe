@@ -157,11 +157,19 @@ def Chi2Confidence(chi: float) -> float:
 ###############################################################################################
 
 
-def SearchBigramUnit(text: str, query: tuple[str, ...]) -> float:
-    T = tokenization(text)
-    bigrams = NGrams(T, 2)
-    A = query[0]
-    B = query[1]
+def SearchBigramUnit(text: str, query: tuple[str, str]) -> float:
+    """
+    Checks the chi^2 score of two words happening together in a text.
+    The confidence level of this score tells if both words form a compound.
+    `param 1:  text`
+    `param 1:  tuple with both words`
+    `returns:  chi^2 of number of bigrams of those words in the text`
+    `example:  bi_query_chi2_score: float = SearchBigramUnit(mytext, ("snow", "white"))`
+    """
+    T: list[str] = tokenization(text)
+    bigrams: list[tuple] = NGrams(T, 2)
+    A: str = query[0]
+    B: str = query[1]
     a: int = bigrams.count((A, B))
     b: int = T.count(A)-a
     c: int = T.count(B)-a
@@ -170,23 +178,31 @@ def SearchBigramUnit(text: str, query: tuple[str, ...]) -> float:
     return chi
 
 
-def SearchTrigramUnit(text: str, query: tuple[str, ...]) -> float:
-    T = tokenization(text)
-    bigrams = NGrams(T, 2)
-    trigrams = NGrams(T, 3)
-    A = query[0]
-    B = query[1]
-    C = query[2]
-    a: int = trigrams.count((A, B, C))
-    b: int = bigrams.count((A, B))-a
-    c: int = bigrams.count((B, C))-a
-    d: int = (len(trigrams)+1) - (a+b+c)
+def SearchTrigramUnit(text: str, query: tuple[str, str, str]) -> float:
+    """
+    Checks the chi^2 score of three words happening together in a text.
+    The confidence level of this score tells if the words form a compound.
+    `param 1:  text`
+    `param 1:  tuple with the three words`
+    `returns:  chi^2 of number of trigrams of those words in the text`
+    `example:  tri_query_chi2_score: float = SearchTrigramUnit(mytext, ("de", "la", "soul"))`
+    """
+    T: list[str] = tokenization(text)
+    bigrams: list[tuple] = NGrams(T, 2)
+    trigrams: list[tuple] = NGrams(T, 3)
+    A: str = query[0]
+    B: str = query[1]
+    C: str = query[2]
+    a: int = trigrams.count((A, B, C))      # = "(A & B & C)"
+    b: int = bigrams.count((A, B))-a        # = "(A & B) ∧ ¬(A & B & C)"
+    c: int = bigrams.count((B, C))-a        # = "(B & C) ∧ ¬(A & B & C)"
+    d: int = (len(trigrams)+1) - (a+b+c)    # = "¬(A & B & C)"
     chi: float = Chi2(a, b, c, d)
     return chi
 
 
 def ExtractBigramCompositions(text: str) -> dict[tuple, float]:
-    T = tokenization(text)
+    T: list[str] = tokenization(text)
     bigrams = NGrams(T, 2)
     bigrams = [i for i in bigrams if i[0] not in stop_words]
     bigrams = [i for i in bigrams if i[1] not in stop_words]
@@ -206,7 +222,7 @@ def ExtractBigramCompositions(text: str) -> dict[tuple, float]:
 
 
 def ExtractTrigramCompositions(text: str) -> dict[tuple, float]:
-    T = tokenization(text)
+    T: list[str] = tokenization(text)
     bigrams = NGrams(T, 2)
     trigrams = NGrams(T, 3)
     alph, df, p = 0.0005, 1, 12.116
