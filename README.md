@@ -67,6 +67,19 @@ You should have received a copy of the GNU General Public License along with thi
 ```
 
 
+## ChiSquare
+```
+> Chi2(a, b, c, d) -> float                         == chi^2 test of {a, b, c, d} in a 2x2 contingency table (1df)
+> Chi2Confidence(float) -> float                    == confidence level per-one of a 1df chi^2
+
+> SearchBigramUnit(str, tuple[str]) -> float        == search on a dirty text for a given bigram composition ("A", "B")
+> SearchTrigramUnit(str, tuple[str]) -> float       == search on a dirty text for a given trigram composition ("A", "B", "C")
+
+> ExtractBigramCompositions(str) -> dict[tuple,fl]  == extract from a dirty text probable bigram compositions
+> ExtractTrigramCompositions(str) -> dict[tuple,fl] == extract from a dirty text probable trigram compositions
+```
+
+
 ## WebScraper
 ```
 > WebPage("<URL>") -> str                           == extracts somewhat clean text from an URL
@@ -79,11 +92,11 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## TextProcessor
 ```
+> KSetLanguage("<es>")                              == sets language for stopwords, legal characters, webpages
 > dirty_characters: str                             == string of characters to remove
-> legal_characters: str                             == string of allowed characters in spa + ita orthography
-> stop_words: list[str]                             == list of stopwords (esp + ita)
+> legal_characters: str                             == string of allowed characters
+> stop_words: list[str]                             == list of stopwords
 
-> KSetLanguage("<es>")                              == sets language for stopwords and webpages
 > clean_text("<text>") -> str                       == normalizes text
 
 > sentence_tokenization("<text>") -> lisr[str]      == separates text by sentence
@@ -105,7 +118,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 > sampletexts.py                                    == corpus of sample texts
 > KSampleTexts()                                    == prints every text name in sampletexts.py
-> KCleanWikiText("<text>") -> str                   == somewhat cleans a copied wikipedia text
+> KCleanWikiText("<text>") -> str                   == somewhat cleans a copied and pasted wikipedia text
 ```
 
 
@@ -136,19 +149,6 @@ You should have received a copy of the GNU General Public License along with thi
 > PrintTextGenre("<text>", glossary, VTmodel)       == directly outputs result of a categorization query
 
 > Categorizar("<text>")                             == categorizes by topic a text in spanish
-```
-
-
-## ChiSquare
-```
-> Chi2(int, int, int) -> float                      == chi^2 test of {a, b, c} in a 2x2 contingency table (1df)
-> Chi2Confidence(float) -> float                    == confidence level per-one of a 1df chi^2
-
-> SearchBigramUnit(str, tuple[str]) -> float        == search on a dirty text for a given bigram composition ("A", "B")
-> SearchTrigramUnit(str, tuple[str]) -> float       == search on a dirty text for a given trigram composition ("A", "B", "C")
-
-> ExtractBigramCompositions(str) -> dict[tuple,fl]  == extract from a dirty text probable bigram compositions
-> ExtractTrigramCompositions(str) -> dict[tuple,fl] == extract from a dirty text probable trigram compositions
 ```
 
 

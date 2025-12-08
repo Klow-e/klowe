@@ -142,7 +142,7 @@ def Chi2Confidence(chi: float) -> float:
 ###############################################################################################
 
 
-def SearchBigramUnit(text: str, query: tuple[str]) -> float:
+def SearchBigramUnit(text: str, query: tuple[str, ...]) -> float:
     T = tokenization(text)
     bigrams = NGrams(T, 2)
     A = query[0]
@@ -156,7 +156,7 @@ def SearchBigramUnit(text: str, query: tuple[str]) -> float:
 # print(SearchBigramUnit("snow white a snow white b snow white c snow white d snow white e snow white f snow white", ("snow", "white")))
 
 
-def SearchTrigramUnit(text: str, query: tuple[str]) -> float:
+def SearchTrigramUnit(text: str, query: tuple[str, ...]) -> float:
     T = tokenization(text)
     bigrams = NGrams(T, 2)
     trigrams = NGrams(T, 3)

@@ -21,12 +21,12 @@ dirty_characters += string.digits
 dirty_characters += "¿¡““»«…©"
 
 
+latin_characters: list[str] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
 es_characters: list[str] = ["á", "é", "í", "ó", "ú", "ü", "ñ", "ç"]
 it_characters: list[str] = ['é', 'è', 'à', 'ì', 'ò', 'ù']
 fr_characters: list[str] = ['á', 'é', 'í', 'ó', 'ú', 'à', 'è', 'ì', 'ò', 'ù', 'ä', 'ë', 'ï', 'ö', 'ü', 'ÿ', 'â', 'ê', 'î', 'ô', 'û', 'ç', 'œ', 'æ']
 en_characters: list[str] = ['è', 'é', 'í', 'ë', 'ï', 'ü', 'ô', 'ç']
-
-latin_characters: list[str] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 legal_characters: list[str] = []
 
@@ -75,14 +75,12 @@ KLanguage: list = []
 def KSetLanguage(lang: str) -> list[str]:
     """
     Sets all language-dependent variables to the selected language version.
-    The language can be retreaved using the variable 'KLanguage',
-    having each letter of the language id code as a member, like "KLanguage: list[str] = ['e', 's']".
     Available languages are: 'es', 'it', 'en', 'fr', '' (for general case).
+    The language can be retreaved using the variable 'KLanguage', which returns a list[str] with each letter of the lang id as a member.
     `param 1:  one str as the two-letter language code`
-    `returns:  KLanguage = ['firstletter', 'secondletter']`
+    `returns:  KLanguage: list[str] = ['firstletter', 'secondletter']`
     `example:  KSetLanguage('es')`
     """
-
     KLanguage.clear()
     KLanguage.extend(lang)
 
@@ -105,7 +103,6 @@ def KSetLanguage(lang: str) -> list[str]:
         case "en": legal_characters.extend(en_characters)
         case "fr": legal_characters.extend(fr_characters)
         case _: print(f"Pick 'es', 'it', 'en', 'fr', or empty string '' to set to general case.")
-    
     return KLanguage
 
 
