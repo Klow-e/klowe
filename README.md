@@ -58,11 +58,12 @@ You should have received a copy of the GNU General Public License along with thi
 > ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
 
 > MidPoint(a, b) -> float                           == gives the midpoint between two numbers
-> TopPercent(list[float], float) -> list[float]     == gets the top float per one values in a list of values
+> TopPercent(list[float], float) -> list[float]     == gets the top float per-one values in a list of values
 > RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
 
 > NormalizeDict(dict[str,float], scale) -> dict     == normalizes a dict's values into a (s0, s1) feature scale
 > RoundDict(dict[str,float], int) -> dict           == rouns a dict's values to n positions
+> TopPercentDict(dict[str, float], float) -> dict   == gets the items with the top float per-one values in a dict[str, float]
 ```
 
 
@@ -141,7 +142,7 @@ You should have received a copy of the GNU General Public License along with thi
 ## ChiSquare
 ```
 > Chi2(int, int, int) -> float                      == chi^2 test of {a, b, c} in a 2x2 contingency table (1df)
-> Chi2Confidence(float) -> float                    == confidence level (per one) of a 1df chi^2
+> Chi2Confidence(float) -> float                    == confidence level per-one of a 1df chi^2
 
 > SearchBigramUnit(str, tuple[str]) -> float        == search on a dirty text for a given bigram composition ("A", "B")
 > SearchTrigramUnit(str, tuple[str]) -> float       == search on a dirty text for a given trigram composition ("A", "B", "C")

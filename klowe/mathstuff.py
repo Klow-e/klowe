@@ -171,7 +171,7 @@ def TopPercent(values_l: list[float], threshold: float) -> list[float]:
     sorted_values: list[float] = sorted(values_l, reverse=True)
     
     selected_v: list[float] = []
-    accumulated_sum: int = 0
+    accumulated_sum: float = 0
 
     for v in sorted_values:
         selected_v.append(v)
@@ -218,6 +218,28 @@ def RoundDict(dicc: dict[str, float], n: int) -> dict[str, float]:
     """
     r_dicc: dict[str, float] = {i : round(dicc[i], n) for i in dicc}
     return r_dicc
+
+
+def TopPercentDict(dicc: dict[str, float], threshold: float) -> dict[str, float]:
+    """
+    Of a dict[str, float], gives the top n perone items based on the float values.
+    `param 1:  dict of strings and floats`
+    `param 2:  top perone threshold`
+    `returns:  the dict but just with the items that make up the top n perone of the sum of the values`
+    `example:  top_30_percent_dict: dict[str, float] = TopPercentDict({'e': 2.7182, 'pi': 3.1415, 'tau': 6.2831}, 0.30)`
+    """
+    sdicc: dict[str, float] = SortDict(dicc)
+    target_threshold: float = sum(GetValues(dicc)) * threshold
+
+    selected: dict[str, float] = {}
+    accumulated_sum: float = 0
+
+    for k, v in sdicc.items():
+        selected.update({k:v})
+        accumulated_sum += v
+        if accumulated_sum >= target_threshold:
+            break
+    return selected
 
 
 ###############################################################################################
