@@ -104,9 +104,10 @@ def KWeightModel(text: str) -> dict[str,float]:
         freq_dist[i] = (t, round( w * m , 10))
 
     weighted: dict[str,float] = SortDict(freq_dist)
-    weighted: dict[str,float] = TopPercentDict(freq_dist, 0.35)
-    weighted: dict[str,float] = RoundDict(freq_dist, 10)
+    weighted: dict[str,float] = TopPercentDict(weighted, 0.35)
+    weighted: dict[str,float] = RoundDict(weighted, 10)
     return weighted
+
 # print(KWeightModel(my_text))
 
 
