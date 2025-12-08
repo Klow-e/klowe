@@ -23,7 +23,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## PythonTools
 ```
-> SortDict(dict) -> dict                            == returns a sorted dict from a dict or zip item
+> SortDict(dict) -> dict                            == returns a sorted dict from a dict or zip or list[tuple[str,int]]
 > GetKeys(dict|list[dict]) -> list                  == returns a list of the keys of a dict or list of dicts
 > GetValues(dict|list[dict]) -> list                == returns a list of the values of a dict or list of dicts
 
@@ -51,8 +51,8 @@ You should have received a copy of the GNU General Public License along with thi
 > ELU(x) -> y                                       == exponential linear unit function
 > ReLU(x) -> y                                      == rectified linear unit function
 
-> NormalizeValue(x, values, (s0, s1)) -> float      == of a value in a list of values, returns the normalized value
-> NormalizeList(list[float], scale) -> list[float]  == normalizes a list of values into a (s0, s1) feature scale
+> NormalizeValue(x, values, (a,b)) -> float         == of a value in a list of values, returns the normalized value
+> NormalizeList(list[float], (a,b)) -> list[float]  == normalizes a list of values into an (a,b) feature scale
 > TanhNormalization(values) -> list[float]          == normalizes values through a Tanh function, making them more extreme
 > ELUNormalization(list[float])                     == passes a list of values through the ELU function
 > ReLUNormalization(list[float])                    == passes a list of values through the ReLU function
@@ -61,9 +61,9 @@ You should have received a copy of the GNU General Public License along with thi
 > TopPercent(list[float], float) -> list[float]     == gets the top float per-one values in a list of values
 > RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
 
-> NormalizeDict(dict[str,float], scale) -> dict     == normalizes a dict's values into a (s0, s1) feature scale
+> NormalizeDict(dict[str,float], (a,b)) -> dict     == normalizes a dict's values into an (a,b) feature scale
 > RoundDict(dict[str,float], int) -> dict           == rouns a dict's values to n positions
-> TopPercentDict(dict[str, float], float) -> dict   == gets the items with the top float per-one values in a dict[str, float]
+> TopPercentDict(dict[str,float], float) -> dict    == gets the items with the top float per-one values in a dict[str, float]
 ```
 
 

@@ -22,16 +22,16 @@ np.set_printoptions(suppress=True)
 ###############################################################################################
 
 
-def TermFrequency(text: str) -> list[tuple[str,float]]:
+def TermFrequency(text: str) -> list[tuple[str, float]]:
     freq_dist: list[tuple[str,int]] = tdistribution(text)
     tokens: list[str] = [i[0] for i in freq_dist]
     doc_tlen: int = count_tokens(text)
     rel_freqs: list[float] = [i[1]/doc_tlen for i in freq_dist]
-    TF: list[tuple[str,float]] = list(zip(tokens, rel_freqs))
+    TF: list[tuple[str, float]] = list(zip(tokens, rel_freqs))
     return TF
 
 
-def BagFrequency(text: str) -> list[tuple[str,float]]:
+def BagFrequency(text: str) -> list[tuple[str, float]]:
     bfreq_dist: list[tuple[str,int]] = btdistribution(text)
     btokens: list[str] = [i[0] for i in bfreq_dist]
     doc_btlen: int = sum([i[1] for i in bfreq_dist])
@@ -87,8 +87,8 @@ def TermFreq_IDF(sample_dicts: list[str]):
 ###############################################################################################
 
 
-def KWeightModel(text: str) -> dict[str,float]:
-    freq_dist: list[tuple[str,int]] = BagFrequency(text)
+def KWeightModel(text: str) -> dict[str, float]:
+    freq_dist: list[tuple[str, int]] = BagFrequency(text)
     prelex_5 = {t[:5] for t, _ in freq_dist}
     prelex_6 = {t[:6] for t, _ in freq_dist}
 
@@ -103,9 +103,9 @@ def KWeightModel(text: str) -> dict[str,float]:
             case _ if t[:6] in prelex_6: m *= 5.0
         freq_dist[i] = (t, round( w * m , 10))
 
-    weighted: dict[str,float] = SortDict(freq_dist)
-    weighted: dict[str,float] = TopPercentDict(weighted, 0.35)
-    weighted: dict[str,float] = RoundDict(weighted, 10)
+    weighted: dict[str, float] = SortDict(freq_dist)
+    weighted: dict[str, float] = TopPercentDict(weighted, 0.35)
+    weighted: dict[str, float] = RoundDict(weighted, 10)
     return weighted
 
 # print(KWeightModel(my_text))
@@ -131,7 +131,7 @@ class KGlossary:
         #self.articles = [s for _, s in gloss]
         self.apply = {n : self.DefineGenre([self.model(d) for d in s]) for n, s in gloss}
     
-    def DefineGenre(self, l_dicts: list[dict[str,float]]) -> dict[str,float]:
+    def DefineGenre(self, l_dicts: list[dict[str, float]]) -> dict[str, float]:
         return DefineGenre(l_dicts)
 
 # glossary = KGlossary(KWeightModel, [("POLI", [my_text_maoism, my_text_trotsky]),
@@ -154,7 +154,7 @@ def load_gloss():
 # glossary = load_gloss()
 
 
-def IDF_gloss(gloss: dict[str:[dict[str:float]]], xIDF: str) -> dict[str:[dict[str:float]]]:
+def IDF_gloss(gloss: dict[str, dict[str, float]], xIDF: str) -> dict[str, dict[str, float]]:
     gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
     gd_values: list[list[float]] = GetValues(GetValues(gloss))
     cor_Tdist = dict(CountDistribution([j for i in gd_keys for j in i]))
@@ -166,16 +166,16 @@ def IDF_gloss(gloss: dict[str:[dict[str:float]]], xIDF: str) -> dict[str:[dict[s
         IDF: list[list[float]] = [[math.log2( ((len(gloss) - n) + 1) / (n + 1) ) for n in d] for d in nt_tensor]
 
     IDFw: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(IDF, gd_values)]
-    IDFw: list[dict[str,float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, IDFw)]
+    IDFw: list[dict[str, float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, IDFw)]
 
     return dict(zip(GetKeys(gloss), IDFw))
 
 
-def sIDFw_gloss (gloss, xIDF = "sIDF") -> dict[str:[dict[str:float]]]:
+def sIDFw_gloss (gloss, xIDF = "sIDF") -> dict[str:[dict[str, float]]]:
     return IDF_gloss(gloss, xIDF)
 
 
-def pIDFw_gloss (gloss, xIDF = "pIDF") -> dict[str:[dict[str:float]]]:
+def pIDFw_gloss (gloss, xIDF = "pIDF") -> dict[str:[dict[str, float]]]:
     return IDF_gloss(gloss, xIDF)
 
 
@@ -199,7 +199,7 @@ def VTModel(g: np.array, t: float) -> np.array:
     return np.around(w, 8)
 
 
-def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str,list]:
+def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str, list]:
     vectors = KLexicon(gloss).get("vectors")
     WText: dict[str,float] = KWeightModel(text)
     WText = zip(GetKeys(WText), NormalizeList(GetValues(WText), (0, 1)))

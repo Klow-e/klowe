@@ -25,7 +25,7 @@ def KPrintDict(dicc: dict) -> None:
 # KPrintDict(glossary)
 
 
-def KPlotDict(weighted_text: dict[str,float]) -> None:
+def KPlotDict(weighted_text: dict[str, float]) -> None:
     print(weighted_text)
     print(len(weighted_text))
     x = [i for i in weighted_text]
@@ -41,7 +41,7 @@ def KPlotDict(weighted_text: dict[str,float]) -> None:
 # KPlotDict(RandomDictStrFloat(10))
 
 
-def KPlotFunction(func: callable, name: str = '', xsize: tuple = (-3, 3), ysize: tuple = (-1, 1), step: float|int = 0.5) -> None:
+def KPlotFunction(func: callable, name: str = '', xsize: tuple = (-3,3), ysize: tuple = (-1,1), step: float|int = 0.5) -> None:
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     # function
