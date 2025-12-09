@@ -32,6 +32,7 @@ You should have received a copy of the GNU General Public License along with thi
 > NGrams(list, n) -> list[tuple]                    == returns a list of n-grams from a list
 
 > RemoveFolder(str)                                 == removes the folder with the given name
+> RemoveFile(str)                                   == removes the file with the given name
 ```
 
 
@@ -83,8 +84,8 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## WebScraper
 ```
-> PDFFileText(file_path: str) -> str:                   == extracts text from a PDF file
-> HTMLFileText(file_path: str) -> str:                  == extracts text from an HTML file
+> PDFFileText(file_path: str) -> str:               == extracts text from a PDF file
+> HTMLFileText(file_path: str) -> str:              == extracts text from an HTML file
 
 > WebPage("<URL>") -> str                           == extracts somewhat clean text from an URL
 > PDFtext("<URL>") -> str                           == extracts somewhat clean text from an URL to a PDF

@@ -115,12 +115,23 @@ def RemoveFolder(name: str) -> None:
     `param 1:  relative path to folder`
     `returns:  None`
     `result:   folder deleted`
-    `example:  RemoveFolder(myfolder)`
+    `example:  RemoveFolder('myfolder')`
     """
     if os.path.exists(name):
         shutil.rmtree(name)
     if os.path.exists(f"{name}.zip"):
         os.remove(f"{name}.zip")
+
+
+def RemoveFile(name: str) -> None:
+    """
+    Checks the existance of a file and removes it if so.
+    `param 1:  relative path to file`
+    `returns:  None`
+    `result:   file deleted`
+    `example:  RemoveFile(myfile)`
+    """
+    os.remove(f'{name}') if os.path.exists(f'{name}') else None
 
 
 ###############################################################################################
