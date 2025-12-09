@@ -84,13 +84,13 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## WebScraper
 ```
-> PDFFileText(file_path: str) -> str:               == extracts text from a PDF file
-> HTMLFileText(file_path: str) -> str:              == extracts text from an HTML file
+> PDFFileText(file_path: str) -> str                == extracts text from a PDF file
+> HTMLFileText(file_path: str) -> str               == extracts text from an HTML file
+> FileToText(file_path: str) -> str                 == extracts text from a PDF or HTML file
 
 > WebPage("<URL>") -> str                           == extracts somewhat clean text from an URL
 > PDFtext("<URL>") -> str                           == extracts somewhat clean text from an URL to a PDF
 > search_engine("<URL>") -> list[str]               == extracts links in a webpage
-> file_to_text(file_path: str) -> list[str]         == extracts text from a PDF or HTML file
 > KWebScrap("<project>", tuple[str, ...])           == from a tuple of queries scraps the web and builds a corpus
 ```
 

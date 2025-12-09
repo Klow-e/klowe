@@ -60,6 +60,25 @@ def HTMLFileText(file_path: str) -> str:
     return text
 
 
+def FileToText(file_path: str) -> str:
+    """
+    Extracts the text from a file. Accepts HTML and PDF.
+    `param 1:  file path`
+    `returns:  text`
+    `example:  thetext: str = FileToText(myhtmlfile)`
+    """
+    if file_path.endswith(".html"): return HTMLFileText(file_path)
+    elif file_path.endswith(".pdf"): return PDFFileText(file_path)
+    else: raise Exception(f"Invalid file type: {file_path}. Try PDF or HTML")
+
+
+def create_xml(text: str, filename: str, uri: str):
+    xml_data = f"\n<text filename='{filename}' url='{uri}'>"
+    for i in text.split('\n'): xml_data += f"\n<s>{i}</s>"
+    xml_data += f"\n</text>\n"
+    return xml_data
+
+
 ###############################################################################################
 
 
@@ -107,29 +126,7 @@ def search_engine(url: str) -> list[str]:
         return [url, ]
 
 
-def file_to_text(file_path: str) -> list[str]:
 
-    def html_text(file_path: str) -> list[str]:
-        with open(file_path, 'r', encoding='utf-8', errors='ignore') as html:  
-            soup = BeautifulSoup(html.read(), 'html.parser')
-        text = soup.find_all('p')
-        text = "\n".join([p.text for p in text])
-        text = [j for j in [i.strip() for i in text.split("\n")] if j != ""]
-        return text
-
-    def pdf_text(file_path: str) -> list[str]:
-        with open(file_path, 'rb') as pdf:  
-            with open('pdf_bytes', 'wb') as fl:
-                fl.write(pdf.read())
-        text = extract_text('pdf_bytes').split("\n")
-        text = "\n".join([i.strip() for i in text])
-        text = [j for j in [i.strip() for i in text.split("\n")] if j != ""]
-        os.remove('pdf_bytes')
-        return text
-    
-    if file_path.endswith(".html"): return html_text(file_path)
-    elif file_path.endswith(".pdf"): return pdf_text(file_path)
-    else: raise Exception(f"Invalid file type: {file_path}. Try PDF or HTML")
 
 
 def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
@@ -139,21 +136,24 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     3: Searches online (with StartPage and Lycos) for the combinations, and extracts the results.
     4: Creates a txt and xml corpus based on the results and cleans it.
     5: Creates a zip file of the project.
+
     `param 1:  one str as the project's name`
-    `param 2:  one tuple[str, ...] of at least three string`
+    `param 2:  one tuple[str, ...] of at least three strings`
     `returns:  None`
     `result:   a directory is created with the scrapped corpus`
     `example:  KWebScrap("GNU", ("software libre", "sistema operativo", "distribución linux", "GNU"))`
-    It's better if the terms are unequivocally in the desired language. EG.: 'FOSS' is okay for English,
-    but use 'software libre' and 'código abierto' for Spanish.
+    It's better if the terms are unequivocally in the desired language.
     Works fine on UNIX-based file systems, may fail on Windows.
     """
 
-    if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with KSetLanguage() as 'es', 'en'...")
-    if len(seeds := [f"%22{i}%22" for i in query_terms]) < 3: raise Exception(f"Must add at least 3 seeds to input_seeds()")
+    if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with KSetLanguage() as 'es', 'en', ...")
+    if len(seeds := [f"%22{i}%22" for i in query_terms]) < 3: raise Exception(f"Must add at least 3 terms in a tuple as the second argument.")
+
     search_tuples: list[str] = ["+".join(i).replace(" ", "+") for i in list(combinations(seeds, 3))]
 
     print(f"\nThe machine is thinking. This will take a couple of seconds.")
+
+    
     os.makedirs(f"{project_name}") if not os.path.exists(f"{project_name}") else None
     os.makedirs(f"{project_name}/downloads") if not os.path.exists(f"{project_name}/downloads") else None
     os.makedirs(f"{project_name}/xml_corpus") if not os.path.exists(f"{project_name}/xml_corpus") else None
@@ -216,25 +216,28 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
         except Exception as e: print(f"Error '{e}' in URL {i: <3} {j}")
     print()
 
-    def create_xml(x: list, filename: str, uri: str):
-        xml_data = f"\n<text filename='{filename}' url='{uri}'>"
-        for i in x: xml_data += f"\n<s>{i}</s>"
-        xml_data += f"\n</text>\n"
-        return xml_data
 
     logging.getLogger('pdfminer').setLevel(logging.ERROR)
+
     source = os.listdir(f"{project_name}/downloads")
     print(f"Creating {len(source)} xml and txt files from:")
+
     for i in source:
-        text_as_list = file_to_text(f"{project_name}/downloads/{i}")
-        uri = clean_urls[int(i.rstrip('.htmlpdf').removeprefix(f"{project_name}_"))]
+
+        texto: str = FileToText(f"{project_name}/downloads/{i}")
+        uri: str = clean_urls[int(i.rstrip('.htmlpdf').removeprefix(f"{project_name}_"))]
+
         with open(f"{project_name}/xml_corpus/{i.rstrip('.htmlpdf')}.xml", 'w') as fl:
-            fl.write(create_xml(text_as_list, i, uri))
+            fl.write(create_xml(texto, i, uri))
+
         with open(f"{project_name}/txt_corpus/{i.rstrip('.htmlpdf')}.txt", 'w') as fl:
-            fl.write("\n".join(text_as_list))
+            fl.write(texto)
+
         print(f" {i}")
     print()
+
     logging.getLogger('pdfminer').setLevel(logging.NOTSET)
+
 
     print(f"Removing useless files...")
     text_list = []
