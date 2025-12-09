@@ -72,8 +72,16 @@ def FileToText(file_path: str) -> str:
     else: raise Exception(f"Invalid file type: {file_path}. Try PDF or HTML")
 
 
-def create_xml(text: str, filename: str, uri: str):
-    xml_data = f"\n<text filename='{filename}' url='{uri}'>"
+def FormXML(text: str, filename: str, uri: str = '') -> str:
+    """
+    Extracts the text from a file. Accepts HTML and PDF.
+    `param 1:  text name`
+    `param 1:  file name`
+    `param 1:  URL string`
+    `returns:  text formatted for xml corpus`
+    `example:  xmltext: str = FormXML(mytext)`
+    """
+    xml_data: str = f"\n<text filename='{filename}' url='{uri}'>"
     for i in text.split('\n'): xml_data += f"\n<s>{i}</s>"
     xml_data += f"\n</text>\n"
     return xml_data
@@ -153,7 +161,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
     print(f"\nThe machine is thinking. This will take a couple of seconds.")
 
-    
+
     os.makedirs(f"{project_name}") if not os.path.exists(f"{project_name}") else None
     os.makedirs(f"{project_name}/downloads") if not os.path.exists(f"{project_name}/downloads") else None
     os.makedirs(f"{project_name}/xml_corpus") if not os.path.exists(f"{project_name}/xml_corpus") else None
@@ -228,7 +236,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
         uri: str = clean_urls[int(i.rstrip('.htmlpdf').removeprefix(f"{project_name}_"))]
 
         with open(f"{project_name}/xml_corpus/{i.rstrip('.htmlpdf')}.xml", 'w') as fl:
-            fl.write(create_xml(texto, i, uri))
+            fl.write(FormXML(texto, i, uri))
 
         with open(f"{project_name}/txt_corpus/{i.rstrip('.htmlpdf')}.txt", 'w') as fl:
             fl.write(texto)
