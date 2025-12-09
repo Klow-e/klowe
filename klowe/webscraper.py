@@ -26,26 +26,69 @@ import time
 ###############################################################################################
 
 
+def PDFFileText(file_path: str) -> str:
+    """
+    Extracts the text from a PDF file.
+    `param 1:  file path`
+    `returns:  text`
+    `example:  thetext: str = PDFFileText(mypdffile)`
+    """
+    with open(file_path, 'rb') as pdf:
+        with open('pdf_bytes', 'wb') as fl:
+            fl.write(pdf.read())
+    lines: list[str] = extract_text('pdf_bytes').split("\n")
+    lines: list[str] = [i.strip().replace('\x0c', '') for i in lines]
+    lines: list[str] = ShortenList(lines)
+    text: str = "\n".join(lines)
+    os.remove('pdf_bytes')
+    return text
+
+
+def HTMLFileText(file_path: str) -> str:
+    """
+    Extracts the text from an HTML file.
+    `param 1:  file path`
+    `returns:  text`
+    `example:  thetext: str = HTMLFileText(myhtmlfile)`
+    """
+    with open(file_path, 'r', encoding='utf-8', errors='ignore') as html:  
+        soup = BeautifulSoup(html.read(), 'html.parser')
+    lines: list[str] = [p.text for p in soup.find_all('p')]
+    lines: list[str] = [i.strip() for i in lines]
+    lines: list[str] = ShortenList(lines)
+    text: str = "\n".join(lines)
+    return text
+
+
+###############################################################################################
+
+
 def WebPage(url: str) -> str:
+
     response = requests.get(url, timeout=5)
     if response.status_code == 200:
+
         soup = BeautifulSoup(response.text, 'html.parser')
         paragraphs = soup.find_all('p')
         paragraphs = [p.text for p in paragraphs]
         paragraphs = " ".join(paragraphs)
         return paragraphs
+
     else: raise Exception(f"Unacceptable response '{response.status_code}' at '{url = }'")
 
 
-def PDFtext(url: str):
+def PDFtext(url: str) -> str:
+
     response = requests.get(url,  timeout=5)
     if response.status_code == 200:
+
         with open('name', 'wb') as fl:
             fl.write(response.content)
-        text = extract_text('name')
+        text: str = extract_text('name')
         os.remove('name')
         return text
-    else: raise Exception(f"Not found {url = }")
+
+    else: raise Exception(f"Unacceptable response '{response.status_code}' at '{url = }'")
 
 
 ###############################################################################################

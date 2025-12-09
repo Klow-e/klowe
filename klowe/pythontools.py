@@ -55,6 +55,31 @@ def GetValues(dicc: dict|list[dict]) -> list:
         return [GetValues(i) for i in dicc]
 
 
+def ShortenList(lista: list[str]) -> list[str]:
+    """
+    Reduces series of empty string items in lists to just one.
+    `param 1:  list[str]`
+    `returns:  the list with series of '' reduced to one appearance`
+    `example:  cleaner_l: list[str] = ShortenList(['one', '', '', '', 'two'])`
+    """
+    outlist: list[str] = []
+    i: int = 0
+    emptycount: int = 0
+
+    while i < len(lista):
+        item: str = lista[i]
+
+        if item != '':
+            outlist.append(item)
+            emptycount: int = 0
+        else:
+            emptycount += 1
+        i += 1
+
+        outlist.append('') if emptycount == 1 else None
+    return outlist
+
+
 ###############################################################################################
 
 

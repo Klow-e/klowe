@@ -26,6 +26,7 @@ You should have received a copy of the GNU General Public License along with thi
 > SortDict(dict) -> dict                            == returns a sorted dict from a dict or zip or list[tuple[str,int]]
 > GetKeys(dict|list[dict]) -> list                  == returns a list of the keys of a dict or list of dicts
 > GetValues(dict|list[dict]) -> list                == returns a list of the values of a dict or list of dicts
+> ShortenList(list[str]) -> list[str]:              == replaces series of empty strings in a list with just one
 
 > CountDistribution(list[str]) -> list[tuple]       == returns a count of each str in a list
 > NGrams(list, n) -> list[tuple]                    == returns a list of n-grams from a list
@@ -82,6 +83,9 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## WebScraper
 ```
+> PDFFileText(file_path: str) -> str:                   == extracts text from a PDF file
+> HTMLFileText(file_path: str) -> str:                  == extracts text from an HTML file
+
 > WebPage("<URL>") -> str                           == extracts somewhat clean text from an URL
 > PDFtext("<URL>") -> str                           == extracts somewhat clean text from an URL to a PDF
 > search_engine("<URL>") -> list[str]               == extracts links in a webpage
