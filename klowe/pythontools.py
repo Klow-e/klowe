@@ -129,9 +129,20 @@ def RemoveFile(name: str) -> None:
     `param 1:  relative path to file`
     `returns:  None`
     `result:   file deleted`
-    `example:  RemoveFile(myfile)`
+    `example:  RemoveFile('myfile')`
     """
-    os.remove(f'{name}') if os.path.exists(f'{name}') else None
+    os.remove(name) if os.path.exists(name) else None
+
+
+def CreateFolder(name: str) -> None:
+    """
+    Creates a folder if it doesn't already exist.
+    `param 1:  relative path to folder`
+    `returns:  None`
+    `result:   folder created`
+    `example:  CreateFolder('myfolder')`
+    """
+    os.makedirs(name) if not os.path.exists(name) else None
 
 
 ###############################################################################################

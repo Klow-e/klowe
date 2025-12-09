@@ -118,9 +118,6 @@ def PDFtext(url: str) -> str:
     else: raise Exception(f"Unacceptable response '{response.status_code}' at '{url = }'")
 
 
-###############################################################################################
-
-
 def search_engine(url: str) -> list[str]:
     lang_code = {"en":"en,en", "es":"es-ES,es", "it":"it,it", "fr":"fr,fr"}.get("".join(KLanguage))
     headers = {'Accept-Language': lang_code, 'Accept' : '*/*', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Safari/605.1.15',}
@@ -132,8 +129,6 @@ def search_engine(url: str) -> list[str]:
     except Exception as e:
         print(f"Error: {e} in {url}")
         return [url, ]
-
-
 
 
 
@@ -156,17 +151,17 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
     if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with KSetLanguage() as 'es', 'en', ...")
     if len(seeds := [f"%22{i}%22" for i in query_terms]) < 3: raise Exception(f"Must add at least 3 terms in a tuple as the second argument.")
-
-    search_tuples: list[str] = ["+".join(i).replace(" ", "+") for i in list(combinations(seeds, 3))]
-
     print(f"\nThe machine is thinking. This will take a couple of seconds.")
 
+    CreateFolder(f"{project_name}")
+    CreateFolder(f"{project_name}/downloads")
+    CreateFolder(f"{project_name}/xml_corpus")
+    CreateFolder(f"{project_name}/txt_corpus")
 
-    os.makedirs(f"{project_name}") if not os.path.exists(f"{project_name}") else None
-    os.makedirs(f"{project_name}/downloads") if not os.path.exists(f"{project_name}/downloads") else None
-    os.makedirs(f"{project_name}/xml_corpus") if not os.path.exists(f"{project_name}/xml_corpus") else None
-    os.makedirs(f"{project_name}/txt_corpus") if not os.path.exists(f"{project_name}/txt_corpus") else None
+    search_tuples: list[str] = ["+".join(i).replace(" ", "+") for i in list(combinations(seeds, 3))]
     with open(f"{project_name}/generated_tuples.txt", "w") as fl: fl.write("\n".join(search_tuples))
+
+
 
     def search_queries(url_query: str) -> list[str]:
         searchers: list[str] = [f"https://www.startpage.com/rvd/search?query={url_query}&language={lang}",
@@ -225,6 +220,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     print()
 
 
+
     logging.getLogger('pdfminer').setLevel(logging.ERROR)
 
     source = os.listdir(f"{project_name}/downloads")
@@ -245,6 +241,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     print()
 
     logging.getLogger('pdfminer').setLevel(logging.NOTSET)
+
 
 
     print(f"Removing useless files...")
