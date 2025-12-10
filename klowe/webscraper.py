@@ -182,7 +182,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
     if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with KSetLanguage() as 'es', 'en', ...")
     if len(seeds := [f"%22{i}%22" for i in query_terms]) < 3: raise Exception(f"Must add at least 3 terms in a tuple as the second argument.")
-    print(f"\nThe machine is thinking. This will take a couple of seconds.")
+    print(f"\nThe machine is thinking. This will take a couple of seconds.\n")
 
     # makes pdfminer less verbose
     logging.getLogger('pdfminer').setLevel(logging.ERROR)
@@ -194,7 +194,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     CreateFolder(f"{project_name}/txt_corpus")
     CreateFile(f"{project_name}/generated_tuples.txt")
     CreateFile(f"{project_name}/cleaned_links.txt")
-    kwslog: str = KLog(f"{project_name}/KWebScrap_{project_name}.log", '')
+    kwslog: str = f"{project_name}/KWebScrap_{project_name}.log"
 
     # creates combination tuples to search and saves them in a file
     search_tuples: list[str] = ["+".join(i).replace(' ', '+') for i in list(combinations(seeds, 3))]
@@ -245,7 +245,8 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
 
 
-    KLog(kwslog, f"\nDownloading {len(clean_urls)} files... \nDon't mind errors. Takes about 1 minute per 100 files.\n")
+
+    KLog(kwslog, f"Downloading {len(clean_urls)} files... Don't mind errors. Takes about 1 minute per 100 files.\n")
 
     # downloads webpages in clean_url
     for i, j in enumerate(clean_urls):
@@ -256,7 +257,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
         except Exception as e: KLog(kwslog, f"Error '{e}' in URL {i: <3} {j}")
 
     source: list[str] = os.listdir(f"{project_name}/downloads")
-    KLog(kwslog, f"Creating {len(source)} xml and txt files from:")
+    KLog(kwslog, f"\nCreating {len(source)} xml and txt files from:")
 
     # extracts text from downloaded webpages into txt and xml formats
     for i in source:
@@ -274,7 +275,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
 
 
-    KLog(kwslog, f"Removing useless files...")
+    KLog(kwslog, f"\nRemoving useless files...")
 
 
     text_list = []
@@ -300,6 +301,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
         os.remove(xml_path)
     
 
+    KLog(kwslog, f"\nDing!\n")
     shutil.make_archive(project_name, "zip", project_name)
     return None
 
