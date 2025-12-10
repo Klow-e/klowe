@@ -164,7 +164,7 @@ def SearchLinks(url: str, logfile: str = 'SearchLinks.log') -> list[str]:
 ###############################################################################################
 
 
-def KWebScrap(project_name: str, query_terms: tuple[str, ...], download: bool = False) -> None:
+def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     """
     1: Creates the directory structure for a web scraping project.
     2: Generates a list of combinations of temrs suitable for insertion in a searcher's URL.
@@ -243,58 +243,35 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...], download: bool = 
     clean_urls: list[str] = list(set([i for i in clean_urls if not i.startswith(exclude_domains)]))
     WriteOnFile(f"{project_name}/cleaned_links.txt", '\n'.join(clean_urls))
 
+    KLog(kwslog, f"Downloading {len(clean_urls)} files with 'DownloadWebpage()'... Don't mind errors. Takes about 1 minute per 100 files.\n")
 
+    # downloads webpages in clean_url
+    for i, j in enumerate(clean_urls):
+        try:
+            format = 'pdf' if j.endswith('.pdf') else 'html'
+            DownloadWebpage(f"{project_name}/downloads/{project_name}_{i}.{format}", j)
+            KLog(kwslog, f"{format.upper(): <4} {i: <3} {j}")
+        except Exception as e: KLog(kwslog, f"Error '{e}' in URL {i: <3} {j}")
 
-    if download == True:
+    source: list[str] = os.listdir(f"{project_name}/downloads")
+    KLog(kwslog, f"\nCreating {len(source)} xml and txt files from:")
 
-        KLog(kwslog, f"Downloading {len(clean_urls)} files with 'DownloadWebpage()'... Don't mind errors. Takes about 1 minute per 100 files.\n")
+    # extracts text from downloaded webpages into txt and xml formats
+    for i in source:
+        itemid: str = f"{i.rstrip('.htmlpdf')}"
+        texto: str = FileToText(f"{project_name}/downloads/{i}")
+        uri: str = clean_urls[int(i.rstrip('.htmlpdf').removeprefix(f"{project_name}_"))]
 
-        # downloads webpages in clean_url
-        for i, j in enumerate(clean_urls):
-            try:
-                format = 'pdf' if j.endswith('.pdf') else 'html'
-                DownloadWebpage(f"{project_name}/downloads/{project_name}_{i}.{format}", j)
-                KLog(kwslog, f"{format.upper(): <4} {i: <3} {j}")
-            except Exception as e: KLog(kwslog, f"Error '{e}' in URL {i: <3} {j}")
+        with open(f"{project_name}/xml_corpus/{itemid}.xml", 'w') as fl:
+            fl.write(FormXML(texto, i, uri))
 
-        source: list[str] = os.listdir(f"{project_name}/downloads")
-        KLog(kwslog, f"\nCreating {len(source)} xml and txt files from:")
+        with open(f"{project_name}/txt_corpus/{itemid}.txt", 'w') as fl:
+            fl.write(texto)
 
-        # extracts text from downloaded webpages into txt and xml formats
-        for i in source:
-            texto: str = FileToText(f"{project_name}/downloads/{i}")
-            uri: str = clean_urls[int(i.rstrip('.htmlpdf').removeprefix(f"{project_name}_"))]
-
-            with open(f"{project_name}/xml_corpus/{i.rstrip('.htmlpdf')}.xml", 'w') as fl:
-                fl.write(FormXML(texto, i, uri))
-
-            with open(f"{project_name}/txt_corpus/{i.rstrip('.htmlpdf')}.txt", 'w') as fl:
-                fl.write(texto)
-
-            KLog(kwslog, f" {i}")
-
-    else:
-
-        KLog(kwslog, f"Extracting {len(clean_urls)} texts with 'WebPage()'... Don't mind errors. Takes about 1 minute per 100 files.\n")
-
-        for i, j in enumerate(clean_urls):
-            try:
-                text_id: str = f"{project_name}_{i}"
-                text_content: str = WebPage(j)
-            except Exception as e: KLog(kwslog, f"Error '{e}' in URL {i: <3} {j}")
-
-            with open(f"{project_name}/txt_corpus/{text_id}.txt", 'w') as fl:
-                fl.write(text_content)
-
-            with open(f"{project_name}/xml_corpus/{text_id}.xml", 'w') as fl:
-                fl.write(FormXML(text_content, text_id, j))
-            
-            KLog(kwslog, f" {text_id}")
-
-
-
+        KLog(kwslog, f" {i}")
 
     KLog(kwslog, f"\nRemoving useless files...")
+
 
 
     text_list = []
@@ -318,9 +295,10 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...], download: bool = 
         xml_path = os.path.join(f"{project_name}/xml_corpus", i.replace(".txt", ".xml"))
         os.remove(txt_path)
         os.remove(xml_path)
-    
 
-    KLog(kwslog, f"\nDing!\n")
+
+
+    KLog(kwslog, f"Ding!\n")
     shutil.make_archive(project_name, "zip", project_name)
     return None
 
