@@ -87,19 +87,6 @@ def FormXML(text: str, filename: str, uri: str = '') -> str:
     return xml_data
 
 
-###############################################################################################
-
-
-def DownloadWebpage(filenamepath: str, url: str):
-    response = requests.get(url, timeout=5)
-    if response.status_code == 200:
-
-        with open(f"{filenamepath}", 'wb') as fl:
-            fl.write(response.content)
-
-    else: raise Exception(f"Response error {response.status_code}")
-
-
 def WebPage(url: str) -> str:
     """
     Extracts the text from the contents in an URL, be it an HTML webpage or PDF.
@@ -120,20 +107,55 @@ def WebPage(url: str) -> str:
             soup = BeautifulSoup(response.text, 'html.parser')
             paragraphs = soup.find_all('p')
             paragraphs = [p.text for p in paragraphs]
+            paragraphs = [i.strip().replace('\x0c', '') for i in paragraphs]
             paragraphs = " ".join(paragraphs)
             return paragraphs
 
     else: raise Exception(f"Unacceptable response '{response.status_code}' at '{url = }'")
 
 
-def search_engine(url: str) -> list[str]:
+def DownloadWebpage(filenamepath: str, url: str) -> None:
+    """
+    Extracts the text from the contents in an URL, be it an HTML webpage or PDF.
+    `param 1:  relative path to output file, include file type with a prefix`
+    `param 2:  url string`
+    `returns:  None`
+    `result:   webpage or online PDF downloaded at desired location`
+    `example:  DownloadWebpage('mydownloads/lichen.html', 'https://www.waysofenlichenment.net')`
+    """
+    if filenamepath.endswith(('.pdf', '.html')) == False:
+        print(f" Make sure to include a file type in the first argument, like 'file.pdf' or folder/file.html'.")
+
+    response = requests.get(url, timeout=5)
+    if response.status_code == 200:
+
+        with open(f"{filenamepath}", 'wb') as fl:
+            fl.write(response.content)
+
+    else: raise Exception(f"Response error {response.status_code}")
+
+
+###############################################################################################
+
+
+def SearchLinks(url: str) -> list[str]:
+    """
+    Extracts hyperlinks from an URL.
+    `param 1:  url string`
+    `returns:  list of links in that page`
+    `example:  linksinpage: list[str] = SearchLinks('https://www.waysofenlichenment.net')`
+    """
     lang_code = {"en":"en,en", "es":"es-ES,es", "it":"it,it", "fr":"fr,fr"}.get("".join(KLanguage))
     headers = {'Accept-Language': lang_code, 'Accept' : '*/*', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Safari/605.1.15',}
+
     try:
         response = requests.get(url, headers = headers, timeout = 5)
         soup = BeautifulSoup(response.text, 'html.parser')
         links: list[str] = [str(i.get('href')) for i in soup.find_all('a')]
+        links: list[str] = [i for i in links if i.startswith(('/', '#')) == False]
+        links: list[str] = list(set(links))
         return links
+
     except Exception as e:
         print(f"Error: {e} in {url}")
         return [url, ]
@@ -165,9 +187,10 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     CreateFolder(f"{project_name}/downloads")
     CreateFolder(f"{project_name}/xml_corpus")
     CreateFolder(f"{project_name}/txt_corpus")
+    CreateFile(f"{project_name}/generated_tuples.txt")
 
     search_tuples: list[str] = ["+".join(i).replace(" ", "+") for i in list(combinations(seeds, 3))]
-    with open(f"{project_name}/generated_tuples.txt", "w") as fl: fl.write("\n".join(search_tuples))
+    WriteOnFile(f"{project_name}/generated_tuples.txt", "\n".join(search_tuples))
 
 
 
@@ -181,13 +204,15 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
         return searchers
     searches: list[str] = [j for k in [search_queries(i) for i in search_tuples] for j in k]
 
+
     if not os.path.exists(f"{project_name}/collected_links.txt"):
         with open(f"{project_name}/collected_links.txt", "w") as fl: fl.write("\n".join(searches))
         with open(f"{project_name}/collected_links.txt", "a") as fl: fl.write("\n")
-        collected: list[str] = [j for k in [search_engine(i) for i in searches] for j in k]
+        collected: list[str] = [j for k in [SearchLinks(i) for i in searches] for j in k]
         with open(f"{project_name}/collected_links.txt", "a") as fl:
             for i in collected: fl.write(f"{i}\n")
     else: None
+
 
     with open(f"{project_name}/collected_links.txt", 'r', encoding='utf8') as f:
         clean_urls: list[str] = list(set([i.removesuffix("\n") for i in f if i.startswith("htt")]))
@@ -219,7 +244,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
     for i, j in enumerate(clean_urls):
         try:
-            format = "pdf" if j.endswith(".pdf") else "html"
+            format = 'pdf' if j.endswith('.pdf') else 'html'
             DownloadWebpage(f"{project_name}/downloads/{project_name}_{i}.{format}", j)
             print(f"{format.upper(): <4} {i: <3} {j}")
         except Exception as e: print(f"Error '{e}' in URL {i: <3} {j}")
@@ -251,6 +276,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
 
     print(f"Removing useless files...")
+
     text_list = []
     for i in os.listdir(f"{project_name}/txt_corpus"):
         with open(f"{project_name}/txt_corpus/{i}", 'r') as fl:
@@ -268,7 +294,10 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
         xml_path = os.path.join(f"{project_name}/xml_corpus", i.replace(".txt", ".xml"))
         os.remove(txt_path)
         os.remove(xml_path)
+    
     print()
+
+
 
     shutil.make_archive(project_name, "zip", project_name)
     return None

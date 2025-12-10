@@ -31,6 +31,9 @@ You should have received a copy of the GNU General Public License along with thi
 > CountDistribution(list[str]) -> list[tuple]       == returns a count of each str in a list
 > NGrams(list, n) -> list[tuple]                    == returns a list of n-grams from a list
 
+> CreateFolder(str) -> 'path'                       == creates a folder if it doesn't already exist
+> CreateFile(str) -> 'path'                         == creates a file if it doesn't already exist
+> WriteOnFile('path', 'content')                    == appends content to a file
 > RemoveFolder(str)                                 == removes the folder with the given name
 > RemoveFile(str)                                   == removes the file with the given name
 ```
@@ -87,12 +90,12 @@ You should have received a copy of the GNU General Public License along with thi
 > PDFFileText(file_path: str) -> str                == extracts text from a PDF file
 > HTMLFileText(file_path: str) -> str               == extracts text from an HTML file
 > FileToText(file_path: str) -> str                 == extracts text from a PDF or HTML file
-
-> WebPage("<URL>") -> str                           == extracts somewhat clean text from an URL to a webpage or online PDF
-
 > FormXML("<text>", "<filename>", "<URL>") -> str   == formats a text into an xml file for corpora
 
-> search_engine("<URL>") -> list[str]               == extracts links in a webpage
+> WebPage("<URL>") -> str                           == extracts somewhat clean text from an URL to a webpage or online PDF
+> DownloadWebpage("<filepath>, "<URL>") -> None:    == downloads a webage, including online PDFs, at desired location name
+> SearchLinks("<URL>") -> list[str]                 == extracts links in a webpage
+
 > KWebScrap("<project>", tuple[str, ...])           == from a tuple of queries scraps the web and builds a corpus
 ```
 

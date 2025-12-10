@@ -134,15 +134,43 @@ def RemoveFile(name: str) -> None:
     os.remove(name) if os.path.exists(name) else None
 
 
-def CreateFolder(name: str) -> None:
+def CreateFolder(name: str) -> str:
     """
     Creates a folder if it doesn't already exist.
     `param 1:  relative path to folder`
-    `returns:  None`
+    `returns:  relative path to file`
     `result:   folder created`
     `example:  CreateFolder('myfolder')`
     """
     os.makedirs(name) if not os.path.exists(name) else None
+    return name
+
+
+def CreateFile(name: str) -> str:
+    """
+    Creates a file if it doesn't already exist.
+    `param 1:  relative path to file`
+    `returns:  relative path to file`
+    `result:   file created`
+    `example:  CreateFile('myfolder/myfile.txt')`
+    """
+    if os.path.exists(name):
+        pass
+    else:
+        with open(name, 'w') as fl: fl.write('')
+    return name
+
+
+def WriteOnFile(name: str, content: str) -> None:
+    """
+    Appends content on a file.
+    `param 1:  relative path to file`
+    `param 2:  content to append to it`
+    `returns:  None`
+    `result:   content writen on file`
+    `example:  WriteOnFile('myfile.txt', '\nUwU')`
+    """
+    with open(name, 'a') as fl: fl.write(content)
 
 
 ###############################################################################################
