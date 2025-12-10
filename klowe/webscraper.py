@@ -278,8 +278,10 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...], download: bool = 
         KLog(kwslog, f"Extracting {len(clean_urls)} texts with 'WebPage()'... Don't mind errors. Takes about 1 minute per 100 files.\n")
 
         for i, j in enumerate(clean_urls):
-            text_id: str = f"{project_name}_{i}"
-            text_content: str = WebPage(j)
+            try:
+                text_id: str = f"{project_name}_{i}"
+                text_content: str = WebPage(j)
+            except Exception as e: KLog(kwslog, f"Error '{e}' in URL {i: <3} {j}")
 
             with open(f"{project_name}/txt_corpus/{text_id}.txt", 'w') as fl:
                 fl.write(text_content)
