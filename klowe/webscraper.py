@@ -183,6 +183,8 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with KSetLanguage() as 'es', 'en', ...")
     if len(seeds := [f"%22{i}%22" for i in query_terms]) < 3: raise Exception(f"Must add at least 3 terms in a tuple as the second argument.")
 
+    logging.getLogger('pdfminer').setLevel(logging.ERROR)
+
     print(f"\nThe machine is thinking. This will take a couple of seconds.")
 
     CreateFolder(f"{project_name}")
@@ -191,8 +193,8 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     CreateFolder(f"{project_name}/txt_corpus")
     CreateFile(f"{project_name}/generated_tuples.txt")
 
-    search_tuples: list[str] = ["+".join(i).replace(" ", "+") for i in list(combinations(seeds, 3))]
-    WriteOnFile(f"{project_name}/generated_tuples.txt", "\n".join(search_tuples))
+    search_tuples: list[str] = ["+".join(i).replace(' ', '+') for i in list(combinations(seeds, 3))]
+    WriteOnFile(f"{project_name}/generated_tuples.txt", '\n'.join(search_tuples))
 
     def search_queries(url_query: str) -> list[str]:
         searchers: list[str] = [f"https://www.startpage.com/rvd/search?query={url_query}&language={lang}",
@@ -205,17 +207,13 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
     searches: list[str] = [j for k in [search_queries(i) for i in search_tuples] for j in k]
 
-
-
     if not os.path.exists(f"{project_name}/collected_links.txt"):
-
-        with open(f"{project_name}/collected_links.txt", "w") as fl: fl.write("\n".join(searches))
-        with open(f"{project_name}/collected_links.txt", "a") as fl: fl.write("\n")
+        WriteOnFile(f"{project_name}/collected_links.txt", f"{'\n'.join(searches)}\n")
         collected: list[str] = [j for k in [SearchLinks(i) for i in searches] for j in k]
         with open(f"{project_name}/collected_links.txt", "a") as fl:
             for i in collected: fl.write(f"{i}\n")
-
     else: None
+
 
 
     with open(f"{project_name}/collected_links.txt", 'r', encoding='utf8') as f:
@@ -256,7 +254,6 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
 
 
-    logging.getLogger('pdfminer').setLevel(logging.ERROR)
 
     source = os.listdir(f"{project_name}/downloads")
     print(f"Creating {len(source)} xml and txt files from:")
@@ -274,8 +271,6 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
         print(f" {i}")
     print()
-
-    logging.getLogger('pdfminer').setLevel(logging.NOTSET)
 
 
 
