@@ -161,18 +161,19 @@ def CreateFile(name: str) -> str:
     return name
 
 
-def WriteOnFile(name: str, content: str, prefix: str = '\n') -> None:
+def WriteOnFile(name: str, content: str, prefix: str = '\n', suffix: str = '') -> None:
     """
     Appends content on a file.
     `param 1:  relative path to file`
     `param 2:  content to append to it`
     `param 3:  what to write before the content; '\n' by default`
+    `param 4:  what to write after the content; '' by default`
     `returns:  None`
     `result:   content writen on file`
     `example:  WriteOnFile('myfile.txt', 'UwU')`
     """
     with open(name, 'a') as fl:
-        fl.write(f"{prefix}{content}")
+        fl.write(f"{prefix}{content}{suffix}")
 
 
 def KLog(logpath: str, content: str, printit: bool = True) -> None:

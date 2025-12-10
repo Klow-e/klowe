@@ -182,20 +182,25 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
     if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with KSetLanguage() as 'es', 'en', ...")
     if len(seeds := [f"%22{i}%22" for i in query_terms]) < 3: raise Exception(f"Must add at least 3 terms in a tuple as the second argument.")
-
-    logging.getLogger('pdfminer').setLevel(logging.ERROR)
-
     print(f"\nThe machine is thinking. This will take a couple of seconds.")
 
+    # makes pdfminer less verbose
+    logging.getLogger('pdfminer').setLevel(logging.ERROR)
+
+    # creates file structure
     CreateFolder(f"{project_name}")
     CreateFolder(f"{project_name}/downloads")
     CreateFolder(f"{project_name}/xml_corpus")
     CreateFolder(f"{project_name}/txt_corpus")
     CreateFile(f"{project_name}/generated_tuples.txt")
+    CreateFile(f"{project_name}/cleaned_links.txt")
+    kwslog: str = KLog(f"{project_name}/KWebScrap_{project_name}.log", '')
 
+    # creates combination tuples to search and saves them in a file
     search_tuples: list[str] = ["+".join(i).replace(' ', '+') for i in list(combinations(seeds, 3))]
     WriteOnFile(f"{project_name}/generated_tuples.txt", '\n'.join(search_tuples))
 
+    # defines web searchers URLs based on the tuples
     def search_queries(url_query: str) -> list[str]:
         searchers: list[str] = [f"https://www.startpage.com/rvd/search?query={url_query}&language={lang}",
                                 f"https://www.startpage.com/rvd/search?query={url_query}&language={lang}&page=2",
@@ -204,24 +209,24 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
                                 f"https://search4.lycos.com/web/?q={url_query}&language={lang}",
                                 ]
         return searchers
-
     searches: list[str] = [j for k in [search_queries(i) for i in search_tuples] for j in k]
 
+    # opens the searchers URL and extracts links from them
     if not os.path.exists(f"{project_name}/collected_links.txt"):
-        WriteOnFile(f"{project_name}/collected_links.txt", f"{'\n'.join(searches)}\n")
-        collected: list[str] = [j for k in [SearchLinks(i) for i in searches] for j in k]
-        with open(f"{project_name}/collected_links.txt", "a") as fl:
-            for i in collected: fl.write(f"{i}\n")
+        CreateFile(f"{project_name}/collected_links.txt")
+        WriteOnFile(f"{project_name}/collected_links.txt", f"{'\n'.join(searches)}", suffix='\n')
+        collected: list[str] = [j for k in [SearchLinks(i, logfile=kwslog) for i in searches] for j in k]
+        for i in collected: WriteOnFile(f"{project_name}/collected_links.txt", i, prefix='', suffix='\n')
     else: None
 
-
-
+    # cleans the collected links list excluding irrelevant items
     with open(f"{project_name}/collected_links.txt", 'r', encoding='utf8') as f:
         clean_urls: list[str] = list(set([i.removesuffix("\n") for i in f if i.startswith("htt")]))
     for i, l in enumerate(clean_urls):
         if l.startswith("https://search.lycos.com/"): clean_urls[i] = "https://" + l.partition("http%3A%2F%2F")[-1]
     clean_urls: list[str] = [i.replace(" ", "%20") for i in clean_urls if not i.endswith("...")]
     clean_urls: list[str] = [i.replace("%2F", "/") for i in clean_urls if len(i) != 8]
+
     exclude_domains: tuple = ("https://www.startpage", "https://us1-browse", "https://www.youtube", "https://blocksurvey",
                                 "https://support.", "https://m.youtube", "https://play.", "http://www.tripod.", "https://www.google",
                                 "https://twitter", "https://hackerone", "https://buttondown", "https://www.tiktok", "http://www.mail.",
@@ -236,28 +241,24 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
                                 "https://registration.", "https://www.lavozdigital.", "https://www.centraldereservas.", "https://www.abc.",
                                 "https://www.trainvelling.com", "https://www.getyourguide", "https://www.renfe", "https://www.tripadvisor.",)
     clean_urls: list[str] = list(set([i for i in clean_urls if not i.startswith(exclude_domains)]))
-    with open(f"{project_name}/cleaned_links.txt", "w") as fl: fl.write("\n".join(clean_urls))
+    WriteOnFile(f"{project_name}/cleaned_links.txt", '\n'.join(clean_urls))
 
 
 
-    print(f"\nDownloading {len(clean_urls)} files... \nDon't mind errors. Takes about 1 minute per 100 files.\n")
+    KLog(kwslog, f"\nDownloading {len(clean_urls)} files... \nDon't mind errors. Takes about 1 minute per 100 files.\n")
 
-
-
+    # downloads webpages in clean_url
     for i, j in enumerate(clean_urls):
         try:
             format = 'pdf' if j.endswith('.pdf') else 'html'
             DownloadWebpage(f"{project_name}/downloads/{project_name}_{i}.{format}", j)
-            print(f"{format.upper(): <4} {i: <3} {j}")
-        except Exception as e: print(f"Error '{e}' in URL {i: <3} {j}")
-    print()
+            KLog(kwslog, f"{format.upper(): <4} {i: <3} {j}")
+        except Exception as e: KLog(kwslog, f"Error '{e}' in URL {i: <3} {j}")
 
+    source: list[str] = os.listdir(f"{project_name}/downloads")
+    KLog(kwslog, f"Creating {len(source)} xml and txt files from:")
 
-
-
-    source = os.listdir(f"{project_name}/downloads")
-    print(f"Creating {len(source)} xml and txt files from:")
-
+    # extracts text from downloaded webpages into txt and xml formats
     for i in source:
 
         texto: str = FileToText(f"{project_name}/downloads/{i}")
@@ -269,14 +270,15 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
         with open(f"{project_name}/txt_corpus/{i.rstrip('.htmlpdf')}.txt", 'w') as fl:
             fl.write(texto)
 
-        print(f" {i}")
-    print()
+        KLog(kwslog, f" {i}")
 
 
 
-    print(f"Removing useless files...")
+    KLog(kwslog, f"Removing useless files...")
+
 
     text_list = []
+
     for i in os.listdir(f"{project_name}/txt_corpus"):
         with open(f"{project_name}/txt_corpus/{i}", 'r') as fl:
             t = fl.read()
@@ -284,19 +286,19 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
             t = t.replace("\n", " ")
             t = (i, t)
         text_list.append(t)
+
     exclude_text: list[str] = [i for i,v in text_list if len(v) < 60]
+
     sw_ratio = [( i , (sum(t.split().count(w) for w in stop_words) / len(t.split())) ) for i, t in text_list if i not in exclude_text]
     exclude_text.extend([i for i,v in sw_ratio if v < 0.1])
+
     for i in exclude_text:
-        print(f" Removed {i.replace('.txt', '')} from corpus")
+        KLog(kwslog, f" Removed {i.replace('.txt', '')} from corpus")
         txt_path = os.path.join(f"{project_name}/txt_corpus", i)
         xml_path = os.path.join(f"{project_name}/xml_corpus", i.replace(".txt", ".xml"))
         os.remove(txt_path)
         os.remove(xml_path)
     
-    print()
-
-
 
     shutil.make_archive(project_name, "zip", project_name)
     return None
