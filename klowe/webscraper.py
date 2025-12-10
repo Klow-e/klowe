@@ -90,30 +90,38 @@ def FormXML(text: str, filename: str, uri: str = '') -> str:
 ###############################################################################################
 
 
-def WebPage(url: str) -> str:
-
+def DownloadWebpage(filenamepath: str, url: str):
     response = requests.get(url, timeout=5)
     if response.status_code == 200:
 
-        soup = BeautifulSoup(response.text, 'html.parser')
-        paragraphs = soup.find_all('p')
-        paragraphs = [p.text for p in paragraphs]
-        paragraphs = " ".join(paragraphs)
-        return paragraphs
+        with open(f"{filenamepath}", 'wb') as fl:
+            fl.write(response.content)
 
-    else: raise Exception(f"Unacceptable response '{response.status_code}' at '{url = }'")
+    else: raise Exception(f"Response error {response.status_code}")
 
 
-def PDFtext(url: str) -> str:
-
-    response = requests.get(url,  timeout=5)
+def WebPage(url: str) -> str:
+    """
+    Extracts the text from the contents in an URL, be it an HTML webpage or PDF.
+    `param 1:  url string`
+    `returns:  text in the contents of the page`
+    `example:  webtext: str = WebPage('https://www.waysofenlichenment.net')`
+    """
+    response = requests.get(url, timeout=5)
     if response.status_code == 200:
 
-        with open('name', 'wb') as fl:
-            fl.write(response.content)
-        text: str = extract_text('name')
-        os.remove('name')
-        return text
+        if url.endswith('.pdf'):
+            with open('name', 'wb') as fl:
+                fl.write(response.content)
+            text: str = extract_text('name')
+            os.remove('name')
+            return text
+        else:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            paragraphs = soup.find_all('p')
+            paragraphs = [p.text for p in paragraphs]
+            paragraphs = " ".join(paragraphs)
+            return paragraphs
 
     else: raise Exception(f"Unacceptable response '{response.status_code}' at '{url = }'")
 
@@ -203,18 +211,16 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     clean_urls: list[str] = list(set([i for i in clean_urls if not i.startswith(exclude_domains)]))
     with open(f"{project_name}/cleaned_links.txt", "w") as fl: fl.write("\n".join(clean_urls))
 
-    def download_webpage(project_name: str, filename: str, url: str):
-        response = requests.get(url, timeout=5)
-        if response.status_code == 200:
-            with open(f"{project_name}/downloads/{filename}", 'wb') as fl:
-                fl.write(response.content)
-        else: raise Exception(f"Response error {response.status_code}")
+
 
     print(f"\nDownloading {len(clean_urls)} files... \nDon't mind errors. Takes about 1 minute per 100 files.\n")
+
+
+
     for i, j in enumerate(clean_urls):
         try:
             format = "pdf" if j.endswith(".pdf") else "html"
-            download_webpage(f"{project_name}", f"{project_name}_{i}.{format}", j)
+            DownloadWebpage(f"{project_name}/downloads/{project_name}_{i}.{format}", j)
             print(f"{format.upper(): <4} {i: <3} {j}")
         except Exception as e: print(f"Error '{e}' in URL {i: <3} {j}")
     print()
