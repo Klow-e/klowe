@@ -72,14 +72,14 @@ def FileToText(file_path: str) -> str:
     else: raise Exception(f"Invalid file type: {file_path}. Try PDF or HTML")
 
 
-def FormXML(text: str, filename: str, uri: str = '') -> str:
+def FormXML(text: str, filename: str = '', uri: str = '') -> str:
     """
     Extracts the text from a file. Accepts HTML and PDF.
     `param 1:  text name`
     `param 1:  file name`
     `param 1:  URL string`
     `returns:  text formatted for xml corpus`
-    `example:  xmltext: str = FormXML(mytext)`
+    `example:  xmltext: str = FormXML(mytext, 'mytext.xml')`
     """
     xml_data: str = f"\n<text filename='{filename}' url='{uri}'>"
     for i in text.split('\n'): xml_data += f"\n<s>{i}</s>"
@@ -164,7 +164,7 @@ def SearchLinks(url: str, logfile: str = 'SearchLinks.log') -> list[str]:
 ###############################################################################################
 
 
-def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
+def KWebScrap(project_name: str, query_terms: tuple[str, ...], download: bool = False) -> None:
     """
     1: Creates the directory structure for a web scraping project.
     2: Generates a list of combinations of temrs suitable for insertion in a searcher's URL.
@@ -245,33 +245,50 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
 
 
+    if download == True:
 
-    KLog(kwslog, f"Downloading {len(clean_urls)} files... Don't mind errors. Takes about 1 minute per 100 files.\n")
+        KLog(kwslog, f"Downloading {len(clean_urls)} files with 'DownloadWebpage()'... Don't mind errors. Takes about 1 minute per 100 files.\n")
 
-    # downloads webpages in clean_url
-    for i, j in enumerate(clean_urls):
-        try:
-            format = 'pdf' if j.endswith('.pdf') else 'html'
-            DownloadWebpage(f"{project_name}/downloads/{project_name}_{i}.{format}", j)
-            KLog(kwslog, f"{format.upper(): <4} {i: <3} {j}")
-        except Exception as e: KLog(kwslog, f"Error '{e}' in URL {i: <3} {j}")
+        # downloads webpages in clean_url
+        for i, j in enumerate(clean_urls):
+            try:
+                format = 'pdf' if j.endswith('.pdf') else 'html'
+                DownloadWebpage(f"{project_name}/downloads/{project_name}_{i}.{format}", j)
+                KLog(kwslog, f"{format.upper(): <4} {i: <3} {j}")
+            except Exception as e: KLog(kwslog, f"Error '{e}' in URL {i: <3} {j}")
 
-    source: list[str] = os.listdir(f"{project_name}/downloads")
-    KLog(kwslog, f"\nCreating {len(source)} xml and txt files from:")
+        source: list[str] = os.listdir(f"{project_name}/downloads")
+        KLog(kwslog, f"\nCreating {len(source)} xml and txt files from:")
 
-    # extracts text from downloaded webpages into txt and xml formats
-    for i in source:
+        # extracts text from downloaded webpages into txt and xml formats
+        for i in source:
+            texto: str = FileToText(f"{project_name}/downloads/{i}")
+            uri: str = clean_urls[int(i.rstrip('.htmlpdf').removeprefix(f"{project_name}_"))]
 
-        texto: str = FileToText(f"{project_name}/downloads/{i}")
-        uri: str = clean_urls[int(i.rstrip('.htmlpdf').removeprefix(f"{project_name}_"))]
+            with open(f"{project_name}/xml_corpus/{i.rstrip('.htmlpdf')}.xml", 'w') as fl:
+                fl.write(FormXML(texto, i, uri))
 
-        with open(f"{project_name}/xml_corpus/{i.rstrip('.htmlpdf')}.xml", 'w') as fl:
-            fl.write(FormXML(texto, i, uri))
+            with open(f"{project_name}/txt_corpus/{i.rstrip('.htmlpdf')}.txt", 'w') as fl:
+                fl.write(texto)
 
-        with open(f"{project_name}/txt_corpus/{i.rstrip('.htmlpdf')}.txt", 'w') as fl:
-            fl.write(texto)
+            KLog(kwslog, f" {i}")
 
-        KLog(kwslog, f" {i}")
+    else:
+
+        KLog(kwslog, f"Extracting {len(clean_urls)} texts with 'WebPage()'... Don't mind errors. Takes about 1 minute per 100 files.\n")
+
+        for i, j in enumerate(clean_urls):
+            text_id: str = f"{project_name}_{i}"
+            text_content: str = WebPage(j)
+
+            with open(f"{project_name}/txt_corpus/{text_id}.txt", 'w') as fl:
+                fl.write(text_content)
+
+            with open(f"{project_name}/xml_corpus/{text_id}.xml", 'w') as fl:
+                fl.write(FormXML(text_content, text_id, j))
+            
+            KLog(kwslog, f" {text_id}")
+
 
 
 
@@ -288,10 +305,10 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
             t = (i, t)
         text_list.append(t)
 
-    exclude_text: list[str] = [i for i,v in text_list if len(v) < 60]
+    exclude_text: list[str] = [i for i, v in text_list if len(v) < 60]
 
     sw_ratio = [( i , (sum(t.split().count(w) for w in stop_words) / len(t.split())) ) for i, t in text_list if i not in exclude_text]
-    exclude_text.extend([i for i,v in sw_ratio if v < 0.1])
+    exclude_text.extend([i for i, v in sw_ratio if v < 0.1])
 
     for i in exclude_text:
         KLog(kwslog, f" Removed {i.replace('.txt', '')} from corpus")
