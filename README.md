@@ -36,6 +36,7 @@ You should have received a copy of the GNU General Public License along with thi
 > WriteOnFile('path', 'content')                    == appends content to a file
 > RemoveFolder(str)                                 == removes the folder with the given name
 > RemoveFile(str)                                   == removes the file with the given name
+> KLog('path', 'content', printit=True)             == creates log file if it didn't exist, writes on it, and optionally prints
 ```
 
 

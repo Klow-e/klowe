@@ -161,16 +161,33 @@ def CreateFile(name: str) -> str:
     return name
 
 
-def WriteOnFile(name: str, content: str) -> None:
+def WriteOnFile(name: str, content: str, prefix: str = '\n') -> None:
     """
     Appends content on a file.
     `param 1:  relative path to file`
     `param 2:  content to append to it`
+    `param 3:  what to write before the content; '\n' by default`
     `returns:  None`
     `result:   content writen on file`
-    `example:  WriteOnFile('myfile.txt', '\nUwU')`
+    `example:  WriteOnFile('myfile.txt', 'UwU')`
     """
-    with open(name, 'a') as fl: fl.write(content)
+    with open(name, 'a') as fl:
+        fl.write(f"{prefix}{content}")
+
+
+def KLog(logpath: str, content: str, printit: bool = True) -> None:
+    """
+    Creates a log file if it doesn't exist, and writes on it.
+    `param 1:  relative path to log file`
+    `param 2:  content to write on it`
+    `param 3:  if to print the content, 'True' by default`
+    `returns:  None`
+    `result:   content writen on log file, created if it didn't exist`
+    `example:  KLog('mylog.txt', 'f"error in {errorlocation}"')`
+    """
+    CreateFile(logpath)
+    WriteOnFile(logpath, content)
+    print(f"Log: {content}") if printit else None
 
 
 ###############################################################################################

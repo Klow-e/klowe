@@ -87,6 +87,9 @@ def FormXML(text: str, filename: str, uri: str = '') -> str:
     return xml_data
 
 
+###############################################################################################
+
+
 def WebPage(url: str) -> str:
     """
     Extracts the text from the contents in an URL, be it an HTML webpage or PDF.
@@ -135,10 +138,7 @@ def DownloadWebpage(filenamepath: str, url: str) -> None:
     else: raise Exception(f"Response error {response.status_code}")
 
 
-###############################################################################################
-
-
-def SearchLinks(url: str) -> list[str]:
+def SearchLinks(url: str, logfile: str = 'SearchLinks.log') -> list[str]:
     """
     Extracts hyperlinks from an URL.
     `param 1:  url string`
@@ -157,9 +157,11 @@ def SearchLinks(url: str) -> list[str]:
         return links
 
     except Exception as e:
-        print(f"Error: {e} in {url}")
+        KLog(logfile, f"Error: {e} in {url}")
         return [url, ]
 
+
+###############################################################################################
 
 
 def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
@@ -169,7 +171,6 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     3: Searches online (with StartPage and Lycos) for the combinations, and extracts the results.
     4: Creates a txt and xml corpus based on the results and cleans it.
     5: Creates a zip file of the project.
-
     `param 1:  one str as the project's name`
     `param 2:  one tuple[str, ...] of at least three strings`
     `returns:  None`
@@ -181,6 +182,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
     if len(lang := "".join(KLanguage)) == 0: raise Exception(f"Language not set. Set it with KSetLanguage() as 'es', 'en', ...")
     if len(seeds := [f"%22{i}%22" for i in query_terms]) < 3: raise Exception(f"Must add at least 3 terms in a tuple as the second argument.")
+
     print(f"\nThe machine is thinking. This will take a couple of seconds.")
 
     CreateFolder(f"{project_name}")
@@ -192,8 +194,6 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
     search_tuples: list[str] = ["+".join(i).replace(" ", "+") for i in list(combinations(seeds, 3))]
     WriteOnFile(f"{project_name}/generated_tuples.txt", "\n".join(search_tuples))
 
-
-
     def search_queries(url_query: str) -> list[str]:
         searchers: list[str] = [f"https://www.startpage.com/rvd/search?query={url_query}&language={lang}",
                                 f"https://www.startpage.com/rvd/search?query={url_query}&language={lang}&page=2",
@@ -202,15 +202,19 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
                                 f"https://search4.lycos.com/web/?q={url_query}&language={lang}",
                                 ]
         return searchers
+
     searches: list[str] = [j for k in [search_queries(i) for i in search_tuples] for j in k]
 
 
+
     if not os.path.exists(f"{project_name}/collected_links.txt"):
+
         with open(f"{project_name}/collected_links.txt", "w") as fl: fl.write("\n".join(searches))
         with open(f"{project_name}/collected_links.txt", "a") as fl: fl.write("\n")
         collected: list[str] = [j for k in [SearchLinks(i) for i in searches] for j in k]
         with open(f"{project_name}/collected_links.txt", "a") as fl:
             for i in collected: fl.write(f"{i}\n")
+
     else: None
 
 
