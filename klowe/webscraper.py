@@ -293,8 +293,6 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> list[tuple[str
         KLog(kwslog, f" Removed {i.replace('.txt', '')} from corpus")
         txt_path = os.path.join(f"{project_name}/txt_corpus", i)
         xml_path = os.path.join(f"{project_name}/xml_corpus", i.replace(".txt", ".xml"))
-        # os.remove(txt_path)
-        # os.remove(xml_path)
         os.rename(txt_path, f"{project_name}/removed/{i}")
         os.rename(xml_path, f"{project_name}/removed/{i.replace(".txt", ".xml")}")
 
