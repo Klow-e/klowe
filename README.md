@@ -114,6 +114,7 @@ You should have received a copy of the GNU General Public License along with thi
 > tokenization("<text>") -> list[str]               == clean_text + excludes tokens with illegal characters + tokenizes
 > bagwords("<text>") -> list[str]                   == tokenization + stopwords filter
 > list_types("<text>") -> list[str]                 == list of unique words in a text (types)
+> StopWordsRatio("<text>") -> float                 == ratio of the language's stopwords in a text
 
 > count_letters("<text>") -> int                    == counts only number of letters
 > count_tokens("<text>") -> int                     == counts number of tokens

@@ -151,6 +151,18 @@ def btdistribution(text: str) -> list[tuple[str,int]]:
     return tokens
 
 
+def StopWordsRatio(text: str) -> float:
+    """
+    Determines the ratio of stopwords in the language set by 'KSetLanguage()' of a text.
+    `param 1:  text`
+    `returns:  per-one ratio, sould be over 0.35`
+    `example:  spanishness: float = StopWordsRatio(mitexto)`
+    """
+    tokenized: list[str] = tokenization(text)
+    sw_ratio: float = sum(tokenized.count(w) for w in stop_words) / len(tokenized)
+    return sw_ratio
+
+
 ###############################################################################################
 
 

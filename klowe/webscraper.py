@@ -164,7 +164,7 @@ def SearchLinks(url: str, logfile: str = 'SearchLinks.log') -> list[str]:
 ###############################################################################################
 
 
-def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
+def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> list[tuple[str, str]]:
     """
     1: Creates the directory structure for a web scraping project.
     2: Generates a list of combinations of temrs suitable for insertion in a searcher's URL.
@@ -270,8 +270,6 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
         KLog(kwslog, f" {i}")
 
-    KLog(kwslog, f"===========> Removing useless files...")
-
     # creates a list of tuples with file name and text
     text_list: list[tuple[str, str]] = []
     for i in os.listdir(f"{project_name}/txt_corpus"):
@@ -282,13 +280,14 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
             t = (i, t)
         text_list.append(t)
 
+    KLog(kwslog, f"===========> Removing useless files...")
 
+    # selects texts to be excluded for length and language reasons
+    exclude_text: list[str] = [i for i, v in text_list if len(v) < 50]
+    exclude_text: list[str] = [i for i, v in text_list if StopWordsRatio(v) < 0.1]
+    exclude_text: list[str] = list(set(exclude_text))
 
-    exclude_text: list[str] = [i for i, v in text_list if len(v) < 60]
-
-    sw_ratio = [( i , (sum(t.split().count(w) for w in stop_words) / len(t.split())) ) for i, t in text_list if i not in exclude_text]
-    exclude_text.extend([i for i, v in sw_ratio if v < 0.1])
-
+    # removes bad texts
     for i in exclude_text:
         KLog(kwslog, f" Removed {i.replace('.txt', '')} from corpus")
         txt_path = os.path.join(f"{project_name}/txt_corpus", i)
@@ -296,12 +295,13 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
         os.remove(txt_path)
         os.remove(xml_path)
 
-
+    # generates an output
+    resulting_texts: list[tuple[str, str]] = [i for i in text_list if i not in exclude_text].sort()
 
     # gives the finishing touch
     KLog(kwslog, f"===========> Ding!\n")
     shutil.make_archive(project_name, "zip", project_name)
-    return None
+    return resulting_texts
 
 
 ###############################################################################################
