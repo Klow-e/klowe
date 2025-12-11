@@ -173,7 +173,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> list[tuple[str
     5: Creates a zip file of the project.
     `param 1:  one str as the project's name`
     `param 2:  one tuple[str, ...] of at least three strings`
-    `returns:  None`
+    `returns:  list of tuples with each text's name and content`
     `result:   a directory is created with the scrapped corpus`
     `example:  KWebScrap("GNU", ("software libre", "sistema operativo", "distribución linux", "GNU"))`
     It's better if the terms are unequivocally in the desired language.
@@ -192,6 +192,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> list[tuple[str
     CreateFolder(f"{project_name}/downloads")
     CreateFolder(f"{project_name}/xml_corpus")
     CreateFolder(f"{project_name}/txt_corpus")
+    CreateFolder(f"{project_name}/removed")
     CreateFile(f"{project_name}/generated_tuples.txt")
     CreateFile(f"{project_name}/cleaned_links.txt")
     kwslog: str = f"{project_name}/KWebScrap_{project_name}.log"
@@ -292,8 +293,10 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> list[tuple[str
         KLog(kwslog, f" Removed {i.replace('.txt', '')} from corpus")
         txt_path = os.path.join(f"{project_name}/txt_corpus", i)
         xml_path = os.path.join(f"{project_name}/xml_corpus", i.replace(".txt", ".xml"))
-        os.remove(txt_path)
-        os.remove(xml_path)
+        # os.remove(txt_path)
+        # os.remove(xml_path)
+        os.rename(txt_path, f"{project_name}/removed/{i}")
+        os.rename(xml_path, f"{project_name}/removed/{i.replace(".txt", ".xml")}")
 
     # generates an output
     resulting_texts: list[tuple[str, str]] = [i for i in text_list if i not in exclude_text].sort()
