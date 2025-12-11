@@ -254,7 +254,7 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
         except Exception as e: KLog(kwslog, f"Error '{e}' in URL {i: <3} {j}")
 
     source: list[str] = os.listdir(f"{project_name}/downloads")
-    KLog(kwslog, f"\nCreating {len(source)} xml and txt files from:")
+    KLog(kwslog, f"===========> Creating {len(source)} xml and txt files from:")
 
     # extracts text from downloaded webpages into txt and xml formats
     for i in source:
@@ -270,12 +270,10 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
         KLog(kwslog, f" {i}")
 
-    KLog(kwslog, f"\nRemoving useless files...")
+    KLog(kwslog, f"===========> Removing useless files...")
 
-
-
-    text_list = []
-
+    # creates a list of tuples with file name and text
+    text_list: list[tuple[str, str]] = []
     for i in os.listdir(f"{project_name}/txt_corpus"):
         with open(f"{project_name}/txt_corpus/{i}", 'r') as fl:
             t = fl.read()
@@ -283,6 +281,8 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
             t = t.replace("\n", " ")
             t = (i, t)
         text_list.append(t)
+
+
 
     exclude_text: list[str] = [i for i, v in text_list if len(v) < 60]
 
@@ -298,7 +298,8 @@ def KWebScrap(project_name: str, query_terms: tuple[str, ...]) -> None:
 
 
 
-    KLog(kwslog, f"Ding!\n")
+    # gives the finishing touch
+    KLog(kwslog, f"===========> Ding!\n")
     shutil.make_archive(project_name, "zip", project_name)
     return None
 
