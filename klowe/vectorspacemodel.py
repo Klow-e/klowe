@@ -25,7 +25,7 @@ np.set_printoptions(suppress=True)
 def sIDF_of_T(N: int, nt: int) -> float:
     """
     Gives the smooth IDF of an N and n_t. Same smoothing as sklearn uses.
-    `sIDF = log( N+1 / nt+1 ) + 1`
+    `formula:  sIDF = log( N+1 / nt+1 ) + 1`
     `param 1:  N: number of documents in the corpus`
     `param 2:  nt: number of documents where the term appears`
     `returns:  smooth IDF of a term in that corpus`
@@ -38,7 +38,7 @@ def sIDF_of_T(N: int, nt: int) -> float:
 def pIDF_of_T(N: int, nt: int) -> float:
     """
     Gives the probabilistic IDF of an N and n_t. The formula has also been smoothed.
-    `pIDF = log( ((N - nt) + 1) / (nt + 1) )`
+    `formula:  pIDF = log( ((N - nt) + 1) / (nt + 1) )`
     `param 1:  N: number of documents in the corpus`
     `param 2:  nt: number of documents where the term appears`
     `returns:  probabilistic IDF of a term in that corpus`
@@ -52,10 +52,10 @@ def InverseDocFreq(ltexts: list[str]) -> tuple[list[list[float]], list[list[floa
     """
     Gives smooth and probabilistic IDF of a list of texts corpus, alongside TF and the Terms.
     `param 1:  list of texts`
-    `return 1: smooth IDF`
-    `return 2: probabilistic IDF`
-    `return 3: TF of each Term in each text`
-    `return 4: list of the Terms of each text`
+    `return1:  smooth IDF`
+    `return2:  probabilistic IDF`
+    `return3:  TF of each Term in each text`
+    `return4:  list of the Terms of each text`
     `example:  sIDF, pIDF, TFtensor, Ttensor = InverseDocFreq([texta, textb, textc])`
     """
     TF_tensor: list[list[tuple[str, int]]] = []
@@ -86,8 +86,16 @@ def InverseDocFreq(ltexts: list[str]) -> tuple[list[list[float]], list[list[floa
     return sIDF, pIDF, F_tensor, T_tensor
 
 
-def TF_IDF(sample_dicts: list[str]):
-    sIDF, pIDF, F_tensor, T_tensor = InverseDocFreq(sample_dicts)
+def TF_IDF(ltexts: list[str]) -> tuple[list[list[float]], list[list[float]], list[list[str]]]:
+    """
+    Gives TF.IDF, smooth and probabilistic, of a list of texts corpus, alongside the Terms.
+    `param 1:  list of texts`
+    `return1:  TF.sIDF`
+    `return2:  TF.pIDF`
+    `return3:  list of the Terms of each text`
+    `example:  TFsIDF, TFpIDF, Terms = TF_IDF([texta, textb, textc])`
+    """
+    sIDF, pIDF, F_tensor, T_tensor = InverseDocFreq(ltexts)
 
     def TF_IDF(IDF: list[list[float]], F_tensor: list[list[float]]):
         TF_IDF_tensor = [[IDF[i][j] * F_tensor[i][j] for j in range(len(IDF[i]))] for i in range(len(IDF))]
