@@ -150,20 +150,10 @@ def DefineGenre(l_dicts: list[dict[str, float]]) -> dict[str, float]:
 ###############################################################################################
 
 
-class KGlossary:
-
-    def __init__(self, model: callable, gloss: list[tuple[str, list[str]]]):
-        self.model = model
-        #self.genres = [n for n, _ in gloss]
-        #self.articles = [s for _, s in gloss]
-        self.apply = {n : self.DefineGenre([self.model(d) for d in s]) for n, s in gloss}
-    
-    def DefineGenre(self, l_dicts: list[dict[str, float]]) -> dict[str, float]:
-        return DefineGenre(l_dicts)
-
-# glossary = KGlossary(KWeightModel, [("POLI", [my_text_maoism, my_text_trotsky]),
-# ("CHEM", [my_text_quimica, my_text_valencia]),]).apply
-# KPrintDict(glossary)
+def KGlossary(model: callable, gloss: list[tuple[str, list[str]]]):
+    KGloss = {n : DefineGenre([model(d) for d in s]) for n, s in gloss}
+    return KGloss
+# glossary = KGlossary( KWeightModel, [ ("POLI", [t_maoismo, t_trotsky]), ("CHEM", [t_quimica, t_valencia]) ] )
 
 
 def save_gloss(glossary) -> None:
