@@ -199,6 +199,18 @@ def RoundList(l: list[float], n: int) -> list[float]:
     return r_list
 
 
+def VecVecProd(tla: list[list[float]], tlb: list[list[float]]) -> list[list[float]]:
+    """
+    Multiplies the contests of two list[list[float]] of the same length resulting in just one.
+    `param 1:  a list[list[float]]`
+    `param 2:  another list[list[float]]`
+    `returns:  a list[list[float]] with the products of the intems in the given lists`
+    `example:  vector_of_vectors_product: list[list[float]] = VecVecProd(vecveclist_a, vecveclist_b)`
+    """
+    tensor_product: list[list[float]] = [[tla[i][j] * tlb[i][j] for j in range(len(tla[i]))] for i in range(len(tla))]
+    return tensor_product
+
+
 ###############################################################################################
 
 

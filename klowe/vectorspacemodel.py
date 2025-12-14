@@ -96,14 +96,8 @@ def TF_IDF(ltexts: list[str]) -> tuple[list[list[float]], list[list[float]], lis
     `example:  TFsIDF, TFpIDF, Terms = TF_IDF([texta, textb, textc])`
     """
     sIDF, pIDF, F_tensor, T_tensor = InverseDocFreq(ltexts)
-
-    def TF_IDF(IDF: list[list[float]], F_tensor: list[list[float]]):
-        TF_IDF_tensor = [[IDF[i][j] * F_tensor[i][j] for j in range(len(IDF[i]))] for i in range(len(IDF))]
-        return TF_IDF_tensor
-
-    TF_sIDF = TF_IDF(sIDF, F_tensor)
-    TF_pIDF = TF_IDF(pIDF, F_tensor)
-
+    TF_sIDF: list[list[float]] = VecVecProd(sIDF, F_tensor)
+    TF_pIDF: list[list[float]] = VecVecProd(pIDF, F_tensor)
     return TF_sIDF, TF_pIDF, T_tensor
 
 
