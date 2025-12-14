@@ -12,6 +12,7 @@ from .pythontools import *
 from .datavisualization import *
 from .example_gloss import *
 
+from typing import NewType
 import math
 import operator
 import json
@@ -150,25 +151,31 @@ def DefineGenre(l_dicts: list[dict[str, float]]) -> dict[str, float]:
 ###############################################################################################
 
 
-def KGlossary(model: callable, gloss: list[tuple[str, list[str]]]):
-    KGloss = {n : DefineGenre([model(d) for d in s]) for n, s in gloss}
+KGlossary = NewType("KGlossary", dict[str, dict[str, float]])
+
+
+def KGlossary(model: callable, gloss: list[tuple[str, list[str]]]) -> KGlossary:
+    """
+    1: aaaaa
+    `param 1:  aaaaa`
+    `returns:  aaaaa`
+    `example:  glossary: KGlossary = KGlossary(KWeightModel, [("POLI", [t_maoismo, t_trotsky]), ("CHEM", [t_quimica, t_valencia])] )`
+    """
+    KGloss: KGlossary = {n : DefineGenre([model(d) for d in s]) for n, s in gloss}
     return KGloss
-# glossary = KGlossary( KWeightModel, [ ("POLI", [t_maoismo, t_trotsky]), ("CHEM", [t_quimica, t_valencia]) ] )
 
 
-def save_gloss(glossary) -> None:
+def save_gloss(glossary: KGlossary) -> None:
     with open("gloss.json", "w") as fp:
         json.dump(glossary, fp, indent = 4)
-# save_gloss(glossary)
 
 
-def load_gloss():
+def load_gloss() -> None:
     try:
         with open("gloss.json", "r") as fp:
-            glossary = json.load(fp)
+            glossary: KGlossary = json.load(fp)
         return glossary
     except: print("No 'gloss.json' file found.")
-# glossary = load_gloss()
 
 
 def IDF_gloss(gloss: dict[str, dict[str, float]], xIDF: str) -> dict[str, dict[str, float]]:
