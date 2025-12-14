@@ -139,8 +139,10 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## VectorSpaceModel
 ```
+> sIDF_of_T(N, nt) -> float                         == calculates smooth IDF of an N and n_t
+> pIDF_of_T(N, nt) -> float                         == calculates probabilistic IDF of an N and n_t
 > InverseDocFreq(list[str]) -> sIDF, pIDF, TF, T    == of a list of texts returns a list of lists for IDF, TF, and terms
-> TF_IDF(list[str]) -> TF_sIDF, TF_pIDF, T    == of a list of texts returns a list of lists for TF.IDF and the terms
+> TF_IDF(list[str]) -> TF_sIDF, TF_pIDF, T          == of a list of texts returns a list of lists for TF.IDF and the terms
 
 > KWeightModel("<text>") -> dict[str, float]        == my very own weighting model for texts
 > DefineGrenre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into a unified and mean-value one

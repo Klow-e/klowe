@@ -114,7 +114,7 @@ def RemoveFolder(name: str) -> None:
     Removes a folder alongside its contents and any .zip file with the same name.
     `param 1:  relative path to folder`
     `returns:  None`
-    `result:   folder deleted`
+    `results:  folder deleted`
     `example:  RemoveFolder('myfolder')`
     """
     if os.path.exists(name):
@@ -128,7 +128,7 @@ def RemoveFile(name: str) -> None:
     Checks the existance of a file and removes it if so.
     `param 1:  relative path to file`
     `returns:  None`
-    `result:   file deleted`
+    `results:  file deleted`
     `example:  RemoveFile('myfile')`
     """
     os.remove(name) if os.path.exists(name) else None
@@ -139,7 +139,7 @@ def CreateFolder(name: str) -> str:
     Creates a folder if it doesn't already exist.
     `param 1:  relative path to folder`
     `returns:  relative path to file`
-    `result:   folder created`
+    `results:  folder created`
     `example:  CreateFolder('myfolder')`
     """
     os.makedirs(name) if not os.path.exists(name) else None
@@ -151,7 +151,7 @@ def CreateFile(name: str) -> str:
     Creates a file if it doesn't already exist.
     `param 1:  relative path to file`
     `returns:  relative path to file`
-    `result:   file created`
+    `results:  file created`
     `example:  CreateFile('myfolder/myfile.txt')`
     """
     if os.path.exists(name):
@@ -169,7 +169,7 @@ def WriteOnFile(name: str, content: str, prefix: str = '\n', suffix: str = '') -
     `param 3:  what to write before the content; '\n' by default`
     `param 4:  what to write after the content; '' by default`
     `returns:  None`
-    `result:   content writen on file`
+    `results:  content writen on file`
     `example:  WriteOnFile('myfile.txt', 'UwU')`
     """
     with open(name, 'a') as fl:
@@ -183,7 +183,7 @@ def KLog(logpath: str, content: str, printit: bool = True) -> None:
     `param 2:  content to write on it`
     `param 3:  if to print the content, 'True' by default`
     `returns:  None`
-    `result:   content writen on log file, created if it didn't exist`
+    `results:  content writen on log file, created if it didn't exist`
     `example:  KLog('mylog.txt', 'f"error in {errorlocation}"')`
     """
     CreateFile(logpath)

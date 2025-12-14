@@ -22,14 +22,40 @@ np.set_printoptions(suppress=True)
 ###############################################################################################
 
 
+def sIDF_of_T(N: int, nt: int) -> float:
+    """
+    Gives the smooth IDF of an N and n_t. Same smoothing as sklearn uses.
+    `sIDF = log( N+1 / nt+1 ) + 1`
+    `param 1:  N: number of documents in the corpus`
+    `param 2:  nt: number of documents where the term appears`
+    `returns:  smooth IDF of a term in that corpus`
+    `example:  sIDF_of_myterm: float = sIDF_of_T(4, 3)`
+    """
+    sIDF_of: float = math.log2( ((N + 1) / (nt + 1)) + 1 ) 
+    return sIDF_of
+
+
+def pIDF_of_T(N: int, nt: int) -> float:
+    """
+    Gives the probabilistic IDF of an N and n_t. The formula has also been smoothed.
+    `pIDF = log( ((N - nt) + 1) / (nt + 1) )`
+    `param 1:  N: number of documents in the corpus`
+    `param 2:  nt: number of documents where the term appears`
+    `returns:  probabilistic IDF of a term in that corpus`
+    `example:  pIDF_of_myterm: float = pIDF_of_T(4, 3)`
+    """
+    pIDF_of: float = math.log2( ((N - nt) + 1) / (nt + 1) )
+    return pIDF_of
+
+
 def InverseDocFreq(ltexts: list[str]) -> tuple[list[list[float]], list[list[float]], list[list[float]], list[list[str]]]:
     """
-    Gives the IDF of a corpus as a list of texts.
+    Gives smooth and probabilistic IDF of a list of texts corpus, alongside TF and the Terms.
     `param 1:  list of texts`
     `return 1: smooth IDF`
     `return 2: probabilistic IDF`
-    `return 3: TF of each term in each text`
-    `return 4: list of the terms of each text`
+    `return 3: TF of each Term in each text`
+    `return 4: list of the Terms of each text`
     `example:  sIDF, pIDF, TFtensor, Ttensor = InverseDocFreq([texta, textb, textc])`
     """
     TF_tensor: list[list[tuple[str, int]]] = []
@@ -50,13 +76,13 @@ def InverseDocFreq(ltexts: list[str]) -> tuple[list[list[float]], list[list[floa
 
     # dict of how many times each Term appears in the corpus as a whole
     corpus_Tdist: dict[str, int] = dict(CountDistribution([j for i in T_tensor for j in i]))
-    #
+    # nt: list of Terms of each text with the mumber of documents where they appear
     nt_tensor: list[list[int]] = [[corpus_Tdist.get(j, 0) for j in i] for i in T_tensor]
     # N: number of documents in the corpus
     corpus_N: int = len(ltexts)
-
-    sIDF: list[list[float]] = [[math.log2((corpus_N + 1) / (nt + 1)) for nt in d] for d in nt_tensor]
-    pIDF: list[list[float]] = [[math.log2(((corpus_N - nt) + 1) / (nt + 1)) for nt in d] for d in nt_tensor]
+    # list with a list for each text that contains each Term's IDF
+    sIDF: list[list[float]] = [[sIDF_of_T(corpus_N, nt) for nt in d] for d in nt_tensor]
+    pIDF: list[list[float]] = [[pIDF_of_T(corpus_N, nt) for nt in d] for d in nt_tensor]
     return sIDF, pIDF, F_tensor, T_tensor
 
 
@@ -71,9 +97,6 @@ def TF_IDF(sample_dicts: list[str]):
     TF_pIDF = TF_IDF(pIDF, F_tensor)
 
     return TF_sIDF, TF_pIDF, T_tensor
-# sample_dicts = [my_text_bacterias, my_text_celulas, my_text_carbunco, my_text_bacilo]
-# S, P, T = TF_IDF(sample_dicts)
-# print("\n\n".join("\n".join(map(str, l)) for l in [S, P, T]), "\n")
 
 
 ###############################################################################################

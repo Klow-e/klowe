@@ -28,8 +28,7 @@ def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: str) -> Cal
 
 def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: int|float|str = '') -> float|int|Callable[[int|float], int|float]:
     """
-    Of a quadratic equation in a given x solves for y.
-    If x is left empty, gives a python function for f(x).
+    Of a quadratic equation in a given x solves for y. If x is left empty, gives a python function for f(x).
     `param 1:  a`
     `param 2:  b`
     `param 3:  c`
@@ -49,7 +48,7 @@ def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: int|float|s
 def TanhFunction(x: float) -> int:
     """
     Solves y for x in the Tanh function.
-    tanh(x) = (e^x - e^-x) / (e^x + e^-x)
+    `formula:  tanh(x) = (e^x - e^-x) / (e^x + e^-x)`
     `param 1:  x`
     `returns:  basically 1 if positive, -1 if negative`
     `example:  tanh_atp5: float = TanhFunction(0.5)`
@@ -62,7 +61,7 @@ def TanhFunction(x: float) -> int:
 def ELU(z: float) -> float:
     """
     Solves y for x in the ELU function. Currently the best activation function.
-    elu(x) = a * (e^x -1) if x>0, else x
+    `formula:  elu(x) = a * (e^x -1) if x>0, else x`
     `param 1:  x`
     `returns:  x if x is positive, else aproaches -1`
     `example:  elu_atp5: float = ELU(0.5)`
@@ -75,7 +74,7 @@ def ELU(z: float) -> float:
 def ReLU(x: float) -> float:
     """
     Solves y for x in the ReLU function.
-    relu(x) = max(0,x)
+    `formula:  relu(x) = max(0,x)`
     `param 1:  x`
     `returns:  x if x is positive, else 0`
     `example:  relu_atp5: float = ReLU(0.5)`
@@ -92,7 +91,7 @@ def NormalizeValue(x: float, values_l: list[float], scale: tuple[float, float]) 
     `param 1:  value to be normalized`
     `param 2:  list where it would appear`
     `param 3:  tuple of the scale to normalize in`
-    `returns:  aaa`
+    `returns:  the value in the context of the list normalized to the scale`
     `example:  normalized_value: float = NormalizeValue(0.314, [-0.42, -2, 2, 0.314], (0, 1))`
     """
     s0, s1 = scale
@@ -131,7 +130,7 @@ def TanhNormalization(l_values: list[float]) -> list[float]:
 
 def ELUNormalization(l_values: list[float]) -> list[float]:
     """
-    1: aaaaa
+    Passes a list of values through the ELU function.
     `param 1:  List of values to be normalized`
     `returns:  List through a ELU function`
     `example:  elu_normlis: list[float] = ELUNormalization([-3, -2. -1, 0, 1, 2, 3])`
@@ -142,7 +141,7 @@ def ELUNormalization(l_values: list[float]) -> list[float]:
 
 def ReLUNormalization(l_values: list[float]) -> list[float]:
     """
-    1: aaaaa
+    Passes a list of values through the ReLU function.
     `param 1:  List of values to be normalized`
     `returns:  List through a ReLU function`
     `example:  relu_norlis: list[float] = ReLUNormalization([-3, -2. -1, 0, 1, 2, 3])`
