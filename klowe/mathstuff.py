@@ -22,11 +22,11 @@ from collections.abc import Sequence
 
 
 @overload
-def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: int|float) -> float|int: ...
+def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: float) -> float|int: ...
 @overload
 def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: str) -> Callable[[float|int], float|int]: ...
 
-def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: int|float|str = '') -> float|int|Callable[[int|float], int|float]:
+def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: float|str = '') -> float|int|Callable[[float], float]:
     """
     Of a quadratic equation in a given x solves for y. If x is left empty, gives a python function for f(x).
     `param 1:  a`
