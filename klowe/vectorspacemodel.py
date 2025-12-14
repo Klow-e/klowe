@@ -105,10 +105,16 @@ def TF_IDF(ltexts: list[str]) -> tuple[list[list[float]], list[list[float]], lis
 
 
 def KWeightModel(text: str) -> dict[str, float]:
+    """
+    Weighting model for texts.
+    `param 1:  text`
+    `returns:  dict of relevant words with their absolute weight`
+    `example:  weighted_text: dict[str, float] = KWeightModel(mytext)`
+    """
     freq_dist: list[tuple[str, int]] = BagFrequency(text)
-    prelex_5 = {t[:5] for t, _ in freq_dist}
-    prelex_6 = {t[:6] for t, _ in freq_dist}
-
+    prelex_5: set[str] = {t[:5] for t, _ in freq_dist}
+    prelex_6: set[str] = {t[:6] for t, _ in freq_dist}
+    # filters stopwords and applies multipliers based on length
     for i, (t, w) in enumerate(freq_dist):
         match len(t):
             case 5 | 6 | 7 : m = 1.0
@@ -119,22 +125,26 @@ def KWeightModel(text: str) -> dict[str, float]:
             case _ if t[:5] in prelex_5: m *= 4.0
             case _ if t[:6] in prelex_6: m *= 5.0
         freq_dist[i] = (t, round( w * m , 10))
-
+    # instead of lematizing, it applies multiplier to words with popular beginnings
     weighted: dict[str, float] = SortDict(freq_dist)
     weighted: dict[str, float] = TopPercentDict(weighted, 0.35)
-    weighted: dict[str, float] = RoundDict(weighted, 10)
     return weighted
-
-# print(KWeightModel(my_text))
 
 
 def DefineGenre(l_dicts: list[dict[str, float]]) -> dict[str, float]:
+    """
+    Averages the weights of every term in a list of weighted texts.
+    Accounts for frequency as the weight of a term in a text where it doesn't appear is 0. 
+    `param 1:  list of weighted texts as dict[str, float]`
+    `returns:  dict[str, float] with every term in the list and their mean weights across the list`
+    `example:  my_genre: dict[str, float] = DefineGenre([weightedtexta, weightedtextb])`
+    """
     all_keys: set[str] = sorted({k for d in l_dicts for k in d})
-    genre_dict: dict = SortDict({i : (sum(d.get(i, 0) for d in l_dicts) / len(l_dicts)) for i in all_keys})
+    genre_dict: dict[str, float] = {i : (sum(d.get(i, 0) for d in l_dicts) / len(l_dicts)) for i in all_keys}
+    genre_dict: dict[str, float] = SortDict(genre_dict)
     genre_dict: dict[str, float] = NormalizeDict(genre_dict, (0, 1))
     genre_dict: dict[str, float] = RoundDict(genre_dict, 10)
     return genre_dict
-# print(DefineGenre([KWeightModel(my_text_aritmetica), KWeightModel(my_text_geometria)]))
 
 
 ###############################################################################################
@@ -204,8 +214,6 @@ def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[str,list[str]|dict[
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
     embedded_gloss: dict = {"genres": GetKeys(gloss), "vectors": words_vectors}
     return embedded_gloss
-# KPrintDict(KLexicon(glossary).get("vectors"))
-# print(KLexicon(glossary).get("genres"))
 
 
 def VTModel(g: np.array, t: float) -> np.array:
@@ -226,7 +234,6 @@ def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str, list]:
     TVect = np.vstack([np.array([k]) for k in NormalizeList(sum(GetValues(WText)), (0, 1))])
     VText: dict = {"genres" : KLexicon(gloss).get("genres"), "vectors" : TVect}
     return VText
-# KPrintDict(VectorializeText(my_text, glossary, VTModel))
 
 
 def CategorizeText(VT: dict) -> list[tuple]:
@@ -251,7 +258,6 @@ def CategorizeText(VT: dict) -> list[tuple]:
     if i_c_trust >= 25:
         result.append((i_c_genre, i_c_trust))
     return result
-# print(CategorizeText(VectorializeText(mytext, glossary, VTModel)))
 
 
 def PrintTextGenre(text: str, gloss, VTmodel) -> None:
@@ -261,15 +267,10 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
     for i in range(len(result)): print(f" {result[i][0]}: \t {result[i][1]:.0%}")
     print(e)
     print_text_vector(VT)
-# PrintTextGenre(my_text, glossary, VTModel)
-
-
-###############################################################################################
 
 
 def Categorizar(text: str) -> None:
     PrintTextGenre(text, example_gloss, VTModel)
-# Categorizar(my_text)
 
 
 ###############################################################################################

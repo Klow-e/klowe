@@ -22,11 +22,11 @@ from collections.abc import Sequence
 
 
 @overload
-def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: float) -> float|int: ...
+def AlKhwarizmiFunction(a: float, b: float, c: float, x: float) -> float: ...
 @overload
-def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: str) -> Callable[[float|int], float|int]: ...
+def AlKhwarizmiFunction(a: float, b: float, c: float, x: str) -> Callable[[float], float]: ...
 
-def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: float|str = '') -> float|int|Callable[[float], float]:
+def AlKhwarizmiFunction(a: float, b: float, c: float, x: float|str = '') -> float|Callable[[float], float]:
     """
     Of a quadratic equation in a given x solves for y. If x is left empty, gives a python function for f(x).
     `param 1:  a`
@@ -38,7 +38,7 @@ def AlKhwarizmiFunction(a: float|int, b: float|int, c: float|int, x: float|str =
     `example:  myf: Callable = AlKhwarizmiFunction(1, -4, -5) -> myf(5): float -> 0`
     """
     if type(x) != str:
-        y: float|int = (a * x**2) + (b*x) + c
+        y: float = (a * x**2) + (b*x) + c
         return round(y, 4)
     else:
         def myf(x): return AlKhwarizmiFunction(a, b, c, x)
@@ -263,7 +263,7 @@ def TopPercentDict(dicc: dict[str, float], threshold: float) -> dict[str, float]
 ###############################################################################################
 
 
-def RandomFloat(a: float|int, b: float|int) -> float:
+def RandomFloat(a: float, b: float) -> float:
     """
     Gives a true random float bewteen the specified values.
     `param 1:  inclusive lower limit`

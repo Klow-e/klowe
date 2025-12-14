@@ -41,7 +41,7 @@ def KPlotDict(weighted_text: dict[str, float]) -> None:
 # KPlotDict(RandomDictStrFloat(10))
 
 
-def KPlotFunction(func: callable, name: str = '', xsize: tuple = (-3,3), ysize: tuple = (-1,1), step: float|int = 0.5) -> None:
+def KPlotFunction(func: callable, name: str = '', xsize: tuple = (-3,3), ysize: tuple = (-1,1), step: float = 0.5) -> None:
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     # function
