@@ -20,7 +20,6 @@
 
 
 # ToDo:
-# # capitalize textprocessor functions
 # # create hebrew & greek parser
 # # add formal language, rewriting, and chomsky hierarchy to theory
 # # annotate functions

@@ -22,47 +22,57 @@ np.set_printoptions(suppress=True)
 ###############################################################################################
 
 
-def InverseDocFreq(sample_dicts: list[str]):
-    TF_tensor: list[list[tuple[str,int]]] = []
+def InverseDocFreq(ltexts: list[str]) -> tuple[list[list[float]], list[list[float]], list[list[float]], list[list[str]]]:
+    """
+    Gives the IDF of a corpus as a list of texts.
+    `param 1:  list of texts`
+    `return 1: smooth IDF`
+    `return 2: probabilistic IDF`
+    `return 3: TF of each term in each text`
+    `return 4: list of the terms of each text`
+    `example:  sIDF, pIDF, TFtensor, Ttensor = InverseDocFreq([texta, textb, textc])`
+    """
+    TF_tensor: list[list[tuple[str, int]]] = []
     T_tensor: list[list[str]] = []
     F_tensor: list[list[float]] = []
 
-    for i in sample_dicts:
-
-        doc_TF = TermFrequency(i)
-        doc_T = [j[0] for j in doc_TF]
-        doc_F = [j[1] for j in doc_TF]
-
+    for i in ltexts:
+        # of each text
+        doc_TF: list[tuple[str, float]] = TermFrequency(i)
+        # list of Terms
+        doc_T: list[str] = [j[0] for j in doc_TF]
+        # list of T Frequencies
+        doc_F: list[float] = [j[1] for j in doc_TF]
+        # append to a list for each data
         TF_tensor.append(doc_TF)
         T_tensor.append(doc_T)
         F_tensor.append(doc_F)
 
-    cor_Tdist = dict(CountDistribution([j for i in T_tensor for j in i]))
-    nt_tensor = [[cor_Tdist.get(j, 0) for j in i] for i in T_tensor]
-    cor_N: int = len(sample_dicts)
+    # dict of how many times each Term appears in the corpus as a whole
+    corpus_Tdist: dict[str, int] = dict(CountDistribution([j for i in T_tensor for j in i]))
+    #
+    nt_tensor: list[list[int]] = [[corpus_Tdist.get(j, 0) for j in i] for i in T_tensor]
+    # N: number of documents in the corpus
+    corpus_N: int = len(ltexts)
 
-    sIDF = [[math.log2((cor_N + 1) / (nt + 1)) for nt in d] for d in nt_tensor]
-    pIDF = [[math.log2(((cor_N - nt) + 1) / (nt + 1)) for nt in d] for d in nt_tensor]
-
+    sIDF: list[list[float]] = [[math.log2((corpus_N + 1) / (nt + 1)) for nt in d] for d in nt_tensor]
+    pIDF: list[list[float]] = [[math.log2(((corpus_N - nt) + 1) / (nt + 1)) for nt in d] for d in nt_tensor]
     return sIDF, pIDF, F_tensor, T_tensor
-# sample_dicts = [my_text_bacterias, my_text_celulas, my_text_carbunco, my_text_bacilo]
-# S, P, F, T = InverseDocFreq(sample_dicts)
-# print("\n" + "\n\n".join("\n".join(map(str, l)) for l in [S, P, F, T]) + "\n")
 
 
-def TermFreq_IDF(sample_dicts: list[str]):
+def TF_IDF(sample_dicts: list[str]):
     sIDF, pIDF, F_tensor, T_tensor = InverseDocFreq(sample_dicts)
 
-    def TermFreq_IDF(IDF: list[list[float]], F_tensor: list[list[float]]):
+    def TF_IDF(IDF: list[list[float]], F_tensor: list[list[float]]):
         TF_IDF_tensor = [[IDF[i][j] * F_tensor[i][j] for j in range(len(IDF[i]))] for i in range(len(IDF))]
         return TF_IDF_tensor
 
-    TF_sIDF = TermFreq_IDF(sIDF, F_tensor)
-    TF_pIDF = TermFreq_IDF(pIDF, F_tensor)
+    TF_sIDF = TF_IDF(sIDF, F_tensor)
+    TF_pIDF = TF_IDF(pIDF, F_tensor)
 
     return TF_sIDF, TF_pIDF, T_tensor
 # sample_dicts = [my_text_bacterias, my_text_celulas, my_text_carbunco, my_text_bacilo]
-# S, P, T = TermFreq_IDF(sample_dicts)
+# S, P, T = TF_IDF(sample_dicts)
 # print("\n\n".join("\n".join(map(str, l)) for l in [S, P, T]), "\n")
 
 
