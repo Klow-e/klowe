@@ -4,6 +4,8 @@
 
 from .vectorspacemodel import KGlossaryT
 from .vectorspacemodel import *
+from typing import NewType
+KGlossaryT = NewType("KGlossaryT", dict[str, dict[str, float]])
 
 
 ###############################################################################################
