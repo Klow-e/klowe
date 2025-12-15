@@ -281,6 +281,28 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
 ###############################################################################################
 
 
+def print_vector(word: str, vectors):
+    print("\n" + word)
+    try:
+        for g, v in zip(vectors.get("genres"), vectors.get("vectors").get(word)):
+            print(f" {g}  \t {v}")
+    except: print("Not in glossary")
+    print()
+
+
+def print_text_vector(test):
+    print()
+    for k, v in zip(test.get("genres"), test.get("vectors")):
+        print(f"{k}:\t{v}")
+    print()
+
+
+###############################################################################################
+
+
 def Categorizar(text: str) -> None:
     PrintTextGenre(text, example_gloss, VTModel)
+
+
+###############################################################################################
 

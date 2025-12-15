@@ -82,24 +82,3 @@ def KPlotList(v_list: list[float]) -> None:
 
 ###############################################################################################
 
-
-def print_vector(word: str, vectors):
-    print("\n" + word)
-    try:
-        for g, v in zip(vectors.get("genres"), vectors.get("vectors").get(word)):
-            print(f" {g}  \t {v}")
-    except: print("Not in glossary")
-    print()
-# print_vector("evolucion", KLexicon(glossary))
-
-
-def print_text_vector(test):
-    print()
-    for k, v in zip(test.get("genres"), test.get("vectors")):
-        print(f"{k}:\t{v}")
-    print()
-# print_text_vector(VectorializeText(my_text, glossary))
-
-
-###############################################################################################
-
