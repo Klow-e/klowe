@@ -2,7 +2,7 @@
 
 # klowe/example_gloss.py
 
-# from .vectorspacemodel import *
+from .vectorspacemodel import *
 
 
 ###############################################################################################
