@@ -23,7 +23,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "KlowE",
-    version = "1.3.4",
+    version = "1.3.5",
     description = "Python package for NLP",
     author = "Chloe Carral Bustillo",
     author_email = "chloevampi01@gmail.com",

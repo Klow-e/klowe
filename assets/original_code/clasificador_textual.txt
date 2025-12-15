@@ -59,8 +59,8 @@ if training == True:
 #    split_genres_from(<<glossary>>)        -> gets back the list of genres
 #    split_vocab_from(<<glossary>>)         -> gets back the list of dict[str,float]
 
-# save_gloss(glossary)                      -> saves the variable <glosary> into 'gloss.json'
-# load_gloss()                              -> loads 'gloss.json'
+# SaveKGlossary(glossary)                      -> saves the variable <glosary> into 'gloss.json'
+# LoadKGlossary()                              -> loads 'gloss.json'
 
 # gloss_embedding(list[<<genre dicts>>])    -> returns an universal dict[str, np.array] with words and their vector ordered by genre
 
@@ -268,12 +268,12 @@ def split_vocab_from(combination: dict[str,dict[str,float]]) -> list[dict[str,fl
 # print(len(split_vocab_from(combine_vocab_genres(genres_list, genres_vocab))))
 
 
-def save_gloss(glossary):
+def SaveKGlossary(glossary):
     with open("gloss.json", "w") as fp:
         json.dump(glossary, fp, indent = 4)
 
 
-def load_gloss():
+def LoadKGlossary():
     try:
         with open("gloss.json", "r") as fp:
             glossary = json.load(fp)
@@ -761,11 +761,11 @@ if training == True:
     genres_vocab: list[dict] = [math_topic, phys_topic, chem_topic, biol_topic, medi_topic, geol_topic, tech_topic, anth_topic, hist_topic, geog_topic, poli_topic, juri_topic, econ_topic, phil_topic, spor_topic, vide_topic, arts_topic, fict_topic]
 
     glossary: dict[str,dict[str,float]] = combine_vocab_genres(genres_list, genres_vocab)
-    save_gloss(glossary)
+    SaveKGlossary(glossary)
 
 
 else:
-    glossary = load_gloss()
+    glossary = LoadKGlossary()
 
 
 ###############################################################################################

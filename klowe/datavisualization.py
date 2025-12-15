@@ -16,13 +16,11 @@ import numpy as np
 
 
 def KPrintDict(dicc: dict) -> None:
-    print(p:= f"Number of items: {len(dicc)}\n\n")
+    print(f"\nNumber of items: {len(dicc)}\n")
     for k, v in dicc.items():
         l = len(v) if isinstance(v, (list, dict)) else len(str(v))
-        print(f"{k}: \n {v} \n {l} \n\n")
-    print(p)
-# KPrintDict(KWeightModel(my_text))
-# KPrintDict(glossary)
+        print(f"{k}:\n {v}\n {l}\n")
+    print(f"Number of items: {len(dicc)}\n")
 
 
 def KPlotDict(weighted_text: dict[str, float]) -> None:
@@ -38,7 +36,6 @@ def KPlotDict(weighted_text: dict[str, float]) -> None:
     plt.tight_layout()
     plt.show()
     print()
-# KPlotDict(RandomDictStrFloat(10))
 
 
 def KPlotFunction(func: callable, name: str = '', xsize: tuple = (-3,3), ysize: tuple = (-1,1), step: float = 0.5) -> None:
@@ -63,7 +60,6 @@ def KPlotFunction(func: callable, name: str = '', xsize: tuple = (-3,3), ysize: 
     plt.tight_layout()
     plt.show()
     print()
-# KPlotFunction(TanhFunction, "Tanh")
 
 
 def KPlotList(v_list: list[float]) -> None:

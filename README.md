@@ -147,18 +147,18 @@ You should have received a copy of the GNU General Public License along with thi
 
 > KWeightModel("<text>") -> dict[str,float]         == KlowE's very own weighting model for texts
 > DefineGrenre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into an unified and mean-value one
-> KGlossary(<model>, KGCorpusT)                     == applies a weighting model to a list of (tag, texts)
+
+> KGlossary(<model>, KGCorpusT) -> KGlossaryT       == applies a weighting model to a list of (tag, texts)
 > KGCorpusT                                         == KlowE's type to store a corpus of tagged texts, equivalent to 'dict[str, list[str]]'
 > KGlossaryT                                        == KlowE's type to store glossaries, equivalent to 'dict[str, dict[str, float]]'
 
+> SaveKGlossary(KGlossaryT)                         == saves a KGlossaryT to a 'gloss.json' file
+> LoadKGlossary()                                   == loads a 'gloss.json' file
+> example_gloss: KGlossaryT                         == example of a KGlossaryT, found in example_gloss.py
 
-> KGlossary(<model>, list)                          == just returns a glossary data as dict[str:[dict[str:float]]]
+
 > sIDFw_gloss(glossary)                             == returns a glossary with sIDF * weights applied to it whole; better
 > pIDFw_gloss(glossary)                             == returns a glossary with pIDF * weights applied to it whole; worse
-
-> save_gloss(dict[str:[dict[str:float]]])           == saves glossary, like a KGlossary output, to a gloss.json file
-> load_gloss()                                      == loads a gloss.json file
-> example_gloss: dict[str:[dict[str:float]]]        == example of a glossary file, found in example_gloss.py
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
 > print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre

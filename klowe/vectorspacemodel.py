@@ -167,17 +167,28 @@ def KGlossary(model: callable, gloss: KGCorpusT) -> KGlossaryT:
     return KGloss
 
 
-def save_gloss(glossary: KGlossaryT) -> None:
-    with open("gloss.json", "w") as fp:
+def SaveKGlossary(glossary: KGlossaryT, glosspath: str = 'gloss.json') -> None:
+    """
+    Saves a KGlossaryT into a json file
+    `param 1:  the KGlossaryT`
+    `results:  'gloss.json' created`
+    `example:  SaveKGlossary(myglossary)`
+    """
+    with open(glosspath, "w") as fp:
         json.dump(glossary, fp, indent = 4)
 
 
-def load_gloss() -> None:
+def LoadKGlossary(glosspath: str = 'gloss.json') -> KGlossaryT:
+    """
+    Loads a 'gloss.json' file.
+    `returns:  the contents of a 'gloss.json' file as a KGlossaryT`
+    `example:  myglossary: KGlossaryT = LoadKGlossary()`
+    """
     try:
-        with open("gloss.json", "r") as fp:
+        with open(glosspath, "r") as fp:
             glossary: KGlossaryT = json.load(fp)
         return glossary
-    except: print("No 'gloss.json' file found.")
+    except: print(f"No '{glosspath}' file found.")
 
 
 def IDF_gloss(gloss: KGlossaryT, xIDF: str) -> KGlossaryT:
