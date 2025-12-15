@@ -157,8 +157,8 @@ You should have received a copy of the GNU General Public License along with thi
 > example_gloss: KGlossaryT                         == example of a KGlossaryT, found in example_gloss.py
 
 
-> sIDFw_gloss(KGlossaryT) -> KGlossaryT             == returns a KGlossaryT with sIDF * weights applied to it whole; better
-> pIDFw_gloss(KGlossaryT) -> KGlossaryT             == returns a KGlossaryT with pIDF * weights applied to it whole; worse
+> xIDFw_KGlossary(KGlossaryT, xIDF) -> KGlossaryT   == returns a KGlossaryT with xIDF * weights applied to it whole
+
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
 > print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre

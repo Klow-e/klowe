@@ -140,7 +140,7 @@ def DefineGenre(l_dicts: list[dict[str, float]]) -> dict[str, float]:
     `returns:  dict[str, float] with every term in the list and their mean weights across the list`
     `example:  my_genre: dict[str, float] = DefineGenre([weightedtexta, weightedtextb])`
     """
-    all_keys: set[str] = sorted({k for d in l_dicts for k in d})
+    all_keys: set[str] = set(sorted({k for d in l_dicts for k in d}))
     genre_dict: dict[str, float] = {i : (sum(d.get(i, 0) for d in l_dicts) / len(l_dicts)) for i in all_keys}
     genre_dict: dict[str, float] = SortDict(genre_dict)
     genre_dict: dict[str, float] = NormalizeDict(genre_dict, (0, 1))
@@ -193,36 +193,35 @@ def LoadKGlossary(glosspath: str = 'gloss.json') -> KGlossaryT:
 
 
 
-def IDF_gloss(gloss: KGlossaryT, xIDF: str) -> KGlossaryT:
-    gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
-    gd_values: list[list[float]] = GetValues(GetValues(gloss))
-    cor_Tdist = dict(CountDistribution([j for i in gd_keys for j in i]))
-    nt_tensor = [[cor_Tdist.get(j, 0) for j in i] for i in gd_keys]
+def xIDFw_KGlossary(gloss: KGlossaryT, xIDF: str) -> KGlossaryT:
+    """
+    aaaa
+    `param 1:  aaaa`
+    `param 2:  aaaa`
+    `returns:  aaaa`
+    `example:  aaaa`
+    """
+    genres_keys: list[list[str]] = GetKeys(GetValues(gloss))
+    genres_values: list[list[float]] = GetValues(GetValues(gloss))
+    corpus_Tdist = dict(CountDistribution([j for i in genres_keys for j in i]))
+    nt_tensor = [[corpus_Tdist.get(j, 0) for j in i] for i in genres_keys]
+    corpus_N: int = len(gloss)
 
-    if xIDF == "sIDF":
-        IDF: list[list[float]] = [[math.log2( (len(gloss) + 1) / (n + 1) ) for n in d] for d in nt_tensor]
-    if xIDF == "pIDF":
-        IDF: list[list[float]] = [[math.log2( ((len(gloss) - n) + 1) / (n + 1) ) for n in d] for d in nt_tensor]
+    match xIDF:
+        case "sIDF": IDF: list[list[float]] = [[sIDF_of_T(corpus_N, nt) for nt in d] for d in nt_tensor]
+        case "pIDF": IDF: list[list[float]] = [[pIDF_of_T(corpus_N, nt) for nt in d] for d in nt_tensor]
 
-    IDFw: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(IDF, gd_values)]
-    IDFw: list[dict[str, float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(gd_keys, IDFw)]
-
-    return dict(zip(GetKeys(gloss), IDFw))
-
-
-def sIDFw_gloss (gloss, xIDF = "sIDF") -> dict[str:[dict[str, float]]]:
-    return IDF_gloss(gloss, xIDF)
-
-
-def pIDFw_gloss (gloss, xIDF = "pIDF") -> dict[str:[dict[str, float]]]:
-    return IDF_gloss(gloss, xIDF)
+    new_weights: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(IDF, genres_values)]
+    new_genres: list[dict[str, float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(genres_keys, new_weights)]
+    new_KGlossary: dict[str, dict[str, float]] = dict(zip(GetKeys(gloss), new_genres))
+    return KGlossaryT(new_KGlossary)
 
 
 ###############################################################################################
 
 
-def KLexicon(gloss: list[dict[str:dict[str,float]]]) -> dict[str,list[str]|dict[str,np.array]]:
-    all_keys: set[str] = sorted({k for i in GetKeys(GetValues(gloss)) for k in i})
+def KLexicon(gloss: KGlossaryT) -> dict[str,list[str]|dict[str,np.array]]:
+    all_keys: set[str] = set(sorted({k for i in GetKeys(GetValues(gloss)) for k in i}))
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
     embedded_gloss: dict = {"genres": GetKeys(gloss), "vectors": words_vectors}
     return embedded_gloss
