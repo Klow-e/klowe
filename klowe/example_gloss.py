@@ -2,7 +2,8 @@
 
 # klowe/example_gloss.py
 
-from .vectorspacemodel import KGlossaryT
+#from .vectorspacemodel import KGlossaryT
+from .vectorspacemodel import *
 
 
 ###############################################################################################
@@ -32,3 +33,6 @@ example_gloss: KGlossaryT = {
 
 ###############################################################################################
 
+
+def Categorizar(text: str) -> None:
+    PrintTextGenre(text, example_gloss, VTModel)
