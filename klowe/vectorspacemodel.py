@@ -191,6 +191,8 @@ def LoadKGlossary(glosspath: str = 'gloss.json') -> KGlossaryT:
     except: print(f"No '{glosspath}' file found.")
 
 
+
+
 def IDF_gloss(gloss: KGlossaryT, xIDF: str) -> KGlossaryT:
     gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
     gd_values: list[list[float]] = GetValues(GetValues(gloss))
