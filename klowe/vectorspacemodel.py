@@ -191,15 +191,13 @@ def LoadKGlossary(glosspath: str = 'gloss.json') -> KGlossaryT:
     except: print(f"No '{glosspath}' file found.")
 
 
-
-
-def xIDFw_KGlossary(gloss: KGlossaryT, xIDF: str) -> KGlossaryT:
+def IDF_KGlossary(gloss: KGlossaryT, xIDF: str = 'sIDF') -> KGlossaryT:
     """
-    aaaa
-    `param 1:  aaaa`
-    `param 2:  aaaa`
-    `returns:  aaaa`
-    `example:  aaaa`
+    Applies IDF to the genres of a KGlossaryT.
+    `param 1:  a KGlossaryT`
+    `param 2:  'sIDF' or 'pIDF' to apply`
+    `returns:  the KGlossaryT with the selected IDF applied to it`
+    `example:  glossary: KGlossaryT = IDF_KGlossary(glossary, xIDF='sIDF')`
     """
     genres_keys: list[list[str]] = GetKeys(GetValues(gloss))
     genres_values: list[list[float]] = GetValues(GetValues(gloss))

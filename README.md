@@ -151,13 +151,11 @@ You should have received a copy of the GNU General Public License along with thi
 > KGlossary(<model>, KGCorpusT) -> KGlossaryT       == applies a weighting model to a list of (tag, texts)
 > KGCorpusT                                         == KlowE's type to store a corpus of tagged texts, equivalent to 'dict[str, list[str]]'
 > KGlossaryT                                        == KlowE's type to store glossaries, equivalent to 'dict[str, dict[str, float]]'
+> IDF_KGlossary(KGlossaryT, xIDF) -> KGlossaryT     == returns a KGlossaryT with sIDF or pIDF applied to it whole
 
 > SaveKGlossary(KGlossaryT)                         == saves a KGlossaryT to a 'gloss.json' file
 > LoadKGlossary()                                   == loads a 'gloss.json' file
 > example_gloss: KGlossaryT                         == example of a KGlossaryT, found in example_gloss.py
-
-
-> xIDFw_KGlossary(KGlossaryT, xIDF) -> KGlossaryT   == returns a KGlossaryT with xIDF * weights applied to it whole
 
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
