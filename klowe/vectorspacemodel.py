@@ -155,7 +155,7 @@ KGCorpusT = NewType("KGCorpusT", dict[str, list[str]])
 KGlossaryT = NewType("KGlossaryT", dict[str, dict[str, float]])
 
 
-def KGlossary(model: callable, gloss: KGlossaryT) -> KGlossaryT:
+def KGlossary(model: callable, gloss: KGCorpusT) -> KGlossaryT:
     """
     Applies a weighting model and 'DefineGenre()' to create a glossary datastructure that stores keywords and their weights by genre.
     `param 1:  name of a weighting function to apply, of the type 'foo(str) -> dict[str, float]'`
