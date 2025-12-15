@@ -2,7 +2,7 @@
 
 # klowe/example_gloss.py
 
-#from .vectorspacemodel import KGlossaryT
+from .vectorspacemodel import KGlossaryT
 from .vectorspacemodel import *
 
 
