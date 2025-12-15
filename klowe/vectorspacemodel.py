@@ -10,6 +10,7 @@ from .textprocessor import *
 from .mathstuff import *
 from .pythontools import *
 from .datavisualization import *
+from .example_gloss import *
 
 from typing import NewType
 import math
@@ -281,4 +282,8 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
 
 
 ###############################################################################################
+
+
+def Categorizar(text: str) -> None:
+    PrintTextGenre(text, example_gloss, VTModel)
 
