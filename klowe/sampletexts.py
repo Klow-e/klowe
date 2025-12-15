@@ -21,13 +21,12 @@ def KCleanWikiText(stext: str) -> str:
     return o
 
 
-def KSampleTexts() -> None:
+def KSampleTexts() -> list[str]:
     """
-    Prints every variable that starts with 'ksampletext_', that's to say, every sample text in KlowE.
+    Returns a list of every variable that starts with 'ksampletext_', that's to say, every sample text in KlowE.
     """
-    print()
-    for i in globals(): print(i) if i.startswith("ksampletext_") else None
-    print()
+    kst: list[str] = [str(i) for i in globals() if i.startswith("ksampletext_")]
+    return kst
 
 
 ###############################################################################################
