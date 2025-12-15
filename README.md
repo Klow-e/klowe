@@ -148,7 +148,11 @@ You should have received a copy of the GNU General Public License along with thi
 > KWeightModel("<text>") -> dict[str,float]         == KlowE's very own weighting model for texts
 > DefineGrenre(list[dict]) -> dict[str,float]       == merges a list of dict[str,float] into an unified and mean-value one
 
-> KGlossary(<model>, list[tuple[str,list[str]]])    == class that applies a weighting model to a list of (tag, texts)
+> KGlossary(<model>, KGCorpusT)                     == applies a weighting model to a list of (tag, texts)
+> KGCorpusT                                         == KlowE's type to store a corpus of tagged texts, equivalent to 'dict[str, list[str]]'
+> KGlossaryT                                        == KlowE's type to store glossaries, equivalent to 'dict[str, dict[str, float]]'
+
+
 > KGlossary(<model>, list)                          == just returns a glossary data as dict[str:[dict[str:float]]]
 > sIDFw_gloss(glossary)                             == returns a glossary with sIDF * weights applied to it whole; better
 > pIDFw_gloss(glossary)                             == returns a glossary with pIDF * weights applied to it whole; worse

@@ -34,7 +34,7 @@
     """
     1: aaaaa
     `param 1:  aaaaa`
-    `returns:  None`
+    `returns:  aaaaa`
     `results:  aaaaa`
     `example:  aaaaa`
     """

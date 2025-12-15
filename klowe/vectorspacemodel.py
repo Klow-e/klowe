@@ -151,21 +151,23 @@ def DefineGenre(l_dicts: list[dict[str, float]]) -> dict[str, float]:
 ###############################################################################################
 
 
-KGlossary = NewType("KGlossary", dict[str, dict[str, float]])
+KGCorpusT = NewType("KGCorpusT", dict[str, list[str]])
+KGlossaryT = NewType("KGlossaryT", dict[str, dict[str, float]])
 
 
-def KGlossary(model: callable, gloss: list[tuple[str, list[str]]]) -> KGlossary:
+def KGlossary(model: callable, gloss: KGlossaryT) -> KGlossaryT:
     """
-    1: aaaaa
-    `param 1:  aaaaa`
-    `returns:  aaaaa`
-    `example:  glossary: KGlossary = KGlossary(KWeightModel, [("POLI", [t_maoismo, t_trotsky]), ("CHEM", [t_quimica, t_valencia])] )`
+    Applies a weighting model and 'DefineGenre()' to create a glossary datastructure that stores keywords and their weights by genre.
+    `param 1:  name of a weighting function to apply, of the type 'foo(str) -> dict[str, float]'`
+    `param 2:  a KGCorpusT type (dict[str, list[str]]) where the keys are genre nametags and the values lists of texts of that genre`
+    `returns:  a KGlossaryT type (dict[str, dict[str, float]]) with nametags for genres and a list of weighted terms in them`
+    `example:  glossary: KGlossaryT = KGlossary(KWeightModel, {"POLI": [t_maoismo, t_trotsky], "CHEM": [t_quimica, t_valencia]} )`
     """
-    KGloss: KGlossary = {n : DefineGenre([model(d) for d in s]) for n, s in gloss}
+    KGloss: KGlossaryT = {n : DefineGenre([model(d) for d in gloss[n]]) for n in gloss}
     return KGloss
 
 
-def save_gloss(glossary: KGlossary) -> None:
+def save_gloss(glossary: KGlossaryT) -> None:
     with open("gloss.json", "w") as fp:
         json.dump(glossary, fp, indent = 4)
 
@@ -173,12 +175,12 @@ def save_gloss(glossary: KGlossary) -> None:
 def load_gloss() -> None:
     try:
         with open("gloss.json", "r") as fp:
-            glossary: KGlossary = json.load(fp)
+            glossary: KGlossaryT = json.load(fp)
         return glossary
     except: print("No 'gloss.json' file found.")
 
 
-def IDF_gloss(gloss: dict[str, dict[str, float]], xIDF: str) -> dict[str, dict[str, float]]:
+def IDF_gloss(gloss: KGlossaryT, xIDF: str) -> KGlossaryT:
     gd_keys: list[list[str]] = GetKeys(GetValues(gloss))
     gd_values: list[list[float]] = GetValues(GetValues(gloss))
     cor_Tdist = dict(CountDistribution([j for i in gd_keys for j in i]))
