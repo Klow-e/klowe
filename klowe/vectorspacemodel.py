@@ -9,7 +9,6 @@
 from .textprocessor import *
 from .mathstuff import *
 from .pythontools import *
-from .datavisualization import *
 from .example_gloss import *
 
 from typing import NewType
@@ -210,7 +209,7 @@ def IDF_KGlossary(gloss: KGlossaryT, xIDF: str = 'sIDF') -> KGlossaryT:
         case "sIDF": IDF: list[list[float]] = [[sIDF_of_T(corpus_N, nt) for nt in d] for d in nt_tensor]
         case "pIDF": IDF: list[list[float]] = [[pIDF_of_T(corpus_N, nt) for nt in d] for d in nt_tensor]
 
-    new_weights: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)]) for a, b in zip(IDF, genres_values)]
+    new_weights: list[list[float]] = [RoundList(NormalizeList([x * y for x, y in zip(a, b)])) for a, b in zip(IDF, genres_values)]
     new_genres: list[dict[str, float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(genres_keys, new_weights)]
     new_KGlossary: dict[str, dict[str, float]] = dict(zip(GetKeys(gloss), new_genres))
     return KGlossaryT(new_KGlossary)
@@ -308,3 +307,5 @@ def Categorizar(text: str) -> None:
 
 ###############################################################################################
 
+
+###############################################################################################
