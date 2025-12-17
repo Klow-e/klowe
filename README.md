@@ -157,8 +157,11 @@ You should have received a copy of the GNU General Public License along with thi
 > LoadKGlossary()                                   == loads a 'gloss.json' file
 > example_gloss: KGlossaryT                         == example of a KGlossaryT, found in example_gloss.py
 
+
 >> KPrintKLexiconVector
 >> KLexiconT
+>> SaveKLexicon
+>> LoadKLexicon
 
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre

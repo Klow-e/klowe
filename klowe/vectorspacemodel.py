@@ -219,6 +219,33 @@ def IDF_KGlossary(gloss: KGlossaryT, xIDF: str = 'sIDF') -> KGlossaryT:
 ###############################################################################################
 
 
+def SaveKLexicon(lexicon: KLexiconT, lexicpath: str = 'lexic.json') -> None:
+    """
+    Saves a KLexiconT into a json file
+    `param 1:  the KLexiconT`
+    `results:  'lexic.json' created`
+    `example:  SaveKLexicon(mylexicon)`
+    """
+    with open(lexicpath, "w") as fp:
+        json.dump(lexicon, fp, indent = 4)
+
+
+def LoadKLexicon(lexicpath: str = 'lexic.json') -> KLexiconT:
+    """
+    Loads a 'lexic.json' file.
+    `returns:  the contents of a 'lexic.json' file as a KLexiconT`
+    `example:  mylexicon: KLexiconT = LoadKLexicon()`
+    """
+    try:
+        with open(lexicpath, "r") as fp:
+            lexicon: KLexiconT = json.load(fp)
+    except: print(f"No '{lexicpath}' file found.")
+    return lexicon
+
+
+###############################################################################################
+
+
 def KLexicon(gloss: KGlossaryT) -> dict[str,list[str]|dict[str,np.array]]:
     all_keys: set[str] = set(sorted({k for i in GetKeys(GetValues(gloss)) for k in i}))
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
@@ -263,6 +290,7 @@ def print_text_vector(test):
     print()
 
 
+###############################################################################################
 
 
 def CategorizeText(VT: dict) -> list[tuple]:
