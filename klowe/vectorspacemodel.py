@@ -128,7 +128,7 @@ def KWeightModel(text: str) -> dict[str, float]:
         freq_dist[i] = (t, round( w * m , 10))
     # instead of lematizing, it applies multiplier to words with popular beginnings
     weighted: dict[str, float] = SortDict(freq_dist)
-    weighted: dict[str, float] = TopPercentDict(weighted, 0.35)
+    weighted: dict[str, float] = TopPercentDict(weighted)
     return weighted
 
 
@@ -143,8 +143,8 @@ def DefineGenre(l_dicts: list[dict[str, float]]) -> dict[str, float]:
     all_keys: set[str] = set(sorted({k for d in l_dicts for k in d}))
     genre_dict: dict[str, float] = {i : (sum(d.get(i, 0) for d in l_dicts) / len(l_dicts)) for i in all_keys}
     genre_dict: dict[str, float] = SortDict(genre_dict)
-    genre_dict: dict[str, float] = NormalizeDict(genre_dict, (0, 1))
-    genre_dict: dict[str, float] = RoundDict(genre_dict, 10)
+    genre_dict: dict[str, float] = NormalizeDict(genre_dict)
+    genre_dict: dict[str, float] = RoundDict(genre_dict)
     return genre_dict
 
 
@@ -210,7 +210,7 @@ def IDF_KGlossary(gloss: KGlossaryT, xIDF: str = 'sIDF') -> KGlossaryT:
         case "sIDF": IDF: list[list[float]] = [[sIDF_of_T(corpus_N, nt) for nt in d] for d in nt_tensor]
         case "pIDF": IDF: list[list[float]] = [[pIDF_of_T(corpus_N, nt) for nt in d] for d in nt_tensor]
 
-    new_weights: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)], (0,1)) for a, b in zip(IDF, genres_values)]
+    new_weights: list[list[float]] = [NormalizeList([x * y for x, y in zip(a, b)]) for a, b in zip(IDF, genres_values)]
     new_genres: list[dict[str, float]] = [SortDict({i : j for i, j in zip(a, b) if j != 0}) for a, b in zip(genres_keys, new_weights)]
     new_KGlossary: dict[str, dict[str, float]] = dict(zip(GetKeys(gloss), new_genres))
     return KGlossaryT(new_KGlossary)
