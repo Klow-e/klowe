@@ -86,9 +86,9 @@ def ReLU(x: float) -> float:
 ###############################################################################################
 
 
-def NormalizeValue(x: float, values_l: list[float], scale: tuple[float, float]) -> float:
+def NormalizeValue(x: float, values_l: list[float], scale: tuple[float, float] = (0.0, 1.0)) -> float:
     """
-    Normalizes a value in a list to a desired scale.
+    Normalizes a value in a list to a desired scale. Default is (0,1).
     `param 1:  value to be normalized`
     `param 2:  list where it would appear`
     `param 3:  tuple of the scale to normalize in`
@@ -102,9 +102,9 @@ def NormalizeValue(x: float, values_l: list[float], scale: tuple[float, float]) 
     return n_value
 
 
-def NormalizeList(values_l: list[float], scale: tuple[float, float] = (0,1)) -> list[float]:
+def NormalizeList(values_l: list[float], scale: tuple[float, float] = (0.0, 1.0)) -> list[float]:
     """
-    Normalizes the values of a list[float] to a desired scale.
+    Normalizes the values of a list[float] to a desired scale. Default is (0,1).
     `param 1:  list[float]`
     `param 2:  tuple with the lower and upper limits to normalize to`
     `returns:  the list normalized to that range`
@@ -116,7 +116,7 @@ def NormalizeList(values_l: list[float], scale: tuple[float, float] = (0,1)) -> 
 
 def TanhNormalization(l_values: list[float]) -> list[float]:
     """
-    Makes extreme values more extreme, scaled to (0,1)
+    Makes extreme values more extreme, scaled to (0,1).
     1: Normalizes original list to (-3,3) so the Tanh function applies equally.
     2: Passes values through a Tanh function.
     3: Normalizes result to (0,1).
@@ -166,12 +166,12 @@ def MidPoint(a: float, b: float) -> float:
     return mid
 
 
-def TopPercent(values_l: list[float], threshold: float) -> list[float]:
+def TopPercent(values_l: list[float], threshold: float = 0.35) -> list[float]:
     """
-    Of a list of values, gives the top n perone.
+    Of a list of values, gives the top n per-one. Default is 0.35.
     `param 1:  list of numerical values`
-    `param 2:  top perone threshold`
-    `returns:  values of the list that make up the top n perone of the sum of the list`
+    `param 2:  top per-one threshold`
+    `returns:  values of the list that make up the top n per-one of the sum of the list`
     `example:  top_30_percent_list: list[float] = TopPercent([30, 20, 20, 20, 10], 0.30)`
     """
     target_threshold: float = sum(values_l) * threshold
@@ -188,9 +188,9 @@ def TopPercent(values_l: list[float], threshold: float) -> list[float]:
     return selected_v
 
 
-def RoundList(l: list[float], n: int) -> list[float]:
+def RoundList(l: list[float], n: int = 10) -> list[float]:
     """
-    Rounds every number in a list of floats to a desired size.
+    Rounds every number in a list of floats to a desired size. Default is 10.
     `param 1:  list[float]`
     `param 2:  number of decimals to round each float`
     `returns:  the list with every float rounded to n decimals`
@@ -215,9 +215,9 @@ def VecVecProd(tla: list[list[float]], tlb: list[list[float]]) -> list[list[floa
 ###############################################################################################
 
 
-def NormalizeDict(dicc: dict[str, float], scale: tuple[float, float]) -> dict[str, float]:
+def NormalizeDict(dicc: dict[str, float], scale: tuple[float, float] = (0.0, 1.0)) -> dict[str, float]:
     """
-    Normalizes every value in a dict[str, float] to a desired size.
+    Normalizes every value in a dict[str, float] to a desired size. Default is (0,1).
     `param 1:  dict[str, float]`
     `param 2:  tuple with the lower and upper limits to normalize to`
     `returns:  the dict with every value normalized to that range`
@@ -227,9 +227,9 @@ def NormalizeDict(dicc: dict[str, float], scale: tuple[float, float]) -> dict[st
     return n_dicc
 
 
-def RoundDict(dicc: dict[str, float], n: int) -> dict[str, float]:
+def RoundDict(dicc: dict[str, float], n: int = 10) -> dict[str, float]:
     """
-    Rounds every number in a dict's values to a desired size.
+    Rounds every number in a dict's values to a desired size. Default is 10.
     `param 1:  dict[str, float]`
     `param 2:  number of decimals to round each float`
     `returns:  the dict with every value rounded to n decimals`
@@ -239,9 +239,9 @@ def RoundDict(dicc: dict[str, float], n: int) -> dict[str, float]:
     return r_dicc
 
 
-def TopPercentDict(dicc: dict[str, float], threshold: float) -> dict[str, float]:
+def TopPercentDict(dicc: dict[str, float], threshold: float = 0.35) -> dict[str, float]:
     """
-    Of a dict[str, float], gives the top n perone items based on the float values.
+    Of a dict[str, float], gives the top n perone items based on the float values. Default is 0.35.
     `param 1:  dict of strings and floats`
     `param 2:  top perone threshold`
     `returns:  the dict but just with the items that make up the top n perone of the sum of the values`
@@ -264,11 +264,11 @@ def TopPercentDict(dicc: dict[str, float], threshold: float) -> dict[str, float]
 ###############################################################################################
 
 
-def RandomFloat(a: float, b: float) -> float:
+def RandomFloat(a: float = 0, b: float = 1) -> float:
     """
     Gives a true random float bewteen the specified values.
-    `param 1:  inclusive lower limit`
-    `param 2:  inclusive upper limit`
+    `param 1:  inclusive lower limit, default is 0`
+    `param 2:  inclusive upper limit, default is 1`
     `returns:  a random float between those`
     `example:  random_float: float = RandomFloat(-1, 1.5)`
     """
@@ -277,11 +277,11 @@ def RandomFloat(a: float, b: float) -> float:
     return RN
 
 
-def RandomInt(a: int, b: int) -> int:
+def RandomInt(a: int = 0, b: int = 10) -> int:
     """
     Gives a true random int bewteen the specified values.
-    `param 1:  inclusive lower limit`
-    `param 2:  inclusive upper limit`
+    `param 1:  inclusive lower limit, default is 0`
+    `param 2:  inclusive upper limit, default is 10`
     `returns:  a random int between those`
     `example:  random_int: int = RandomInt(-10, 10)`
     """
@@ -301,12 +301,12 @@ def RandomChoiceFrom(ite: Sequence) -> Any:
     return choice
 
 
-def RandomIntList(a: int, b: int, l: int) -> list[int]:
+def RandomIntList(a: int = 0, b: int = 10, l: int = 10) -> list[int]:
     """
     Gives a list of true random ints bewteen the specified values.
-    `param 1:  inclusive lower limit`
-    `param 2:  inclusive upper limit`
-    `param 3:  length of list`
+    `param 1:  inclusive lower limit, default is 0`
+    `param 2:  inclusive upper limit, default is 10`
+    `param 3:  length of list, default is 10`
     `returns:  a list of ints between those, length of the third param`
     `example:  random_int_list: list[int] = RandomIntList(0, 10, 8)`
     """
@@ -318,12 +318,12 @@ def RandomIntList(a: int, b: int, l: int) -> list[int]:
     return RIL
 
 
-def RandomFloatList(a:float, b:float, l: int) -> list[float]:
+def RandomFloatList(a: float = 0.0, b: float = 1.0, l: int = 10) -> list[float]:
     """
     Gives a list of true random floats bewteen the specified values.
-    `param 1:  inclusive lower limit`
-    `param 2:  inclusive upper limit`
-    `param 3:  length of list`
+    `param 1:  inclusive lower limit, default is 0`
+    `param 2:  inclusive upper limit, default is 1`
+    `param 3:  length of list, default is 10`
     `returns:  a list of floats between those, length of the third param`
     `example:  random_float_list: list[float] = RandomFloatList(-1, 1, 8)`
     """
@@ -343,10 +343,10 @@ def RandomFloatList(a:float, b:float, l: int) -> list[float]:
     return RFL
 
 
-def RandomWordList(l: int) -> list[str]:
+def RandomWordList(l: int = 10) -> list[str]:
     """
     Gives a list of pseudo-random words in Spanish.
-    `param 1:  length of list`
+    `param 1:  length of list, default is 10`
     `returns:  a list of that length containing random words`
     `example:  random_word_list: list[str] = RandomWordList(5)`
     """
@@ -367,10 +367,10 @@ def RandomWord() -> str:
     return RS
 
 
-def RandomDictStrFloat(l: int) -> dict[str, float]:
+def RandomDictStrFloat(l: int = 10) -> dict[str, float]:
     """
     Gives a mock dict with Spanish words as keys and random floats between 0 and 1 as values.
-    `param 1:  length of dict`
+    `param 1:  length of dict, default is 10`
     `returns:  a mock dict of words with weights between 0 and 1`
     `example:  random_dict: dict[str, float] = RandomDictStrFloat(5)`
     """
