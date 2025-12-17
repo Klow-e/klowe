@@ -15,11 +15,12 @@ import numpy as np
 ###############################################################################################
 
 
-def KPrintDict(dicc: dict) -> None:
+def KPrintDict(dicc: dict, alsolen: bool = True) -> None:
     print(f"\nNumber of items: {len(dicc)}\n")
     for k, v in dicc.items():
         l = len(v) if isinstance(v, (list, dict)) else len(str(v))
-        print(f"{k}:\n {v}\n {l}\n")
+        if alsolen: print(f"{k}:\n {v}\n  {l}\n")
+        else: print(f"{k}:\n {v}\n")
     print(f"Number of items: {len(dicc)}\n")
 
 

@@ -153,6 +153,7 @@ def DefineGenre(l_dicts: list[dict[str, float]]) -> dict[str, float]:
 
 KGCorpusT = NewType("KGCorpusT", dict[str, list[str]])
 KGlossaryT = NewType("KGlossaryT", dict[str, dict[str, float]])
+KLexiconT = NewType("KLexiconT", dict[str, dict[str, float]])
 
 
 def KGlossary(model: callable, gloss: KGCorpusT) -> KGlossaryT:
@@ -218,6 +219,15 @@ def IDF_KGlossary(gloss: KGlossaryT, xIDF: str = 'sIDF') -> KGlossaryT:
 ###############################################################################################
 
 
+def KPrintKLexiconVector(word: str, vectors: KLexiconT):
+    print("\n" + word)
+    try:
+        for g, v in vectors[word].items():
+            print(f" {g}  \t {v}")
+    except: print("Not in glossary")
+    print()
+
+
 def KLexicon(gloss: KGlossaryT) -> dict[str,list[str]|dict[str,np.array]]:
     all_keys: set[str] = set(sorted({k for i in GetKeys(GetValues(gloss)) for k in i}))
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
@@ -227,9 +237,7 @@ def KLexicon(gloss: KGlossaryT) -> dict[str,list[str]|dict[str,np.array]]:
 
 def VTModel(g: np.array, t: float) -> np.array:
     np.set_printoptions(suppress=True)
-    # w = abs( g * math.log(t) )    # works decent
-    # w = ( g * TanhFunction(t) )   # works decent
-    w = ( g * t )                   # works better
+    w = ( g * t )
     return np.around(w, 8)
 
 
@@ -278,9 +286,6 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
     print_text_vector(VT)
 
 
-###############################################################################################
-
-
 def print_vector(word: str, vectors):
     print("\n" + word)
     try:
@@ -295,9 +300,6 @@ def print_text_vector(test):
     for k, v in zip(test.get("genres"), test.get("vectors")):
         print(f"{k}:\t{v}")
     print()
-
-
-###############################################################################################
 
 
 def Categorizar(text: str) -> None:

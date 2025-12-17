@@ -102,7 +102,7 @@ def NormalizeValue(x: float, values_l: list[float], scale: tuple[float, float]) 
     return n_value
 
 
-def NormalizeList(values_l: list[float], scale: tuple[float, float]) -> list[float]:
+def NormalizeList(values_l: list[float], scale: tuple[float, float] = (0,1)) -> list[float]:
     """
     Normalizes the values of a list[float] to a desired scale.
     `param 1:  list[float]`
