@@ -11,6 +11,7 @@ from .mathstuff import *
 from .pythontools import *
 from .example_gloss import *
 
+from collections.abc import Callable
 from typing import NewType
 import math
 import operator
@@ -155,7 +156,7 @@ KGlossaryT = NewType("KGlossaryT", dict[str, dict[str, float]])
 KLexiconT = NewType("KLexiconT", dict[str, dict[str, float]])
 
 
-def KGlossary(model: callable, gloss: KGCorpusT) -> KGlossaryT:
+def KGlossary(model: Callable, gloss: KGCorpusT) -> KGlossaryT:
     """
     Applies a weighting model and 'DefineGenre()' to create a glossary datastructure that stores keywords and their weights by genre.
     `param 1:  name of a weighting function to apply, of the type 'foo(str) -> dict[str, float]'`
@@ -163,8 +164,8 @@ def KGlossary(model: callable, gloss: KGCorpusT) -> KGlossaryT:
     `returns:  a KGlossaryT type (dict[str, dict[str, float]]) with nametags for genres and a list of weighted terms in them`
     `example:  glossary: KGlossaryT = KGlossary(KWeightModel, {"POLI": [t_maoismo, t_trotsky], "CHEM": [t_quimica, t_valencia]} )`
     """
-    KGloss: KGlossaryT = {n : DefineGenre([model(d) for d in gloss[n]]) for n in gloss}
-    return KGloss
+    KGloss: dict[str, dict[str, float]] = {n : DefineGenre([model(d) for d in gloss[n]]) for n in gloss}
+    return KGlossaryT(KGloss)
 
 
 def SaveKGlossary(glossary: KGlossaryT, glosspath: str = 'gloss.json') -> None:
@@ -187,8 +188,8 @@ def LoadKGlossary(glosspath: str = 'gloss.json') -> KGlossaryT:
     try:
         with open(glosspath, "r") as fp:
             glossary: KGlossaryT = json.load(fp)
-        return glossary
-    except: print(f"No '{glosspath}' file found.")
+    except Exception as e: print(f"No '{glosspath}' file found.")
+    return glossary
 
 
 def IDF_KGlossary(gloss: KGlossaryT, xIDF: str = 'sIDF') -> KGlossaryT:
@@ -218,20 +219,23 @@ def IDF_KGlossary(gloss: KGlossaryT, xIDF: str = 'sIDF') -> KGlossaryT:
 ###############################################################################################
 
 
-def KPrintKLexiconVector(word: str, vectors: KLexiconT):
-    print("\n" + word)
-    try:
-        for g, v in vectors[word].items():
-            print(f" {g}  \t {v}")
-    except: print("Not in glossary")
-    print()
-
-
 def KLexicon(gloss: KGlossaryT) -> dict[str,list[str]|dict[str,np.array]]:
     all_keys: set[str] = set(sorted({k for i in GetKeys(GetValues(gloss)) for k in i}))
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
     embedded_gloss: dict = {"genres": GetKeys(gloss), "vectors": words_vectors}
     return embedded_gloss
+
+
+def print_vector(word: str, vectors):
+    print("\n" + word)
+    try:
+        for g, v in zip(vectors.get("genres"), vectors.get("vectors").get(word)):
+            print(f" {g}  \t {v}")
+    except: print("Not in glossary")
+    print()
+
+
+###############################################################################################
 
 
 def VTModel(g: np.array, t: float) -> np.array:
@@ -250,6 +254,15 @@ def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str, list]:
     TVect = np.vstack([np.array([k]) for k in NormalizeList(sum(GetValues(WText)), (0, 1))])
     VText: dict = {"genres" : KLexicon(gloss).get("genres"), "vectors" : TVect}
     return VText
+
+
+def print_text_vector(test):
+    print()
+    for k, v in zip(test.get("genres"), test.get("vectors")):
+        print(f"{k}:\t{v}")
+    print()
+
+
 
 
 def CategorizeText(VT: dict) -> list[tuple]:
@@ -285,22 +298,6 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
     print_text_vector(VT)
 
 
-def print_vector(word: str, vectors):
-    print("\n" + word)
-    try:
-        for g, v in zip(vectors.get("genres"), vectors.get("vectors").get(word)):
-            print(f" {g}  \t {v}")
-    except: print("Not in glossary")
-    print()
-
-
-def print_text_vector(test):
-    print()
-    for k, v in zip(test.get("genres"), test.get("vectors")):
-        print(f"{k}:\t{v}")
-    print()
-
-
 def Categorizar(text: str) -> None:
     PrintTextGenre(text, example_gloss, VTModel)
 
@@ -308,4 +305,21 @@ def Categorizar(text: str) -> None:
 ###############################################################################################
 
 
+def KPrintKLexiconVector(word: str, vectors: KLexiconT) -> None:
+    """
+    Searches the vector for a word in a KLexiconT.
+    `param 1:  word to search`
+    `param 2:  the KLexicon`
+    `results:  prints the word`
+    `example:  KPrintKLexiconVector("evolucion", mylexicon)`
+    """
+    print("\n" + word)
+    try:
+        for g, v in vectors[word].items():
+            print(f" {g}  \t {v}")
+    except: print("Not in glossary")
+    print()
+
+
 ###############################################################################################
+
