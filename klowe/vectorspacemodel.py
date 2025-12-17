@@ -9,6 +9,7 @@
 from .textprocessor import *
 from .mathstuff import *
 from .pythontools import *
+from .datavisualization import *
 from .example_gloss import *
 
 from typing import NewType
