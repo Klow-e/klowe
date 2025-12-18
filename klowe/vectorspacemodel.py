@@ -308,30 +308,6 @@ def KLexiconVectorializeText(text: str, lexic: KLexiconT, wmodel: Callable = KWe
 ###############################################################################################
 
 
-def CategorizeText(VT: dict) -> list[tuple]:
-    genres = VT.get("genres")
-    flat_matrix = VT.get("vectors").flatten()
-    sorted_indices = np.argsort(flat_matrix)
-
-    i_3 = sorted_indices[-3:]
-    k_3 = flat_matrix[i_3]
-
-    i_a_genre = genres[i_3[2]]
-    i_b_genre = genres[i_3[1]]
-    i_c_genre = genres[i_3[0]]
-
-    i_a_trust = k_3[2] / sum(k_3)
-    i_b_trust = k_3[1] / sum(k_3)
-    i_c_trust = k_3[0] / sum(k_3)
-
-    result: list[tuple] = []
-    result.append((i_a_genre, i_a_trust))
-    result.append((i_b_genre, i_b_trust))
-    if i_c_trust >= 25:
-        result.append((i_c_genre, i_c_trust))
-    return result
-
-
 def PrintTextGenre(text: str, gloss, KVTModel) -> None:
     VT: dict[str,list] = old_VectorializeText(text, gloss, KVTModel)
     result: tuple[str,float] = CategorizeText(VT)

@@ -162,22 +162,24 @@ You should have received a copy of the GNU General Public License along with thi
 > example_gloss: KGlossaryT                         == example of a KGlossaryT, found in example_gloss.py
 
 
->> KPrintKLexiconVector
 >> KLexiconT
+>> KLexicon
 >> SaveKLexicon
 >> LoadKLexicon
+>> KPrintKLexiconVector
+>> KLexiconVectorializeText
 >> KVTModel
->> KLexicon
+>> KCategorizeTextLV
 
-> KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
-> print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre
-> VectorializeText(text, glossary, VTmodel) -> dict == returns a single textual vector from a text crosmatched with a glossary
-> VTModel(g, t) -> w                                == definition of how weights are crossmatched in VectorializeText
-> print_text_vector(VectorializeText())             == better way to print a text vector of a VectorializeText()
-> CategorizeText(VectorializeText())                == returns two or three most likely genres with a percentage
-> PrintTextGenre("<text>", glossary, VTmodel)       == directly outputs result of a categorization query
 
-> Categorizar("<text>")                             == categorizes by topic a text in spanish
+>- KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
+>- print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre
+>- VectorializeText(text, glossary, VTmodel) -> dict == returns a single textual vector from a text crosmatched with a glossary
+>- VTModel(g, t) -> w                                == definition of how weights are crossmatched in VectorializeText
+>- print_text_vector(VectorializeText())             == better way to print a text vector of a VectorializeText()
+>- CategorizeText(VectorializeText())                == returns two or three most likely genres with a percentage
+>- PrintTextGenre("<text>", glossary, VTmodel)       == directly outputs result of a categorization query
+>- Categorizar("<text>")                             == categorizes by topic a text in spanish
 ```
 
 
