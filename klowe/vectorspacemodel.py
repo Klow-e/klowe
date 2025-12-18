@@ -228,7 +228,7 @@ def KVTModel(tokenscalar: float, lexicvector: list[float]) -> list[float]:
     `returns:  a list[float] resulting from crossmatching the word weight with the genres weights for it`
     `example:  crossmatched_weights: list[float] = KVTModel(word_weight_intext, word_weights_bygenre)`
     """
-    prod: list[float] = ScaVecProd(WText[i], lexicvector)
+    prod: list[float] = ScaVecProd(tokenscalar, lexicvector)
     return prod
 
 
