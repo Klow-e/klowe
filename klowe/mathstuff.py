@@ -395,5 +395,27 @@ def ScaVecProd(n: float, v: list[float]) -> list[float]:
     return prod
 
 
+def TransposeVecOfVec(vv: list[list[float]]) -> list[list[float]]:
+    """
+    Transposes a vector of vectors of the same size.
+    `param 1:  vector of vectors as list[list[float]]`
+    `returns:  the list[list[float]] transposed`
+    `example:  transposed_vecofvec: list[list[float]] = TransposeVecOfVec([[1, 2, 3], [4, 5, 6]])`
+    """
+    transposed: list[list[float]] = [[j[i] for j in vv] for i in range(len(vv[0]))]
+    return transposed
+
+
+def VecOfVecSumm(vv: list[list[float]]) -> list[float]:
+    """
+    Sums each vector's content in a vector of vectors.
+    `param 1:  vector of vectors as list[list[float]]`
+    `returns:  a list of the results of the summation of each list[float]`
+    `example:  summation_vecofvec: list[float] = VecOfVecSumm([[1, 2, 3], [4, 5, 6]])`
+    """
+    summation: list[float] = [sum(i) for i in TransposeVecOfVec(vv)]
+    return summation
+
+
 ###############################################################################################
 

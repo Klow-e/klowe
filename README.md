@@ -66,12 +66,15 @@ You should have received a copy of the GNU General Public License along with thi
 > MidPoint(a, b) -> float                           == gives the midpoint between two numbers
 > TopPercent(list[float], float) -> list[float]     == gets the top float per-one values in a list of values
 > RoundList(list[float], int) -> list[float]        == rouns floats in a list to n positions
-> VecOfVecProd(list[list[float]],list[list[float]]) == multiplies the values of two list[list[float]] together
-> ScaVecProd(float, list[float]) -> list[float]     == multiplies a float by each item of a list
 
 > NormalizeDict(dict[str,float], (a,b)) -> dict     == normalizes a dict's values into an (a,b) feature scale
 > RoundDict(dict[str,float], int) -> dict           == rouns a dict's values to n positions
 > TopPercentDict(dict[str,float], float) -> dict    == gets the items with the top float per-one values in a dict[str, float]
+
+> VecOfVecProd(list[list[float]],list[list[float]]) == multiplies the values of two list[list[float]] together
+> ScaVecProd(float, list[float]) -> list[float]     == multiplies a float by each item of a list
+> TransposeVecOfVec(list[list[float]])              == transposes a list[list[float]]
+> VecOfVecSumm(list[list[float]]) -> list[float]    == sums every item in each list[float] of a list[list[float]]
 ```
 
 
