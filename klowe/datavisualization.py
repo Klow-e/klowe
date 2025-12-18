@@ -16,6 +16,12 @@ import numpy as np
 ###############################################################################################
 
 
+def KPrintDictStrFloat(dicc: dict[str, float]) -> None:
+    print()
+    for i in dicc: print(f"{i}:\t{dicc[i]}")
+    print()
+
+
 def KPrintDict(dicc: dict, alsolen: bool = True) -> None:
     print(f"\nNumber of items: {len(dicc)}\n")
     for k, v in dicc.items():

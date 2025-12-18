@@ -75,6 +75,7 @@ You should have received a copy of the GNU General Public License along with thi
 > ScaVecProd(float, list[float]) -> list[float]     == multiplies a float by each item of a list
 > TransposeVecOfVec(list[list[float]])              == transposes a list[list[float]]
 > VecOfVecSumm(list[list[float]]) -> list[float]    == sums every item in each list[float] of a list[list[float]]
+> VecOfVecAvrg(list[list[float]]) -> list[float]    == averages the items of each list[float] of a list[list[float]]
 ```
 
 
@@ -183,7 +184,7 @@ You should have received a copy of the GNU General Public License along with thi
 ## DataVisualization
 ```
 > KPrintDict(dict)                                  == better way to print dictionaries
-
+>> KPrintDictStrFloat
 > KPlotDict(dict[str,float])                        == of a dict with {string:float} plots a silly little graph
 > KPlotFunction(<function>, xsize, ysize, step)     == graphs a f(x)=y function
 > KPlotList(list[float])                            == graphs a list of numbers
