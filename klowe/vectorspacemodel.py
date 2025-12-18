@@ -219,6 +219,19 @@ def IDF_KGlossary(gloss: KGlossaryT, xIDF: str = 'sIDF') -> KGlossaryT:
 ###############################################################################################
 
 
+def KVTModel(tokenscalar: float, lexicvector: list[float]) -> list[float]:
+    """
+    KloE's model to crossmatch weights in a text with a list of weights per genre in a KLexiconT.
+    A simple multiplication seems to be the best option
+    `param 1:  a weight of a word as a float`
+    `param 2:  a list of ordered weights representing the word's genres as a list[float]`
+    `returns:  a list[float] resulting from crossmatching the word weight with the genres weights for it`
+    `example:  crossmatched_weights: list[float] = KVTModel(word_weight_intext, word_weights_bygenre)`
+    """
+    prod: list[float] = ScaVecProd(WText[i], lexicvector)
+    return prod
+
+
 def SaveKLexicon(lexicon: KLexiconT, lexicpath: str = 'lexic.json') -> None:
     """
     Saves a KLexiconT into a json file
@@ -262,9 +275,6 @@ def print_vector(word: str, vectors):
     print()
 
 
-###############################################################################################
-
-
 def VTModel(g: np.array, t: float) -> np.array:
     np.set_printoptions(suppress=True)
     w = ( g * t )
@@ -283,14 +293,14 @@ def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str, list]:
     return VText
 
 
+###############################################################################################
+
+
 def print_text_vector(test):
     print()
     for k, v in zip(test.get("genres"), test.get("vectors")):
         print(f"{k}:\t{v}")
     print()
-
-
-###############################################################################################
 
 
 def CategorizeText(VT: dict) -> list[tuple]:
