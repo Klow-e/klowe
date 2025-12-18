@@ -200,16 +200,28 @@ def RoundList(l: list[float], n: int = 10) -> list[float]:
     return r_list
 
 
-def VecVecProd(tla: list[list[float]], tlb: list[list[float]]) -> list[list[float]]:
+def VecOfVecProd(tla: list[list[float]], tlb: list[list[float]]) -> list[list[float]]:
     """
     Multiplies the contests of two list[list[float]] of the same length resulting in just one.
     `param 1:  a list[list[float]]`
     `param 2:  another list[list[float]]`
     `returns:  a list[list[float]] with the products of the intems in the given lists`
-    `example:  vector_of_vectors_product: list[list[float]] = VecVecProd(vecveclist_a, vecveclist_b)`
+    `example:  vector_of_vectors_product: list[list[float]] = VecOfVecProd(vecveclist_a, vecveclist_b)`
     """
     tensor_product: list[list[float]] = [[tla[i][j] * tlb[i][j] for j in range(len(tla[i]))] for i in range(len(tla))]
     return tensor_product
+
+
+def ScaVecProd(n: float, v: list[float]) -> list[float]: 
+    """
+    Multiplies a float by a list of floats.
+    `param 1:  float`
+    `param 2:  list of floats`
+    `returns:  the list of floats with every item multiplied by the given float`
+    `example:  scalar_times_vector: list[float] = ScaVecProd(2, [1, 2, 3])`
+    """
+    prod: list[float] = [n * i for i in v]
+    return prod
 
 
 ###############################################################################################
