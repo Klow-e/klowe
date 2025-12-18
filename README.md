@@ -163,6 +163,7 @@ You should have received a copy of the GNU General Public License along with thi
 >> SaveKLexicon
 >> LoadKLexicon
 >> KVTModel
+>> KLexicon
 
 > KLexicon(glossary) -> dict[dict[str,np.array]]    == of a glossary type file, returns a dict with words vectorialized by genre
 > print_vector("<query>", KLexicon(glossary))       == prints a single word vector with its values by genre

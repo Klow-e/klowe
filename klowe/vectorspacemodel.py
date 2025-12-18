@@ -219,6 +219,18 @@ def IDF_KGlossary(gloss: KGlossaryT, xIDF: str = 'sIDF') -> KGlossaryT:
 ###############################################################################################
 
 
+def KLexicon(gloss: KGlossaryT) -> KLexiconT:
+    """
+    Turns a KGlossaryT into a KLexiconT.
+    `param 1:  a KGlossaryT`
+    `returns:  its KLexiconT version`
+    `example:  mylexicon: KLexiconT = KLexicon(myglossary)`
+    """
+    all_keys: set[str] = set(sorted({k for i in GetKeys(GetValues(gloss)) for k in i}))
+    words_vectors: dict[str, dict[str, float]] = {i : {j : gloss[j].get(i, 0.0) for j in gloss} for i in all_keys}
+    return KLexiconT(words_vectors)
+
+
 def KVTModel(tokenscalar: float, lexicvector: list[float]) -> list[float]:
     """
     KloE's model to crossmatch weights in a text with a list of weights per genre in a KLexiconT.
@@ -259,7 +271,7 @@ def LoadKLexicon(lexicpath: str = 'lexic.json') -> KLexiconT:
 ###############################################################################################
 
 
-def KLexicon(gloss: KGlossaryT) -> dict[str,list[str]|dict[str,np.array]]:
+def KLexicon_old(gloss: KGlossaryT) -> dict[str,list[str]|dict[str,np.array]]:
     all_keys: set[str] = set(sorted({k for i in GetKeys(GetValues(gloss)) for k in i}))
     words_vectors: dict = { i : np.vstack([np.array([k]) for k in [j.get(i, 0.0) for j in GetValues(gloss)]]) for i in all_keys}
     embedded_gloss: dict = {"genres": GetKeys(gloss), "vectors": words_vectors}
@@ -275,21 +287,15 @@ def print_vector(word: str, vectors):
     print()
 
 
-def VTModel(g: np.array, t: float) -> np.array:
-    np.set_printoptions(suppress=True)
-    w = ( g * t )
-    return np.around(w, 8)
-
-
-def VectorializeText(text: str, gloss, VTmodel: callable) -> dict[str, list]:
-    vectors = KLexicon(gloss).get("vectors")
+def VectorializeText(text: str, gloss, KVTModel: callable) -> dict[str, list]:
+    vectors = KLexicon_old(gloss).get("vectors")
     WText: dict[str,float] = KWeightModel(text)
     WText = zip(GetKeys(WText), NormalizeList(GetValues(WText), (0, 1)))
     WText: list[list[str,float]] = [[k, v] for k, v in WText if k in vectors and v != 0]
     WText: list[list[str,float, np.array]] = [[k, v, vectors.get(k)] for k, v in WText]
-    WText = {k: VTmodel(g, v) for k, v, g in WText}
+    WText = {k: KVTModel(g, v) for k, v, g in WText}
     TVect = np.vstack([np.array([k]) for k in NormalizeList(sum(GetValues(WText)), (0, 1))])
-    VText: dict = {"genres" : KLexicon(gloss).get("genres"), "vectors" : TVect}
+    VText: dict = {"genres" : KLexicon_old(gloss).get("genres"), "vectors" : TVect}
     return VText
 
 
@@ -327,8 +333,8 @@ def CategorizeText(VT: dict) -> list[tuple]:
     return result
 
 
-def PrintTextGenre(text: str, gloss, VTmodel) -> None:
-    VT: dict[str,list] = VectorializeText(text, gloss, VTmodel)
+def PrintTextGenre(text: str, gloss, KVTModel) -> None:
+    VT: dict[str,list] = VectorializeText(text, gloss, KVTModel)
     result: tuple[str,float] = CategorizeText(VT)
     print(f"Search: {text[:25]}...\n", e := "====================", "\nTopic:")
     for i in range(len(result)): print(f" {result[i][0]}: \t {result[i][1]:.0%}")
@@ -337,7 +343,7 @@ def PrintTextGenre(text: str, gloss, VTmodel) -> None:
 
 
 def Categorizar(text: str) -> None:
-    PrintTextGenre(text, example_gloss, VTModel)
+    PrintTextGenre(text, example_gloss, KVTModel)
 
 
 ###############################################################################################
@@ -347,7 +353,7 @@ def KPrintKLexiconVector(word: str, vectors: KLexiconT) -> None:
     """
     Searches the vector for a word in a KLexiconT.
     `param 1:  word to search`
-    `param 2:  the KLexicon`
+    `param 2:  the KLexiconT`
     `results:  prints the word`
     `example:  KPrintKLexiconVector("evolucion", mylexicon)`
     """
