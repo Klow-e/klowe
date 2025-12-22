@@ -199,32 +199,6 @@ You should have received a copy of the GNU General Public License along with thi
 # Theory
 
 
-## Arithmetics
->
-> Science of quantities and their operations.
->
-> * **Quantity:** anything admitting of increasing or decreasing.
->    * **Continious:** cannot be segmented.
->        * **Nominal:** unordered categories without distance, like colors.
->        * **Ordinal:** ordered undivisible ranking, like lists.
->    * **Discrete:** consisting of segmentable parts.
->        * **Interval:** data with relative divisible distances, like temperature.
->        * **Ratio:** cardinal count with true zero, like volume.
-> * **Measure:** comparing a Quantity to another known one of the same kind.
-> * **Unit:** base Quantity used to Meassure others of its kind.
-> * **Complex Number:** multi-dimensional Quantity not representable by just one Number at once.
-> * **Real Number:** representation of a Quantity as relation to the Unit.
->    * **Transcendental:** not obtainable by Polynomial Equations, like $e$.
->        * **Uncomputable:** not obtainable by Computation, like $\Omega$.
->        * **Computable:** obtainable by Algorithmic Computation, like $e$.
->    * **Algebraic:** obtainable by Polynomial Equations, like $\sqrt[3]{2}$.
->        * **Constructable:** obtainable in a Cartesian Plane, like $\sqrt{2} $.
->        * **Rational:** ratios to the Unit, like $\frac{5}{4}$.
->        * **Integerns:** obtainable by stacking or removing Units, like $-3$.
->        * **Whole:** obtainable by stacking Units or its absence, like $0$.
->        * **Natural:** obtainable by stacking Units, like $2$.
->
-
 ### Linear Programming
 > 
 > Algebraic technique for optimizing a Cost Function subject to Constraints.
@@ -493,31 +467,15 @@ You should have received a copy of the GNU General Public License along with thi
 > * **Classification:** divides data into binary classes.
 >
 > * **Regression:** predicts the value of an input.
->
-> _**Nearest Neighbour Classifier**_
->> a
->
-> _**K-Nearest Neighbour Classifier**_
->> a
->
-> _**Support Vector Machine Classifier**_
->> a
->
-> _**Random Forest Classifier**_
->> a
->  
-> _**Naive Bayes Classifier**_
->> a
->
-> _**Linear Regression**_
->> a
->
-> _**Logistic Regression**_
->> a
->
-> _**Random Forest Regression**_
->> a
->
+
+Nearest Neighbour Classifier,
+K-Nearest Neighbour Classifier,
+Support Vector Machine Classifier,
+Random Forest Classifier,
+Naive Bayes Classifier,
+Linear Regression,
+Logistic Regression,
+Random Forest Regression.
 
 
 ### Reinforcement Machine Learning
@@ -796,4 +754,3 @@ You should have received a copy of the GNU General Public License along with thi
 >>                CC    -> { and | or | but | ... }
 >>
 >>```
->>
