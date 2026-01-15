@@ -246,8 +246,6 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## Probability
 >
->
->
 > * $ω$: a possible world, one result of an experiment.
 > * $P(ω)$: probability of a particular possible world.
 >     * $0 ≤ P(ω) ≤ 1 $
