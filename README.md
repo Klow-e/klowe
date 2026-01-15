@@ -242,13 +242,6 @@ You should have received a copy of the GNU General Public License along with thi
 > * **Vector:** complex quantity expressed as a 1D array of numbers.
 > * **Matrix:** complex quantity expressed as a 2D table of numbers.
 > * **Tensor:** complex quantity expressed as an nD space of numbers.
->
-> _**Cosine Similarity**_
->> 
->
-> _**Euclidean Distance**_
->> 
->
 
 
 ## Probability
